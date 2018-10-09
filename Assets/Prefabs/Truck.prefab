@@ -265,6 +265,7 @@ GameObject:
   - component: {fileID: 212344068995576862}
   - component: {fileID: 114964337360061496}
   - component: {fileID: 50254654541653292}
+  - component: {fileID: 61268927352224472}
   m_Layer: 0
   m_Name: Truck
   m_TagString: Untagged
@@ -546,7 +547,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1623435752053756}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.4121873, y: 0.048891082, z: -0.0859375}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4674073796666468}
@@ -782,6 +783,31 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.34
+--- !u!61 &61268927352224472
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1623435752053756}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.16, y: 0.16}
+    newSize: {x: 0.16, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.16, y: 0.16}
+  m_EdgeRadius: 0
 --- !u!114 &114008442340257940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -899,7 +925,7 @@ MonoBehaviour:
   lu: {fileID: 1456184739460282}
   rd: {fileID: 1042225999037272}
   ld: {fileID: 1725665851676448}
-  throwForce: 100
+  throwForce: 700
   cranePoint: {fileID: 1607798668703448}
   up: {fileID: 4273159328877284}
   down: {fileID: 4669150211036104}
@@ -909,6 +935,8 @@ MonoBehaviour:
   targetReticle: {fileID: 1345681843616540}
   up2: {fileID: 4981469485215136}
   right2: {fileID: 4913710291580284}
+  jumpTime: 1.5
+  jumpDamage: 1
 --- !u!212 &212149814973384658
 SpriteRenderer:
   m_ObjectHideFlags: 1

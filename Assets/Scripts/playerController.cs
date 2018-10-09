@@ -25,8 +25,31 @@ public class playerController : MonoBehaviour {
     [SerializeField] GameObject targetReticle;
     [SerializeField] Transform up2, right2;
 
+    float hitPoints = 100;
+    float collisionDamageMultiplier = 1f;
+
+    bool isJumping = false;
+    float jumpTimer = 0;
+    [SerializeField] float jumpTime = 3f;
+    [SerializeField] float jumpDamage = 1.0f;
+
+
     // Use this for initialization
     void Start() {
+        switch (playerNum)
+        {
+            case PlayerNum.P1:
+                this.gameObject.layer = 12;
+                break;
+            case PlayerNum.P2:
+                this.gameObject.layer = 13;
+                break;
+            default:
+                break;
+        }
+        
+
+
         targetReticle.GetComponent<SpriteRenderer>().enabled = false;
         throwRange.GetComponent<SpriteRenderer>().enabled = false;
     }
@@ -98,13 +121,32 @@ public class playerController : MonoBehaviour {
         }
 
         //Debug.Log(getOwnAxis("Trigger"));
-        if (isCarrying == false && getOwnAxis("Trigger") < -0.7f)
+        if (isJumping == false && isCarrying == false && getOwnAxis("Trigger") < -0.7f)
         {
             pickUp();
         }
-        else if (isCarrying && getOwnAxis("Trigger") > -0.1f)
+        else if (isCarrying && getOwnAxis("Trigger") > -0.25f)
         {
             throwObj();
+        }
+        else if (isCarrying == false && getOwnAxis("Trigger") > 0.25f)
+        {
+            isJumping = true;
+            GetComponent<BoxCollider2D>().enabled = false;
+            GetComponent<SpriteRenderer>().enabled = false;
+            jumpTimer = 0;
+        }
+        else if (isJumping)
+        {
+            jumpTimer += Time.deltaTime;
+
+            if (jumpTimer >= jumpTime)
+            {
+                isJumping = false;
+                GetComponent<BoxCollider2D>().enabled = true;
+                GetComponent<SpriteRenderer>().enabled = true;
+                takeDamage(jumpDamage);
+            }
         }
     }
 
@@ -212,6 +254,19 @@ public class playerController : MonoBehaviour {
             Vector2 dir = new Vector2(getOwnAxis("Horizontal2"), -getOwnAxis("Vertical2"));
             dir.Normalize();
             //objPicked.GetComponent<throwable>().setPos(targetReticle.transform.position);
+
+            switch (playerNum)
+            {
+                case PlayerNum.P1:
+                    objPicked.GetComponent<throwable>().setLayer(1);
+                    break;
+                case PlayerNum.P2:
+                    objPicked.GetComponent<throwable>().setLayer(1);
+                    break;
+                default:
+                    break;
+            }
+
             objPicked.GetComponent<throwable>().setDistance(distance);
             objPicked.GetComponent<Rigidbody2D>().AddForce(dir * throwForce);
             
@@ -221,6 +276,21 @@ public class playerController : MonoBehaviour {
         }
     }
 
+    public void takeDamage(float amount)
+    {
+        hitPoints -= amount;
 
+        if (hitPoints <= 0)
+        {   // DEAD
+
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        takeDamage(collision.relativeVelocity.magnitude * collisionDamageMultiplier);
+
+
+    }
 
 }

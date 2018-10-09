@@ -24,6 +24,11 @@ public class throwable : MonoBehaviour {
             distanceTravelled += Vector3.Distance(this.transform.position, lastFramePos);
             lastFramePos = this.transform.position;
 
+            if (distanceTravelled >= stopDistance / 2)
+            {
+                this.gameObject.layer = 0;
+            }
+
             if (distanceTravelled >= stopDistance)
             {
                 isStopped = true;
@@ -48,5 +53,21 @@ public class throwable : MonoBehaviour {
         lastFramePos = this.transform.position;
         isThrown = true;
         isStopped = false;
+    }
+
+    public void setLayer(int i)
+    {
+        switch (i)
+        {
+            case 1:
+                this.gameObject.layer = 8;
+                break;
+            case 2:
+                this.gameObject.layer = 9;
+                break;
+            default:
+                break;
+        }
+        
     }
 }
