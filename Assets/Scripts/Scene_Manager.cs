@@ -11,12 +11,23 @@ public class Scene_Manager : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 		
 	}
 
     public void playGame()
     {
         SceneManager.LoadScene("SampleScene");
+    }
+
+    public void replay()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void backToMenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }
