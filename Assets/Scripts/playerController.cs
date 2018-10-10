@@ -16,6 +16,8 @@ public class playerController : MonoBehaviour {
     GameObject objPicked;
     [SerializeField] float throwForce = 1f;
 
+    [SerializeField] HealthBar playerHealth; //Dan included, associates the health bars to the players
+
 
     bool isCarrying = false;
     [SerializeField] GameObject cranePoint;
