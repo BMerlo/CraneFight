@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class playerController : MonoBehaviour {
+    [SerializeField] HealthBar playerHealth;
+
     enum PlayerNum
     {
         P1,
