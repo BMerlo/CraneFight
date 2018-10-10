@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class destructible : MonoBehaviour {
     [SerializeField] float minForce2Destroy = 0.5f;
-
+    [SerializeField] GameObject spawnee;
+    
 
 	// Use this for initialization
 	void Start () {

@@ -20,14 +20,8 @@ public class oil : MonoBehaviour {
         if (collision.tag == "Player")
         {
             Debug.Log("Player is here!");
-
-
+            collision.GetComponent<playerController>().getOiled();
         }
     }
 
-
-    public void unoilPlayersBeforeDestruction()
-    {
-
-    }
 }

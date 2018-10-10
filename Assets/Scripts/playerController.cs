@@ -39,6 +39,8 @@ public class playerController : MonoBehaviour {
     float drag;
     bool isOiled = false;
 
+
+    //[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
     // Use this for initialization
     void Start() {
         switch (playerNum)
@@ -81,15 +83,16 @@ public class playerController : MonoBehaviour {
         }
         else
         {
-            Collider2D[] temp;
-           // ContactFilter2D tempFilter = new ContactFilter2D();
+            Collider2D[] temp = new Collider2D[30];
+            ContactFilter2D tempFilter = new ContactFilter2D();
+            tempFilter.useTriggers = true;
             //int i = GetComponent<BoxCollider2D>().OverlapCollider(tempFilter, temp);
-           temp = Physics2D.OverlapBoxAll(this.transform.position, GetComponent<BoxCollider2D>().size, 0f);
-
+            //temp = Physics2D.OverlapBoxAll(this.transform.position, GetComponent<BoxCollider2D>().size, 0f);
+            int numColliders = GetComponent<BoxCollider2D>().OverlapCollider(tempFilter, temp);
             bool isStillOiled = false;
-            foreach (Collider2D collider in temp)
+            for (int i = 0; i < numColliders; i++)
             {
-                if (collider.GetComponent<oil>())
+                if (temp[i].gameObject.GetComponent<oil>())
                 {
                     isStillOiled = true;
                 }
@@ -344,11 +347,13 @@ public class playerController : MonoBehaviour {
         drag = GetComponent<Rigidbody2D>().drag;
         GetComponent<Rigidbody2D>().drag = 0;
         isOiled = true;
+        Debug.Log("got oiled!");
     }
 
     public void getUnOiled()
     {
         GetComponent<Rigidbody2D>().drag = drag;
         isOiled = false;
+        Debug.Log("got unoiled!");
     }
 }

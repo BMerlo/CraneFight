@@ -934,8 +934,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f09c527b827a0419e392cbc445e156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNum: 1
-  moveSpeed: 15
+  playerHealth: {fileID: 0}
+  playerNum: 0
+  moveSpeed: 20
   r: {fileID: 1030074618824174}
   l: {fileID: 1071792865304264}
   u: {fileID: 1076528598286044}
