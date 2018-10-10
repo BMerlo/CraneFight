@@ -12,7 +12,6 @@ public class throwable : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         lastFramePos = this.transform.position;
-
     }
 	
 	// Update is called once per frame
@@ -34,6 +33,11 @@ public class throwable : MonoBehaviour {
                 isStopped = true;
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
                 isThrown = false;
+
+                if (GetComponent<Exploder>())
+                {
+                    GetComponent<Exploder>().explode();
+                }
             }
 
         }

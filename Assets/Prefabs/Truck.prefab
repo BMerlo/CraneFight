@@ -265,10 +265,11 @@ GameObject:
   - component: {fileID: 212344068995576862}
   - component: {fileID: 114964337360061496}
   - component: {fileID: 50254654541653292}
-  - component: {fileID: 61268927352224472}
+  - component: {fileID: 61457500624391484}
+  - component: {fileID: 95638600150682162}
   m_Layer: 0
   m_Name: Truck
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -547,8 +548,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1623435752053756}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 2.0575314, y: -2.160806, z: 0}
+  m_LocalScale: {x: 3.5, y: 3.5, z: 1}
   m_Children:
   - {fileID: 4674073796666468}
   - {fileID: 4425385542800394}
@@ -623,7 +624,7 @@ Transform:
   m_GameObject: {fileID: 1585035327435368}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 30, y: 21, z: 1}
+  m_LocalScale: {x: 20, y: 14, z: 1}
   m_Children:
   - {fileID: 4981469485215136}
   - {fileID: 4913710291580284}
@@ -783,7 +784,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.34
---- !u!61 &61268927352224472
+--- !u!61 &61457500624391484
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -795,19 +796,37 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.04}
   m_SpriteTilingProperty:
-    border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
+    border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
+    oldSize: {x: 0.42, y: 0.31}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 0.42, y: 0.22}
   m_EdgeRadius: 0
+--- !u!95 &95638600150682162
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1623435752053756}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3a58b5ad4101b3f4cab1cba2da9a60dc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114008442340257940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -915,8 +934,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f09c527b827a0419e392cbc445e156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNum: 0
-  moveSpeed: 5
+  playerNum: 1
+  moveSpeed: 15
   r: {fileID: 1030074618824174}
   l: {fileID: 1071792865304264}
   u: {fileID: 1076528598286044}
@@ -926,6 +945,7 @@ MonoBehaviour:
   rd: {fileID: 1042225999037272}
   ld: {fileID: 1725665851676448}
   throwForce: 700
+  myAnim: {fileID: 95638600150682162}
   cranePoint: {fileID: 1607798668703448}
   up: {fileID: 4273159328877284}
   down: {fileID: 4669150211036104}
@@ -935,7 +955,7 @@ MonoBehaviour:
   targetReticle: {fileID: 1345681843616540}
   up2: {fileID: 4981469485215136}
   right2: {fileID: 4913710291580284}
-  jumpTime: 1.5
+  jumpTime: 0.5
   jumpDamage: 1
 --- !u!212 &212149814973384658
 SpriteRenderer:
@@ -1018,7 +1038,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: b45db4b76958abd4f8798f049556edcb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1064,7 +1084,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 922b04059c6a45942ab4c13c62d4ffa4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
