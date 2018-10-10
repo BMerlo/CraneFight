@@ -16,6 +16,7 @@ public class playerController : MonoBehaviour {
     GameObject objPicked;
     [SerializeField] float throwForce = 1f;
 
+    [SerializeField] Animator myAnim;
 
     bool isCarrying = false;
     [SerializeField] GameObject cranePoint;
@@ -33,6 +34,8 @@ public class playerController : MonoBehaviour {
     [SerializeField] float jumpTime = 3f;
     [SerializeField] float jumpDamage = 1.0f;
 
+    float drag;
+    bool isOiled = false;
 
     // Use this for initialization
     void Start() {
@@ -47,8 +50,8 @@ public class playerController : MonoBehaviour {
             default:
                 break;
         }
-        
 
+        
 
         targetReticle.GetComponent<SpriteRenderer>().enabled = false;
         throwRange.GetComponent<SpriteRenderer>().enabled = false;
@@ -70,8 +73,35 @@ public class playerController : MonoBehaviour {
         }
 
 
+        if(isOiled == false)
+        {
+            movement();
+        }
+        else
+        {
+            Collider2D[] temp;
+           // ContactFilter2D tempFilter = new ContactFilter2D();
+            //int i = GetComponent<BoxCollider2D>().OverlapCollider(tempFilter, temp);
+           temp = Physics2D.OverlapBoxAll(this.transform.position, GetComponent<BoxCollider2D>().size, 0f);
 
-        movement();
+            bool isStillOiled = false;
+            foreach (Collider2D collider in temp)
+            {
+                if (collider.GetComponent<oil>())
+                {
+                    isStillOiled = true;
+                }
+            }
+
+            if (isStillOiled == false)
+            {
+                getUnOiled();
+            }
+
+        }
+        
+
+
 
 
 
@@ -132,8 +162,9 @@ public class playerController : MonoBehaviour {
         else if (isCarrying == false && getOwnAxis("Trigger") > 0.25f)
         {
             isJumping = true;
+            myAnim.SetBool("IsJumping", true);
             GetComponent<BoxCollider2D>().enabled = false;
-            GetComponent<SpriteRenderer>().enabled = false;
+            //GetComponent<SpriteRenderer>().enabled = false;
             jumpTimer = 0;
         }
         else if (isJumping)
@@ -143,8 +174,9 @@ public class playerController : MonoBehaviour {
             if (jumpTimer >= jumpTime)
             {
                 isJumping = false;
+                myAnim.SetBool("IsJumping", false);
                 GetComponent<BoxCollider2D>().enabled = true;
-                GetComponent<SpriteRenderer>().enabled = true;
+                //GetComponent<SpriteRenderer>().enabled = true;
                 takeDamage(jumpDamage);
             }
         }
@@ -235,6 +267,12 @@ public class playerController : MonoBehaviour {
             isCarrying = true;
             cranePoint.transform.position = objPicked.transform.position;
             objPicked.GetComponent<Rigidbody2D>().isKinematic = true;
+
+            if (objPicked.GetComponent<CircleCollider2D>())
+            {
+                objPicked.GetComponent<CircleCollider2D>().enabled = false;
+            }
+
             objPicked.transform.parent = cranePoint.transform;
             // ADD MORE LATER
         }
@@ -267,6 +305,11 @@ public class playerController : MonoBehaviour {
                     break;
             }
 
+            if (objPicked.GetComponent<CircleCollider2D>())
+            {
+                objPicked.GetComponent<CircleCollider2D>().enabled = true;
+            }
+
             objPicked.GetComponent<throwable>().setDistance(distance);
             objPicked.GetComponent<Rigidbody2D>().AddForce(dir * throwForce);
             
@@ -293,4 +336,17 @@ public class playerController : MonoBehaviour {
 
     }
 
+
+    public void getOiled()
+    {
+        drag = GetComponent<Rigidbody2D>().drag;
+        GetComponent<Rigidbody2D>().drag = 0;
+        isOiled = true;
+    }
+
+    public void getUnOiled()
+    {
+        GetComponent<Rigidbody2D>().drag = drag;
+        isOiled = false;
+    }
 }
