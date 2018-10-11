@@ -112,6 +112,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1270969521716430
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4017850046119682}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1322148132686638
 GameObject:
   m_ObjectHideFlags: 1
@@ -351,6 +366,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4017850046119682
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1270969521716430}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4817705447390464}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4094155286060660
 Transform:
   m_ObjectHideFlags: 1
@@ -548,7 +576,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1623435752053756}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.0575314, y: -2.160806, z: 0}
+  m_LocalPosition: {x: 2.0575314, y: -11.27, z: 0}
   m_LocalScale: {x: 3.5, y: 3.5, z: 1}
   m_Children:
   - {fileID: 4674073796666468}
@@ -557,6 +585,7 @@ Transform:
   - {fileID: 4856586578083314}
   - {fileID: 4941688838568940}
   - {fileID: 4342841726112494}
+  - {fileID: 4017850046119682}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -935,6 +964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 0}
+  aimSpeed: 4
   playerNum: 0
   moveSpeed: 20
   r: {fileID: 1030074618824174}
@@ -954,8 +984,8 @@ MonoBehaviour:
   left: {fileID: 4928226138319068}
   throwRange: {fileID: 1585035327435368}
   targetReticle: {fileID: 1345681843616540}
-  up2: {fileID: 4981469485215136}
-  right2: {fileID: 4913710291580284}
+  upLarger: {fileID: 4981469485215136}
+  rightLarger: {fileID: 4913710291580284}
   jumpTime: 0.5
   jumpDamage: 1
 --- !u!212 &212149814973384658

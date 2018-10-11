@@ -5,6 +5,7 @@ using UnityEngine;
 public class destructible : MonoBehaviour {
     [SerializeField] float minForce2Destroy = 0.5f;
     [SerializeField] GameObject spawnee;
+    [SerializeField] bool doesSpawnOnDestroy = false;
     
 
 	// Use this for initialization
@@ -19,9 +20,15 @@ public class destructible : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(this.gameObject, 0.1f);
+        getDestroyed();
     }
 
-
-   
+   public void getDestroyed()
+    {
+        if (doesSpawnOnDestroy && spawnee)
+        {
+            Instantiate(spawnee, this.transform.position, this.transform.rotation);
+        }
+        Destroy(this.gameObject, 0.01f);
+    }
 }

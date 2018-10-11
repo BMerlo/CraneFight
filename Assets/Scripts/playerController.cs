@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour {
     [SerializeField] HealthBar playerHealth;
+    [SerializeField] float aimSpeed = 4f;
 
     enum PlayerNum
     {
@@ -26,7 +27,7 @@ public class playerController : MonoBehaviour {
     [SerializeField] Transform up, down, right, left;
     [SerializeField] GameObject throwRange;
     [SerializeField] GameObject targetReticle;
-    [SerializeField] Transform up2, right2;
+    [SerializeField] Transform upLarger, rightLarger;
 
     float hitPoints = 100;
     float collisionDamageMultiplier = 1f;
@@ -132,26 +133,7 @@ public class playerController : MonoBehaviour {
             //cranePoint.transform.position = pos;
 
 
-            Vector2 circularPos = new Vector2(getOwnAxis("Horizontal2"), -getOwnAxis("Vertical2"));
-            if(circularPos.magnitude > 1)
-            circularPos.Normalize();
-
-            float localX = right.transform.position.x - this.transform.position.x;
-            float localY = up.transform.position.y - this.transform.position.y;
-
-            Vector2 temp = new Vector2(localX * circularPos.x, circularPos.y * localY);
-            Vector3 pos = new Vector3(-temp.x, -temp.y, 0) + this.transform.position;
-            cranePoint.transform.position = pos;
-
-
-
-        
-            float localX2 = right2.transform.position.x - this.transform.position.x;
-            float localY2 = up2.transform.position.y - this.transform.position.y;
-
-            Vector2 temp2 = new Vector2(localX2 * circularPos.x, circularPos.y * localY2);
-            Vector3 pos2 = new Vector3(temp2.x, temp2.y, 0) + this.transform.position;
-            targetReticle.transform.position = pos2;
+            aim();
 
         }
 
@@ -185,6 +167,87 @@ public class playerController : MonoBehaviour {
                 takeDamage(jumpDamage);
             }
         }
+    }
+
+    void aim()
+    {
+        Vector3 dir = new Vector3(0, 0,0);
+
+        if (getOwnAxis("Horizontal2") > 0.3f)
+        {
+            //GetComponent<Rigidbody2D>().AddForce(new Vector2(moveSpeed, 0));
+            dir.x = getOwnAxis("Horizontal2");
+        }
+        else if (getOwnAxis("Horizontal2") < -0.3f)
+        {
+            dir.x = getOwnAxis("Horizontal2");
+        }
+
+        if (getOwnAxis("Vertical2") > 0.3f)
+        {
+            dir.y = -getOwnAxis("Vertical2");
+        }
+        else if (getOwnAxis("Vertical2") < -0.3f)
+        {
+            dir.y = -getOwnAxis("Vertical2");
+        }
+
+        if (Vector3.Magnitude(dir) > 1)
+        {
+            dir.Normalize();
+        }
+
+
+
+        //float localX = right.transform.position.x - this.transform.position.x;
+        //float localY = up.transform.position.y - this.transform.position.y;
+
+        //Vector2 temp = new Vector2(localX * dir.x, dir.y * localY);
+        //Vector3 pos = new Vector3(-temp.x, -temp.y, 0) + this.transform.position;
+        //cranePoint.transform.position = pos;
+
+        targetReticle.transform.Translate(dir * Time.deltaTime * aimSpeed);
+
+        Vector3 temp = targetReticle.transform.position - this.transform.position;
+        temp.Normalize();
+
+        cranePoint.transform.position = this.transform.position - temp;
+
+        while (isInsideElipse(this.transform.position.x, this.transform.position.y, targetReticle.transform.position.x, targetReticle.transform.position.y,
+            rightLarger.position.x - this.transform.position.x, upLarger.position.y - this.transform.position.y) == false)
+        {
+            targetReticle.transform.position = (0.99f * (targetReticle.transform.position - this.transform.position)) + this.transform.position;
+        }
+        
+        
+
+        //Debug.Log("Is inside eclipse? " + tem);
+    }
+
+
+
+    void oldAim()
+    {
+        Vector2 circularPos = new Vector2(getOwnAxis("Horizontal2"), -getOwnAxis("Vertical2"));
+        if (circularPos.magnitude > 1)
+            circularPos.Normalize();
+
+        float localX = right.transform.position.x - this.transform.position.x;
+        float localY = up.transform.position.y - this.transform.position.y;
+
+        Vector2 temp = new Vector2(localX * circularPos.x, circularPos.y * localY);
+        Vector3 pos = new Vector3(-temp.x, -temp.y, 0) + this.transform.position;
+        cranePoint.transform.position = pos;
+
+
+
+
+       // float localX2 = right2.transform.position.x - this.transform.position.x;
+       // float localY2 = up2.transform.position.y - this.transform.position.y;
+
+       // Vector2 temp2 = new Vector2(localX2 * circularPos.x, circularPos.y * localY2);
+       // Vector3 pos2 = new Vector3(temp2.x, temp2.y, 0) + this.transform.position;
+      //  targetReticle.transform.position = pos2;
     }
 
     void checkColliders()
@@ -284,7 +347,59 @@ public class playerController : MonoBehaviour {
 
     }
 
-    void throwObj(){
+
+    void throwObj()
+    {
+        if (objPicked != null)
+        {
+            float distance = Vector3.Distance(cranePoint.transform.position, targetReticle.transform.position);
+
+            objPicked.GetComponent<Rigidbody2D>().isKinematic = false;
+            objPicked.transform.parent = null;
+
+            Vector2 dir = targetReticle.transform.position - cranePoint.transform.position;
+            dir.Normalize();
+
+            switch (playerNum)
+            {
+                case PlayerNum.P1:
+                    objPicked.GetComponent<throwable>().setLayer(1);
+                    break;
+                case PlayerNum.P2:
+                    objPicked.GetComponent<throwable>().setLayer(1);
+                    break;
+                default:
+                    break;
+            }
+
+            if (objPicked.GetComponent<CircleCollider2D>())
+            {
+                objPicked.GetComponent<CircleCollider2D>().enabled = true;
+            }
+
+            objPicked.GetComponent<throwable>().setDistance(distance);
+            objPicked.GetComponent<Rigidbody2D>().AddForce(dir * throwForce);
+
+
+            objPicked = null;
+            isCarrying = false;
+        }
+    }
+
+
+    bool isInsideElipse(float centreX, float centreY, float posX, float posY, float horDis, float verDis)
+    {
+        float p = (Mathf.Pow((posX - centreX), 2) / Mathf.Pow(horDis, 2)) + (Mathf.Pow(posY - centreY, 2) / Mathf.Pow(verDis, 2));
+
+        //Debug.Log(p);
+        if (p > 0.98f)
+        {
+            return false;
+        }
+
+        return true;
+    }
+    void oldthrowObj(){
         if(objPicked != null)
         {
             float distance = Vector3.Distance(cranePoint.transform.position, targetReticle.transform.position);
