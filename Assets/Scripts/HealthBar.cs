@@ -27,27 +27,13 @@ public class HealthBar : MonoBehaviour {
 
         healthBar.transform.localScale = new Vector3(myHealth / 100, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
 
-        Debug.Log("Health" + myHealth);
-        Debug.Log("Scale" + healthBar.transform.localScale);
     }
 
-    void Update()
+    public void updateHealthBar(float hp)
     {
-        if (Input.GetKeyDown(KeyCode.D))
-            ChangeHealth(10);
-
-        /*if (myHealth < 0)
-            myHealth = 0;
-
-        if (myHealth > 100)
-            myHealth = 100;
-
-        if (myHealth != currentHealth)
-        {
-            myHealth = currentHealth;
-            healthBar.transform.localScale = new Vector3(myHealth / 100, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
-        }
-    }*/
+        healthBar.transform.localScale = new Vector3(hp / 100, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
     }
+
+  
 }
 

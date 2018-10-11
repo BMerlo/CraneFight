@@ -6,7 +6,7 @@ public class destructible : MonoBehaviour {
     [SerializeField] float minForce2Destroy = 0.5f;
     [SerializeField] GameObject spawnee;
     [SerializeField] bool doesSpawnOnDestroy = false;
-    
+    [SerializeField] float damage = 5f;
 
 	// Use this for initialization
 	void Start () {
@@ -30,5 +30,11 @@ public class destructible : MonoBehaviour {
             Instantiate(spawnee, this.transform.position, this.transform.rotation);
         }
         Destroy(this.gameObject, 0.01f);
+    }
+
+
+    public float getDmgAmount()
+    {
+        return damage;
     }
 }

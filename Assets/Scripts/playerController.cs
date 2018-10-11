@@ -6,16 +6,19 @@ public class playerController : MonoBehaviour {
     [SerializeField] HealthBar playerHealth;
     [SerializeField] float aimSpeed = 4f;
 
+
     enum PlayerNum
     {
         P1,
-        P2
+        P2,
+        P3,
+        P4
     }
     [SerializeField] PlayerNum playerNum;
 
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] GameObject r, l, u, d, ru, lu, rd, ld;
-    GameObject colliderObj2Listen;
+    [SerializeField] GameObject colliderObj2Listen;
     GameObject objPicked;
     [SerializeField] float throwForce = 1f;
 
@@ -341,6 +344,12 @@ public class playerController : MonoBehaviour {
                 objPicked.GetComponent<CircleCollider2D>().enabled = false;
             }
 
+            if (objPicked.GetComponent<moveBack>())
+            {
+                objPicked.GetComponent<moveBack>().enabled = false;
+            }
+
+
             objPicked.transform.parent = cranePoint.transform;
             // ADD MORE LATER
         }
@@ -366,7 +375,13 @@ public class playerController : MonoBehaviour {
                     objPicked.GetComponent<throwable>().setLayer(1);
                     break;
                 case PlayerNum.P2:
-                    objPicked.GetComponent<throwable>().setLayer(1);
+                    objPicked.GetComponent<throwable>().setLayer(2);
+                    break;
+                case PlayerNum.P3:
+                    objPicked.GetComponent<throwable>().setLayer(3);
+                    break;
+                case PlayerNum.P4:
+                    objPicked.GetComponent<throwable>().setLayer(4);
                     break;
                 default:
                     break;
@@ -375,6 +390,11 @@ public class playerController : MonoBehaviour {
             if (objPicked.GetComponent<CircleCollider2D>())
             {
                 objPicked.GetComponent<CircleCollider2D>().enabled = true;
+            }
+
+            if (objPicked.GetComponent<moveBack>())
+            {
+                objPicked.GetComponent<moveBack>().enabled = true;
             }
 
             objPicked.GetComponent<throwable>().setDistance(distance);
@@ -443,23 +463,36 @@ public class playerController : MonoBehaviour {
     {
         hitPoints -= amount;
 
+        playerHealth.updateHealthBar(hitPoints);
+
         if (hitPoints <= 0)
         {   // DEAD
-
+            Destroy(this.gameObject, 0.1f);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        takeDamage(collision.relativeVelocity.magnitude * collisionDamageMultiplier);
-
+        if (collision.transform.tag == "Player")
+        {
+            takeDamage(collision.relativeVelocity.magnitude * collisionDamageMultiplier);
+        }
+        else if (collision.transform.GetComponent<destructible>())
+        {
+            collision.transform.GetComponent<destructible>().getDestroyed();
+            takeDamage(collision.transform.GetComponent<destructible>().getDmgAmount());
+        }
 
     }
 
 
     public void getOiled()
     {
-        drag = GetComponent<Rigidbody2D>().drag;
+        if (GetComponent<Rigidbody2D>().drag != 0)
+        {
+            drag = GetComponent<Rigidbody2D>().drag;
+
+        }
         GetComponent<Rigidbody2D>().drag = 0;
         isOiled = true;
         Debug.Log("got oiled!");

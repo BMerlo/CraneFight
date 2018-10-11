@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4789115472491072}
   - component: {fileID: 58344754255076946}
   - component: {fileID: 114610905903524984}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4157630357493170}
   - component: {fileID: 58522053779843778}
   - component: {fileID: 114008442340257940}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4128099115285494}
   - component: {fileID: 58103027978952860}
   - component: {fileID: 114692141539428842}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4872690871896996}
   - component: {fileID: 58236778098982164}
   - component: {fileID: 114430892475020744}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: U
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4674073796666468}
   - component: {fileID: 212773999155990210}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Range
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 4137342508167274}
   - component: {fileID: 58111136046615184}
   - component: {fileID: 114774555043020010}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4017850046119682}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4273159328877284}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4342841726112494}
   - component: {fileID: 212509803666502692}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: TargetReticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4913710291580284}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: right2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 4094155286060660}
   - component: {fileID: 58927045056937352}
   - component: {fileID: 114836226355694142}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: UL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 4343762179696774}
   - component: {fileID: 58582348097929156}
   - component: {fileID: 114094218868134410}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: UR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4856586578083314}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BorderPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,7 +231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4941688838568940}
   - component: {fileID: 212149814973384658}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Range2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4777737966793652}
   - component: {fileID: 212987777356933914}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CranePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4425385542800394}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,8 +282,8 @@ GameObject:
   - component: {fileID: 50254654541653292}
   - component: {fileID: 61457500624391484}
   - component: {fileID: 95638600150682162}
-  m_Layer: 0
-  m_Name: Truck
+  m_Layer: 12
+  m_Name: Truck1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -297,7 +297,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4477046050894194}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 4662309643269414}
   - component: {fileID: 58553809717455410}
   - component: {fileID: 114224947001181902}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4669150211036104}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +344,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4981469485215136}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: up2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -359,7 +359,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4928226138319068}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -576,7 +576,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1623435752053756}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.0575314, y: -11.27, z: 0}
+  m_LocalPosition: {x: -2.21, y: 0.64, z: 0}
   m_LocalScale: {x: 3.5, y: 3.5, z: 1}
   m_Children:
   - {fileID: 4674073796666468}
@@ -975,6 +975,7 @@ MonoBehaviour:
   lu: {fileID: 1456184739460282}
   rd: {fileID: 1042225999037272}
   ld: {fileID: 1725665851676448}
+  colliderObj2Listen: {fileID: 0}
   throwForce: 700
   myAnim: {fileID: 95638600150682162}
   cranePoint: {fileID: 1607798668703448}
