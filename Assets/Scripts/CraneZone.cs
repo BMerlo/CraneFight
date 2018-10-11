@@ -5,7 +5,7 @@ using UnityEngine;
 public class CraneZone : MonoBehaviour {
     Collider2D myCollider;
     [SerializeField] GameObject obj2pick;
-    GameObject carrier2pickUpFrom;
+    [SerializeField] GameObject carrier2pickUpFrom;
 
 	// Use this for initialization
 	void Start () {
@@ -35,7 +35,7 @@ public class CraneZone : MonoBehaviour {
         {
             obj2pick = null;
         }
-        else if (obj2pick == collision.gameObject)
+        else if (carrier2pickUpFrom == collision.gameObject)
         {
             carrier2pickUpFrom = null;
         }
@@ -62,7 +62,7 @@ public class CraneZone : MonoBehaviour {
         else if (carrier2pickUpFrom)
         {   // Instantiate obj here
             Debug.Log("else if (carrier2pickUpFrom)");
-            return carrier2pickUpFrom.GetComponent<Carrier>().getPickUpable();
+            return carrier2pickUpFrom.GetComponent<Carrier>().getPickUpable();    // Infinite oil
         }
         return null;
     }

@@ -334,7 +334,12 @@ public class playerController : MonoBehaviour {
         if (colliderObj2Listen != null && colliderObj2Listen.GetComponent<CraneZone>().isTherePickable())
         {
             Debug.Log("picking up");
+
+
             objPicked = colliderObj2Listen.GetComponent<CraneZone>().getObj2PickUp();
+
+
+
             isCarrying = true;
             cranePoint.transform.position = objPicked.transform.position;
             objPicked.GetComponent<Rigidbody2D>().isKinematic = true;
