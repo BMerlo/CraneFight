@@ -117,7 +117,7 @@ MonoBehaviour:
   minForce2Destroy: 0.5
   spawnee: {fileID: 1931508802401118, guid: 43730c45f5261b045a21f98450496ac8, type: 2}
   doesSpawnOnDestroy: 1
-  damage: 5
+  damage: 10
 --- !u!212 &212486997756901044
 SpriteRenderer:
   m_ObjectHideFlags: 1
