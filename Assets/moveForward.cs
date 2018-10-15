@@ -15,6 +15,12 @@ public class moveForward : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        this.transform.Translate(dir * speedActual);
+        //this.transform.Translate(dir * speedActual);
+        
+    }
+
+    private void FixedUpdate()
+    {
+        GetComponent<Rigidbody2D>().AddForce(speedActual * dir);
     }
 }

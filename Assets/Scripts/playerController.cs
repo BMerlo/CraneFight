@@ -14,6 +14,9 @@ public class playerController : MonoBehaviour {
         P3,
         P4
     }
+
+
+
     [SerializeField] PlayerNum playerNum;
 
     [SerializeField] float moveSpeed = 5f;
@@ -44,6 +47,11 @@ public class playerController : MonoBehaviour {
     bool isOiled = false;
 
 
+    [SerializeField] float regenAmount = 0.5f;
+    [SerializeField] float regenDelay = 1.5f;
+    float regenCounter = 0;
+
+
     //[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
     // Use this for initialization
     void Start() {
@@ -54,6 +62,12 @@ public class playerController : MonoBehaviour {
                 break;
             case PlayerNum.P2:
                 this.gameObject.layer = 13;
+                break;
+            case PlayerNum.P3:
+                this.gameObject.layer = 14;
+                break;
+            case PlayerNum.P4:
+                this.gameObject.layer = 15;
                 break;
             default:
                 break;
@@ -67,6 +81,19 @@ public class playerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        //REGENERATION
+        if (regenCounter > 0)
+        {
+            regenCounter -= Time.deltaTime;
+        }
+        else
+        {
+            getHealth(Time.deltaTime * regenAmount);
+        }
+
+
+
+
         if (isCarrying)
         {
             cranePoint.GetComponent<SpriteRenderer>().enabled = true;
@@ -83,7 +110,7 @@ public class playerController : MonoBehaviour {
 
         if(isOiled == false)
         {
-            movement();
+            //movement();
         }
         else
         {
@@ -171,7 +198,13 @@ public class playerController : MonoBehaviour {
             }
         }
     }
-
+    private void FixedUpdate()
+    {
+        if (isOiled == false)
+        {
+            movement();
+        }
+    }
     void aim()
     {
         Vector3 dir = new Vector3(0, 0,0);
@@ -226,7 +259,6 @@ public class playerController : MonoBehaviour {
 
         //Debug.Log("Is inside eclipse? " + tem);
     }
-
 
 
     void oldAim()
@@ -307,20 +339,26 @@ public class playerController : MonoBehaviour {
         // MOVEMENT
         if (getOwnAxis("Horizontal") > 0.3f)
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(moveSpeed, 0));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(moveSpeed * (hitPoints / 100f), 0));
         }
         else if (getOwnAxis("Horizontal") < -0.3f)
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(-moveSpeed, 0));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(-moveSpeed * (hitPoints / 100f), 0));
         }
 
         if (getOwnAxis("Vertical") > 0.3f)
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -moveSpeed));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -moveSpeed * (hitPoints / 100f)));
         }
         else if (getOwnAxis("Vertical") < -0.3f)
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, moveSpeed));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, moveSpeed * (hitPoints / 100f)));
+        }
+
+
+        if (hitPoints < 100)
+        {
+            this.transform.Translate(new Vector3(-1, 0, 0) * 0.04f * ((100f-hitPoints) / 100f));
         }
     }
 
@@ -329,7 +367,7 @@ public class playerController : MonoBehaviour {
         return Input.GetAxis(playerNum.ToString() + axis);
     }
 
-    void pickUp()   // Gimme your best pick up lines
+    void pickUp()   // Gimme your best pick up lines, programmer intern
     {
         if (colliderObj2Listen != null && colliderObj2Listen.GetComponent<CraneZone>().isTherePickable())
         {
@@ -468,12 +506,27 @@ public class playerController : MonoBehaviour {
     {
         hitPoints -= amount;
 
+        if(amount >0)   //just in case?
+        regenCounter = regenDelay;
+
         playerHealth.updateHealthBar(hitPoints);
 
         if (hitPoints <= 0)
         {   // DEAD
-            Destroy(this.gameObject, 0.1f);
+            //Destroy(this.gameObject, 0.1f);
         }
+    }
+
+    public void getHealth(float amount)
+    {
+        hitPoints += amount;
+
+        if (hitPoints > 100)
+        {
+            hitPoints = 100;
+        }
+
+        playerHealth.updateHealthBar(hitPoints);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
