@@ -15,13 +15,24 @@ public class fallOff : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(this.transform.position.x);
-        if (this.transform.position.y > maxY || this.transform.position.y < minY)
+        //Debug.Log(this.transform.position.x);
+        if (this.transform.position.y > maxY)
+        {
+            fallFromTop();
+        }
+        else if (this.transform.position.y < minY)
         {
             fall();
         }
 	}
 
+    void fallFromTop()
+    {
+        GetComponent<SpriteRenderer>().sortingOrder = -3;
+        GetComponent<SpriteRenderer>().sortingLayerName = "Background";
+
+        fall();
+    }
 
     void fall()
     {
@@ -44,8 +55,6 @@ public class fallOff : MonoBehaviour {
             GetComponent<Rigidbody2D>().gravityScale = 5;
         }
 
-        GetComponent<SpriteRenderer>().sortingOrder = -3;
-        GetComponent<SpriteRenderer>().sortingLayerName = "Background";
 
         Destroy(this.gameObject, 1.5f);
     }

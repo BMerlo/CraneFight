@@ -8,7 +8,15 @@ public class Explosion : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+        //foreach (var item in find)
+        //{
+
+       // }
+
+
+
+
+
 	}
 	
 	// Update is called once per frame
@@ -19,19 +27,31 @@ public class Explosion : MonoBehaviour {
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.GetComponent<Rigidbody2D>())
+        //Debug.Log(collision.name);
+
+        if (collision.GetComponent<Rigidbody2D>() && !collision.GetComponent<oil>())
         {
-            Vector3 dir = collision.transform.position - this.transform.position;
+            Debug.Log(collision.gameObject.transform.position);
+
+            Vector3 dir = collision.gameObject.transform.position - this.transform.position;
             dir.Normalize();
-            collision.GetComponent<Rigidbody2D>().AddForce(pushForce * dir * 
-                (1f / Vector3.Distance(this.transform.position, collision.transform.position)));
+            Debug.Log(dir);
+            collision.GetComponent<Rigidbody2D>().AddForce(pushForce * dir);
+             //   * (1f / Vector3.Distance(this.transform.position, collision.gameObject.transform.position)));
 
             if (collision.GetComponent<playerController>())
             {
                 collision.GetComponent<playerController>().
-                    takeDamage(damageMultiplier* (1f / Vector3.Distance(this.transform.position, collision.transform.position)));
+                    takeDamage(damageMultiplier* (1f / Vector3.Distance(this.transform.position, collision.gameObject.transform.position)));
             }
 
         }
+
+        if (collision.GetComponent<oil>())
+        {
+            collision.GetComponent<oil>().burn();
+        }
+        
     }
+
 }

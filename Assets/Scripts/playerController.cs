@@ -387,6 +387,11 @@ public class playerController : MonoBehaviour {
                 objPicked.GetComponent<CircleCollider2D>().enabled = false;
             }
 
+            if (objPicked.GetComponent<BoxCollider2D>())
+            {
+                objPicked.GetComponent<BoxCollider2D>().enabled = false;
+            }
+
             if (objPicked.GetComponent<moveBack>())
             {
                 objPicked.GetComponent<moveBack>().enabled = false;
@@ -433,6 +438,10 @@ public class playerController : MonoBehaviour {
             if (objPicked.GetComponent<CircleCollider2D>())
             {
                 objPicked.GetComponent<CircleCollider2D>().enabled = true;
+            }
+            if (objPicked.GetComponent<BoxCollider2D>())
+            {
+                objPicked.GetComponent<BoxCollider2D>().enabled = true;
             }
 
             if (objPicked.GetComponent<moveBack>())
@@ -509,12 +518,14 @@ public class playerController : MonoBehaviour {
         if(amount >0)   //just in case?
         regenCounter = regenDelay;
 
+        if (hitPoints < 0)
+        {
+            hitPoints = 0;
+        }
+
         playerHealth.updateHealthBar(hitPoints);
 
-        if (hitPoints <= 0)
-        {   // DEAD
-            //Destroy(this.gameObject, 0.1f);
-        }
+        
     }
 
     public void getHealth(float amount)
