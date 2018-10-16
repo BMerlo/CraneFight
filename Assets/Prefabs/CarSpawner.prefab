@@ -54,6 +54,9 @@ MonoBehaviour:
   spawnees:
   - {fileID: 1754915230294402, guid: 76f43c2eb601efc43bc3fb780e65e841, type: 2}
   - {fileID: 1242579458027634, guid: 41524a80f2ce62049a9a7bd450766f82, type: 2}
-  - {fileID: 1754915230294402, guid: 76f43c2eb601efc43bc3fb780e65e841, type: 2}
+  - {fileID: 1300860513420610, guid: 1436af8cafdab554c813a69f5c54c800, type: 2}
+  - {fileID: 1245417796248068, guid: 022ee6f60b898d7499958f88a4a7a3b7, type: 2}
+  - {fileID: 1362977601529740, guid: e9f48a7c019a4e1478e9642d6e289875, type: 2}
+  - {fileID: 1621109719893064, guid: 058f1371eef9e904089f946afb913f73, type: 2}
   minTime: 4
   maxTime: 12
