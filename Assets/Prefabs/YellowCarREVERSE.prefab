@@ -21,10 +21,10 @@ GameObject:
   - component: {fileID: 4748853651247562}
   - component: {fileID: 212788501880520028}
   - component: {fileID: 95454856578980412}
-  - component: {fileID: 114319293457881918}
   - component: {fileID: 50940224978446888}
   - component: {fileID: 61013320229249752}
   - component: {fileID: 114672452569025202}
+  - component: {fileID: 114881093513106366}
   m_Layer: 0
   m_Name: YellowCarREVERSE
   m_TagString: Untagged
@@ -40,7 +40,7 @@ Transform:
   m_GameObject: {fileID: 1139914837488882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.47, y: 0.57, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: -4, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -108,19 +108,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114319293457881918
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1139914837488882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe365fedf6512e14a816b1450b8620b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minSpeed: 15
-  maxSpeed: 25
 --- !u!114 &114672452569025202
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -136,6 +123,19 @@ MonoBehaviour:
   spawnee: {fileID: 1256037077999480, guid: f16e9ddcae5750746883261818dab7e2, type: 2}
   doesSpawnOnDestroy: 1
   damage: 5
+--- !u!114 &114881093513106366
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1139914837488882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 300efa1015976504b9d68dead04f31b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSpeed: 17
+  maxSpeed: 35
 --- !u!212 &212788501880520028
 SpriteRenderer:
   m_ObjectHideFlags: 1

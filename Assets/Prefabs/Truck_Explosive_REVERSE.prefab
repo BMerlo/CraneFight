@@ -20,12 +20,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4257745241350464}
   - component: {fileID: 212131155033523978}
-  - component: {fileID: 114525149657261544}
   - component: {fileID: 114502057253458888}
   - component: {fileID: 50883442270177416}
   - component: {fileID: 61529819540711762}
+  - component: {fileID: 114177206175620514}
   m_Layer: 0
-  m_Name: Truck_Explosive (1)
+  m_Name: Truck_Explosive_REVERSE
   m_TagString: Carrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1967959112820670}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.5167756, y: 1.1798234, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -89,6 +89,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.81, y: 1.14}
   m_EdgeRadius: 0
+--- !u!114 &114177206175620514
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1967959112820670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 300efa1015976504b9d68dead04f31b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSpeed: 28
+  maxSpeed: 35
 --- !u!114 &114502057253458888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -106,19 +119,6 @@ MonoBehaviour:
   sprite2: {fileID: 21300000, guid: 7700a6810001b704baed64221ce5b9a1, type: 3}
   sprite3: {fileID: 21300000, guid: 0a6e1ef71d0b7eb42bb843694364ef6a, type: 3}
   sprite4: {fileID: 21300000, guid: 97daf85a44e34b34c829318f53241d41, type: 3}
---- !u!114 &114525149657261544
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1967959112820670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe365fedf6512e14a816b1450b8620b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minSpeed: 0.025
-  maxSpeed: 0.04
 --- !u!212 &212131155033523978
 SpriteRenderer:
   m_ObjectHideFlags: 1
