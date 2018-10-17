@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 50809700597775166}
   - component: {fileID: 61797788251839970}
   - component: {fileID: 114197209535687116}
+  - component: {fileID: 114719995057325028}
   m_Layer: 0
   m_Name: Truck_Explosive
   m_TagString: Carrier
@@ -120,6 +121,17 @@ MonoBehaviour:
   sprite2: {fileID: 21300000, guid: 7700a6810001b704baed64221ce5b9a1, type: 3}
   sprite3: {fileID: 21300000, guid: 0a6e1ef71d0b7eb42bb843694364ef6a, type: 3}
   sprite4: {fileID: 21300000, guid: 97daf85a44e34b34c829318f53241d41, type: 3}
+--- !u!114 &114719995057325028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1300860513420610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a535f7a8da192cd4d899f8b85adc7c09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114996923979425608
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -131,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe365fedf6512e14a816b1450b8620b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSpeed: 8
+  minSpeed: 10
   maxSpeed: 20
 --- !u!212 &212761597377306896
 SpriteRenderer:

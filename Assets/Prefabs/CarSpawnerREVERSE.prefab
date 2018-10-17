@@ -52,9 +52,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnees:
-  - {fileID: 1139914837488882, guid: 6e5379598ca42a64fa93eb8ba5acdce6, type: 2}
-  - {fileID: 1164686690122672, guid: 2d84caf13f1197a42ae2549c9e00ea62, type: 2}
+  - {fileID: 1655117760019758, guid: 01b1b3c2730e7834e9f619b516eca706, type: 2}
+  - {fileID: 1482328439592544, guid: ae6248d6f24e9814692bd896d643ec0f, type: 2}
+  - {fileID: 1102174245965482, guid: 1a9d2926cebd87e4eabfdac418c7e121, type: 2}
+  - {fileID: 1726110695139282, guid: 6aaac90a43529e84b915a9043a34600f, type: 2}
   - {fileID: 1967959112820670, guid: 4d2a84ccc65aa5643a462d1fcad67b95, type: 2}
+  - {fileID: 1164686690122672, guid: 2d84caf13f1197a42ae2549c9e00ea62, type: 2}
   - {fileID: 1139914837488882, guid: 6e5379598ca42a64fa93eb8ba5acdce6, type: 2}
-  minTime: 4
-  maxTime: 12
+  minTime: 3
+  maxTime: 9

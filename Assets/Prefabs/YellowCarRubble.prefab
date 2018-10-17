@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114919243357972434}
   - component: {fileID: 61425466817830642}
   - component: {fileID: 114826442293484400}
+  - component: {fileID: 114339927404293854}
   m_Layer: 0
   m_Name: YellowCarRubble
   m_TagString: Untagged
@@ -68,6 +69,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.9, y: 1.4}
   m_EdgeRadius: 0
+--- !u!114 &114339927404293854
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1256037077999480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a535f7a8da192cd4d899f8b85adc7c09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114826442293484400
 MonoBehaviour:
   m_ObjectHideFlags: 1

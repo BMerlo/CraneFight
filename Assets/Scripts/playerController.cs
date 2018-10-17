@@ -51,6 +51,9 @@ public class playerController : MonoBehaviour {
     [SerializeField] float regenDelay = 1.5f;
     float regenCounter = 0;
 
+    [SerializeField] GameObject craneActual;
+    [SerializeField] Sprite craneL, craneLU, craneU, craneRU, craneR, craneRD, craneD, craneLD;
+
 
     //[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
     // Use this for initialization
@@ -260,6 +263,23 @@ public class playerController : MonoBehaviour {
         //Debug.Log("Is inside eclipse? " + tem);
     }
 
+    public int getPlayerNum()
+    {
+        switch (playerNum)
+        {
+            case PlayerNum.P1:
+                return 1;
+            case PlayerNum.P2:
+                return 2;
+            case PlayerNum.P3:
+                return 3;
+            case PlayerNum.P4:
+                return 4;
+            default:
+                break;
+        }
+        return 0;
+    }
 
     void oldAim()
     {
@@ -292,14 +312,17 @@ public class playerController : MonoBehaviour {
             if (getOwnAxis("Vertical2") < -0.34f)
             {
                 colliderObj2Listen = lu;
+                craneActual.GetComponent<SpriteRenderer>().sprite = craneLU;
             }
             else if (getOwnAxis("Vertical2") > 0.34f)
             {
                 colliderObj2Listen = ld;
+                craneActual.GetComponent<SpriteRenderer>().sprite = craneLD;
             }
             else
             {
                 colliderObj2Listen = l;
+                craneActual.GetComponent<SpriteRenderer>().sprite = craneL;
             }
         }
         else if (getOwnAxis("Horizontal2") > 0.34f)
@@ -307,14 +330,17 @@ public class playerController : MonoBehaviour {
             if (getOwnAxis("Vertical2") < -0.34f)
             {
                 colliderObj2Listen = ru;
+                craneActual.GetComponent<SpriteRenderer>().sprite = craneRU;
             }
             else if (getOwnAxis("Vertical2") > 0.34f)
             {
                 colliderObj2Listen = rd;
+                craneActual.GetComponent<SpriteRenderer>().sprite = craneRD;
             }
             else
             {
                 colliderObj2Listen = r;
+                craneActual.GetComponent<SpriteRenderer>().sprite = craneR;
             }
         }
         else
@@ -322,14 +348,18 @@ public class playerController : MonoBehaviour {
             if (getOwnAxis("Vertical2") < -0.34f)
             {
                 colliderObj2Listen = u;
+                craneActual.GetComponent<SpriteRenderer>().sprite = craneU;
             }
             else if (getOwnAxis("Vertical2") > 0.34f)
             {
                 colliderObj2Listen = d;
+                craneActual.GetComponent<SpriteRenderer>().sprite = craneD;
             }
             else
             {
-                colliderObj2Listen = null;
+                //colliderObj2Listen = null;
+                colliderObj2Listen = d;
+                craneActual.GetComponent<SpriteRenderer>().sprite = craneD;
             }
         }
     }

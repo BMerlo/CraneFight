@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 50945487332478212}
   - component: {fileID: 61121834923212228}
   - component: {fileID: 114098428492154576}
+  - component: {fileID: 114030425320551522}
   m_Layer: 0
   m_Name: Car03
   m_TagString: Untagged
@@ -108,6 +109,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114030425320551522
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1362977601529740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a535f7a8da192cd4d899f8b85adc7c09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114098428492154576
 MonoBehaviour:
   m_ObjectHideFlags: 1

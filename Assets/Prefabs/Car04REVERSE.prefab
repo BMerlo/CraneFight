@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 61019687323638368}
   - component: {fileID: 114372569300003018}
   - component: {fileID: 114957025697339538}
+  - component: {fileID: 114474905482734628}
   m_Layer: 0
   m_Name: Car04REVERSE
   m_TagString: Untagged
@@ -123,6 +124,17 @@ MonoBehaviour:
   spawnee: {fileID: 1256037077999480, guid: f16e9ddcae5750746883261818dab7e2, type: 2}
   doesSpawnOnDestroy: 1
   damage: 5
+--- !u!114 &114474905482734628
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1102174245965482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a535f7a8da192cd4d899f8b85adc7c09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114957025697339538
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -134,8 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 300efa1015976504b9d68dead04f31b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSpeed: 17
-  maxSpeed: 35
+  minSpeed: 20
+  maxSpeed: 30
 --- !u!212 &212789649961829946
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -39,6 +39,7 @@ public class fallOff : MonoBehaviour {
         Debug.Log("Falling!");
         if (GetComponent<playerController>())
         {
+            GetComponent<playerController>().takeDamage(100);
             GetComponent<playerController>().enabled = false;
         }
         if (GetComponent<BoxCollider2D>())

@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114570033896135006}
   - component: {fileID: 114291555184167492}
   - component: {fileID: 61667440957343196}
+  - component: {fileID: 114974477341697840}
   m_Layer: 0
   m_Name: ExplosiveBarrel
   m_TagString: Pickable
@@ -104,7 +105,7 @@ MonoBehaviour:
   minForce2Destroy: 0.5
   spawnee: {fileID: 1674921903964498, guid: da91c45527867dc4d8ad25e2fc37f7d4, type: 2}
   doesSpawnOnDestroy: 1
-  damage: 15
+  damage: 10
 --- !u!114 &114570033896135006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -128,6 +129,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stopDistance: 1
+--- !u!114 &114974477341697840
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1635140410580730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a535f7a8da192cd4d899f8b85adc7c09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212288153108639920
 SpriteRenderer:
   m_ObjectHideFlags: 1

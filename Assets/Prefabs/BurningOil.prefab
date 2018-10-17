@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114304179858050450}
   - component: {fileID: 58423162973970150}
   - component: {fileID: 114510591758696988}
+  - component: {fileID: 114167309304728046}
   m_Layer: 0
   m_Name: BurningOil
   m_TagString: Untagged
@@ -77,6 +78,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114167309304728046
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1642278224687958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a535f7a8da192cd4d899f8b85adc7c09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114304179858050450
 MonoBehaviour:
   m_ObjectHideFlags: 1

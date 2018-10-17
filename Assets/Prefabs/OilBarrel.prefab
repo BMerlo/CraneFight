@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114410451038223358}
   - component: {fileID: 114840203468558682}
   - component: {fileID: 61302775131900172}
+  - component: {fileID: 114473356452900278}
   m_Layer: 0
   m_Name: OilBarrel
   m_TagString: Pickable
@@ -111,6 +112,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 047d9eed5a2858c4aaa9d27defb07f94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114473356452900278
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1073607942288620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a535f7a8da192cd4d899f8b85adc7c09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114840203468558682
