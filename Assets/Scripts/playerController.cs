@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class playerController : MonoBehaviour {
     [SerializeField] HealthBar playerHealth;
     [SerializeField] float aimSpeed = 4f;
@@ -14,8 +15,6 @@ public class playerController : MonoBehaviour {
         P3,
         P4
     }
-
-
 
     [SerializeField] PlayerNum playerNum;
 
@@ -138,7 +137,7 @@ public class playerController : MonoBehaviour {
             }
 
         }
-        
+
 
 
 
@@ -150,9 +149,11 @@ public class playerController : MonoBehaviour {
 
 
         // Assign which collider we'll use for picking up w crane
-        checkColliders();
-
-        if (isCarrying)
+        if (!isCarrying)
+        {
+            checkColliders();
+        }
+        else
         {
             //float x = right.transform.position.x;
             //float y = up.transform.position.y;
@@ -252,6 +253,52 @@ public class playerController : MonoBehaviour {
 
         cranePoint.transform.position = this.transform.position - temp;
 
+        Vector2 craneAngle = cranePoint.transform.position - this.transform.position;
+        //MOVE CRANE ACCORDING TO CRANE POINT //
+        float angle = findDegree(craneAngle.x, craneAngle.y);
+        Debug.Log(angle);
+        if (angle < 22.5f)
+        {
+            craneActual.GetComponent<SpriteRenderer>().sprite = craneU;
+        }
+        else if (angle < 67.5f)
+        {
+            craneActual.GetComponent<SpriteRenderer>().sprite = craneRU;
+        }
+        else if (angle < 112.5f)
+        {
+            craneActual.GetComponent<SpriteRenderer>().sprite = craneR;
+        }
+        else if (angle < 157.5f)
+        {
+            craneActual.GetComponent<SpriteRenderer>().sprite = craneRD;
+        }
+        else if (angle < 202.5f)
+        {
+            craneActual.GetComponent<SpriteRenderer>().sprite = craneD;
+        }
+        else if (angle < 247.5f)
+        {
+            craneActual.GetComponent<SpriteRenderer>().sprite = craneLD;
+        }
+        else if (angle < 292.5f)
+        {
+            craneActual.GetComponent<SpriteRenderer>().sprite = craneL;
+        }
+        else if (angle < 337.5f)
+        {
+            craneActual.GetComponent<SpriteRenderer>().sprite = craneLU;
+        }
+        else
+        {
+            craneActual.GetComponent<SpriteRenderer>().sprite = craneU;
+        }
+
+
+
+
+
+        ///////////////////////////////////////////////
         while (isInsideElipse(this.transform.position.x, this.transform.position.y, targetReticle.transform.position.x, targetReticle.transform.position.y,
             rightLarger.position.x - this.transform.position.x, upLarger.position.y - this.transform.position.y) == false)
         {
@@ -261,6 +308,16 @@ public class playerController : MonoBehaviour {
         
 
         //Debug.Log("Is inside eclipse? " + tem);
+    }
+
+    float findDegree(float x, float y)
+    {
+        float value = (float)((Mathf.Atan2(x, y) * 180f) / Mathf.PI);
+        if (value < 0)
+        {
+            value += 360f;
+        }
+        return value;
     }
 
     public int getPlayerNum()
@@ -430,6 +487,8 @@ public class playerController : MonoBehaviour {
 
             objPicked.transform.parent = cranePoint.transform;
             // ADD MORE LATER
+
+
         }
 
     }

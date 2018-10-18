@@ -70,6 +70,12 @@ public class throwable : MonoBehaviour {
             case 2:
                 this.gameObject.layer = 9;
                 break;
+            case 3:
+                this.gameObject.layer = 10;
+                break;
+            case 4:
+                this.gameObject.layer = 11;
+                break;
             default:
                 break;
         }

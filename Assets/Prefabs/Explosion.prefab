@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pushForce: 50
-  damageMultiplier: 0.5
+  damageMultiplier: 0.25
 --- !u!212 &212289015750981116
 SpriteRenderer:
   m_ObjectHideFlags: 1
