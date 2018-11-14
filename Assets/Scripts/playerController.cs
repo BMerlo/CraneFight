@@ -49,7 +49,9 @@ public class playerController : MonoBehaviour {
     bool isOiled = false;
     bool isCoroutineRunning = false;
     int oilCount = 1;
-    float oilForce = 1.0f;
+    [SerializeField] float oilForce = 1.0f;
+    [SerializeField] float oilForceTime = 0.5f;
+    float oilTimer = 0.0f;
 
 
     [SerializeField] float regenAmount = 0.5f;
@@ -208,7 +210,12 @@ public class playerController : MonoBehaviour {
         }
         else
         {
-           oiledMovement();
+            oilTimer += Time.deltaTime;
+            if (oilTimer >= oilForceTime)
+            {
+                oiledMovement();
+                oilTimer = 0.0f;
+            }
         }
     }
     void aim()
