@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 95097303077831462}
   - component: {fileID: 114483659460474656}
   m_Layer: 14
-  m_Name: PurpleTruck
+  m_Name: PinkTruck
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

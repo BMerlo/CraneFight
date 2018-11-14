@@ -17,6 +17,8 @@ public class playerController : MonoBehaviour {
     }
 
     [SerializeField] PlayerNum playerNum;
+    private float horizontalDeadZone = 0.3f;
+    private float verticalDeadZone = 0.3f;
 
     [SerializeField] float moveSpeed = 40f;
     [SerializeField] GameObject r, l, u, d, ru, lu, rd, ld;
@@ -35,6 +37,7 @@ public class playerController : MonoBehaviour {
     [SerializeField] Transform upLarger, rightLarger;
 
     float hitPoints = 100;
+    float maximumHitPoints = 100;
     float collisionDamageMultiplier = 1f;
 
     bool isJumping = false;
@@ -45,6 +48,8 @@ public class playerController : MonoBehaviour {
     float drag;
     bool isOiled = false;
     bool isCoroutineRunning = false;
+    int oilCount = 1;
+    float oilForce = 1.0f;
 
 
     [SerializeField] float regenAmount = 0.5f;
@@ -131,7 +136,6 @@ public class playerController : MonoBehaviour {
                     isStillOiled = true;
                 }
             }
-
             if (isStillOiled == false)
             {
                 getUnOiled();
@@ -139,15 +143,8 @@ public class playerController : MonoBehaviour {
 
         }
 
-
-
-
-
-
         //Debug.Log(Input.GetAxis("P1Horizontal2"));
         //Debug.Log(Input.GetAxis("P1Vertical2"));
-
-
 
         // Assign which collider we'll use for picking up w crane
         if (!isCarrying)
@@ -205,35 +202,34 @@ public class playerController : MonoBehaviour {
     }
     private void FixedUpdate()
     {
-        if (isOiled == false && isCoroutineRunning == false)
+        if (isOiled == false)
         {
-            
             movement();
         }
         else
         {
-           StartCoroutine(oiledMovement(2.0f));
+           oiledMovement();
         }
     }
     void aim()
     {
         Vector3 dir = new Vector3(0, 0,0);
 
-        if (getOwnAxis("Horizontal2") > 0.3f)
+        if (getOwnAxis("Horizontal2") > horizontalDeadZone)
         {
             //GetComponent<Rigidbody2D>().AddForce(new Vector2(moveSpeed, 0));
             dir.x = getOwnAxis("Horizontal2");
         }
-        else if (getOwnAxis("Horizontal2") < -0.3f)
+        else if (getOwnAxis("Horizontal2") < -horizontalDeadZone)
         {
             dir.x = getOwnAxis("Horizontal2");
         }
 
-        if (getOwnAxis("Vertical2") > 0.3f)
+        if (getOwnAxis("Vertical2") > verticalDeadZone)
         {
             dir.y = -getOwnAxis("Vertical2");
         }
-        else if (getOwnAxis("Vertical2") < -0.3f)
+        else if (getOwnAxis("Vertical2") < verticalDeadZone)
         {
             dir.y = -getOwnAxis("Vertical2");
         }
@@ -344,29 +340,29 @@ public class playerController : MonoBehaviour {
         return 0;
     }
 
-    void oldAim()
-    {
-        Vector2 circularPos = new Vector2(getOwnAxis("Horizontal2"), -getOwnAxis("Vertical2"));
-        if (circularPos.magnitude > 1)
-            circularPos.Normalize();
+    //void oldAim()
+    //{
+    //    Vector2 circularPos = new Vector2(getOwnAxis("Horizontal2"), -getOwnAxis("Vertical2"));
+    //    if (circularPos.magnitude > 1)
+    //        circularPos.Normalize();
 
-        float localX = right.transform.position.x - this.transform.position.x;
-        float localY = up.transform.position.y - this.transform.position.y;
+    //    float localX = right.transform.position.x - this.transform.position.x;
+    //    float localY = up.transform.position.y - this.transform.position.y;
 
-        Vector2 temp = new Vector2(localX * circularPos.x, circularPos.y * localY);
-        Vector3 pos = new Vector3(-temp.x, -temp.y, 0) + this.transform.position;
-        cranePoint.transform.position = pos;
-
-
+    //    Vector2 temp = new Vector2(localX * circularPos.x, circularPos.y * localY);
+    //    Vector3 pos = new Vector3(-temp.x, -temp.y, 0) + this.transform.position;
+    //    cranePoint.transform.position = pos;
 
 
-       // float localX2 = right2.transform.position.x - this.transform.position.x;
-       // float localY2 = up2.transform.position.y - this.transform.position.y;
 
-       // Vector2 temp2 = new Vector2(localX2 * circularPos.x, circularPos.y * localY2);
-       // Vector3 pos2 = new Vector3(temp2.x, temp2.y, 0) + this.transform.position;
-      //  targetReticle.transform.position = pos2;
-    }
+
+    //   // float localX2 = right2.transform.position.x - this.transform.position.x;
+    //   // float localY2 = up2.transform.position.y - this.transform.position.y;
+
+    //   // Vector2 temp2 = new Vector2(localX2 * circularPos.x, circularPos.y * localY2);
+    //   // Vector3 pos2 = new Vector3(temp2.x, temp2.y, 0) + this.transform.position;
+    //  //  targetReticle.transform.position = pos2;
+    //}
 
     void checkColliders()
     {
@@ -430,44 +426,45 @@ public class playerController : MonoBehaviour {
     void movement()
     {
         // MOVEMENT
-        if (getOwnAxis("Horizontal") > 0.3f)
+        if (getOwnAxis("Horizontal") > horizontalDeadZone)
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(moveSpeed * (hitPoints / 100f), 0));
             Debug.Log(GetComponent<Rigidbody2D>().velocity);
         }
-        else if (getOwnAxis("Horizontal") < -0.3f)
+        else if (getOwnAxis("Horizontal") < -horizontalDeadZone)
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(-moveSpeed * (hitPoints / 100f), 0));
         }
 
-        if (getOwnAxis("Vertical") > 0.3f)
+        if (getOwnAxis("Vertical") > horizontalDeadZone)
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -moveSpeed * (hitPoints / 100f)));
         }
-        else if (getOwnAxis("Vertical") < -0.3f)
+        else if (getOwnAxis("Vertical") < -horizontalDeadZone)
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0, moveSpeed * (hitPoints / 100f)));
         }
 
 
-        if (hitPoints < 100)
+        if (hitPoints < maximumHitPoints)
         {
             this.transform.Translate(new Vector3(-1, 0, 0) * 0.04f * ((100f-hitPoints) / 100f));
         }
     }
 
-    //Function deals with the movement of a player when they are oiled up
-    IEnumerator oiledMovement(float animTime)
+    //Coroutine deals with the movement of a player when they are oiled up
+    void oiledMovement()
     {
-        if (isCoroutineRunning)
-            yield break;
-        isCoroutineRunning = true;
-        myAnim.SetBool("IsSlipping", true);
-        yield return new WaitForSeconds(animTime);
-        myAnim.SetBool("IsSlipping", false);
-        isCoroutineRunning = false;
-        yield break;
-
+        if (oilCount % 2 == 0)
+        {
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, moveSpeed * oilForce *(hitPoints / 100f)));
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -moveSpeed *oilForce* (hitPoints / 100f)));
+        }
+        oilCount++;
+        oilForce += 0.1f;
     }
 
     float getOwnAxis(string axis)
@@ -581,45 +578,45 @@ public class playerController : MonoBehaviour {
 
         return true;
     }
-    void oldthrowObj(){
-        if(objPicked != null)
-        {
-            float distance = Vector3.Distance(cranePoint.transform.position, targetReticle.transform.position);
+    //void oldthrowObj(){
+    //    if(objPicked != null)
+    //    {
+    //        float distance = Vector3.Distance(cranePoint.transform.position, targetReticle.transform.position);
 
 
-            objPicked.GetComponent<Rigidbody2D>().isKinematic = false;
-            objPicked.transform.parent = null;
+    //        objPicked.GetComponent<Rigidbody2D>().isKinematic = false;
+    //        objPicked.transform.parent = null;
             
 
-            Vector2 dir = new Vector2(getOwnAxis("Horizontal2"), -getOwnAxis("Vertical2"));
-            dir.Normalize();
-            //objPicked.GetComponent<throwable>().setPos(targetReticle.transform.position);
+    //        Vector2 dir = new Vector2(getOwnAxis("Horizontal2"), -getOwnAxis("Vertical2"));
+    //        dir.Normalize();
+    //        //objPicked.GetComponent<throwable>().setPos(targetReticle.transform.position);
 
-            switch (playerNum)
-            {
-                case PlayerNum.P1:
-                    objPicked.GetComponent<throwable>().setLayer(1);
-                    break;
-                case PlayerNum.P2:
-                    objPicked.GetComponent<throwable>().setLayer(1);
-                    break;
-                default:
-                    break;
-            }
+    //        switch (playerNum)
+    //        {
+    //            case PlayerNum.P1:
+    //                objPicked.GetComponent<throwable>().setLayer(1);
+    //                break;
+    //            case PlayerNum.P2:
+    //                objPicked.GetComponent<throwable>().setLayer(1);
+    //                break;
+    //            default:
+    //                break;
+    //        }
 
-            if (objPicked.GetComponent<CircleCollider2D>())
-            {
-                objPicked.GetComponent<CircleCollider2D>().enabled = true;
-            }
+    //        if (objPicked.GetComponent<CircleCollider2D>())
+    //        {
+    //            objPicked.GetComponent<CircleCollider2D>().enabled = true;
+    //        }
 
-            objPicked.GetComponent<throwable>().setDistance(distance);
-            objPicked.GetComponent<Rigidbody2D>().AddForce(dir * throwForce);
+    //        objPicked.GetComponent<throwable>().setDistance(distance);
+    //        objPicked.GetComponent<Rigidbody2D>().AddForce(dir * throwForce);
             
 
-            objPicked = null;
-            isCarrying = false;
-        }
-    }
+    //        objPicked = null;
+    //        isCarrying = false;
+    //    }
+    //}
 
     public void takeDamage(float amount)
     {
@@ -642,9 +639,9 @@ public class playerController : MonoBehaviour {
     {
         hitPoints += amount;
 
-        if (hitPoints > 100)
+        if (hitPoints > maximumHitPoints)
         {
-            hitPoints = 100;
+            hitPoints = maximumHitPoints;
         }
 
         playerHealth.updateHealthBar(hitPoints);
@@ -664,7 +661,7 @@ public class playerController : MonoBehaviour {
 
     }
 
-
+    //Called when the player hits an oil spill. Sets drag to 0 while storing original drag value.
     public void getOiled()
     {
         if (GetComponent<Rigidbody2D>().drag != 0)
@@ -676,11 +673,21 @@ public class playerController : MonoBehaviour {
         isOiled = true;
         Debug.Log("got oiled!");
     }
-
+    //Called when the player leaves an oil spill. Sets drag to original value.
     public void getUnOiled()
     {
         GetComponent<Rigidbody2D>().drag = drag;
         isOiled = false;
+        if (oilCount % 2 == 0)
+        {
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, moveSpeed* oilForce  /2 * (hitPoints / 100f)));
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -moveSpeed* oilForce /2 * (hitPoints / 100f)));
+        }
+        oilCount = 1;
+        oilForce = 1.0f;
         Debug.Log("got unoiled!");
     }
 }
