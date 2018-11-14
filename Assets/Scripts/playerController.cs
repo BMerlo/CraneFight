@@ -18,7 +18,7 @@ public class playerController : MonoBehaviour {
 
     [SerializeField] PlayerNum playerNum;
 
-    [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float moveSpeed = 40f;
     [SerializeField] GameObject r, l, u, d, ru, lu, rd, ld;
     [SerializeField] GameObject colliderObj2Listen;
     GameObject objPicked;
@@ -44,6 +44,7 @@ public class playerController : MonoBehaviour {
 
     float drag;
     bool isOiled = false;
+    bool isCoroutineRunning = false;
 
 
     [SerializeField] float regenAmount = 0.5f;
@@ -204,9 +205,14 @@ public class playerController : MonoBehaviour {
     }
     private void FixedUpdate()
     {
-        if (isOiled == false)
+        if (isOiled == false && isCoroutineRunning == false)
         {
+            
             movement();
+        }
+        else
+        {
+           StartCoroutine(oiledMovement(2.0f));
         }
     }
     void aim()
@@ -427,6 +433,7 @@ public class playerController : MonoBehaviour {
         if (getOwnAxis("Horizontal") > 0.3f)
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(moveSpeed * (hitPoints / 100f), 0));
+            Debug.Log(GetComponent<Rigidbody2D>().velocity);
         }
         else if (getOwnAxis("Horizontal") < -0.3f)
         {
@@ -449,12 +456,26 @@ public class playerController : MonoBehaviour {
         }
     }
 
+    //Function deals with the movement of a player when they are oiled up
+    IEnumerator oiledMovement(float animTime)
+    {
+        if (isCoroutineRunning)
+            yield break;
+        isCoroutineRunning = true;
+        myAnim.SetBool("IsSlipping", true);
+        yield return new WaitForSeconds(animTime);
+        myAnim.SetBool("IsSlipping", false);
+        isCoroutineRunning = false;
+        yield break;
+
+    }
+
     float getOwnAxis(string axis)
     {
         return Input.GetAxis(playerNum.ToString() + axis);
     }
 
-    void pickUp()   // Gimme your best pick up lines, programmer intern
+    void pickUp()   // Gimme your best pick up lines, programmer intern. > "I hope we can merge without any conflicts ( ͡° ͜ʖ ͡°) "
     {
         if (colliderObj2Listen != null && colliderObj2Listen.GetComponent<CraneZone>().isTherePickable())
         {

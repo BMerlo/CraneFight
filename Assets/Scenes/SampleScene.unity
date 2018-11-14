@@ -859,6 +859,19 @@ Prefab:
       propertyPath: m_Name
       value: YellowTruck
       objectReference: {fileID: 0}
+    - target: {fileID: 212344068995576862, guid: d50e2276728a84b4a979d2c20952fc74,
+        type: 2}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560342349835096, guid: d50e2276728a84b4a979d2c20952fc74, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.053463593
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560342349835096, guid: d50e2276728a84b4a979d2c20952fc74, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.025
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d50e2276728a84b4a979d2c20952fc74, type: 2}
   m_IsPrefabAsset: 0
@@ -875,7 +888,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4027042143310548, guid: 05c55c0aa8a1e56428a6435cd5ad3383, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.7940047
+      value: 1.01
       objectReference: {fileID: 0}
     - target: {fileID: 4027042143310548, guid: 05c55c0aa8a1e56428a6435cd5ad3383, type: 2}
       propertyPath: m_LocalPosition.z
