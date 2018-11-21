@@ -6,8 +6,7 @@ using UnityEngine;
 public class playerController : MonoBehaviour {
     [SerializeField] HealthBar playerHealth;
     [SerializeField] float aimSpeed = 4f;
-
-
+    
     enum PlayerNum
     {
         P1,
@@ -92,9 +91,6 @@ public class playerController : MonoBehaviour {
         {
             getHealth(Time.deltaTime * regenAmount);
         }
-
-
-
 
         if (isCarrying)
         {
@@ -463,8 +459,6 @@ public class playerController : MonoBehaviour {
 
             objPicked = colliderObj2Listen.GetComponent<CraneZone>().getObj2PickUp();
 
-
-
             isCarrying = true;
             cranePoint.transform.position = objPicked.transform.position;
             objPicked.GetComponent<Rigidbody2D>().isKinematic = true;
@@ -612,9 +606,7 @@ public class playerController : MonoBehaviour {
             hitPoints = 0;
         }
 
-        playerHealth.updateHealthBar(hitPoints);
-
-        
+        playerHealth.updateHealthBar(hitPoints);        
     }
 
     public void getHealth(float amount)
