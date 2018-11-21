@@ -53,6 +53,9 @@ public class playerController : MonoBehaviour {
     [SerializeField] float oilForceTime = 0.5f;
     float oilTimer = 0.0f;
 
+    [SerializeField] float oilSpeed = 1.7f;
+    private int oilDirectionModifier = 1;
+
 
     [SerializeField] float regenAmount = 0.5f;
     [SerializeField] float regenDelay = 1.5f;
@@ -60,6 +63,8 @@ public class playerController : MonoBehaviour {
 
     [SerializeField] GameObject craneActual;
     [SerializeField] Sprite craneL, craneLU, craneU, craneRU, craneR, craneRD, craneD, craneLD;
+
+    private Rigidbody2D m_rb;
 
 
     //[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
@@ -83,8 +88,8 @@ public class playerController : MonoBehaviour {
                 break;
         }
 
-        
 
+        m_rb = GetComponent<Rigidbody2D>();
         targetReticle.GetComponent<SpriteRenderer>().enabled = false;
         throwRange.GetComponent<SpriteRenderer>().enabled = false;
     }
@@ -204,19 +209,21 @@ public class playerController : MonoBehaviour {
     }
     private void FixedUpdate()
     {
-        if (isOiled == false)
-        {
-            movement();
-        }
-        else
-        {
-            oilTimer += Time.deltaTime;
-            if (oilTimer >= oilForceTime)
-            {
-                oiledMovement();
-                oilTimer = 0.0f;
-            }
-        }
+
+        movement();
+        //if (isOiled == false)
+        //{
+        //    movement();
+        //}
+        //else
+        //{
+        //    oilTimer += Time.deltaTime;
+        //    if (oilTimer >= oilForceTime)
+        //    {
+        //        oiledMovement();
+        //        oilTimer = 0.0f;
+        //    }
+        //}
     }
     void aim()
     {
@@ -432,24 +439,34 @@ public class playerController : MonoBehaviour {
 
     void movement()
     {
+        float modifiedSpeed = moveSpeed;
+        if (isOiled)
+        {
+            modifiedSpeed *= oilSpeed * oilDirectionModifier * (hitPoints /100f);
+        }
+        else
+        {
+            modifiedSpeed *= (hitPoints / 100f);
+        }
+            
         // MOVEMENT
         if (getOwnAxis("Horizontal") > horizontalDeadZone)
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(moveSpeed * (hitPoints / 100f), 0));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(modifiedSpeed, 0));
             Debug.Log(GetComponent<Rigidbody2D>().velocity);
         }
         else if (getOwnAxis("Horizontal") < -horizontalDeadZone)
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(-moveSpeed * (hitPoints / 100f), 0));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(-modifiedSpeed, 0));
         }
 
         if (getOwnAxis("Vertical") > horizontalDeadZone)
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -moveSpeed * (hitPoints / 100f)));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -modifiedSpeed));
         }
         else if (getOwnAxis("Vertical") < -horizontalDeadZone)
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, moveSpeed * (hitPoints / 100f)));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, modifiedSpeed));
         }
 
 
@@ -460,19 +477,21 @@ public class playerController : MonoBehaviour {
     }
 
     //Coroutine deals with the movement of a player when they are oiled up
-    void oiledMovement()
-    {
-        if (oilCount % 2 == 0)
-        {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, moveSpeed * oilForce *(hitPoints / 100f)));
-        }
-        else
-        {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -moveSpeed *oilForce* (hitPoints / 100f)));
-        }
-        oilCount++;
-        oilForce += 0.1f;
-    }
+   
+
+    //void oiledMovement()
+    //{
+    //    if (oilCount % 2 == 0)
+    //    {
+    //        GetComponent<Rigidbody2D>().AddForce(new Vector2(0, moveSpeed * oilForce *(hitPoints / 100f)));
+    //    }
+    //    else
+    //    {
+    //        GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -moveSpeed *oilForce* (hitPoints / 100f)));
+    //    }
+    //    oilCount++;
+    //    oilForce += 0.1f;
+    //}
 
     float getOwnAxis(string axis)
     {
@@ -678,6 +697,7 @@ public class playerController : MonoBehaviour {
         }
         GetComponent<Rigidbody2D>().drag = 0;
         isOiled = true;
+        oilDirectionModifier = -1;
         Debug.Log("got oiled!");
     }
     //Called when the player leaves an oil spill. Sets drag to original value.
@@ -695,6 +715,7 @@ public class playerController : MonoBehaviour {
         }
         oilCount = 1;
         oilForce = 1.0f;
+        oilDirectionModifier = 1;
         Debug.Log("got unoiled!");
     }
 }
