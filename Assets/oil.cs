@@ -27,7 +27,7 @@ public class oil : MonoBehaviour {
 
     public void burn()
     {
-        Instantiate(burningOil, this.transform.position, this.transform.rotation);
+       // Instantiate(burningOil, this.transform.position, this.transform.rotation);
         Destroy(this.gameObject);
     }
 

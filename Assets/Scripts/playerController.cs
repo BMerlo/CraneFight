@@ -24,7 +24,7 @@ public class playerController : MonoBehaviour {
     [SerializeField] GameObject r, l, u, d, ru, lu, rd, ld;
     [SerializeField] GameObject colliderObj2Listen;
     GameObject objPicked;
-    [SerializeField] float throwForce = 1f;
+    private float throwForce = 0f;
 
     [SerializeField] Animator myAnim;
 
@@ -65,6 +65,11 @@ public class playerController : MonoBehaviour {
     [SerializeField] Sprite craneL, craneLU, craneU, craneRU, craneR, craneRD, craneD, craneLD;
 
     private Rigidbody2D m_rb;
+
+    [SerializeField] float maxThrowForce = 1f;
+    [SerializeField] float maxThrowTime = 3.0f;
+    private bool isCharging = false;
+    float timeCharging;
 
 
     //[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
@@ -177,13 +182,14 @@ public class playerController : MonoBehaviour {
         }
 
         //Debug.Log(getOwnAxis("Trigger"));
-        if (isJumping == false && isCarrying == false && getOwnAxis("Trigger") < -0.7f)
+        //if (isJumping == false && isCarrying == false && getOwnAxis("Trigger") < -0.7f)
+        //{
+            
+        //}
+        if (!isJumping && isCarrying && getOwnAxis("Trigger") < -0.7f)
         {
-            pickUp();
-        }
-        else if (isCarrying && getOwnAxis("Trigger") > -0.25f)
-        {
-            throwObj();
+            chargingForce();
+            //throwObj();
         }
         else if (isCarrying == false && getOwnAxis("Trigger") > 0.25f)
         {
@@ -397,6 +403,7 @@ public class playerController : MonoBehaviour {
                 colliderObj2Listen = l;
                 craneActual.GetComponent<SpriteRenderer>().sprite = craneL;
             }
+            pickUp();
         }
         else if (getOwnAxis("Horizontal2") > 0.34f)
         {
@@ -415,6 +422,7 @@ public class playerController : MonoBehaviour {
                 colliderObj2Listen = r;
                 craneActual.GetComponent<SpriteRenderer>().sprite = craneR;
             }
+            pickUp();
         }
         else
         {
@@ -422,11 +430,13 @@ public class playerController : MonoBehaviour {
             {
                 colliderObj2Listen = u;
                 craneActual.GetComponent<SpriteRenderer>().sprite = craneU;
+                pickUp();
             }
             else if (getOwnAxis("Vertical2") > 0.34f)
             {
                 colliderObj2Listen = d;
                 craneActual.GetComponent<SpriteRenderer>().sprite = craneD;
+                pickUp();
             }
             else
             {
@@ -435,6 +445,7 @@ public class playerController : MonoBehaviour {
                 craneActual.GetComponent<SpriteRenderer>().sprite = craneD;
             }
         }
+        
     }
 
     void movement()
@@ -537,6 +548,27 @@ public class playerController : MonoBehaviour {
 
     }
 
+    void chargingForce()
+    {
+        if (!isCharging)
+        {
+            isCharging = true;
+            //while (isCharging)
+            {
+                timeCharging += Time.deltaTime;
+            }
+            if (timeCharging > maxThrowTime)
+            {
+                throwForce = maxThrowForce;
+            }
+            else
+            {
+                throwForce = (timeCharging / maxThrowTime) * maxThrowForce; 
+            }
+            isCharging = false;
+            throwObj();
+        }
+    }
 
     void throwObj()
     {
