@@ -70,8 +70,19 @@ public class playerController : MonoBehaviour {
 
     [SerializeField] float maxThrowForce = 5000f;
     [SerializeField] float maxThrowTime = 3.0f;
-    private bool isCharging = false;
+    [SerializeField] float minThrowForce = 1650f;
     [SerializeField]float timeCharging;
+
+    [SerializeField] private float evadeCooldown = 1f;
+    private bool hasEvaded = false;
+    private float evadeCooldownTimer = 0;
+    [SerializeField] private float jumpCooldown = 1f;
+    private bool hasJumped = false;
+    private float jumpCooldownTimer = 0;
+    [SerializeField] private float throwCooldown = 0.5f;
+    private float throwCooldownTimer = 0;
+    private bool hasThrown = false;
+    private bool isCharging = false;
 
 
     //[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
@@ -113,7 +124,7 @@ public class playerController : MonoBehaviour {
             getHealth(Time.deltaTime * regenAmount);
         }
 
-
+        cooldownTimers();
 
 
         if (isCarrying)
@@ -184,17 +195,17 @@ public class playerController : MonoBehaviour {
         }
 
         //Debug.Log(getOwnAxis("Trigger"));
-        if (!isJumping && isCarrying && getOwnAxis("Trigger") < -0.7f)
+        if (!isJumping && isCarrying && getOwnAxis("Trigger") < -0.7f && !hasThrown)
         {
             timeCharging += Time.deltaTime;
             isCharging = true;    
         }
-        else if (!isJumping && isCarrying && isCharging)
+        else if (!isJumping && isCarrying && isCharging && !hasThrown)
         {
             chargingForce();
             throwObj();
         }
-        else if (isCarrying == false && getOwnAxis("Trigger") > 0.25f)
+        else if (isCarrying == false && !hasJumped && !isJumping && getOwnAxis("Trigger") > 0.25f)
         {
             isJumping = true;
             myAnim.SetBool("IsJumping", true);
@@ -209,6 +220,7 @@ public class playerController : MonoBehaviour {
             if (jumpTimer >= jumpTime)
             {
                 isJumping = false;
+                hasJumped = true;
                 myAnim.SetBool("IsJumping", false);
                 GetComponent<BoxCollider2D>().enabled = true;
                 //GetComponent<SpriteRenderer>().enabled = true;
@@ -236,6 +248,39 @@ public class playerController : MonoBehaviour {
         //    }
         //}
     }
+
+    void cooldownTimers()
+    {
+        if (hasJumped)
+        {
+            jumpCooldownTimer += Time.deltaTime;
+            if (jumpCooldownTimer >= jumpCooldown) { 
+                hasJumped = false;
+                jumpCooldownTimer = 0;
+            }
+        }
+
+        if (hasEvaded)
+        {
+            evadeCooldownTimer += Time.deltaTime;
+            if (evadeCooldownTimer >= evadeCooldown)
+            {
+                hasEvaded = false;
+                evadeCooldownTimer = 0;
+            }
+        }
+
+        if (hasThrown)
+        {
+            throwCooldownTimer += Time.deltaTime;
+            if (throwCooldownTimer >= throwCooldown)
+            {
+                hasThrown = false;
+                throwCooldownTimer = 0;
+            }  
+        }
+    }
+
     void aim()
     {
         Vector3 dir = new Vector3(0, 0,0);
@@ -485,19 +530,16 @@ public class playerController : MonoBehaviour {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0, modifiedSpeed));
         }
 
-        if (getOwnAxis("RBumper") > 0 && !hasBoosted)
+        if (getOwnAxis("RBumper") > 0 && !hasEvaded)
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -evadeSpeed), ForceMode2D.Impulse);
-            hasBoosted = true;
+            hasEvaded = true;
             
         }
-        else if (getOwnAxis("LBumper") > 0 && !hasBoosted)
+        else if (getOwnAxis("LBumper") > 0 && !hasEvaded)
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0, evadeSpeed), ForceMode2D.Impulse);
-            hasBoosted = true;
-        }else if (getOwnAxis("LBumper") == 0 && getOwnAxis("RBumper") == 0)
-        {
-            hasBoosted = false;
+            hasEvaded = true;
         }
 
         if (hitPoints < maximumHitPoints)
@@ -572,6 +614,8 @@ public class playerController : MonoBehaviour {
         isCharging = false;
         if (timeCharging > maxThrowTime)
             throwForce = maxThrowForce;
+        else if (timeCharging < maxThrowTime / maxThrowTime)
+            throwForce = minThrowForce;
         else
             throwForce = (timeCharging / maxThrowTime) * maxThrowForce;
         timeCharging = 0f;
@@ -627,6 +671,7 @@ public class playerController : MonoBehaviour {
 
             objPicked = null;
             isCarrying = false;
+            hasThrown = true;
         }
     }
 
