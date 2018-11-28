@@ -967,6 +967,8 @@ MonoBehaviour:
   aimSpeed: 8
   playerNum: 2
   moveSpeed: 100
+  evadeSpeed: 100
+  hasBoosted: 0
   r: {fileID: 1041512384735870}
   l: {fileID: 1015572694195708}
   u: {fileID: 1913467551741224}
@@ -989,6 +991,9 @@ MonoBehaviour:
   rightLarger: {fileID: 4995599974256828}
   jumpTime: 0.5
   jumpDamage: 1
+  oilForce: 1
+  oilForceTime: 0.5
+  oilSpeed: 1.7
   regenAmount: 2
   regenDelay: 0.5
   craneActual: {fileID: 1510166361964872}
@@ -1000,6 +1005,9 @@ MonoBehaviour:
   craneRD: {fileID: 21300000, guid: 8dde639af37e2e5429ffcaaec9a1ee94, type: 3}
   craneD: {fileID: 21300000, guid: 4f6bd8a648693b94da8d5aa074cb9a82, type: 3}
   craneLD: {fileID: 21300000, guid: 55f681abd7bb2a94d87a69825f99de65, type: 3}
+  maxThrowForce: 5000
+  maxThrowTime: 3
+  timeCharging: 0
 --- !u!114 &114746938398170652
 MonoBehaviour:
   m_ObjectHideFlags: 1

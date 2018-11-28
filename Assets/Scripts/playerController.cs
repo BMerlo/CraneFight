@@ -21,6 +21,8 @@ public class playerController : MonoBehaviour {
     private float verticalDeadZone = 0.3f;
 
     [SerializeField] float moveSpeed = 40f;
+    [SerializeField] float evadeSpeed = 400f;
+    [SerializeField] bool hasBoosted = false;
     [SerializeField] GameObject r, l, u, d, ru, lu, rd, ld;
     [SerializeField] GameObject colliderObj2Listen;
     GameObject objPicked;
@@ -182,10 +184,6 @@ public class playerController : MonoBehaviour {
         }
 
         //Debug.Log(getOwnAxis("Trigger"));
-        //if (isJumping == false && isCarrying == false && getOwnAxis("Trigger") < -0.7f)
-        //{
-            
-        //}
         if (!isJumping && isCarrying && getOwnAxis("Trigger") < -0.7f)
         {
             timeCharging += Time.deltaTime;
@@ -217,6 +215,8 @@ public class playerController : MonoBehaviour {
                 takeDamage(jumpDamage);
             }
         }
+
+
     }
     private void FixedUpdate()
     {
@@ -485,6 +485,20 @@ public class playerController : MonoBehaviour {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0, modifiedSpeed));
         }
 
+        if (getOwnAxis("RBumper") > 0 && !hasBoosted)
+        {
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -evadeSpeed), ForceMode2D.Impulse);
+            hasBoosted = true;
+            
+        }
+        else if (getOwnAxis("LBumper") > 0 && !hasBoosted)
+        {
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, evadeSpeed), ForceMode2D.Impulse);
+            hasBoosted = true;
+        }else if (getOwnAxis("LBumper") == 0 && getOwnAxis("RBumper") == 0)
+        {
+            hasBoosted = false;
+        }
 
         if (hitPoints < maximumHitPoints)
         {

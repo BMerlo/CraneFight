@@ -1019,6 +1019,8 @@ MonoBehaviour:
   aimSpeed: 8
   playerNum: 0
   moveSpeed: 100
+  evadeSpeed: 100
+  hasBoosted: 0
   r: {fileID: 1030074618824174}
   l: {fileID: 1071792865304264}
   u: {fileID: 1076528598286044}
