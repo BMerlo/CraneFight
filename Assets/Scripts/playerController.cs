@@ -24,7 +24,7 @@ public class playerController : MonoBehaviour {
     [SerializeField] GameObject r, l, u, d, ru, lu, rd, ld;
     [SerializeField] GameObject colliderObj2Listen;
     GameObject objPicked;
-    private float throwForce = 0f;
+    [SerializeField] private float throwForce = 0f;
 
     [SerializeField] Animator myAnim;
 
@@ -66,10 +66,10 @@ public class playerController : MonoBehaviour {
 
     private Rigidbody2D m_rb;
 
-    [SerializeField] float maxThrowForce = 1f;
+    [SerializeField] float maxThrowForce = 5000f;
     [SerializeField] float maxThrowTime = 3.0f;
     private bool isCharging = false;
-    float timeCharging;
+    [SerializeField]float timeCharging;
 
 
     //[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
@@ -188,8 +188,13 @@ public class playerController : MonoBehaviour {
         //}
         if (!isJumping && isCarrying && getOwnAxis("Trigger") < -0.7f)
         {
+            timeCharging += Time.deltaTime;
+            isCharging = true;    
+        }
+        else if (!isJumping && isCarrying && isCharging)
+        {
             chargingForce();
-            //throwObj();
+            throwObj();
         }
         else if (isCarrying == false && getOwnAxis("Trigger") > 0.25f)
         {
@@ -550,24 +555,12 @@ public class playerController : MonoBehaviour {
 
     void chargingForce()
     {
-        if (!isCharging)
-        {
-            isCharging = true;
-            //while (isCharging)
-            {
-                timeCharging += Time.deltaTime;
-            }
-            if (timeCharging > maxThrowTime)
-            {
-                throwForce = maxThrowForce;
-            }
-            else
-            {
-                throwForce = (timeCharging / maxThrowTime) * maxThrowForce; 
-            }
-            isCharging = false;
-            throwObj();
-        }
+        isCharging = false;
+        if (timeCharging > maxThrowTime)
+            throwForce = maxThrowForce;
+        else
+            throwForce = (timeCharging / maxThrowTime) * maxThrowForce;
+        timeCharging = 0f;
     }
 
     void throwObj()

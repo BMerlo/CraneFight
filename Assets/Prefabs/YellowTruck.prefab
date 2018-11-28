@@ -1028,7 +1028,7 @@ MonoBehaviour:
   rd: {fileID: 1042225999037272}
   ld: {fileID: 1725665851676448}
   colliderObj2Listen: {fileID: 0}
-  throwForce: 700
+  throwForce: 0
   myAnim: {fileID: 95638600150682162}
   cranePoint: {fileID: 1607798668703448}
   up: {fileID: 4273159328877284}
@@ -1041,6 +1041,9 @@ MonoBehaviour:
   rightLarger: {fileID: 4913710291580284}
   jumpTime: 0.5
   jumpDamage: 1
+  oilForce: 1
+  oilForceTime: 0.5
+  oilSpeed: 1.7
   regenAmount: 2
   regenDelay: 0.5
   craneActual: {fileID: 1235722282267316}
@@ -1052,6 +1055,9 @@ MonoBehaviour:
   craneRD: {fileID: 21300000, guid: 8dde639af37e2e5429ffcaaec9a1ee94, type: 3}
   craneD: {fileID: 21300000, guid: 4f6bd8a648693b94da8d5aa074cb9a82, type: 3}
   craneLD: {fileID: 21300000, guid: 55f681abd7bb2a94d87a69825f99de65, type: 3}
+  maxThrowForce: 5000
+  maxThrowTime: 3
+  timeCharging: 0
 --- !u!212 &212149814973384658
 SpriteRenderer:
   m_ObjectHideFlags: 1
