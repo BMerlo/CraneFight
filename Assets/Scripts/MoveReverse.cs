@@ -30,7 +30,7 @@ public class MoveReverse : MonoBehaviour
 
         if (hit.collider != null)
         {
-            Debug.Log("Distance to other obj: " + hit.distance);
+           // Debug.Log("Distance to other obj: " + hit.distance);
             
             if (hit.transform.tag == "Player" && (hit.distance <= 1.0f) && (hit.distance >= 0.0f))
             {
@@ -47,7 +47,7 @@ public class MoveReverse : MonoBehaviour
         }
         else
         {
-            Debug.Log("Speed increased");
+         //   Debug.Log("Speed increased");
             speedUsed = originalSpeed;
         }
     }

@@ -42,7 +42,7 @@ public class moveForward : MonoBehaviour {
         }
         else
         {
-            //Debug.Log("Speed increased");
+       //     Debug.Log("Speed increased");
             speedUsed = originalSpeed;
         }
     }

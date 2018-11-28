@@ -52,6 +52,9 @@ public class playerController : MonoBehaviour {
     [SerializeField] GameObject craneActual;
     [SerializeField] Sprite craneL, craneLU, craneU, craneRU, craneR, craneRD, craneD, craneLD;
 
+    [Header("Ghost")]
+    public GameObject gameManager;
+
 
     //[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
     // Use this for initialization
@@ -59,20 +62,21 @@ public class playerController : MonoBehaviour {
         switch (playerNum)
         {
             case PlayerNum.P1:
-                this.gameObject.layer = 12;
+                this.gameObject.layer = 12;                
                 break;
             case PlayerNum.P2:
-                this.gameObject.layer = 13;
+                this.gameObject.layer = 13;                
                 break;
             case PlayerNum.P3:
-                this.gameObject.layer = 14;
+                this.gameObject.layer = 14;                
                 break;
             case PlayerNum.P4:
-                this.gameObject.layer = 15;
+                this.gameObject.layer = 15;                
                 break;
             default:
                 break;
         }
+
 
         
 
@@ -119,6 +123,7 @@ public class playerController : MonoBehaviour {
             //temp = Physics2D.OverlapBoxAll(this.transform.position, GetComponent<BoxCollider2D>().size, 0f);
             int numColliders = GetComponent<BoxCollider2D>().OverlapCollider(tempFilter, temp);
             bool isStillOiled = false;
+
             for (int i = 0; i < numColliders; i++)
             {
                 if (temp[i].gameObject.GetComponent<oil>())
@@ -133,9 +138,6 @@ public class playerController : MonoBehaviour {
             }
 
         }
-
-
-
 
 
 
@@ -299,9 +301,7 @@ public class playerController : MonoBehaviour {
             rightLarger.position.x - this.transform.position.x, upLarger.position.y - this.transform.position.y) == false)
         {
             targetReticle.transform.position = (0.99f * (targetReticle.transform.position - this.transform.position)) + this.transform.position;
-        }
-        
-        
+        }        
 
         //Debug.Log("Is inside eclipse? " + tem);
     }
@@ -554,6 +554,7 @@ public class playerController : MonoBehaviour {
 
         return true;
     }
+
     void oldthrowObj(){
         if(objPicked != null)
         {
