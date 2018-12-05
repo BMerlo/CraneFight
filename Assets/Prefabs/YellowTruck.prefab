@@ -299,6 +299,7 @@ GameObject:
   - component: {fileID: 61457500624391484}
   - component: {fileID: 95638600150682162}
   - component: {fileID: 114270323687789280}
+  - component: {fileID: 114850491023854556}
   m_Layer: 12
   m_Name: YellowTruck
   m_TagString: Player
@@ -1034,6 +1035,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obj2pick: {fileID: 0}
   carrier2pickUpFrom: {fileID: 0}
+--- !u!114 &114850491023854556
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1623435752053756}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 047d9eed5a2858c4aaa9d27defb07f94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114964337360061496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1089,6 +1101,7 @@ MonoBehaviour:
   craneLD: {fileID: 21300000, guid: 55f681abd7bb2a94d87a69825f99de65, type: 3}
   maxThrowForce: 3000
   maxThrowTime: 3
+  minChargeTime: 1
   minThrowForce: 500
   timeCharging: 0
   evadeCooldown: 1

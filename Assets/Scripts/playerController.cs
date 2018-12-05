@@ -88,6 +88,9 @@ public class playerController : MonoBehaviour {
     public GameObject m_arrow;
     private Vector3 m_arrowOriginalScale;
 
+    private moveBack MoveBackScript;
+    private float m_stunTime;
+
 
     //[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
     // Use this for initialization
@@ -115,6 +118,7 @@ public class playerController : MonoBehaviour {
         targetReticle.GetComponent<SpriteRenderer>().enabled = false;
         throwRange.GetComponent<SpriteRenderer>().enabled = false;
         m_arrowOriginalScale = m_arrow.transform.localScale;
+        MoveBackScript = GetComponent<moveBack>();
 
         
     }
@@ -241,8 +245,15 @@ public class playerController : MonoBehaviour {
     }
     private void FixedUpdate()
     {
-
-        movement();
+        if (m_stunTime <= 0.0f)
+        {
+            MoveBackScript.enabled = false;
+            movement();
+        }
+        else
+        {
+            m_stunTime -= Time.deltaTime;
+        }
         //if (isOiled == false)
         //{
         //    movement();
@@ -817,5 +828,11 @@ public class playerController : MonoBehaviour {
         oilForce = 1.0f;
         oilDirectionModifier = 1;
         Debug.Log("got unoiled!");
+    }
+
+    public void stun(float addedStunTime)
+    {
+        m_stunTime += addedStunTime;
+        MoveBackScript.enabled = true;
     }
 }
