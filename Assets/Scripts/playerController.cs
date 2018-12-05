@@ -70,6 +70,7 @@ public class playerController : MonoBehaviour {
 
     [SerializeField] float maxThrowForce = 5000f;
     [SerializeField] float maxThrowTime = 3.0f;
+    [SerializeField] float minChargeTime = 1.0f;
     [SerializeField] float minThrowForce = 1650f;
     [SerializeField]float timeCharging;
 
@@ -83,6 +84,9 @@ public class playerController : MonoBehaviour {
     private float throwCooldownTimer = 0;
     private bool hasThrown = false;
     private bool isCharging = false;
+
+    public GameObject m_arrow;
+    private Vector3 m_arrowOriginalScale;
 
 
     //[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
@@ -110,6 +114,9 @@ public class playerController : MonoBehaviour {
         m_rb = GetComponent<Rigidbody2D>();
         targetReticle.GetComponent<SpriteRenderer>().enabled = false;
         throwRange.GetComponent<SpriteRenderer>().enabled = false;
+        m_arrowOriginalScale = m_arrow.transform.localScale;
+
+        
     }
 
     // Update is called once per frame
@@ -130,8 +137,8 @@ public class playerController : MonoBehaviour {
         if (isCarrying)
         {
             cranePoint.GetComponent<SpriteRenderer>().enabled = true;
-            targetReticle.GetComponent<SpriteRenderer>().enabled = true;
-            throwRange.GetComponent<SpriteRenderer>().enabled = true;
+           // targetReticle.GetComponent<SpriteRenderer>().enabled = true;
+           // throwRange.GetComponent<SpriteRenderer>().enabled = true;
         }
         else
         {
@@ -198,7 +205,9 @@ public class playerController : MonoBehaviour {
         if (!isJumping && isCarrying && getOwnAxis("Trigger") < -0.7f && !hasThrown)
         {
             timeCharging += Time.deltaTime;
-            isCharging = true;    
+            isCharging = true;
+            if (m_arrow.transform.localScale.y < 0.3 && timeCharging > minChargeTime)
+                m_arrow.transform.localScale += new Vector3(0f, 0.01f, 0);
         }
         else if (!isJumping && isCarrying && isCharging && !hasThrown)
         {
@@ -283,7 +292,9 @@ public class playerController : MonoBehaviour {
 
     void aim()
     {
-        Vector3 dir = new Vector3(0, 0,0);
+
+        m_arrow.SetActive(true);
+        Vector3 dir = new Vector3(0,0,0);
 
         if (getOwnAxis("Horizontal2") > horizontalDeadZone)
         {
@@ -329,6 +340,9 @@ public class playerController : MonoBehaviour {
         //MOVE CRANE ACCORDING TO CRANE POINT //
         float angle = findDegree(craneAngle.x, craneAngle.y);
         Debug.Log(angle);
+
+        m_arrow.transform.localEulerAngles = new Vector3(0,0,-angle - 180);
+
         if (angle < 22.5f)
         {
             craneActual.GetComponent<SpriteRenderer>().sprite = craneU;
@@ -376,8 +390,8 @@ public class playerController : MonoBehaviour {
         {
             targetReticle.transform.position = (0.99f * (targetReticle.transform.position - this.transform.position)) + this.transform.position;
         }
-        
-        
+
+
 
         //Debug.Log("Is inside eclipse? " + tem);
     }
@@ -614,11 +628,12 @@ public class playerController : MonoBehaviour {
         isCharging = false;
         if (timeCharging > maxThrowTime)
             throwForce = maxThrowForce;
-        else if (timeCharging < maxThrowTime / maxThrowTime)
+        else if (timeCharging < minChargeTime)
             throwForce = minThrowForce;
         else
             throwForce = (timeCharging / maxThrowTime) * maxThrowForce;
         timeCharging = 0f;
+        m_arrow.transform.localScale = m_arrowOriginalScale;
     }
 
     void throwObj()
@@ -665,13 +680,14 @@ public class playerController : MonoBehaviour {
                 objPicked.GetComponent<moveBack>().enabled = true;
             }
 
-            objPicked.GetComponent<throwable>().setDistance(distance);
+            //objPicked.GetComponent<throwable>().setDistance(distance);
             objPicked.GetComponent<Rigidbody2D>().AddForce(dir * throwForce);
 
 
             objPicked = null;
             isCarrying = false;
             hasThrown = true;
+            m_arrow.SetActive(false);
         }
     }
 

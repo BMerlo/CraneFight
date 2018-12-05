@@ -943,23 +943,6 @@ Prefab:
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 1172820702}
-    - target: {fileID: 1623435752053756, guid: d50e2276728a84b4a979d2c20952fc74, type: 2}
-      propertyPath: m_Name
-      value: YellowTruck
-      objectReference: {fileID: 0}
-    - target: {fileID: 212344068995576862, guid: d50e2276728a84b4a979d2c20952fc74,
-        type: 2}
-      propertyPath: m_FlipY
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4560342349835096, guid: d50e2276728a84b4a979d2c20952fc74, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.053463593
-      objectReference: {fileID: 0}
-    - target: {fileID: 4560342349835096, guid: d50e2276728a84b4a979d2c20952fc74, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -0.025
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d50e2276728a84b4a979d2c20952fc74, type: 2}
   m_IsPrefabAsset: 0
@@ -1007,11 +990,11 @@ Prefab:
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 1277896150}
-    - target: {fileID: 95395617129674752, guid: 05c55c0aa8a1e56428a6435cd5ad3383,
+    - target: {fileID: 114500328268871928, guid: 05c55c0aa8a1e56428a6435cd5ad3383,
         type: 2}
-      propertyPath: m_Controller
+      propertyPath: m_arrow
       value: 
-      objectReference: {fileID: 9100000, guid: 355b2462bd1dd7e4c91a5d8b8fafe376, type: 2}
+      objectReference: {fileID: 770404669}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05c55c0aa8a1e56428a6435cd5ad3383, type: 2}
   m_IsPrefabAsset: 0
@@ -1167,6 +1150,11 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 610104570}
   m_CullTransparentMesh: 0
+--- !u!1 &770404669 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1854917733035248, guid: 05c55c0aa8a1e56428a6435cd5ad3383,
+    type: 2}
+  m_PrefabInternal: {fileID: 550533851}
 --- !u!1 &1030605463
 GameObject:
   m_ObjectHideFlags: 0
@@ -2882,10 +2870,6 @@ Prefab:
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 1797421591}
-    - target: {fileID: 1345305072863228, guid: 0bb6da52bc9397f4a9a665c1e9cad7df, type: 2}
-      propertyPath: m_Name
-      value: GreenTruck
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bb6da52bc9397f4a9a665c1e9cad7df, type: 2}
   m_IsPrefabAsset: 0
