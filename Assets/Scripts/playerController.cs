@@ -4,7 +4,6 @@ using UnityEngine;
 
 
 public class playerController : MonoBehaviour {
-    [SerializeField] HealthBar playerHealth;
     [SerializeField] float aimSpeed = 4f;
 
 
@@ -38,14 +37,13 @@ public class playerController : MonoBehaviour {
     [SerializeField] GameObject targetReticle;
     [SerializeField] Transform upLarger, rightLarger;
 
-    float hitPoints = 100;
-    float maximumHitPoints = 100;
+
     float collisionDamageMultiplier = 1f;
 
     bool isJumping = false;
     float jumpTimer = 0;
     [SerializeField] float jumpTime = 3f;
-    [SerializeField] float jumpDamage = 1.0f;
+  
 
     float drag;
     bool isOiled = false;
@@ -59,9 +57,6 @@ public class playerController : MonoBehaviour {
     private int oilDirectionModifier = 1;
 
 
-    [SerializeField] float regenAmount = 0.5f;
-    [SerializeField] float regenDelay = 1.5f;
-    float regenCounter = 0;
 
     [SerializeField] GameObject craneActual;
     [SerializeField] Sprite craneL, craneLU, craneU, craneRU, craneR, craneRD, craneD, craneLD;
@@ -126,14 +121,14 @@ public class playerController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         //REGENERATION
-        if (regenCounter > 0)
-        {
-            regenCounter -= Time.deltaTime;
-        }
-        else
-        {
-            getHealth(Time.deltaTime * regenAmount);
-        }
+        //if (regenCounter > 0)
+        //{
+        //    regenCounter -= Time.deltaTime;
+        //}
+        //else
+        //{
+        //    getHealth(Time.deltaTime * regenAmount);
+        //}
 
         cooldownTimers();
 
@@ -237,7 +232,7 @@ public class playerController : MonoBehaviour {
                 myAnim.SetBool("IsJumping", false);
                 GetComponent<BoxCollider2D>().enabled = true;
                 //GetComponent<SpriteRenderer>().enabled = true;
-                takeDamage(jumpDamage);
+                //takeDamage(jumpDamage);
             }
         }
 
@@ -525,34 +520,35 @@ public class playerController : MonoBehaviour {
 
     void movement()
     {
-        float modifiedSpeed = moveSpeed;
-        if (isOiled)
-        {
-            modifiedSpeed *= oilSpeed * oilDirectionModifier * (hitPoints /100f);
-        }
-        else
-        {
-            modifiedSpeed *= (hitPoints / 100f);
-        }
+        //float modifiedSpeed = moveSpeed;
+        //if (isOiled)
+        //{
+        //    modifiedSpeed *= oilSpeed * oilDirectionModifier;
+        //        //* (hitPoints /100f);
+        //}
+        //else
+        //{
+        //    modifiedSpeed *= (hitPoints / 100f);
+        //}
             
         // MOVEMENT
         if (getOwnAxis("Horizontal") > horizontalDeadZone)
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(modifiedSpeed, 0));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(moveSpeed, 0));
             Debug.Log(GetComponent<Rigidbody2D>().velocity);
         }
         else if (getOwnAxis("Horizontal") < -horizontalDeadZone)
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(-modifiedSpeed, 0));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(-moveSpeed, 0));
         }
 
         if (getOwnAxis("Vertical") > horizontalDeadZone)
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -modifiedSpeed));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -moveSpeed));
         }
         else if (getOwnAxis("Vertical") < -horizontalDeadZone)
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, modifiedSpeed));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, moveSpeed));
         }
 
         if (getOwnAxis("RBumper") > 0 && !hasEvaded)
@@ -567,10 +563,10 @@ public class playerController : MonoBehaviour {
             hasEvaded = true;
         }
 
-        if (hitPoints < maximumHitPoints)
-        {
-            this.transform.Translate(new Vector3(-1, 0, 0) * 0.04f * ((100f-hitPoints) / 100f));
-        }
+        //if (hitPoints < maximumHitPoints)
+        //{
+        //    this.transform.Translate(new Vector3(-1, 0, 0) * 0.04f * ((100f-hitPoints) / 100f));
+        //}
     }
 
     //Coroutine deals with the movement of a player when they are oiled up
@@ -757,31 +753,32 @@ public class playerController : MonoBehaviour {
 
     public void takeDamage(float amount)
     {
-        hitPoints -= amount;
+        stun(amount * 0.1f);
+        //hitPoints -= amount;
 
-        if(amount >0)   //just in case?
-        regenCounter = regenDelay;
+        //if(amount >0)   //just in case?
+        //regenCounter = regenDelay;
 
-        if (hitPoints < 0)
-        {
-            hitPoints = 0;
-        }
+        //if (hitPoints < 0)
+        //{
+        //    hitPoints = 0;
+        //}
 
-        playerHealth.updateHealthBar(hitPoints);
+        //playerHealth.updateHealthBar(hitPoints);
 
         
     }
 
     public void getHealth(float amount)
     {
-        hitPoints += amount;
+        //hitPoints += amount;
 
-        if (hitPoints > maximumHitPoints)
-        {
-            hitPoints = maximumHitPoints;
-        }
+        //if (hitPoints > maximumHitPoints)
+        //{
+        //    hitPoints = maximumHitPoints;
+        //}
 
-        playerHealth.updateHealthBar(hitPoints);
+        //playerHealth.updateHealthBar(hitPoints);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
