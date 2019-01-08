@@ -473,7 +473,8 @@ public class playerController : MonoBehaviour {
                 colliderObj2Listen = l;
                 craneActual.GetComponent<SpriteRenderer>().sprite = craneL;
             }
-            pickUp();
+            if(!hasThrown)
+                pickUp();
         }
         else if (getOwnAxis("Horizontal2") > 0.34f)
         {
@@ -492,7 +493,8 @@ public class playerController : MonoBehaviour {
                 colliderObj2Listen = r;
                 craneActual.GetComponent<SpriteRenderer>().sprite = craneR;
             }
-            pickUp();
+            if (!hasThrown)
+                pickUp();
         }
         else
         {
@@ -500,13 +502,15 @@ public class playerController : MonoBehaviour {
             {
                 colliderObj2Listen = u;
                 craneActual.GetComponent<SpriteRenderer>().sprite = craneU;
-                pickUp();
+                if (!hasThrown)
+                    pickUp();
             }
             else if (getOwnAxis("Vertical2") > 0.34f)
             {
                 colliderObj2Listen = d;
                 craneActual.GetComponent<SpriteRenderer>().sprite = craneD;
-                pickUp();
+                if (!hasThrown)
+                    pickUp();
             }
             else
             {
@@ -591,7 +595,7 @@ public class playerController : MonoBehaviour {
         return Input.GetAxis(playerNum.ToString() + axis);
     }
 
-    void pickUp()   // Gimme your best pick up lines, programmer intern. > "I hope we can merge without any conflicts ( ͡° ͜ʖ ͡°) "
+    void pickUp()   // Gimme your best pick up lines, programmer intern. > "I hope we can merge without any conflicts ( ͡° ͜ʖ ͡°) " > Not bad playa -- E
     {
         if (colliderObj2Listen != null && colliderObj2Listen.GetComponent<CraneZone>().isTherePickable())
         {
@@ -815,11 +819,13 @@ public class playerController : MonoBehaviour {
         isOiled = false;
         if (oilCount % 2 == 0)
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, moveSpeed* oilForce  /2 * (hitPoints / 100f)));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, moveSpeed * oilForce / 2));
+                //* (hitPoints / 100f)));
         }
         else
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -moveSpeed* oilForce /2 * (hitPoints / 100f)));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -moveSpeed * oilForce / 2));
+                //* (hitPoints / 100f)));
         }
         oilCount = 1;
         oilForce = 1.0f;
