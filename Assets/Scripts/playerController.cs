@@ -61,6 +61,8 @@ public class playerController : MonoBehaviour {
     [SerializeField] GameObject craneActual;
     [SerializeField] Sprite craneL, craneLU, craneU, craneRU, craneR, craneRD, craneD, craneLD;
 
+    public GameObject gameManager;
+
     private Rigidbody2D m_rb;
 
     [SerializeField] float maxThrowForce = 5000f;

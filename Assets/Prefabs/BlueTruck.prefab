@@ -151,7 +151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1498448315931672
 GameObject:
   m_ObjectHideFlags: 1
@@ -406,7 +406,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1816207980975280}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.85073, y: 1.01, z: 0}
+  m_LocalPosition: {x: 2.85073, y: 0.7940047, z: 0}
   m_LocalScale: {x: 3.5, y: 3.5, z: 1}
   m_Children:
   - {fileID: 4332873382489970}
@@ -1019,8 +1019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f09c527b827a0419e392cbc445e156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: {fileID: 0}
-  aimSpeed: 8
+  aimSpeed: 16
   playerNum: 3
   moveSpeed: 100
   evadeSpeed: 100
@@ -1046,12 +1045,9 @@ MonoBehaviour:
   upLarger: {fileID: 4267603136706276}
   rightLarger: {fileID: 4075680587630458}
   jumpTime: 0.5
-  jumpDamage: 1
   oilForce: 1
   oilForceTime: 0.5
   oilSpeed: 1.7
-  regenAmount: 2
-  regenDelay: 0.5
   craneActual: {fileID: 1696839777384956}
   craneL: {fileID: 21300000, guid: f34e1efd9b956e644bf5bb27ecd3d13d, type: 3}
   craneLU: {fileID: 21300000, guid: efd71b7bae6204d4cb8e3e1c427d5b5d, type: 3}
@@ -1061,9 +1057,11 @@ MonoBehaviour:
   craneRD: {fileID: 21300000, guid: 8dde639af37e2e5429ffcaaec9a1ee94, type: 3}
   craneD: {fileID: 21300000, guid: 4f6bd8a648693b94da8d5aa074cb9a82, type: 3}
   craneLD: {fileID: 21300000, guid: 55f681abd7bb2a94d87a69825f99de65, type: 3}
-  maxThrowForce: 5000
+  gameManager: {fileID: 0}
+  maxThrowForce: 3000
   maxThrowTime: 3
-  minThrowForce: 1650
+  minChargeTime: 1
+  minThrowForce: 500
   timeCharging: 0
   evadeCooldown: 1
   jumpCooldown: 1
