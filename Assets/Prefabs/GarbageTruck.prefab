@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 114820368000043528}
   - component: {fileID: 114534794761944566}
   - component: {fileID: 114441874898207622}
+  - component: {fileID: 114261472188703166}
   m_Layer: 0
   m_Name: GarbageTruck
   m_TagString: Untagged
@@ -87,7 +88,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 2.5
-  m_LinearDrag: 0
+  m_LinearDrag: 5
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -120,6 +121,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3, y: 0.95}
   m_EdgeRadius: 0
+--- !u!114 &114261472188703166
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1324067062573500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c8a3bb7d046504fb2cd26fb3b6e940, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isReverse: 0
+  minSpeed: 20
+  maxSpeed: 25
+  speedUsed: 0
 --- !u!114 &114441874898207622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -152,13 +168,15 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1324067062573500}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe365fedf6512e14a816b1450b8620b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   minSpeed: 8
   maxSpeed: 11
+  originalSpeed: 0
+  speedUsed: 0
 --- !u!114 &114820368000043528
 MonoBehaviour:
   m_ObjectHideFlags: 1
