@@ -326,6 +326,7 @@ GameObject:
   - component: {fileID: 61437416553635588}
   - component: {fileID: 95097303077831462}
   - component: {fileID: 114483659460474656}
+  - component: {fileID: 114207204951058586}
   m_Layer: 14
   m_Name: PinkTruck
   m_TagString: Player
@@ -498,7 +499,7 @@ Transform:
   m_GameObject: {fileID: 1042585015362986}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children:
   - {fileID: 4857673566403774}
   - {fileID: 4937798047998412}
@@ -654,7 +655,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1775787893706996}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.14719212, y: -1.1215298, z: 0}
+  m_LocalPosition: {x: -0.6861186, y: -1.293253, z: 0}
   m_LocalScale: {x: 3.5, y: 3.5, z: 1}
   m_Children:
   - {fileID: 4756936410389260}
@@ -930,6 +931,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obj2pick: {fileID: 0}
   carrier2pickUpFrom: {fileID: 0}
+--- !u!114 &114207204951058586
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1775787893706996}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 047d9eed5a2858c4aaa9d27defb07f94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114207893494276730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1006,7 +1018,7 @@ MonoBehaviour:
   lu: {fileID: 1719776905254998}
   rd: {fileID: 1813108009536676}
   ld: {fileID: 1511778056627132}
-  colliderObj2Listen: {fileID: 0}
+  colliderObj2Listen: {fileID: 1708636738189232}
   throwForce: 700
   myAnim: {fileID: 95097303077831462}
   cranePoint: {fileID: 1310885231817702}
@@ -1099,7 +1111,7 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1310885231817702}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1191,7 +1203,7 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1850580457322372}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1358,7 +1370,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5420e28c469c11b4abde1d9fb75a261a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3e786f47528dbd94ea841803d7174f87, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1375,7 +1387,7 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1664197332566994}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1

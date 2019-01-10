@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 61389546396772638}
   - component: {fileID: 114156288777437524}
   - component: {fileID: 114077097883060238}
+  - component: {fileID: 114507786065417600}
   m_Layer: 0
   m_Name: Truck_Oil
   m_TagString: Carrier
@@ -132,7 +133,7 @@ MonoBehaviour:
   sprite2: {fileID: 21300000, guid: 5866603ef9d6c48418985fb79d74fd2d, type: 3}
   sprite3: {fileID: 21300000, guid: db10f3b02b430774898a437fbe59ed40, type: 3}
   sprite4: {fileID: 21300000, guid: 2eef355fb3b2e2148a353e89ec9f2069, type: 3}
---- !u!114 &114997252282830544
+--- !u!114 &114507786065417600
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,11 +141,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1242579458027634}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c8a3bb7d046504fb2cd26fb3b6e940, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isReverse: 0
+  minSpeed: 20
+  maxSpeed: 25
+  speedUsed: 0
+--- !u!114 &114997252282830544
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1242579458027634}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe365fedf6512e14a816b1450b8620b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   minSpeed: 10
   maxSpeed: 20
+  originalSpeed: 0
+  speedUsed: 0
 --- !u!212 &212325344338182352
 SpriteRenderer:
   m_ObjectHideFlags: 1

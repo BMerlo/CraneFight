@@ -200,6 +200,7 @@ GameObject:
   - component: {fileID: 61887909737662610}
   - component: {fileID: 95249500882565738}
   - component: {fileID: 114096501893516344}
+  - component: {fileID: 114060238280362408}
   m_Layer: 13
   m_Name: GreenTruck
   m_TagString: Player
@@ -581,7 +582,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1345305072863228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.6116486, y: -2.643022, z: 0}
+  m_LocalPosition: {x: -1.171659, y: 1.1569837, z: 0}
   m_LocalScale: {x: 3.5, y: 3.5, z: 1}
   m_Children:
   - {fileID: 4392858079819378}
@@ -708,7 +709,7 @@ Transform:
   m_GameObject: {fileID: 1407942104250288}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children:
   - {fileID: 4786918499815744}
   - {fileID: 4220495351050946}
@@ -917,6 +918,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114060238280362408
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1345305072863228}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 047d9eed5a2858c4aaa9d27defb07f94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114096501893516344
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1032,7 +1044,7 @@ MonoBehaviour:
   lu: {fileID: 1745091426608412}
   rd: {fileID: 1041931635918950}
   ld: {fileID: 1051392844350130}
-  colliderObj2Listen: {fileID: 0}
+  colliderObj2Listen: {fileID: 1371876436963586}
   throwForce: 700
   myAnim: {fileID: 95249500882565738}
   cranePoint: {fileID: 1498336822028304}
@@ -1099,7 +1111,7 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1339368371133292}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1145,7 +1157,7 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1498336822028304}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1220,7 +1232,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1df61926a0168ea4f92dcdb69bc7f54b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5337de06976ed05468c29c1dae2b83c7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1283,7 +1295,7 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1797970792335872}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1

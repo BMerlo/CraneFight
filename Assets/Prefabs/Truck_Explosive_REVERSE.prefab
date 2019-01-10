@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114177206175620514}
   - component: {fileID: 114957472244730726}
   - component: {fileID: 114073932947808702}
+  - component: {fileID: 114777754615276936}
   m_Layer: 0
   m_Name: Truck_Explosive_REVERSE
   m_TagString: Carrier
@@ -108,13 +109,15 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1967959112820670}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 300efa1015976504b9d68dead04f31b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   minSpeed: 15
   maxSpeed: 25
+  originalSpeed: 0
+  speedUsed: 0
 --- !u!114 &114502057253458888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -132,6 +135,21 @@ MonoBehaviour:
   sprite2: {fileID: 21300000, guid: 7700a6810001b704baed64221ce5b9a1, type: 3}
   sprite3: {fileID: 21300000, guid: 0a6e1ef71d0b7eb42bb843694364ef6a, type: 3}
   sprite4: {fileID: 21300000, guid: 97daf85a44e34b34c829318f53241d41, type: 3}
+--- !u!114 &114777754615276936
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1967959112820670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c8a3bb7d046504fb2cd26fb3b6e940, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isReverse: 1
+  minSpeed: 20
+  maxSpeed: 25
+  speedUsed: 0
 --- !u!114 &114957472244730726
 MonoBehaviour:
   m_ObjectHideFlags: 1

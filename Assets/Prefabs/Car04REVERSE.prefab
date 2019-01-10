@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114372569300003018}
   - component: {fileID: 114957025697339538}
   - component: {fileID: 114474905482734628}
+  - component: {fileID: 114362569144344504}
   m_Layer: 0
   m_Name: Car04REVERSE
   m_TagString: Untagged
@@ -109,6 +110,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114362569144344504
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1102174245965482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c8a3bb7d046504fb2cd26fb3b6e940, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isReverse: 1
+  minSpeed: 20
+  maxSpeed: 30
 --- !u!114 &114372569300003018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -141,13 +156,15 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1102174245965482}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 300efa1015976504b9d68dead04f31b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   minSpeed: 20
   maxSpeed: 30
+  originalSpeed: 0
+  speedUsed: 0
 --- !u!212 &212789649961829946
 SpriteRenderer:
   m_ObjectHideFlags: 1

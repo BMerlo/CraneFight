@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114667907048571896}
   - component: {fileID: 114167014991137992}
   - component: {fileID: 114869835421410580}
+  - component: {fileID: 114501186124481782}
   m_Layer: 0
   m_Name: Truck_Oil_REVERSE
   m_TagString: Carrier
@@ -121,7 +122,7 @@ MonoBehaviour:
   sprite2: {fileID: 21300000, guid: 5866603ef9d6c48418985fb79d74fd2d, type: 3}
   sprite3: {fileID: 21300000, guid: db10f3b02b430774898a437fbe59ed40, type: 3}
   sprite4: {fileID: 21300000, guid: 2eef355fb3b2e2148a353e89ec9f2069, type: 3}
---- !u!114 &114667907048571896
+--- !u!114 &114501186124481782
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,11 +130,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1164686690122672}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c8a3bb7d046504fb2cd26fb3b6e940, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isReverse: 1
+  minSpeed: 20
+  maxSpeed: 25
+  speedUsed: 0
+--- !u!114 &114667907048571896
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1164686690122672}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 300efa1015976504b9d68dead04f31b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   minSpeed: 15
   maxSpeed: 25
+  originalSpeed: 0
+  speedUsed: 0
 --- !u!114 &114869835421410580
 MonoBehaviour:
   m_ObjectHideFlags: 1

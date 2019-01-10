@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 61121834923212228}
   - component: {fileID: 114098428492154576}
   - component: {fileID: 114030425320551522}
+  - component: {fileID: 114518373985575832}
   m_Layer: 0
   m_Name: Car03
   m_TagString: Untagged
@@ -135,7 +136,7 @@ MonoBehaviour:
   spawnee: {fileID: 1256037077999480, guid: f16e9ddcae5750746883261818dab7e2, type: 2}
   doesSpawnOnDestroy: 1
   damage: 5
---- !u!114 &114548336063082742
+--- !u!114 &114518373985575832
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,11 +144,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1362977601529740}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c8a3bb7d046504fb2cd26fb3b6e940, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isReverse: 0
+  minSpeed: 20
+  maxSpeed: 30
+--- !u!114 &114548336063082742
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1362977601529740}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe365fedf6512e14a816b1450b8620b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   minSpeed: 15
   maxSpeed: 25
+  originalSpeed: 0
+  speedUsed: 0
 --- !u!212 &212102748420144106
 SpriteRenderer:
   m_ObjectHideFlags: 1

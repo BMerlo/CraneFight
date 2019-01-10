@@ -16,7 +16,8 @@ public class MoveReverse : MonoBehaviour
     {
         originalSpeed = Random.Range(minSpeed, maxSpeed);
         speedUsed = originalSpeed;
-        lowerSpeed = Random.Range(2, 5);
+        //lowerSpeed = Random.Range(2, 5);
+        lowerSpeed = 0;
     }
 
     // Update is called once per frame

@@ -516,6 +516,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1775787893706996, guid: c641bf49444ced041b6585b14faf0436,
     type: 2}
   m_PrefabInternal: {fileID: 2074799178}
+--- !u!114 &210224079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 210224078}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 047d9eed5a2858c4aaa9d27defb07f94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &232552584
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,6 +802,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1345305072863228, guid: 0bb6da52bc9397f4a9a665c1e9cad7df,
     type: 2}
   m_PrefabInternal: {fileID: 1941361698}
+--- !u!114 &276195342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 276195341}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 047d9eed5a2858c4aaa9d27defb07f94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &352483224
 Prefab:
   m_ObjectHideFlags: 0
@@ -833,6 +855,16 @@ Prefab:
     - target: {fileID: 1478576222663740, guid: 142009931797a164d8a02f0cc08cf1c1, type: 2}
       propertyPath: m_Name
       value: CarSpawner (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114423415500325790, guid: 142009931797a164d8a02f0cc08cf1c1,
+        type: 2}
+      propertyPath: minTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114423415500325790, guid: 142009931797a164d8a02f0cc08cf1c1,
+        type: 2}
+      propertyPath: maxTime
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 142009931797a164d8a02f0cc08cf1c1, type: 2}
@@ -880,6 +912,16 @@ Prefab:
     - target: {fileID: 4533819972933900, guid: 0af9b495b364c10448f44b4202de76c3, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402769238047392, guid: 0af9b495b364c10448f44b4202de76c3,
+        type: 2}
+      propertyPath: minTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402769238047392, guid: 0af9b495b364c10448f44b4202de76c3,
+        type: 2}
+      propertyPath: maxTime
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0af9b495b364c10448f44b4202de76c3, type: 2}
@@ -1042,6 +1084,14 @@ Prefab:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 82463958}
+    - target: {fileID: 4425385542800394, guid: d50e2276728a84b4a979d2c20952fc74, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4425385542800394, guid: d50e2276728a84b4a979d2c20952fc74, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d50e2276728a84b4a979d2c20952fc74, type: 2}
   m_IsPrefabAsset: 0
@@ -1573,6 +1623,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1816207980975280, guid: 05c55c0aa8a1e56428a6435cd5ad3383,
     type: 2}
   m_PrefabInternal: {fileID: 550533851}
+--- !u!114 &1174980435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1174980434}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 047d9eed5a2858c4aaa9d27defb07f94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1182254451 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4117310881833986, guid: 9616a6fca3904594ca945e71fd75f4ef,
@@ -1877,6 +1938,16 @@ Prefab:
       propertyPath: m_Name
       value: CarSpawnerREVERSE (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114402769238047392, guid: 0af9b495b364c10448f44b4202de76c3,
+        type: 2}
+      propertyPath: minTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114402769238047392, guid: 0af9b495b364c10448f44b4202de76c3,
+        type: 2}
+      propertyPath: maxTime
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0af9b495b364c10448f44b4202de76c3, type: 2}
   m_IsPrefabAsset: 0
@@ -2032,7 +2103,7 @@ GameObject:
   - component: {fileID: 1669731436}
   - component: {fileID: 1669731435}
   - component: {fileID: 1669731437}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FallBackChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2254,6 +2325,16 @@ Prefab:
     - target: {fileID: 1478576222663740, guid: 142009931797a164d8a02f0cc08cf1c1, type: 2}
       propertyPath: m_Name
       value: CarSpawner (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114423415500325790, guid: 142009931797a164d8a02f0cc08cf1c1,
+        type: 2}
+      propertyPath: minTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114423415500325790, guid: 142009931797a164d8a02f0cc08cf1c1,
+        type: 2}
+      propertyPath: maxTime
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 142009931797a164d8a02f0cc08cf1c1, type: 2}

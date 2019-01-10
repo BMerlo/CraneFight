@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114881093513106366}
   - component: {fileID: 114300228055256750}
   - component: {fileID: 114450010395088010}
+  - component: {fileID: 114852080139154616}
   m_Layer: 0
   m_Name: YellowCarREVERSE
   m_TagString: Untagged
@@ -149,7 +150,7 @@ MonoBehaviour:
   spawnee: {fileID: 1256037077999480, guid: f16e9ddcae5750746883261818dab7e2, type: 2}
   doesSpawnOnDestroy: 1
   damage: 5
---- !u!114 &114881093513106366
+--- !u!114 &114852080139154616
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,11 +158,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1139914837488882}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c8a3bb7d046504fb2cd26fb3b6e940, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isReverse: 1
+  minSpeed: 20
+  maxSpeed: 30
+--- !u!114 &114881093513106366
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1139914837488882}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 300efa1015976504b9d68dead04f31b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   minSpeed: 20
   maxSpeed: 30
+  originalSpeed: 0
+  speedUsed: 0
 --- !u!212 &212788501880520028
 SpriteRenderer:
   m_ObjectHideFlags: 1
