@@ -29,7 +29,7 @@ GameObject:
   - component: {fileID: 114362569144344504}
   m_Layer: 0
   m_Name: Car04REVERSE
-  m_TagString: Untagged
+  m_TagString: AICar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,6 +124,7 @@ MonoBehaviour:
   isReverse: 1
   minSpeed: 20
   maxSpeed: 30
+  speedUsed: 0
 --- !u!114 &114372569300003018
 MonoBehaviour:
   m_ObjectHideFlags: 1

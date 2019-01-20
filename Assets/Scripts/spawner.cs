@@ -20,18 +20,26 @@ public class spawner : MonoBehaviour {
 	void Update () {
         counter += Time.deltaTime;
 
-        if (counter >= timeActual)
+        if (GameObject.FindGameObjectsWithTag("AICar").Length < 3 && GameObject.FindGameObjectsWithTag("Carrier").Length < 3)
         {
-            counter = 0;
-            timeActual = Random.Range(minTime, maxTime);
-
-            int i = Random.Range(0, spawnees.Length);
-
-            Instantiate(spawnees[i], this.transform.position, this.transform.rotation);
-
+            Debug.Log(GameObject.FindGameObjectsWithTag("AICar").Length);
+            SpawnChecked();
         }
 
+    }
+        
 
+    void SpawnChecked()
+    {
+            if (counter >= timeActual)
+            {
+                counter = 0;
+                timeActual = Random.Range(minTime, maxTime);
 
-	}
+                int i = Random.Range(0, spawnees.Length);
+
+                Instantiate(spawnees[i], this.transform.position, this.transform.rotation);
+
+            }
+    }
 }

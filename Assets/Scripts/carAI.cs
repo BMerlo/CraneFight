@@ -45,7 +45,7 @@ public class carAI : MonoBehaviour {
             if (hit.transform.tag == "Player" && (hit.distance <= 3.0f) && (hit.distance >= 0.0f))
             {
                 //Debug.Log("Speed decreased");
-                //Debug.Log("Name of other obj: " + hit.collider.name);
+                Debug.Log("Name of other obj: " + hit.collider.name);
                 speedUsed = lowerSpeed;
             }
             else if (hit.transform.GetComponent<carAI>() != null)
@@ -63,7 +63,7 @@ public class carAI : MonoBehaviour {
             else if (hit.distance <= 3f)
             {
                 //Debug.Log("Speed decreased");
-                //Debug.Log("Name of other obj: " + hit.collider.name);
+                Debug.Log("Name of other obj: " + hit.collider.name);
                 speedUsed = lowerSpeed;
             }
             else
@@ -76,7 +76,7 @@ public class carAI : MonoBehaviour {
         else
         {
             speedUsed = originalSpeed;
-        }
+        }        
     }
 
     public float getCurrentSpeed()
@@ -92,6 +92,15 @@ public class carAI : MonoBehaviour {
     private void FixedUpdate()
     {
         GetComponent<Rigidbody2D>().AddForce(speedUsed * dir);
+
+        if (isReverse && transform.position.y<0.01) //this checks if AI goes left and its position
+        {
+            GetComponent<Rigidbody2D>().AddForce(transform.up*3);
+        }
+        else if(!isReverse && transform.position.y > 0)
+        {
+            GetComponent<Rigidbody2D>().AddForce(transform.up * -3);
+        }
     }
 
 
