@@ -6,11 +6,11 @@ public class fallOff : MonoBehaviour {
     [SerializeField] float maxY = 3.51f;
     [SerializeField] float minY = -3.91f;
 
-
+    Game_Manager manager;
 
 	// Use this for initialization
 	void Start () {
-		
+        manager = FindObjectOfType<Game_Manager>();
 	}
 	
 	// Update is called once per frame
@@ -55,6 +55,10 @@ public class fallOff : MonoBehaviour {
         {
             GetComponent<Rigidbody2D>().gravityScale = 5;
         }
+        
+        if(GetComponent<playerController>())
+        manager.spawnGhost(GetComponent<playerController>().getPlayerNum() -1);
+
 
 
         Destroy(this.gameObject, 1.5f);

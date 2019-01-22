@@ -29,6 +29,14 @@ public class Game_Manager : MonoBehaviour {
 
     [SerializeField] GameObject ghostPrefab;
 
+    public enum PlayerNum
+    {
+        P1,
+        P2,
+        P3,
+        P4
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -56,9 +64,11 @@ public class Game_Manager : MonoBehaviour {
         //      }
     }
 
-    void spawnGhost()
+    public void spawnGhost(int num)
     {
-        Instantiate(ghostPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+
+        GameObject obj = Instantiate(ghostPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        obj.GetComponent<ghostController>().setPlayerNum(num);
     }
 
 }

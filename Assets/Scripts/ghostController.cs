@@ -130,4 +130,30 @@ public class ghostController : MonoBehaviour
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0, moveSpeed));
         }
     }
+
+    public void setPlayerNum(int i)
+    {
+        playerNum = (PlayerNum)i;
+        Color color = Color.white;
+        switch (i)
+        {
+            case 0:
+                color = Color.yellow;
+                break;
+            case 1:
+                color = Color.green;
+                break;
+            case 2:
+                color = Color.magenta;
+                break;
+            case 3:
+                color = Color.blue;
+                break;
+            default:
+                break;
+        }
+
+        GetComponent<SpriteRenderer>().color = color;
+
+    }
 }
