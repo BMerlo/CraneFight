@@ -7,11 +7,20 @@ public class throwable : MonoBehaviour {
     [SerializeField] float stopDistance = 0.5f;
     bool isStopped = false;
     bool isThrown = false;
+    [SerializeField] private bool[] isPlayerPickupAble = new bool[4];
     Vector3 lastFramePos;
     float distanceTravelled = 0;
+    [SerializeField] float highlightSwapTimer = 1f; //How often the highlight will change
+    private float highlightCounter;
+    private int currentHighlight = 0;
+    private Color[] playerColors = new Color[4]{Color.yellow,Color.green,Color.magenta,Color.blue};
+
+
 	// Use this for initialization
 	void Start () {
         lastFramePos = this.transform.position;
+        isPlayerPickupAble[3] = true;
+        isPlayerPickupAble[2] = true;
     }
 	
 	// Update is called once per frame
@@ -42,6 +51,8 @@ public class throwable : MonoBehaviour {
             }
 
         }
+
+        highlightObject();
 	}
 
 
@@ -80,5 +91,42 @@ public class throwable : MonoBehaviour {
                 break;
         }
         
+    }
+
+    //Sets boolean to true in array isPlayerPickupAble at index position playerNumber
+    public void makePickupAble(int playerNumber)
+    {
+        isPlayerPickupAble[playerNumber] = true;
+    }
+
+    //Sets boolean to false in array isPlayerPickupAble at index position playerNumber
+    public void makeNotPickupAble(int playerNumber)
+    {
+        isPlayerPickupAble[playerNumber] = false;
+    }
+
+    public bool canIPickup(int playerNumber)
+    {
+        return isPlayerPickupAble[playerNumber] = false;
+    }
+
+    //Highlights the object after a set time with a colour that is allowed to pick up the object
+    private void highlightObject()
+    {
+        highlightCounter += Time.deltaTime;
+        if(highlightCounter >= highlightSwapTimer)
+        {
+            if (currentHighlight == 3)
+                currentHighlight = -1;
+            while (!isPlayerPickupAble[currentHighlight+1])
+            {
+                if (currentHighlight == 2)
+                    currentHighlight = -1;
+                else currentHighlight++;
+            }
+            currentHighlight++;
+            GetComponent<SpriteRenderer>().color = playerColors[currentHighlight];
+            highlightCounter = 0;
+        }
     }
 }
