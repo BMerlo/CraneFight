@@ -11,6 +11,8 @@ public class spawner : MonoBehaviour {
     float counter = 0;
     float timeActual;
 
+    int MAX_CARS = 8;
+
 	// Use this for initialization
 	void Start () {
         timeActual = Random.Range(minTime, maxTime);
@@ -20,11 +22,9 @@ public class spawner : MonoBehaviour {
 	void Update () {
         counter += Time.deltaTime;
 
-        if (GameObject.FindGameObjectsWithTag("AICar").Length < 3 && GameObject.FindGameObjectsWithTag("Carrier").Length < 3)
-        {
-            Debug.Log(GameObject.FindGameObjectsWithTag("AICar").Length);
-            SpawnChecked();
-        }
+
+        SpawnChecked();
+
 
     }
         
@@ -33,13 +33,23 @@ public class spawner : MonoBehaviour {
     {
             if (counter >= timeActual)
             {
+                if (countAIvehicles() < MAX_CARS)
+                {
                 counter = 0;
                 timeActual = Random.Range(minTime, maxTime);
 
                 int i = Random.Range(0, spawnees.Length);
 
                 Instantiate(spawnees[i], this.transform.position, this.transform.rotation);
+                }   
 
             }
+    }
+
+    int countAIvehicles()
+    {
+        carAI[] cars = FindObjectsOfType<carAI>();
+        Debug.Log("There are " + cars.Length + " in the scene.----------------");
+        return cars.Length;
     }
 }
