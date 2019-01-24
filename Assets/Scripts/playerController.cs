@@ -81,6 +81,8 @@ public class playerController : MonoBehaviour {
     private float throwCooldownTimer = 0;
     private bool hasThrown = false;
     private bool isCharging = false;
+    [SerializeField] private float isDestroyedFreq = 1.0f; //How often the game checks if the object the crane was holding is destroyed
+    private float isDestroyedTimer = 0.0f;
 
     public GameObject m_arrow;
     private Vector3 m_arrowOriginalScale;
@@ -295,6 +297,16 @@ public class playerController : MonoBehaviour {
                 hasThrown = false;
                 throwCooldownTimer = 0;
             }  
+        }
+
+        if (isCarrying)
+        {
+            isDestroyedTimer += Time.deltaTime;
+            if (isDestroyedTimer >= isDestroyedFreq)
+            {
+                resetCrane();
+                isDestroyedTimer = 0;
+            }
         }
     }
 
@@ -601,35 +613,39 @@ public class playerController : MonoBehaviour {
     {
         if (colliderObj2Listen != null && colliderObj2Listen.GetComponent<CraneZone>().isTherePickable())
         {
-            Debug.Log("picking up");
+            Debug.Log("attempting to pick up");
+
+            //Checks if the current player can pick up the object
+            //if (colliderObj2Listen.GetComponent<CraneZone>().getObj2PickUp().GetComponent<throwable>().canIPickup((int)playerNum))
+           // {
+                objPicked = colliderObj2Listen.GetComponent<CraneZone>().getObj2PickUp();
 
 
-            objPicked = colliderObj2Listen.GetComponent<CraneZone>().getObj2PickUp();
+                objPicked.GetComponent<Rigidbody2D>().velocity.Set(0, 0);
+                isCarrying = true;
+                cranePoint.transform.position = objPicked.transform.position;
+                objPicked.GetComponent<Rigidbody2D>().isKinematic = true;
+
+                if (objPicked.GetComponent<CircleCollider2D>())
+                {
+                    objPicked.GetComponent<CircleCollider2D>().enabled = false;
+                }
+
+                if (objPicked.GetComponent<BoxCollider2D>())
+                {
+                    objPicked.GetComponent<BoxCollider2D>().enabled = false;
+                }
+
+                if (objPicked.GetComponent<moveBack>())
+                {
+                    objPicked.GetComponent<moveBack>().enabled = false;
+                }
 
 
+                objPicked.transform.parent = cranePoint.transform;
+                // ADD MORE LATER
+           // }
 
-            isCarrying = true;
-            cranePoint.transform.position = objPicked.transform.position;
-            objPicked.GetComponent<Rigidbody2D>().isKinematic = true;
-
-            if (objPicked.GetComponent<CircleCollider2D>())
-            {
-                objPicked.GetComponent<CircleCollider2D>().enabled = false;
-            }
-
-            if (objPicked.GetComponent<BoxCollider2D>())
-            {
-                objPicked.GetComponent<BoxCollider2D>().enabled = false;
-            }
-
-            if (objPicked.GetComponent<moveBack>())
-            {
-                objPicked.GetComponent<moveBack>().enabled = false;
-            }
-
-
-            objPicked.transform.parent = cranePoint.transform;
-            // ADD MORE LATER
 
 
         }
@@ -698,6 +714,17 @@ public class playerController : MonoBehaviour {
 
 
             objPicked = null;
+            isCarrying = false;
+            hasThrown = true;
+            m_arrow.SetActive(false);
+        }
+    }
+
+    //Used if object gets destoryed while in possession of crane, resets crane to default state
+    void resetCrane()
+    {
+        if (objPicked == null)
+        {
             isCarrying = false;
             hasThrown = true;
             m_arrow.SetActive(false);
