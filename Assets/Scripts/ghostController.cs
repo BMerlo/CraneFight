@@ -21,6 +21,7 @@ public class ghostController : MonoBehaviour
 
     private float moveRightBust;
     private float moveLeftBust;
+    private float m_timeElapsed;
     //float timeToDestroy;
 
     // Use this for initialization
@@ -28,9 +29,8 @@ public class ghostController : MonoBehaviour
     {
         isPossesing = false;
         wantToPossess = false;
-        timeToDestroy = 100.0f;
-        Destroy(gameObject, timeToDestroy);
-                
+        timeToDestroy = 5.0f;
+        Destroy(gameObject, timeToDestroy);       
     }
 
     // Update is called once per frame
@@ -48,6 +48,12 @@ public class ghostController : MonoBehaviour
         //    isPossesing = false;
         //    objectToPossess = null;
         //}
+
+        m_timeElapsed += Time.deltaTime;
+
+        if (m_timeElapsed > timeToDestroy) {
+            Destroy(gameObject);
+        }
 
         if (isPossesing)
         {
@@ -130,6 +136,7 @@ public class ghostController : MonoBehaviour
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0, moveSpeed));
         }
     }
+    
 
     public void setPlayerNum(int i)
     {

@@ -6,7 +6,7 @@ public class fallOff : MonoBehaviour {
     [SerializeField] float maxY = 3.51f;
     [SerializeField] float minY = -3.91f;
 
-    Game_Manager manager;
+    Game_Manager manager;    
 
 	// Use this for initialization
 	void Start () {
@@ -18,12 +18,15 @@ public class fallOff : MonoBehaviour {
         //Debug.Log(this.transform.position.x);
         if (this.transform.position.y > maxY)
         {
+            manager.needsGhost = true;
             fallFromTop();
         }
         else if (this.transform.position.y < minY)
-        {
-            fall();
+        {               
+                fall();            
         }
+        
+                
 	}
 
     void fallFromTop()
@@ -36,7 +39,7 @@ public class fallOff : MonoBehaviour {
 
     void fall()
     {
-        Debug.Log("Falling!");
+        Debug.Log("Falling!");        
         if (GetComponent<playerController>())
         {
             GetComponent<playerController>().takeDamage(100);
@@ -59,8 +62,33 @@ public class fallOff : MonoBehaviour {
         if(GetComponent<playerController>())
         manager.spawnGhost(GetComponent<playerController>().getPlayerNum() -1);
 
+        if ((GetComponent<playerController>().getPlayerNum() - 1) == 0)
+        {
+            Debug.Log("player 1 dead");
+            manager.player1alive = false;
+            //manager.ghostToSpawn = 0;
+            Destroy(this.gameObject, 1.0f);
+        }
+        else if ((GetComponent<playerController>().getPlayerNum() - 1) == 1) {
+            Debug.Log("player 2 dead");
+            manager.player2alive = false;
+            //manager.ghostToSpawn = 1;
+            Destroy(this.gameObject, 1.0f);
+        }
+        else if ((GetComponent<playerController>().getPlayerNum() - 1) == 2) {
+            Debug.Log("player 3 dead");
+            manager.player3alive = false;
+            //manager.ghostToSpawn = 2;
+            Destroy(this.gameObject, 1.0f);
+        }
+        else if ((GetComponent<playerController>().getPlayerNum() - 1) == 3) {
+            Debug.Log("player 4 dead");
+            manager.player4alive = false;
+            //manager.ghostToSpawn = 3;
+            Destroy(this.gameObject, 1.0f);
+        }
 
-
-        Destroy(this.gameObject, 1.5f);
+        this.enabled = false;
+        
     }
 }

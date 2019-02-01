@@ -6,7 +6,7 @@ public class Tentacle : MonoBehaviour {
     const float speed = 0.05f;
     Vector3 dir = new Vector3(-1, 0, 0);
     public bool reverse;
-    // Use this for initialization
+    
     void Start () {
         if (transform.position.y < 0)
         {
