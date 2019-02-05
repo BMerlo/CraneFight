@@ -581,6 +581,27 @@ public class playerController : MonoBehaviour {
             hasEvaded = true;
         }
 
+        /* added diagonal up and down controls (in progress)
+           if (getOwnAxis("RBumper") > 0 && !hasEvaded )
+        {
+            if (getOwnAxis("Horizontal") < 0.8)
+            {
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -evadeSpeed), ForceMode2D.Impulse); //d
+            }
+            if (getOwnAxis("Horizontal") > 0 && getOwnAxis("Vertical") > 0)
+            {
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(evadeSpeed / 2, -evadeSpeed / 2), ForceMode2D.Impulse); //dr
+            }
+            else if (getOwnAxis("Horizontal") > 0 && getOwnAxis("Vertical") < 0)
+            {
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(evadeSpeed / 2, evadeSpeed / 2), ForceMode2D.Impulse); //ur
+            }
+
+            hasEvaded = true;
+        }
+     
+         */
+
         //if (hitPoints < maximumHitPoints)
         //{
         //    this.transform.Translate(new Vector3(-1, 0, 0) * 0.04f * ((100f-hitPoints) / 100f));
@@ -588,7 +609,7 @@ public class playerController : MonoBehaviour {
     }
 
     //Coroutine deals with the movement of a player when they are oiled up
-   
+
 
     //void oiledMovement()
     //{
@@ -819,6 +840,7 @@ public class playerController : MonoBehaviour {
         if (collision.transform.tag == "Player")
         {
             takeDamage(collision.relativeVelocity.magnitude * collisionDamageMultiplier);
+
         }
         else if (collision.transform.GetComponent<destructible>())
         {
