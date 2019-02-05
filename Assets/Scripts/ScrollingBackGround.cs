@@ -20,12 +20,12 @@ public class ScrollingBackGround : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.transform.position.x < -length)
+        if (this.transform.position.x < -length*3)
             Reposition();
     }
     private void Reposition()
     {
-        Vector2 ground = new Vector2(length*3, 0);
+        Vector2 ground = new Vector2(length, 0);
         this.transform.position = (Vector2)transform.position + ground;
     }
 }
