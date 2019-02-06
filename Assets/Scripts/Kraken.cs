@@ -9,11 +9,12 @@ public class Kraken : MonoBehaviour {
     public float randomTime;
     float counter = 0;
     public bool top;
+    public bool flag;
 
     // Use this for initialization
     void Start () {
-        randomTime = Random.Range(minTime, maxTime);
-        Debug.Log(transform.position);
+        randomTime = Random.Range(minTime, maxTime);        
+        flag = true;
 
         if (transform.position.y < 0)
         {
@@ -29,18 +30,22 @@ public class Kraken : MonoBehaviour {
 	void Update () {
         counter += Time.deltaTime;
 
+        if (flag) { 
         if (counter >= randomTime && !top)
         {
             counter = 0;
             
             Instantiate(tentacle, transform.position + (tentacle.transform.up * -0.5f), transform.rotation);
             randomTime = Random.Range(minTime, maxTime);
+                flag = false;
         }
         else if (counter >= randomTime && top)
         {            
-            counter = 0;            
+            counter = 00;            
             Instantiate(tentacle, transform.position + (tentacle.transform.up * 1), transform.rotation);
             randomTime = Random.Range(minTime, maxTime);
+                flag = false;
+            }
         }
 
     }
