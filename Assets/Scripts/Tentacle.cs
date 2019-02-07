@@ -36,7 +36,9 @@ public class Tentacle : MonoBehaviour {
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.tag == "AICar") {
+        //if (collision.transform.tag == "AICar")
+        if (collision.transform.GetComponent<carAI>())
+        {
             Destroy(collision.gameObject);
         }
     }

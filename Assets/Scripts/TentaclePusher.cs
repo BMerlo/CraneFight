@@ -10,20 +10,21 @@ public class TentaclePusher : MonoBehaviour
 
     void Start()
     {
-//        findExplosiones();
+        findExplosiones();
+        Destroy(this.gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-        counter += Time.deltaTime;
+        //counter += Time.deltaTime;
 
-        //every 2 seconds will push other objects
-        if (counter >= 2)
-        {
-            findExplosiones();
-            counter = 0;
-        }
+        ////every 2 seconds will push other objects
+        //if (counter >= 2)
+        //{
+        //    findExplosiones();
+        //    counter = 0;
+        //}
     }
 
     private void findExplosiones()
@@ -37,7 +38,7 @@ public class TentaclePusher : MonoBehaviour
         {
             Rigidbody2D targetRigidbody = colliders[i].GetComponent<Rigidbody2D>();
 
-            Debug.Log("Collided with " + targetRigidbody.gameObject);
+            //Debug.Log("Collided with " + targetRigidbody.gameObject);
 
             if (!targetRigidbody)
                 continue;

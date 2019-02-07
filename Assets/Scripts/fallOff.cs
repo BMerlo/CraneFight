@@ -58,35 +58,41 @@ public class fallOff : MonoBehaviour {
         {
             GetComponent<Rigidbody2D>().gravityScale = 5;
         }
-        
-        if(GetComponent<playerController>())
-        manager.spawnGhost(GetComponent<playerController>().getPlayerNum() -1);
 
-        if ((GetComponent<playerController>().getPlayerNum() - 1) == 0)
+        if (GetComponent<playerController>())
         {
-            Debug.Log("player 1 dead");
-            manager.player1alive = false;
-            //manager.ghostToSpawn = 0;
-            Destroy(this.gameObject, 1.0f);
+            manager.spawnGhost(GetComponent<playerController>().getPlayerNum() - 1);
+
+            if ((GetComponent<playerController>().getPlayerNum() - 1) == 0)
+            {
+                Debug.Log("player 1 dead");
+                manager.player1alive = false;
+                //manager.ghostToSpawn = 0;
+                Destroy(this.gameObject, 1.0f);
+            }
+            else if ((GetComponent<playerController>().getPlayerNum() - 1) == 1)
+            {
+                Debug.Log("player 2 dead");
+                manager.player2alive = false;
+                //manager.ghostToSpawn = 1;
+                Destroy(this.gameObject, 1.0f);
+            }
+            else if ((GetComponent<playerController>().getPlayerNum() - 1) == 2)
+            {
+                Debug.Log("player 3 dead");
+                manager.player3alive = false;
+                //manager.ghostToSpawn = 2;
+                Destroy(this.gameObject, 1.0f);
+            }
+            else if ((GetComponent<playerController>().getPlayerNum() - 1) == 3)
+            {
+                Debug.Log("player 4 dead");
+                manager.player4alive = false;
+                //manager.ghostToSpawn = 3;
+                Destroy(this.gameObject, 1.0f);
+            }
         }
-        else if ((GetComponent<playerController>().getPlayerNum() - 1) == 1) {
-            Debug.Log("player 2 dead");
-            manager.player2alive = false;
-            //manager.ghostToSpawn = 1;
-            Destroy(this.gameObject, 1.0f);
-        }
-        else if ((GetComponent<playerController>().getPlayerNum() - 1) == 2) {
-            Debug.Log("player 3 dead");
-            manager.player3alive = false;
-            //manager.ghostToSpawn = 2;
-            Destroy(this.gameObject, 1.0f);
-        }
-        else if ((GetComponent<playerController>().getPlayerNum() - 1) == 3) {
-            Debug.Log("player 4 dead");
-            manager.player4alive = false;
-            //manager.ghostToSpawn = 3;
-            Destroy(this.gameObject, 1.0f);
-        }
+        
 
         this.enabled = false;
         

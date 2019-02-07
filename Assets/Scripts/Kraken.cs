@@ -9,7 +9,7 @@ public class Kraken : MonoBehaviour {
     public float randomTime;
     float counter = 0;
     public bool top;
-    public bool flag;
+    public bool flag = false;
 
     // Use this for initialization
     void Start () {
@@ -28,23 +28,27 @@ public class Kraken : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        
+
+        if (flag) {
+
         counter += Time.deltaTime;
 
-        if (flag) { 
-        if (counter >= randomTime && !top)
+
+            if (counter >= randomTime && !top)
         {
             counter = 0;
             
             Instantiate(tentacle, transform.position + (tentacle.transform.up * -0.5f), transform.rotation);
             randomTime = Random.Range(minTime, maxTime);
-                flag = false;
+                //flag = false;
         }
         else if (counter >= randomTime && top)
         {            
             counter = 00;            
             Instantiate(tentacle, transform.position + (tentacle.transform.up * 1), transform.rotation);
             randomTime = Random.Range(minTime, maxTime);
-                flag = false;
+                //flag = false;
             }
         }
 
