@@ -31,11 +31,18 @@ public class carAI : MonoBehaviour {
         }
 
         originalSpeed = Random.Range(minSpeed, maxSpeed);
-        speedUsed = originalSpeed;       
+        speedUsed = originalSpeed;
+
+
+        RaycastHit hit;
+        Vector3 physicsCentre = this.transform.position + this.GetComponent<CapsuleCollider>().center;
+
+        Debug.DrawRay(physicsCentre, Vector3.down * 0.1f, Color.red, 1);
+
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, dir);
 
         Debug.Log(hit.collider);
@@ -102,6 +109,7 @@ public class carAI : MonoBehaviour {
             GetComponent<Rigidbody2D>().AddForce(transform.up * -3);
         }
     }
+
 
 
 }
