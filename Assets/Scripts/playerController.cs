@@ -693,6 +693,8 @@ public class playerController : MonoBehaviour {
             float distance = Vector3.Distance(cranePoint.transform.position, targetReticle.transform.position);
 
             objPicked.GetComponent<Rigidbody2D>().isKinematic = false;
+            objPicked.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
             objPicked.transform.parent = null;
 
             Vector2 dir = targetReticle.transform.position - cranePoint.transform.position;
