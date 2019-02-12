@@ -143,7 +143,7 @@ public class carAI : MonoBehaviour {
         }
         else if (!isReverse)
         {
-            this.GetComponent<Rigidbody2D>().velocity = new Vector2(1 * -newSpeed - 2, 0);
+            this.GetComponent<Rigidbody2D>().velocity = new Vector2(1 * -newSpeed - 1.5f, 0);
         }
     }
 
