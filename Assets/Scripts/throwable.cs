@@ -125,7 +125,7 @@ public class throwable : MonoBehaviour {
                 else currentHighlight++;
             }
             currentHighlight++;
-            GetComponent<SpriteRenderer>().color = playerColors[currentHighlight];
+           // GetComponent<SpriteRenderer>().color = playerColors[currentHighlight];
             highlightCounter = 0;
         }
     }

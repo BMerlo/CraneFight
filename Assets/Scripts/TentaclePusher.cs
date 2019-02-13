@@ -29,9 +29,6 @@ public class TentaclePusher : MonoBehaviour
 
     private void findExplosiones()
     {
-
-        Debug.Log("trying to explode");
-
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, ExplosionRadius);
 
         for (int i = 0; i < colliders.Length; i++)

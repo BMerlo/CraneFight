@@ -638,32 +638,118 @@ public class playerController : MonoBehaviour {
 
             //Checks if the current player can pick up the object
             //if (colliderObj2Listen.GetComponent<CraneZone>().getObj2PickUp().GetComponent<throwable>().canIPickup((int)playerNum))
-           // {
-                objPicked = colliderObj2Listen.GetComponent<CraneZone>().getObj2PickUp();
+            // {
+            objPicked = colliderObj2Listen.GetComponent<CraneZone>().getObj2PickUp();
+
+            switch (getPlayerNum())
+            {
+                case 1:
+                    objPicked.GetComponent<Rigidbody2D>().velocity.Set(0, 0);
+                    isCarrying = true;
+                    cranePoint.transform.position = objPicked.transform.position;
+                    objPicked.GetComponent<Rigidbody2D>().isKinematic = true;
+                    objPicked.GetComponent<SpriteRenderer>().color = Color.yellow;
+
+                    if (objPicked.GetComponent<CircleCollider2D>())
+                    {
+                        objPicked.GetComponent<CircleCollider2D>().enabled = false;
+                    }
+
+                    if (objPicked.GetComponent<BoxCollider2D>())
+                    {
+                        objPicked.GetComponent<BoxCollider2D>().enabled = false;
+                    }
+
+                    if (objPicked.GetComponent<moveBack>())
+                    {
+                        objPicked.GetComponent<moveBack>().enabled = false;
+                    }
+                    
+                    objPicked.transform.parent = cranePoint.transform;
+                    break;
+                case 2:
+                    objPicked.GetComponent<Rigidbody2D>().velocity.Set(0, 0);
+                    isCarrying = true;
+                    cranePoint.transform.position = objPicked.transform.position;
+                    objPicked.GetComponent<Rigidbody2D>().isKinematic = true;
+
+                    if (objPicked.GetComponent<CircleCollider2D>())
+                    {
+                        objPicked.GetComponent<CircleCollider2D>().enabled = false;
+                    }
+
+                    if (objPicked.GetComponent<BoxCollider2D>())
+                    {
+                        objPicked.GetComponent<BoxCollider2D>().enabled = false;
+                    }
+
+                    if (objPicked.GetComponent<moveBack>())
+                    {
+                        objPicked.GetComponent<moveBack>().enabled = false;
+                    }
+                    objPicked.GetComponent<SpriteRenderer>().color = Color.green;
 
 
-                objPicked.GetComponent<Rigidbody2D>().velocity.Set(0, 0);
-                isCarrying = true;
-                cranePoint.transform.position = objPicked.transform.position;
-                objPicked.GetComponent<Rigidbody2D>().isKinematic = true;
+                    objPicked.transform.parent = cranePoint.transform;
+                    break;
 
-                if (objPicked.GetComponent<CircleCollider2D>())
-                {
-                    objPicked.GetComponent<CircleCollider2D>().enabled = false;
-                }
+                case 3:
+                    objPicked.GetComponent<Rigidbody2D>().velocity.Set(0, 0);
+                    isCarrying = true;
+                    cranePoint.transform.position = objPicked.transform.position;
+                    objPicked.GetComponent<Rigidbody2D>().isKinematic = true;
+                    objPicked.GetComponent<SpriteRenderer>().color = Color.blue;
 
-                if (objPicked.GetComponent<BoxCollider2D>())
-                {
-                    objPicked.GetComponent<BoxCollider2D>().enabled = false;
-                }
+                    if (objPicked.GetComponent<CircleCollider2D>())
+                    {
+                        objPicked.GetComponent<CircleCollider2D>().enabled = false;
+                    }
 
-                if (objPicked.GetComponent<moveBack>())
-                {
-                    objPicked.GetComponent<moveBack>().enabled = false;
-                }
+                    if (objPicked.GetComponent<BoxCollider2D>())
+                    {
+                        objPicked.GetComponent<BoxCollider2D>().enabled = false;
+                    }
+
+                    if (objPicked.GetComponent<moveBack>())
+                    {
+                        objPicked.GetComponent<moveBack>().enabled = false;
+                    }
 
 
-                objPicked.transform.parent = cranePoint.transform;
+                    objPicked.transform.parent = cranePoint.transform;
+                    break;
+                case 4:
+                    objPicked.GetComponent<Rigidbody2D>().velocity.Set(0, 0);
+                    isCarrying = true;
+                    cranePoint.transform.position = objPicked.transform.position;
+                    objPicked.GetComponent<Rigidbody2D>().isKinematic = true;
+                    objPicked.GetComponent<SpriteRenderer>().color = Color.magenta;
+
+                    if (objPicked.GetComponent<CircleCollider2D>())
+                    {
+                        objPicked.GetComponent<CircleCollider2D>().enabled = false;
+                    }
+
+                    if (objPicked.GetComponent<BoxCollider2D>())
+                    {
+                        objPicked.GetComponent<BoxCollider2D>().enabled = false;
+                    }
+
+                    if (objPicked.GetComponent<moveBack>())
+                    {
+                        objPicked.GetComponent<moveBack>().enabled = false;
+                    }
+
+
+                    objPicked.transform.parent = cranePoint.transform;
+                    break;
+                default:
+                    break;
+            }
+           
+
+
+               
                 // ADD MORE LATER
            // }
 
