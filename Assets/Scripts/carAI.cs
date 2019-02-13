@@ -8,11 +8,12 @@ public class carAI : MonoBehaviour
     Vector3 dir = new Vector3(1, 0, 0);
     public float desiredSpeed;
 
+    Rigidbody2D myBody;
     [SerializeField] float minSpeed = 20f;
     [SerializeField] float maxSpeed = 30f;
 
-    float accelerateForce = 15f;
-    float decelerateForce = 20f;
+    float accelerateForce = 100f;
+    float decelerateForce = 150f;
 
     float originalSpeed;
     float lowestSpeed;
@@ -20,7 +21,7 @@ public class carAI : MonoBehaviour
     [SerializeField] float speedUsedTest;
     //new
     //[SerializeField] Vector2 speedUse;
-    public ScrollingBackGround backGroundScript;
+    public ScrollingBackGround backGroundScript; 
     public float backgroundSpeed;
 
     public float testSpeed;
@@ -31,6 +32,7 @@ public class carAI : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        myBody = GetComponent<Rigidbody2D>();
         //lowerSpeed = 0;
         originalSpeed = Random.Range(minSpeed, maxSpeed);
 
@@ -42,14 +44,14 @@ public class carAI : MonoBehaviour
         if (isReverse)
         {
             dir *= -1;
-            originalSpeed *= -1;    // original speed will carry dir now
-            originalSpeed += backgroundSpeed;   // bgSpeed is negative, keep in mind
+            originalSpeed *= -1;    // original speed will carry dir now    // -20
+            originalSpeed += backgroundSpeed;   // bgSpeed is negative, keep in mind    //-23
             
             //lowerSpeed += DIR_DIFF;
         }
         else
         {
-            originalSpeed += backgroundSpeed;
+            originalSpeed += backgroundSpeed;   //  20 - 3 = 17
             //minSpeed -= DIR_DIFF;
             //maxSpeed -= DIR_DIFF;
         }
@@ -58,7 +60,7 @@ public class carAI : MonoBehaviour
         desiredSpeed = originalSpeed;
 
         //float force = desiredSpeed * GetComponent<Rigidbody2D>().mass;
-        GetComponent<Rigidbody2D>().velocity.Set(desiredSpeed, 0);
+        myBody.velocity = new Vector2(desiredSpeed, 0);
         //GetComponent<Rigidbody2D>().AddForce(transform.right * force, ForceMode2D.Impulse);
 
         Debug.Log("-----------------------------------speed set");
@@ -68,12 +70,16 @@ public class carAI : MonoBehaviour
 
     void accelerate()
     {
-        this.GetComponent<Rigidbody2D>().AddForce(dir * accelerateForce);
+        myBody.AddForce(dir * accelerateForce);
+        Debug.Log("---------accelerate " + (dir * accelerateForce));
+
     }
 
     void decelerate()
     {
-        this.GetComponent<Rigidbody2D>().AddForce(-dir * decelerateForce);
+        myBody.AddForce(-dir * decelerateForce);
+        Debug.Log("---------decelerate");
+
     }
 
     void tryToStop()
@@ -144,8 +150,8 @@ public class carAI : MonoBehaviour
             //ResetSpeed();
             desiredSpeed = originalSpeed;
         }
-        testSpeed = this.GetComponent<Rigidbody2D>().velocity.x;
-        Debug.Log(this.GetComponent<Rigidbody2D>().velocity);
+        testSpeed = myBody.velocity.x;
+        //Debug.Log(myBody.velocity);
     }
 
     public float getCurrentSpeed()
@@ -168,19 +174,19 @@ public class carAI : MonoBehaviour
         //old   - is it tho?
         if (isReverse && transform.position.y < 0.01) //this checks if AI goes left and its position
         {
-            GetComponent<Rigidbody2D>().AddForce(transform.up * 3);
+            myBody.AddForce(transform.up * 3);
 
         }
         else if (!isReverse && transform.position.y > 0)
         {
-            GetComponent<Rigidbody2D>().AddForce(transform.up * -3);
+            myBody.AddForce(transform.up * -3);
 
         }
 
         float currentSpeed = GetComponent<Rigidbody2D>().velocity.x;
 
         // google self drive has nothing on me
-        if (isReverse)
+        if (isReverse)  // NEgative speed
         {
              if (desiredSpeed < currentSpeed * 1.1)
             {
