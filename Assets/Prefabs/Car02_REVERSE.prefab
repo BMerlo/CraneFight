@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 114375650675550024}
   - component: {fileID: 114255451606108678}
   - component: {fileID: 114333376657475540}
+  - component: {fileID: 7307891720852572152}
   m_Layer: 0
   m_Name: Car02_REVERSE
   m_TagString: AICar
@@ -217,3 +218,15 @@ MonoBehaviour:
   backgroundSpeed: 0
   testSpeed: 0
   timer: 0
+--- !u!114 &7307891720852572152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655117760019758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88f0c8e5ed8f3e741a9609404f20f917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

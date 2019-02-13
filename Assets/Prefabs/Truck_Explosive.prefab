@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 114197209535687116}
   - component: {fileID: 114719995057325028}
   - component: {fileID: 114853983172960584}
+  - component: {fileID: 3486081034243663606}
   m_Layer: 0
   m_Name: Truck_Explosive
   m_TagString: Carrier
@@ -214,3 +215,15 @@ MonoBehaviour:
   backgroundSpeed: 0
   testSpeed: 0
   timer: 0
+--- !u!114 &3486081034243663606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300860513420610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88f0c8e5ed8f3e741a9609404f20f917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
