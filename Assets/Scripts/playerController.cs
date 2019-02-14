@@ -117,7 +117,7 @@ public class playerController : MonoBehaviour {
         targetReticle.GetComponent<SpriteRenderer>().enabled = false;
         throwRange.GetComponent<SpriteRenderer>().enabled = false;
         m_arrowOriginalScale = m_arrow.transform.localScale;
-        MoveBackScript = GetComponent<moveBack>();
+       // MoveBackScript = GetComponent<moveBack>();
 
         
     }
@@ -135,6 +135,20 @@ public class playerController : MonoBehaviour {
         //}
 
         cooldownTimers();
+
+
+        //if (true)
+        //{
+        //    carAI[] cars = GameObject.FindObjectsOfType<carAI>();
+
+        //    foreach (carAI car in cars)
+        //    {
+        //        if (true) //range
+        //        {
+        //            // add force
+        //        }
+        //    }
+        //}
 
 
         if (isCarrying)
@@ -205,7 +219,7 @@ public class playerController : MonoBehaviour {
         }
 
         //Debug.Log(getOwnAxis("Trigger"));
-        if (!isJumping && isCarrying && getOwnAxis("Trigger") < -0.7f && !hasThrown)
+        if (!isJumping && isCarrying && getOwnAxis("Trigger") < 0.25f && !hasThrown)
         {
             timeCharging += Time.deltaTime;
             isCharging = true;
@@ -246,7 +260,7 @@ public class playerController : MonoBehaviour {
     {
         if (m_stunTime <= 0.0f)
         {
-            MoveBackScript.enabled = false;
+            //MoveBackScript.enabled = false;
             movement();
         }
         else
@@ -889,6 +903,6 @@ public class playerController : MonoBehaviour {
     public void stun(float addedStunTime)
     {
         m_stunTime += addedStunTime;
-        MoveBackScript.enabled = true;
+        //MoveBackScript.enabled = true;
     }
 }
