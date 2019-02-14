@@ -4,11 +4,11 @@ using UnityEngine;
 public class statusEffects : MonoBehaviour
 {
 
-    [SerializeField] bool isSmelly;
-    [SerializeField] GameObject[] cars;
-    [SerializeField] Vector2 smellForceUp;
-    [SerializeField] Vector2 smellForceDown;
-    [SerializeField] float smellRadius;
+     bool isSmelly = true;
+     public GameObject[] cars;
+     Vector2 smellForceUp;
+     Vector2 smellForceDown;
+     float smellRadius = 2.5f;
 
     private int index = 0;
     Rigidbody rb;
@@ -16,6 +16,9 @@ public class statusEffects : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        smellForceDown = new Vector2(0.0f, -0.05f);
+        smellForceUp = new Vector2(0.0f, 0.05f);
+
     }
 
     void becomeSmelly()
