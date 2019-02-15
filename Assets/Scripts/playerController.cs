@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour {
     [SerializeField] float aimSpeed = 4f;
-
+    Rigidbody2D rBody;
+    bool isBoostCharging = false;
+    float boostTimer = 0;
+    float MAX_BOOST_TIME = 2.0f;
 
     enum PlayerNum
     {
@@ -43,7 +46,8 @@ public class playerController : MonoBehaviour {
     bool isJumping = false;
     float jumpTimer = 0;
     [SerializeField] float jumpTime = 3f;
-  
+
+    Vector2 movementVector = Vector2.zero;
 
     float drag;
     bool isOiled = false;
@@ -94,6 +98,8 @@ public class playerController : MonoBehaviour {
     //[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
     // Use this for initialization
     void Start() {
+        rBody = GetComponent<Rigidbody2D>();
+
         switch (playerNum)
         {
             case PlayerNum.P1:
@@ -134,8 +140,12 @@ public class playerController : MonoBehaviour {
         //    getHealth(Time.deltaTime * regenAmount);
         //}
 
-        cooldownTimers();
 
+        //Debug.Log(getOwnAxis("Horizontal"));
+
+
+        cooldownTimers();
+        updateMovementVec();
 
         //if (true)
         //{
@@ -149,6 +159,28 @@ public class playerController : MonoBehaviour {
         //        }
         //    }
         //}
+        if (!isBoostCharging)
+        {
+            if (getOwnAxis("Trigger") < -0.2 || getOwnButtonDown("B"))
+            {
+                isBoostCharging = true;
+
+            }
+        }
+        else // Boost is charging
+        {
+            boostTimer += Time.deltaTime;
+
+            //if (boostTimer >= MAX_BOOST_TIME || (getOwnAxis("Trigger") > -0.2 && getOwnButtonUp("B")))
+            if (getOwnAxis("Trigger") > -0.2 && getOwnButtonUp("B"))
+            {
+                boost();
+            }
+        }
+        
+
+
+
 
 
         if (isCarrying)
@@ -219,7 +251,7 @@ public class playerController : MonoBehaviour {
         }
 
         //Debug.Log(getOwnAxis("Trigger"));
-        if (!isJumping && isCarrying && getOwnAxis("Trigger") < 0.25f && !hasThrown)
+        if (!isJumping && isCarrying && getOwnAxis("Trigger") < 0.25f && !hasThrown)    // Charge the attack?
         {
             timeCharging += Time.deltaTime;
             isCharging = true;
@@ -231,7 +263,8 @@ public class playerController : MonoBehaviour {
             chargingForce();
             throwObj();
         }
-        else if (isCarrying == false && !hasJumped && !isJumping && getOwnAxis("Trigger") > 0.25f)
+        else if (isCarrying == false && !hasJumped && !isJumping && getOwnButtonDown("A"))
+            //getOwnAxis("Trigger") > 0.25f)
         {
             isJumping = true;
             myAnim.SetBool("IsJumping", true);
@@ -258,15 +291,19 @@ public class playerController : MonoBehaviour {
     }
     private void FixedUpdate()
     {
-        if (m_stunTime <= 0.0f)
-        {
-            //MoveBackScript.enabled = false;
-            movement();
-        }
-        else
-        {
-            m_stunTime -= Time.deltaTime;
-        }
+
+        movement();
+
+
+        //if (m_stunTime <= 0.0f)
+        //{
+        //    //MoveBackScript.enabled = false;
+        //    //movement();
+        //}
+        //else
+        //{
+        //    m_stunTime -= Time.deltaTime;
+        //}
         //if (isOiled == false)
         //{
         //    movement();
@@ -282,53 +319,23 @@ public class playerController : MonoBehaviour {
         //}
     }
 
-    void cooldownTimers()
+    void updateMovementVec()
     {
-        if (hasJumped)
-        {
-            jumpCooldownTimer += Time.deltaTime;
-            if (jumpCooldownTimer >= jumpCooldown) { 
-                hasJumped = false;
-                jumpCooldownTimer = 0;
-            }
-        }
-
-        if (hasEvaded)
-        {
-            evadeCooldownTimer += Time.deltaTime;
-            if (evadeCooldownTimer >= evadeCooldown)
-            {
-                hasEvaded = false;
-                evadeCooldownTimer = 0;
-            }
-        }
-
-        if (hasThrown)
-        {
-            throwCooldownTimer += Time.deltaTime;
-            if (throwCooldownTimer >= throwCooldown)
-            {
-                hasThrown = false;
-                throwCooldownTimer = 0;
-            }  
-        }
-
-        if (isCarrying)
-        {
-            isDestroyedTimer += Time.deltaTime;
-            if (isDestroyedTimer >= isDestroyedFreq)
-            {
-                resetCrane();
-                isDestroyedTimer = 0;
-            }
-        }
+        movementVector = new Vector2(getOwnAxis("Horizontal"), getOwnAxis("Vertical"));
     }
 
-    void aim()
+    void boost()
     {
+        float force = (evadeSpeed / 3.0f) + ((evadeSpeed * 2.0f * (boostTimer / MAX_BOOST_TIME)) / 3.0f);
+        GetComponent<Rigidbody2D>().AddForce(movementVector.normalized * force, ForceMode2D.Impulse);
+        hasEvaded = true;
+        isBoostCharging = false;
+        boostTimer = 0;
+    }
 
-        m_arrow.SetActive(true);
-        Vector3 dir = new Vector3(0,0,0);
+    Vector2 getRightStickDir()    // returns a normalized vector from right stick.
+    {
+        Vector3 dir = new Vector3(0, 0, 0);
 
         if (getOwnAxis("Horizontal2") > horizontalDeadZone)
         {
@@ -354,6 +361,16 @@ public class playerController : MonoBehaviour {
             dir.Normalize();
         }
 
+        return dir;
+    }
+
+
+    void aim()
+    {
+
+        m_arrow.SetActive(true);
+
+        Vector2 dir = getRightStickDir();
 
 
         //float localX = right.transform.position.x - this.transform.position.x;
@@ -373,7 +390,7 @@ public class playerController : MonoBehaviour {
         Vector2 craneAngle = cranePoint.transform.position - this.transform.position;
         //MOVE CRANE ACCORDING TO CRANE POINT //
         float angle = findDegree(craneAngle.x, craneAngle.y);
-        Debug.Log(angle);
+        //Debug.Log(angle);
 
         m_arrow.transform.localEulerAngles = new Vector3(0,0,-angle - 180);
 
@@ -562,26 +579,29 @@ public class playerController : MonoBehaviour {
         //{
         //    modifiedSpeed *= (hitPoints / 100f);
         //}
-            
-        // MOVEMENT
-        if (getOwnAxis("Horizontal") > horizontalDeadZone)
-        {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(moveSpeed, 0));
-            Debug.Log(GetComponent<Rigidbody2D>().velocity);
-        }
-        else if (getOwnAxis("Horizontal") < -horizontalDeadZone)
-        {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(-moveSpeed, 0));
-        }
 
-        if (getOwnAxis("Vertical") > horizontalDeadZone)
-        {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -moveSpeed));
-        }
-        else if (getOwnAxis("Vertical") < -horizontalDeadZone)
-        {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, moveSpeed));
-        }
+        // MOVEMENT
+        //if (getOwnAxis("Horizontal") > horizontalDeadZone)
+        //{
+        //    GetComponent<Rigidbody2D>().AddForce(new Vector2(moveSpeed, 0));
+        //   // Debug.Log(GetComponent<Rigidbody2D>().velocity);
+        //}
+        //else if (getOwnAxis("Horizontal") < -horizontalDeadZone)
+        //{
+        //    GetComponent<Rigidbody2D>().AddForce(new Vector2(-moveSpeed, 0));
+        //}
+
+        //if (getOwnAxis("Vertical") > horizontalDeadZone)
+        //{
+        //    GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -moveSpeed));
+        //}
+        //else if (getOwnAxis("Vertical") < -horizontalDeadZone)
+        //{
+        //    GetComponent<Rigidbody2D>().AddForce(new Vector2(0, moveSpeed));
+        //}
+
+        rBody.AddForce(movementVector * moveSpeed);
+        Debug.Log("move");
 
         if (getOwnAxis("RBumper") > 0 && !hasEvaded)
         {
@@ -593,6 +613,10 @@ public class playerController : MonoBehaviour {
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0, evadeSpeed), ForceMode2D.Impulse);
             hasEvaded = true;
+        }
+        else if (getOwnAxis("Trigger") < 0 && !hasEvaded)
+        {
+            
         }
 
         /* added diagonal up and down controls (in progress)
@@ -642,6 +666,16 @@ public class playerController : MonoBehaviour {
     float getOwnAxis(string axis)
     {
         return Input.GetAxis(playerNum.ToString() + axis);
+    }
+
+    bool getOwnButtonDown(string i)
+    {
+        return Input.GetButtonDown(playerNum.ToString() + i);
+    }
+
+    bool getOwnButtonUp(string i)
+    {
+        return Input.GetButtonUp(playerNum.ToString() + i);
     }
 
     void pickUp()   // Gimme your best pick up lines, programmer intern. > "I hope we can merge without any conflicts ( ͡° ͜ʖ ͡°) " > Not bad playa -- E
@@ -905,4 +939,49 @@ public class playerController : MonoBehaviour {
         m_stunTime += addedStunTime;
         //MoveBackScript.enabled = true;
     }
+
+
+    void cooldownTimers()
+    {
+        if (hasJumped)
+        {
+            jumpCooldownTimer += Time.deltaTime;
+            if (jumpCooldownTimer >= jumpCooldown)
+            {
+                hasJumped = false;
+                jumpCooldownTimer = 0;
+            }
+        }
+
+        if (hasEvaded)
+        {
+            evadeCooldownTimer += Time.deltaTime;
+            if (evadeCooldownTimer >= evadeCooldown)
+            {
+                hasEvaded = false;
+                evadeCooldownTimer = 0;
+            }
+        }
+
+        if (hasThrown)
+        {
+            throwCooldownTimer += Time.deltaTime;
+            if (throwCooldownTimer >= throwCooldown)
+            {
+                hasThrown = false;
+                throwCooldownTimer = 0;
+            }
+        }
+
+        if (isCarrying)
+        {
+            isDestroyedTimer += Time.deltaTime;
+            if (isDestroyedTimer >= isDestroyedFreq)
+            {
+                resetCrane();
+                isDestroyedTimer = 0;
+            }
+        }
+    }
+
 }
