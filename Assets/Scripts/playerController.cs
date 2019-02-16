@@ -99,6 +99,11 @@ public class playerController : MonoBehaviour {
     private float m_stunTime;
 
 
+    Vector2 smellForceUp;
+    Vector2 smellForceDown;
+    float smellRadius;
+    bool isSmelly;
+
     //[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
     // Use this for initialization
     void Start() {
@@ -127,9 +132,11 @@ public class playerController : MonoBehaviour {
         targetReticle.GetComponent<SpriteRenderer>().enabled = false;
         throwRange.GetComponent<SpriteRenderer>().enabled = false;
         m_arrowOriginalScale = m_arrow.transform.localScale;
-       // MoveBackScript = GetComponent<moveBack>();
-
-        
+        // MoveBackScript = GetComponent<moveBack>();
+        isSmelly = true;
+        smellForceDown = new Vector2(0.0f, -0.02f);
+        smellForceUp = new Vector2(0.0f, 0.02f);
+        smellRadius = 2.5f;
     }
 
     // Update is called once per frame
@@ -182,11 +189,6 @@ public class playerController : MonoBehaviour {
             }
         }
         
-
-
-
-
-
         if (isCarrying)
         {
             cranePoint.GetComponent<SpriteRenderer>().enabled = true;
@@ -321,6 +323,70 @@ public class playerController : MonoBehaviour {
         //        oilTimer = 0.0f;
         //    }
         //}
+
+
+        if (isSmelly)
+        {
+            carAI[] cars = GameObject.FindObjectsOfType<carAI>();
+
+            foreach (carAI car in cars)
+            {
+                if (GetDistanceFromClosest(GameObject.FindGameObjectsWithTag("AICar")) <= smellRadius)
+                {
+                    //Checks if car AI is in front of player
+                    if (car.transform.position.x > this.transform.position.x)
+                    {
+                        //Transforms if AICar position.y is above player
+                        if (car.transform.position.y > this.transform.position.y)
+                        {
+                            car.GetComponent<Transform>().Translate(smellForceUp);
+                            Debug.Log("CAR NAME: " + car.name + smellForceUp + "moving up: " + car.transform.position);
+                        }
+
+                        //Transforms if AICar position.y is below player
+                        else if (car.transform.position.y < this.transform.position.y)
+                        {
+                            car.GetComponent<Transform>().Translate(smellForceDown);
+                            Debug.Log("CAR NAME: " + car.name + smellForceDown + "moving down: " + car.transform.position);
+                        }
+                    }
+
+                    //Checks if AICar position.x is behind the player
+                    else if (car.transform.position.x < this.transform.position.x)
+                    {
+                        //Transforms if AICar position.y is above player
+                        if (car.transform.position.y > this.transform.position.y)
+                        {
+                            car.GetComponent<Transform>().Translate(smellForceUp);
+                            Debug.Log("CAR NAME: " + car.name + smellForceUp + "moving up: " + car.transform.position);
+                        }
+
+                        //Transforms if AICar position.y is below player
+                        else if (car.transform.position.y < this.transform.position.y)
+                        {
+                            car.GetComponent<Transform>().Translate(smellForceDown);
+                            Debug.Log("CAR NAME: " + car.name + smellForceDown + "moving down: " + car.transform.position);
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
+    float GetDistanceFromClosest(GameObject[] gameObjects)
+    {
+        float shortestDistance = Mathf.Infinity;
+        foreach (GameObject go in gameObjects)
+        {
+            shortestDistance = Mathf.Min(shortestDistance, Vector2.Distance(transform.position, go.transform.position));
+        }
+        return shortestDistance;
+    }
+
+    void becomeSmelly()
+    {
+        isSmelly = true;
     }
 
     void updateMovementVec()
