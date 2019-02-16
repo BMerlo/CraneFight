@@ -28,5 +28,11 @@ public class ScrollingBackGround : MonoBehaviour
         Vector2 ground = new Vector2(length, 0);
         this.transform.position = (Vector2)transform.position + ground;
     }
+
+
+    public float getSpeed()
+    {
+        return speed;
+    }
 }
  

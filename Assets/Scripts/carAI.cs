@@ -39,7 +39,7 @@ public class carAI : MonoBehaviour
 
 
         backGroundScript = FindObjectOfType<ScrollingBackGround>();
-        backgroundSpeed = backGroundScript.GetComponent<Rigidbody2D>().velocity.x;
+        backgroundSpeed = backGroundScript.getSpeed();
 
         if (isReverse)
         {
