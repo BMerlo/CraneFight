@@ -99,10 +99,10 @@ public class playerController : MonoBehaviour {
     private float m_stunTime;
 
 
-    Vector2 smellForceUp;
-    Vector2 smellForceDown;
-    float smellRadius;
-    bool isSmelly;
+    Vector2 smellForceUp = new Vector2(0.0f, 0.08f);
+    Vector2 smellForceDown = new Vector2(0.0f, -0.08f);
+    float smellRadius = 3.5f;
+    public bool isSmelly;
 
     //[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
     // Use this for initialization
@@ -133,10 +133,9 @@ public class playerController : MonoBehaviour {
         throwRange.GetComponent<SpriteRenderer>().enabled = false;
         m_arrowOriginalScale = m_arrow.transform.localScale;
         // MoveBackScript = GetComponent<moveBack>();
-        isSmelly = true;
-        smellForceDown = new Vector2(0.0f, -0.02f);
-        smellForceUp = new Vector2(0.0f, 0.02f);
-        smellRadius = 2.5f;
+        //isSmelly = true;
+
+
     }
 
     // Update is called once per frame
@@ -331,7 +330,8 @@ public class playerController : MonoBehaviour {
 
             foreach (carAI car in cars)
             {
-                if (GetDistanceFromClosest(GameObject.FindGameObjectsWithTag("AICar")) <= smellRadius)
+                //if (GetDistanceFromClosest(GameObject.FindGameObjectsWithTag("AICar")) <= smellRadius)
+                if(Vector2.Distance(car.transform.position, this.transform.position) <= smellRadius)
                 {
                     //Checks if car AI is in front of player
                     if (car.transform.position.x > this.transform.position.x)
