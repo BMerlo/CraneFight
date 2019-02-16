@@ -25,7 +25,7 @@ public class collisionChecker : MonoBehaviour
         {
             collision.transform.GetComponent<playerController>().takeDamage(collisionDmg);
         }
-
+        Destroy(transform.parent.gameObject);
 
         //Vector2 contactPoint = collision.contacts[0].point;
         //Vector2 centre = collision.collider.bounds.center;
