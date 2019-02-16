@@ -4,6 +4,10 @@ using UnityEngine;
 
 
 public class playerController : MonoBehaviour {
+
+    float hitPoints = 100f;
+    [SerializeField] HealthBar playerHealth;
+
     [SerializeField] float aimSpeed = 4f;
     Rigidbody2D rBody;
     bool isBoostCharging = false;
@@ -857,8 +861,8 @@ public class playerController : MonoBehaviour {
 
     public void takeDamage(float amount)
     {
-        stun(amount * 0.1f);
-        //hitPoints -= amount;
+        //stun(amount * 0.1f);
+        hitPoints -= amount;
 
         //if(amount >0)   //just in case?
         //regenCounter = regenDelay;
@@ -868,7 +872,7 @@ public class playerController : MonoBehaviour {
         //    hitPoints = 0;
         //}
 
-        //playerHealth.updateHealthBar(hitPoints);
+        playerHealth.updateHealthBar(hitPoints);
 
         
     }
@@ -889,11 +893,12 @@ public class playerController : MonoBehaviour {
     {
         if (collision.transform.tag == "Player")
         {
-            takeDamage(collision.relativeVelocity.magnitude * collisionDamageMultiplier);
+            //takeDamage(collision.relativeVelocity.magnitude * collisionDamageMultiplier);
 
         }
         else if (collision.transform.GetComponent<destructible>())
         {
+            Debug.Log("destructible collided");
             collision.transform.GetComponent<destructible>().getDestroyed();
             takeDamage(collision.transform.GetComponent<destructible>().getDmgAmount());
         }

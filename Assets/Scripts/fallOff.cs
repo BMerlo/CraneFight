@@ -40,6 +40,7 @@ public class fallOff : MonoBehaviour {
     void fall()
     {
         GetComponent<arrangeLayers>().enabled = false;
+        this.gameObject.layer = 16;
 
         Debug.Log("Falling!");        
         if (GetComponent<playerController>())
