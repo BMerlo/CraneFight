@@ -182,7 +182,7 @@ public class playerController : MonoBehaviour {
             boostTimer += Time.deltaTime;
 
             //if (boostTimer >= MAX_BOOST_TIME || (getOwnAxis("Trigger") > -0.2 && getOwnButtonUp("B")))
-            if (getOwnAxis("Trigger") > -0.2 && getOwnButtonUp("B"))
+            if (getOwnAxis("Trigger") > -0.2 && !getOwnButton("B"))
             {
                 boost();
             }
@@ -746,6 +746,11 @@ public class playerController : MonoBehaviour {
     bool getOwnButtonUp(string i)
     {
         return Input.GetButtonUp(playerNum.ToString() + i);
+    }
+
+    bool getOwnButton(string i)
+    {
+        return Input.GetButton(playerNum.ToString() + i);
     }
 
     void pickUp()   // Gimme your best pick up lines, programmer intern. > "I hope we can merge without any conflicts ( ͡° ͜ʖ ͡°) " > Not bad playa -- E
