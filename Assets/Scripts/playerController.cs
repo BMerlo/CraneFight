@@ -940,7 +940,10 @@ public class playerController : MonoBehaviour {
 
         playerHealth.updateHealthBar(hitPoints);
 
-        
+        if (hitPoints <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public void getHealth(float amount)

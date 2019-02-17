@@ -1,21 +1,11 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &100100000
-Prefab:
-  m_ObjectHideFlags: 1
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications: []
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1559084738765792}
-  m_IsPrefabAsset: 1
 --- !u!1 &1559084738765792
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4533819972933900}
@@ -29,11 +19,12 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &4533819972933900
 Transform:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1559084738765792}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 15.020645, y: -2.314821, z: 0.11869526}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -42,9 +33,10 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114402769238047392
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1559084738765792}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -52,12 +44,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnees:
-  - {fileID: 1655117760019758, guid: 01b1b3c2730e7834e9f619b516eca706, type: 2}
-  - {fileID: 1482328439592544, guid: ae6248d6f24e9814692bd896d643ec0f, type: 2}
-  - {fileID: 1102174245965482, guid: 1a9d2926cebd87e4eabfdac418c7e121, type: 2}
-  - {fileID: 1726110695139282, guid: 6aaac90a43529e84b915a9043a34600f, type: 2}
-  - {fileID: 1967959112820670, guid: 4d2a84ccc65aa5643a462d1fcad67b95, type: 2}
-  - {fileID: 1164686690122672, guid: 2d84caf13f1197a42ae2549c9e00ea62, type: 2}
-  - {fileID: 1139914837488882, guid: 6e5379598ca42a64fa93eb8ba5acdce6, type: 2}
-  minTime: 3
-  maxTime: 9
+  - {fileID: 1655117760019758, guid: 01b1b3c2730e7834e9f619b516eca706, type: 3}
+  - {fileID: 1482328439592544, guid: ae6248d6f24e9814692bd896d643ec0f, type: 3}
+  - {fileID: 1102174245965482, guid: 1a9d2926cebd87e4eabfdac418c7e121, type: 3}
+  - {fileID: 8427128647890767587, guid: bf580fefbce429649aa1913e81b49a8c, type: 3}
+  - {fileID: 3965993868743059531, guid: 3263b25154f709646b24242bf761124c, type: 3}
+  - {fileID: 1164686690122672, guid: 2d84caf13f1197a42ae2549c9e00ea62, type: 3}
+  - {fileID: 1139914837488882, guid: 6e5379598ca42a64fa93eb8ba5acdce6, type: 3}
+  minTime: 1
+  maxTime: 4

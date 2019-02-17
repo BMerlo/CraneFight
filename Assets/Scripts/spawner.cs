@@ -35,21 +35,21 @@ public class spawner : MonoBehaviour {
             {
                 if (countAIvehicles() < MAX_CARS)
                 {
-                counter = 0;
-                timeActual = Random.Range(minTime, maxTime);
-
                 int i = Random.Range(0, spawnees.Length);
 
                 Instantiate(spawnees[i], this.transform.position, this.transform.rotation);
-                }   
+                }
 
+
+            counter = 0;
+            timeActual = Random.Range(minTime, maxTime);
             }
     }
 
     int countAIvehicles()
     {
         carAI[] cars = FindObjectsOfType<carAI>();
-        Debug.Log("There are " + cars.Length + " in the scene.----------------");
+        //Debug.Log("There are " + cars.Length + " in the scene.----------------");
         return cars.Length;
     }
 }

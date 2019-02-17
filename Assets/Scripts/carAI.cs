@@ -12,8 +12,8 @@ public class carAI : MonoBehaviour
     [SerializeField] float minSpeed = 20f;
     [SerializeField] float maxSpeed = 30f;
 
-    float accelerateForce = 100f;
-    float decelerateForce = 150f;
+    float accelerateForce = 30f;
+    float decelerateForce = 5f;
 
     float originalSpeed;
     float lowestSpeed;
@@ -91,7 +91,7 @@ public class carAI : MonoBehaviour
         }
         else if (!isReverse)
         {
-            desiredSpeed = -backgroundSpeed;
+            desiredSpeed = backgroundSpeed;
             //this.GetComponent<Rigidbody2D>().velocity = new Vector2(-newSpeed, 0);
         }
     }
@@ -101,7 +101,7 @@ public class carAI : MonoBehaviour
     void Update()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, dir);
-
+        Debug.DrawLine(transform.position, transform.position + (dir * 3));
         Debug.Log(hit.collider);
 
         if (hit.collider != null)
@@ -188,7 +188,7 @@ public class carAI : MonoBehaviour
         // google self drive has nothing on me
         if (isReverse)  // NEgative speed
         {
-             if (desiredSpeed < currentSpeed * 1.1)
+             if (desiredSpeed < currentSpeed)
             {
                 accelerate();
             }
@@ -199,7 +199,7 @@ public class carAI : MonoBehaviour
         }
         else
         {
-            if (desiredSpeed > currentSpeed * 1.1)
+            if (desiredSpeed > currentSpeed)
             {
                 accelerate();
             }
