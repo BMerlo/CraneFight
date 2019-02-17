@@ -18,6 +18,7 @@ public class oil : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("something is on oil");
         if (collision.tag == "Player")
         {
             Debug.Log("Player is here!");
@@ -27,7 +28,7 @@ public class oil : MonoBehaviour {
 
     public void burn()
     {
-       // Instantiate(burningOil, this.transform.position, this.transform.rotation);
+        Instantiate(burningOil, this.transform.position, this.transform.rotation);
         Destroy(this.gameObject);
     }
 

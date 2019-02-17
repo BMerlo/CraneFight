@@ -54,7 +54,7 @@ public class playerController : MonoBehaviour {
     Vector2 movementVector = Vector2.zero;
 
     float drag;
-    bool isOiled = false;
+    public bool isOiled = false;
     bool isCoroutineRunning = false;
     int oilCount = 1;
     [SerializeField] float oilForce = 1.0f;
@@ -171,7 +171,7 @@ public class playerController : MonoBehaviour {
         //}
         if (!isBoostCharging)
         {
-            if (getOwnAxis("Trigger") < -0.2 || getOwnButtonDown("B"))
+            if (!hasEvaded && (getOwnAxis("Trigger") < -0.2 || getOwnButtonDown("B")))
             {
                 isBoostCharging = true;
 
@@ -213,7 +213,7 @@ public class playerController : MonoBehaviour {
             tempFilter.useTriggers = true;
             //int i = GetComponent<BoxCollider2D>().OverlapCollider(tempFilter, temp);
             //temp = Physics2D.OverlapBoxAll(this.transform.position, GetComponent<BoxCollider2D>().size, 0f);
-            int numColliders = GetComponent<BoxCollider2D>().OverlapCollider(tempFilter, temp);
+            int numColliders = GetComponent<PolygonCollider2D>().OverlapCollider(tempFilter, temp);
             bool isStillOiled = false;
             for (int i = 0; i < numColliders; i++)
             {
@@ -401,6 +401,7 @@ public class playerController : MonoBehaviour {
         hasEvaded = true;
         isBoostCharging = false;
         boostTimer = 0;
+
     }
 
     Vector2 getRightStickDir()    // returns a normalized vector from right stick.
@@ -673,21 +674,21 @@ public class playerController : MonoBehaviour {
         rBody.AddForce(movementVector * moveSpeed);
         Debug.Log("move");
 
-        if (getOwnAxis("RBumper") > 0 && !hasEvaded)
-        {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -evadeSpeed), ForceMode2D.Impulse);
-            hasEvaded = true;
+        //if (getOwnAxis("RBumper") > 0 && !hasEvaded)
+        //{
+        //    GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -evadeSpeed), ForceMode2D.Impulse);
+        //    hasEvaded = true;
             
-        }
-        else if (getOwnAxis("LBumper") > 0 && !hasEvaded)
-        {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, evadeSpeed), ForceMode2D.Impulse);
-            hasEvaded = true;
-        }
-        else if (getOwnAxis("Trigger") < 0 && !hasEvaded)
-        {
+        //}
+        //else if (getOwnAxis("LBumper") > 0 && !hasEvaded)
+        //{
+        //    GetComponent<Rigidbody2D>().AddForce(new Vector2(0, evadeSpeed), ForceMode2D.Impulse);
+        //    hasEvaded = true;
+        //}
+        //else if (getOwnAxis("Trigger") < 0 && !hasEvaded)
+        //{
             
-        }
+        //}
 
         /* added diagonal up and down controls (in progress)
            if (getOwnAxis("RBumper") > 0 && !hasEvaded )
@@ -982,12 +983,19 @@ public class playerController : MonoBehaviour {
     //Called when the player hits an oil spill. Sets drag to 0 while storing original drag value.
     public void getOiled()
     {
-        if (GetComponent<Rigidbody2D>().drag != 0)
+        if(!isOiled)
+        //if (GetComponent<Rigidbody2D>().drag != 0)
         {
             drag = GetComponent<Rigidbody2D>().drag;
 
         }
         GetComponent<Rigidbody2D>().drag = 0;
+
+        // DOESNT WORK THIS WAY> background speed fucks things up
+        //Vector2 v = rBody.velocity;
+        //v *= 10;
+        //rBody.velocity.Set(v.x, v.y);
+
         isOiled = true;
         oilDirectionModifier = -1;
         Debug.Log("got oiled!");
@@ -997,19 +1005,21 @@ public class playerController : MonoBehaviour {
     {
         GetComponent<Rigidbody2D>().drag = drag;
         isOiled = false;
-        if (oilCount % 2 == 0)
-        {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, moveSpeed * oilForce / 2));
-                //* (hitPoints / 100f)));
-        }
-        else
-        {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -moveSpeed * oilForce / 2));
-                //* (hitPoints / 100f)));
-        }
-        oilCount = 1;
-        oilForce = 1.0f;
-        oilDirectionModifier = 1;
+
+        
+        //if (oilCount % 2 == 0)
+        //{
+        //    GetComponent<Rigidbody2D>().AddForce(new Vector2(0, moveSpeed * oilForce / 2));
+        //        //* (hitPoints / 100f)));
+        //}
+        //else
+        //{
+        //    GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -moveSpeed * oilForce / 2));
+        //        //* (hitPoints / 100f)));
+        //}
+        //oilCount = 1;
+        //oilForce = 1.0f;
+        //oilDirectionModifier = 1;
         Debug.Log("got unoiled!");
     }
 
@@ -1061,6 +1071,7 @@ public class playerController : MonoBehaviour {
                 isDestroyedTimer = 0;
             }
         }
+
     }
 
 }
