@@ -23,13 +23,15 @@ public class fallBackChecker : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
         if (isP1here)
         {
-            counter1 += Time.deltaTime;
+            counter1 += Time.deltaTime;            
             if (counter1 >= timeToLose)
             {
                 p1.GetComponent<playerController>().takeDamage(100);
-                Destroy(p1);
+                p1.GetComponent<fallOff>().fall();
+                //Destroy(p1);
             }
         }
 
@@ -39,7 +41,8 @@ public class fallBackChecker : MonoBehaviour {
             if (counter2 >= timeToLose)
             {
                 p2.GetComponent<playerController>().takeDamage(100);
-                Destroy(p2);
+                p2.GetComponent<fallOff>().fall();
+                //Destroy(p2);
             }
         }
 
@@ -49,7 +52,8 @@ public class fallBackChecker : MonoBehaviour {
             if (counter3 >= timeToLose)
             {
                 p3.GetComponent<playerController>().takeDamage(100);
-                Destroy(p3);
+                p3.GetComponent<fallOff>().fall();
+                //Destroy(p3);
             }
         }
 
@@ -59,7 +63,8 @@ public class fallBackChecker : MonoBehaviour {
             if (counter4 >= timeToLose)
             {
                 p4.GetComponent<playerController>().takeDamage(100);
-                Destroy(p4);
+                p4.GetComponent<fallOff>().fall();
+                //Destroy(p4);
             }
         }
 

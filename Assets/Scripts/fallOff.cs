@@ -37,7 +37,7 @@ public class fallOff : MonoBehaviour {
         fall();
     }
 
-    void fall()
+    public void fall()
     {
         GetComponent<arrangeLayers>().enabled = false;
         this.gameObject.layer = 16;
@@ -72,6 +72,7 @@ public class fallOff : MonoBehaviour {
                 manager.player1alive = false;
                 //manager.ghostToSpawn = 0;
                 Destroy(this.gameObject, 1.0f);
+                manager.playersCurrentlyAlive--;
             }
             else if ((GetComponent<playerController>().getPlayerNum() - 1) == 1)
             {
@@ -79,6 +80,7 @@ public class fallOff : MonoBehaviour {
                 manager.player2alive = false;
                 //manager.ghostToSpawn = 1;
                 Destroy(this.gameObject, 1.0f);
+                manager.playersCurrentlyAlive--;
             }
             else if ((GetComponent<playerController>().getPlayerNum() - 1) == 2)
             {
@@ -86,6 +88,7 @@ public class fallOff : MonoBehaviour {
                 manager.player3alive = false;
                 //manager.ghostToSpawn = 2;
                 Destroy(this.gameObject, 1.0f);
+                manager.playersCurrentlyAlive--;
             }
             else if ((GetComponent<playerController>().getPlayerNum() - 1) == 3)
             {
@@ -93,9 +96,9 @@ public class fallOff : MonoBehaviour {
                 manager.player4alive = false;
                 //manager.ghostToSpawn = 3;
                 Destroy(this.gameObject, 1.0f);
+                manager.playersCurrentlyAlive--;
             }
-        }
-        
+        }        
 
         this.enabled = false;
         

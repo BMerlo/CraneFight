@@ -40,6 +40,9 @@ public class Game_Manager : MonoBehaviour {
 
     private float timeToRespawn = 5;
 
+    //keep track of players alive
+    public int playersCurrentlyAlive;
+
     //reference to prefabs
     [SerializeField] GameObject player1respawn;
     [SerializeField] GameObject player2respawn;
@@ -72,7 +75,10 @@ public class Game_Manager : MonoBehaviour {
         player3alive = true;
         player4alive = true;
 
-        needsGhost = false;
+        //needsGhost = false;
+
+
+        playersCurrentlyAlive = 4;
 
         //lastGhostToSpawn = -1;
         //ghostToSpawn = -1;
@@ -100,7 +106,32 @@ public class Game_Manager : MonoBehaviour {
         //          tiePanel.SetActive(true);
         //      }
 
-       //m_timeElapsed += Time.deltaTime;
+        //m_timeElapsed += Time.deltaTime;
+
+        if (playersCurrentlyAlive == 1)
+        {
+            if (player1alive)
+            {
+                Debug.Log("PLAYER 1 WINS");
+                Time.timeScale = 0; //pause the game
+            }
+            else if (player2alive)
+            {
+                Debug.Log("PLAYER 2 WINS");
+                Time.timeScale = 0;
+            }
+            else if (player3alive)
+            {
+                Debug.Log("PLAYER 3 WINS");
+                Time.timeScale = 0;
+            }
+            else if (player4alive)
+            {
+                Debug.Log("PLAYER 4 WINS");
+                Time.timeScale = 0;
+            }
+
+        }
 
         if (!player1alive) {
             m_timeToSpawn1 += Time.deltaTime;
@@ -123,27 +154,35 @@ public class Game_Manager : MonoBehaviour {
 
         if (m_timeToSpawn1 > timeToRespawn) {
             GameObject player1r = Instantiate(player1respawn, new Vector3(0, 0, 0), Quaternion.identity);
+            player1r.GetComponent<playerController>().gameManager = this.gameObject; //prefabs not saving this unused variable for some reason, you have to hard code it
             player1alive = true;
-            m_timeToSpawn1 = 0;            
+            m_timeToSpawn1 = 0;
+            playersCurrentlyAlive++;
         }
 
         if (m_timeToSpawn2 > timeToRespawn)
         {
             GameObject player2r = Instantiate(player2respawn, new Vector3(0, 0, 0), Quaternion.identity);
+            player2r.GetComponent<playerController>().gameManager = this.gameObject;
             player2alive = true;
             m_timeToSpawn2 = 0;
+            playersCurrentlyAlive++;
         }
         if (m_timeToSpawn3 > timeToRespawn)
         {
             GameObject player3r = Instantiate(player3respawn, new Vector3(0, 0, 0), Quaternion.identity);
+            player3r.GetComponent<playerController>().gameManager = this.gameObject;
             player3alive = true;
             m_timeToSpawn3 = 0;
+            playersCurrentlyAlive++;
         }
-        if (m_timeToSpawn1 > timeToRespawn)
+        if (m_timeToSpawn4 > timeToRespawn)
         {
             GameObject player4r = Instantiate(player4respawn, new Vector3(0, 0, 0), Quaternion.identity);
+            player4r.GetComponent<playerController>().gameManager = this.gameObject;
             player4alive = true;
             m_timeToSpawn4 = 0;
+            playersCurrentlyAlive++;
         }
 
     }

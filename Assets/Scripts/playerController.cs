@@ -944,7 +944,7 @@ public class playerController : MonoBehaviour {
         //    hitPoints = 0;
         //}
 
-        playerHealth.updateHealthBar(hitPoints);
+        //playerHealth.updateHealthBar(hitPoints);
 
         if (hitPoints <= 0)
         {

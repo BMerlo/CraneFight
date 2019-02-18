@@ -151,7 +151,7 @@ public class ghostController : MonoBehaviour
                 color = Color.green;
                 break;
             case 2:
-                color = Color.magenta;
+                color = Color.red;
                 break;
             case 3:
                 color = Color.blue;

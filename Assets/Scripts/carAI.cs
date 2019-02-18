@@ -36,8 +36,6 @@ public class carAI : MonoBehaviour
         //lowerSpeed = 0;
         originalSpeed = Random.Range(minSpeed, maxSpeed);
 
-
-
         backGroundScript = FindObjectOfType<ScrollingBackGround>();
         backgroundSpeed = backGroundScript.getSpeed();
 
