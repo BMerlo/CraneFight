@@ -32,6 +32,7 @@ public class Outline : MonoBehaviour
     void Start()
     {
         ShowOutline = false;
+        vOutlineManager = Camera.main.GetComponent<OutlineManager>();
     }
 
     void StartOutline()
@@ -194,24 +195,24 @@ public class Outline : MonoBehaviour
         float range = 2.0f;
         float timer = 500;
 
-        playerController[] cars = FindObjectsOfType<playerController>(); //get player cars
-        for (int i = 0; i < 4; i++)
+        playerController[] cars = GameObject.FindObjectsOfType<playerController>();
+        foreach (playerController car in cars)
         {
-            if (Vector2.Distance(cars[i].transform.position, this.transform.position) <= range)
+            if (Vector2.Distance(car.transform.position, this.transform.position) <= range)
             {
-                if (cars[i].getPlayerNum() == 1)
+                if (car.getPlayerNum() == 1)
                 {
                     color = 0;//set color to yellow 
                 }
-                else if (cars[i].getPlayerNum() == 2)
+                else if (car.getPlayerNum() == 2)
                 {
                     color = 1;//set color to green 
                 }
-                else if (cars[i].getPlayerNum() == 3)
+                else if (car.getPlayerNum() == 3)
                 {
                     color = 3;//set color to pink
                 }
-                else if (cars[i].getPlayerNum() == 4)
+                else if (car.getPlayerNum() == 4)
                 {
                     color = 2;//set color to blue 
                 }

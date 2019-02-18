@@ -162,9 +162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6976f21db275fb449557e51c2c5e6f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MasterOutline: {fileID: 0}
+  MasterOutline: {fileID: 770534416422770575}
   color: 0
-  vOutlineType: 3
+  vOutlineType: 0
   eraseRenderer: 0
   ShowOutline: 1
   OutlineAllChild: 1
