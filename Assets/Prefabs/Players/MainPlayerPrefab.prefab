@@ -980,7 +980,7 @@ Transform:
   m_GameObject: {fileID: 1617817974706834}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children:
   - {fileID: 4872690871896996}
   - {fileID: 4137342508167274}
@@ -1005,11 +1005,10 @@ GameObject:
   - component: {fileID: 212344068995576862}
   - component: {fileID: 114964337360061496}
   - component: {fileID: 50254654541653292}
-  - component: {fileID: 61457500624391484}
   - component: {fileID: 95638600150682162}
   - component: {fileID: 114270323687789280}
-  - component: {fileID: 114850491023854556}
   - component: {fileID: 1288765496779725689}
+  - component: {fileID: 917334501}
   m_Layer: 12
   m_Name: YellowTruck
   m_TagString: Player
@@ -1100,10 +1099,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f09c527b827a0419e392cbc445e156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHealth: {fileID: 0}
   aimSpeed: 16
   playerNum: 0
-  moveSpeed: 100
-  evadeSpeed: 100
+  moveSpeed: 35
+  evadeSpeed: 80
   hasBoosted: 0
   r: {fileID: 1030074618824174}
   l: {fileID: 1071792865304264}
@@ -1126,6 +1126,7 @@ MonoBehaviour:
   upLarger: {fileID: 4981469485215136}
   rightLarger: {fileID: 4913710291580284}
   jumpTime: 0.5
+  isOiled: 0
   oilForce: 1
   oilForceTime: 0.5
   oilSpeed: 1.7
@@ -1149,6 +1150,7 @@ MonoBehaviour:
   throwCooldown: 0.5
   isDestroyedFreq: 1
   m_arrow: {fileID: 1938495078758672}
+  isSmelly: 0
 --- !u!50 &50254654541653292
 Rigidbody2D:
   serializedVersion: 4
@@ -1162,7 +1164,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 5
-  m_LinearDrag: 10
+  m_LinearDrag: 4
   m_AngularDrag: 500
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -1170,32 +1172,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &61457500624391484
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1623435752053756}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.04}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.42, y: 0.31}
-    newSize: {x: 0.16, y: 0.16}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.42, y: 0.22}
-  m_EdgeRadius: 0
 --- !u!95 &95638600150682162
 Animator:
   serializedVersion: 3
@@ -1229,18 +1205,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxY: 3.51
   minY: -3.91
---- !u!114 &114850491023854556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1623435752053756}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 047d9eed5a2858c4aaa9d27defb07f94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1288765496779725689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1253,6 +1217,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88f0c8e5ed8f3e741a9609404f20f917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!60 &917334501
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623435752053756}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 9742e985c1c45b146a4e54a56030751a, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.42, y: 0.31}
+    newSize: {x: 0.16, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.14803572, y: 0.07943391}
+      - {x: -0.17620003, y: 0.05521624}
+      - {x: -0.2111022, y: 0.021737745}
+      - {x: -0.21003367, y: -0.10666893}
+      - {x: -0.16222912, y: -0.15691487}
+      - {x: 0.15247168, y: -0.15707144}
+      - {x: 0.18398736, y: -0.1304595}
+      - {x: 0.21230847, y: -0.097003505}
+      - {x: 0.20941211, y: 0.03157772}
+      - {x: 0.17675538, y: 0.05603548}
+      - {x: 0.14582632, y: 0.08065366}
 --- !u!1 &1707827991027492
 GameObject:
   m_ObjectHideFlags: 0
