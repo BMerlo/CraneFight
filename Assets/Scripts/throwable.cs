@@ -19,8 +19,8 @@ public class throwable : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         lastFramePos = this.transform.position;
-        isPlayerPickupAble[3] = true;
-        isPlayerPickupAble[2] = true;
+        //isPlayerPickupAble[3] = true;
+        //isPlayerPickupAble[2] = true;
     }
 	
 	// Update is called once per frame
@@ -52,7 +52,7 @@ public class throwable : MonoBehaviour {
 
         }
 
-        highlightObject();
+        //highlightObject();    // Old Chris version of hilight
 	}
 
 

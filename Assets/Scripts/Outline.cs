@@ -188,12 +188,10 @@ public class Outline : MonoBehaviour
     {
         ShowHide_Outline(ShowOutline);
 
-    }
 
-    private void FixedUpdate()
-    {
+
         float range = 2.0f;
-        float timer = 500;
+        //float timer = 500;
 
         playerController[] cars = GameObject.FindObjectsOfType<playerController>();
         foreach (playerController car in cars)
@@ -210,14 +208,19 @@ public class Outline : MonoBehaviour
                 }
                 else if (car.getPlayerNum() == 3)
                 {
-                    color = 3;//set color to pink
+                    color = 2;//set color to pink
                 }
                 else if (car.getPlayerNum() == 4)
                 {
-                    color = 2;//set color to blue 
+                    color = 3;//set color to blue 
                 }
             }
 
         }
+    }
+
+    private void FixedUpdate()
+    {
+        
     }
 }

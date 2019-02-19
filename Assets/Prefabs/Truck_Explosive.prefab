@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 114719995057325028}
   - component: {fileID: 114853983172960584}
   - component: {fileID: 3486081034243663606}
+  - component: {fileID: 5450031675294722621}
   m_Layer: 0
   m_Name: Truck_Explosive
   m_TagString: Carrier
@@ -228,6 +229,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88f0c8e5ed8f3e741a9609404f20f917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5450031675294722621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300860513420610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6976f21db275fb449557e51c2c5e6f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MasterOutline: {fileID: 5450031675294722621}
+  color: 0
+  vOutlineType: 0
+  eraseRenderer: 0
+  ShowOutline: 1
+  OutlineAllChild: 1
+  originalLayer: 0
+  originalMaterial: {fileID: 0}
 --- !u!1 &6204844996427122648
 GameObject:
   m_ObjectHideFlags: 0

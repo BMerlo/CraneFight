@@ -28,7 +28,7 @@ public class CraneZone : MonoBehaviour {
         else if (collision.transform.tag == "Carrier")
         {
             carrier2pickUpFrom = collision.gameObject;
-            //carrier2pickUpFrom.GetComponent<Outline>().ShowOutline = true;//show outline when in range
+            carrier2pickUpFrom.GetComponent<Outline>().ShowOutline = true;//show outline when in range
         }
     }
 
@@ -42,7 +42,7 @@ public class CraneZone : MonoBehaviour {
         }
         else if (carrier2pickUpFrom == collision.gameObject)
         {
-            // carrier2pickUpFrom.GetComponent<Outline>().ShowOutline = false;//hide the outline when pick up when not in range
+             carrier2pickUpFrom.GetComponent<Outline>().ShowOutline = false;//hide the outline when pick up when not in range
             carrier2pickUpFrom = null;
         }
     }

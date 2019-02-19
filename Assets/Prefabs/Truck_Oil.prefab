@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1164686690122672, guid: 2d84caf13f1197a42ae2549c9e00ea62, type: 3}
       propertyPath: m_Name
-      value: Truck_Oil_Variant
+      value: Truck_Oil
       objectReference: {fileID: 0}
     - target: {fileID: 4955327324739372, guid: 2d84caf13f1197a42ae2549c9e00ea62, type: 3}
       propertyPath: m_LocalPosition.x

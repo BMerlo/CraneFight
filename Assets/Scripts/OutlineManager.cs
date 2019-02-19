@@ -16,10 +16,10 @@ public class OutlineManager : MonoBehaviour
     private float Intensity = 1f;
 
     //initialize all the color here
-    private Color lineColor0 = Color.yellow;
-    private Color lineColor1 = Color.green;
-    private Color lineColor2 = Color.blue;
-    private Color lineColor3 = Color.red + Color.blue;
+    private Color lineColor0 = Color.green;
+    private Color lineColor1 = Color.magenta;
+    private Color lineColor2 = Color.red;
+    private Color lineColor3 = Color.black;
     private bool darkOutlines = false;
     private float alphaCutoff = .5f;
     private float vWidth = 0f;
