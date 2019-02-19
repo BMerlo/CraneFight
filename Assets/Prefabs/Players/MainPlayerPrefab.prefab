@@ -1010,7 +1010,7 @@ GameObject:
   - component: {fileID: 1288765496779725689}
   - component: {fileID: 917334501}
   m_Layer: 12
-  m_Name: YellowTruck
+  m_Name: MainPlayerPrefab
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1431,7 +1431,7 @@ Transform:
   m_GameObject: {fileID: 1938495078758672}
   m_LocalRotation: {x: 0, y: -0, z: 0.7071068, w: -0.7071068}
   m_LocalPosition: {x: 0, y: -0.04, z: 0}
-  m_LocalScale: {x: 0.08571428, y: 0.08571428, z: 1}
+  m_LocalScale: {x: 0.13, y: 0.13, z: 1}
   m_Children: []
   m_Father: {fileID: 4817705447390464}
   m_RootOrder: 8

@@ -764,6 +764,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5472270730612605908, guid: b77a6e0229f085747a94cc861571ec0b,
+        type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 1565991407}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b77a6e0229f085747a94cc861571ec0b, type: 3}
 --- !u!1001 &352483224
@@ -1118,7 +1123,7 @@ GameObject:
   - component: {fileID: 544523308}
   - component: {fileID: 544523307}
   m_Layer: 5
-  m_Name: pur
+  m_Name: bla
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1157,7 +1162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1468,7 +1473,7 @@ GameObject:
   - component: {fileID: 721252945}
   - component: {fileID: 721252944}
   m_Layer: 5
-  m_Name: gre
+  m_Name: red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1507,14 +1512,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 54e7a7e8d7443c84da2ea253a9d7dc2e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 79753f29a804e6947b2c169f50c828c5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1604,6 +1609,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 426955269363669471, guid: 2261e49bdd976464983ccb40992348d7,
+        type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 1284253815}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2261e49bdd976464983ccb40992348d7, type: 3}
 --- !u!1 &1036599781
@@ -2004,7 +2014,7 @@ GameObject:
   - component: {fileID: 1174225956}
   - component: {fileID: 1174225955}
   m_Layer: 5
-  m_Name: blu
+  m_Name: pur
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2050,7 +2060,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: ee546099468617248aa4e3bb26ee0489, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aeb3d9f3bb26aa6439061953cc2dd89e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3270,7 +3280,7 @@ GameObject:
   - component: {fileID: 1896211957}
   - component: {fileID: 1896211956}
   m_Layer: 5
-  m_Name: yel
+  m_Name: gre
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3316,7 +3326,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 79753f29a804e6947b2c169f50c828c5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 54e7a7e8d7443c84da2ea253a9d7dc2e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3760,6 +3770,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7464490846081373734, guid: 0dfd371af78309148a24c10e6cf84974,
+        type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 1635789380}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dfd371af78309148a24c10e6cf84974, type: 3}
 --- !u!1001 &3591048251079783954
@@ -3827,6 +3842,16 @@ PrefabInstance:
     - target: {fileID: 3584819595467379020, guid: f191b9b7b26201a499147c151dc04c31,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3474145255904569460, guid: f191b9b7b26201a499147c151dc04c31,
+        type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 2049960824}
+    - target: {fileID: 3578154767847970140, guid: f191b9b7b26201a499147c151dc04c31,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

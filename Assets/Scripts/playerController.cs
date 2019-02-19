@@ -104,9 +104,12 @@ public class playerController : MonoBehaviour {
     float smellRadius = 3.5f;
     public bool isSmelly;
 
+    PolygonCollider2D myCollider;
+
     //[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
     // Use this for initialization
     void Start() {
+        myCollider = GetComponent<PolygonCollider2D>();
         rBody = GetComponent<Rigidbody2D>();
 
         switch (playerNum)
@@ -256,16 +259,16 @@ public class playerController : MonoBehaviour {
         }
 
         //Debug.Log(getOwnAxis("Trigger"));
-        if (!isJumping && isCarrying && getOwnAxis("Trigger") < 0.25f && !hasThrown)    // Charge the attack?
+        if (!isJumping && isCarrying && getOwnAxis("Trigger") < 0.25f && !hasThrown)    // Charge the attack?   NO MORE CHARGING
         {
-            timeCharging += Time.deltaTime;
+            //timeCharging += Time.deltaTime;
             isCharging = true;
-            if (m_arrow.transform.localScale.y < 0.3 && timeCharging > minChargeTime)
-                m_arrow.transform.localScale += new Vector3(0f, 0.01f, 0);
+            //if (m_arrow.transform.localScale.y < 0.3 && timeCharging > minChargeTime)
+            //    m_arrow.transform.localScale += new Vector3(0f, 0.01f, 0);
         }
         else if (!isJumping && isCarrying && isCharging && !hasThrown)
         {
-            chargingForce();
+            //chargingForce();  // NO MORE CHARGING
             throwObj();
         }
         else if (isCarrying == false && !hasJumped && !isJumping && getOwnButtonDown("A"))
@@ -273,7 +276,8 @@ public class playerController : MonoBehaviour {
         {
             isJumping = true;
             myAnim.SetBool("IsJumping", true);
-            GetComponent<BoxCollider2D>().enabled = false;
+            //GetComponent<BoxCollider2D>().enabled = false;
+            myCollider.enabled = false;
             //GetComponent<SpriteRenderer>().enabled = false;
             jumpTimer = 0;
         }
@@ -286,7 +290,8 @@ public class playerController : MonoBehaviour {
                 isJumping = false;
                 hasJumped = true;
                 myAnim.SetBool("IsJumping", false);
-                GetComponent<BoxCollider2D>().enabled = true;
+                //GetComponent<BoxCollider2D>().enabled = true;
+                myCollider.enabled = true;
                 //GetComponent<SpriteRenderer>().enabled = true;
                 //takeDamage(jumpDamage);
             }
@@ -857,8 +862,8 @@ public class playerController : MonoBehaviour {
             }
 
             //objPicked.GetComponent<throwable>().setDistance(distance);
-            objPicked.GetComponent<Rigidbody2D>().AddForce(dir * throwForce);
-
+            //objPicked.GetComponent<Rigidbody2D>().AddForce(dir * throwForce);
+            objPicked.GetComponent<Rigidbody2D>().AddForce(dir * maxThrowForce);    // NOW< WE ALWAYS THROW WITH MAX FORCE
 
             objPicked = null;
             isCarrying = false;
@@ -944,12 +949,17 @@ public class playerController : MonoBehaviour {
         //    hitPoints = 0;
         //}
 
-       // playerHealth.updateHealthBar(hitPoints);
+        playerHealth.updateHealthBar(hitPoints);
 
         if (hitPoints <= 0)
         {
             Destroy(this.gameObject);
         }
+    }
+
+    public void setHealth(float value)
+    {
+        playerHealth.updateHealthBar(value);
     }
 
     public void getHealth(float amount)

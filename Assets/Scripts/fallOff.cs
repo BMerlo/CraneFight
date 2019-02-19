@@ -6,7 +6,8 @@ public class fallOff : MonoBehaviour {
     [SerializeField] float maxY = 3.51f;
     [SerializeField] float minY = -3.91f;
 
-    Game_Manager manager;    
+    Game_Manager manager;
+    bool isFalling = false;
 
 	// Use this for initialization
 	void Start () {
@@ -16,15 +17,19 @@ public class fallOff : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //Debug.Log(this.transform.position.x);
-        if (this.transform.position.y > maxY)
+        if (!isFalling)
         {
-            manager.needsGhost = true;
-            fallFromTop();
+            if (this.transform.position.y > maxY)
+            {
+                manager.needsGhost = true;
+                fallFromTop();
+            }
+            else if (this.transform.position.y < minY)
+            {
+                fall();
+            }
         }
-        else if (this.transform.position.y < minY)
-        {               
-                fall();            
-        }
+        
         
                 
 	}
@@ -39,15 +44,12 @@ public class fallOff : MonoBehaviour {
 
     void fall()
     {
+        isFalling = true;
+
         GetComponent<arrangeLayers>().enabled = false;
         this.gameObject.layer = 16;
 
-        Debug.Log("Falling!");        
-        if (GetComponent<playerController>())
-        {
-            GetComponent<playerController>().takeDamage(100);
-            GetComponent<playerController>().enabled = false;
-        }
+
         if (GetComponent<BoxCollider2D>())
         {
             GetComponent<BoxCollider2D>().enabled = false;
@@ -94,10 +96,25 @@ public class fallOff : MonoBehaviour {
                 //manager.ghostToSpawn = 3;
                 Destroy(this.gameObject, 1.0f);
             }
+
+            GetComponent<playerController>().setHealth(0);
+            GetComponent<playerController>().enabled = false;
         }
         
 
-        this.enabled = false;
+        //this.enabled = false;
         
     }
+
+
+    //IEnumerator playerFall()
+    //{
+    //    Debug.Log("playerfall");
+    //    yield return new WaitForSeconds(0.9f);
+    //    Debug.Log("playerfall2");
+    //    GetComponent<playerController>().takeDamage(100);
+
+    //}
+
+    
 }
