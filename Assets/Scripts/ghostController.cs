@@ -145,16 +145,16 @@ public class ghostController : MonoBehaviour
         switch (i)
         {
             case 0:
-                color = Color.yellow;
-                break;
-            case 1:
                 color = Color.green;
                 break;
+            case 1:
+                color = Color.blue;
+                break;
             case 2:
-                color = Color.magenta;
+                color = Color.red;
                 break;
             case 3:
-                color = Color.blue;
+                color = Color.black;
                 break;
             default:
                 break;
