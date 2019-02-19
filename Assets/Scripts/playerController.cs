@@ -955,7 +955,7 @@ public class playerController : MonoBehaviour {
 
         if (hitPoints <= 0)
         {
-            myManager.spawnGhost(getPlayerNum());
+            myManager.spawnGhost(getPlayerNum() - 1);
             Destroy(this.gameObject);
         }
     }
