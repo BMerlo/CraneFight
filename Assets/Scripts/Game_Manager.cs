@@ -10,7 +10,7 @@ public class Game_Manager : MonoBehaviour {
     [SerializeField] GameObject player3;
     [SerializeField] GameObject player4;
 
-    //[SerializeField] GameObject winPanel;
+    [SerializeField] GameObject winPanel;
     //[SerializeField] GameObject tiePanel;
 
     [SerializeField] GameObject[] numberOfPlayers;
@@ -19,6 +19,8 @@ public class Game_Manager : MonoBehaviour {
     //public Transform player2Location;
     //public Transform player3Location;
     //public Transform player4Location;
+
+    public int playersCurrentlyAlive;
 
     [SerializeField] Vector3 locationToSpawn;
 
@@ -32,13 +34,13 @@ public class Game_Manager : MonoBehaviour {
 
     public bool needsGhost;
 
-
     private float m_timeToSpawn1;
     private float m_timeToSpawn2;
     private float m_timeToSpawn3;
     private float m_timeToSpawn4;
 
     private float timeToRespawn = 5;
+    
 
     //reference to prefabs
     [SerializeField] GameObject player1respawn;
@@ -49,6 +51,7 @@ public class Game_Manager : MonoBehaviour {
     private float m_timeElapsed;
 
     [SerializeField] GameObject ghostPrefab;
+    private Text winnerText;
 
     public enum PlayerNum
     {
@@ -67,12 +70,18 @@ public class Game_Manager : MonoBehaviour {
         //player3Location;
         //player4Location;
 
+        winnerText = winPanel.GetComponentInChildren<Text>();
+
+        winnerText.text = "Winner is..."; //added for debugging purposes 
+
         player1alive = true;
         player2alive = true;
         player3alive = true;
         player4alive = true;
 
         needsGhost = false;
+
+        playersCurrentlyAlive = 4;
 
         //lastGhostToSpawn = -1;
         //ghostToSpawn = -1;
@@ -100,7 +109,40 @@ public class Game_Manager : MonoBehaviour {
         //          tiePanel.SetActive(true);
         //      }
 
-       //m_timeElapsed += Time.deltaTime;
+        //m_timeElapsed += Time.deltaTime;
+
+        if (playersCurrentlyAlive == 1)
+        {
+            if (player1alive)
+            {
+                Debug.Log("PLAYER 1 WINS");
+                winPanel.SetActive(true);
+                winnerText.text = "Winner is Player1";
+                Time.timeScale = 0; //pause the game
+            }
+            else if (player2alive)
+            {
+                Debug.Log("PLAYER 2 WINS");
+                winPanel.SetActive(true);
+                winnerText.text = "Winner is Player2";
+                Time.timeScale = 0;
+            }
+            else if (player3alive)
+            {
+                Debug.Log("PLAYER 3 WINS");
+                winPanel.SetActive(true);
+                winnerText.text = "Winner is Player3";
+                Time.timeScale = 0;
+            }
+            else if (player4alive)
+            {
+                Debug.Log("PLAYER 4 WINS");
+                winPanel.SetActive(true);
+                winnerText.text = "Winner is Player4";
+                Time.timeScale = 0;
+            }
+
+        }
 
         if (!player1alive) {
             m_timeToSpawn1 += Time.deltaTime;
@@ -124,7 +166,8 @@ public class Game_Manager : MonoBehaviour {
         if (m_timeToSpawn1 > timeToRespawn) {
             GameObject player1r = Instantiate(player1respawn, new Vector3(0, 0, 0), Quaternion.identity);
             player1alive = true;
-            m_timeToSpawn1 = 0;            
+            m_timeToSpawn1 = 0;
+            playersCurrentlyAlive++;
         }
 
         if (m_timeToSpawn2 > timeToRespawn)
@@ -132,18 +175,21 @@ public class Game_Manager : MonoBehaviour {
             GameObject player2r = Instantiate(player2respawn, new Vector3(0, 0, 0), Quaternion.identity);
             player2alive = true;
             m_timeToSpawn2 = 0;
+            playersCurrentlyAlive++;
         }
         if (m_timeToSpawn3 > timeToRespawn)
         {
             GameObject player3r = Instantiate(player3respawn, new Vector3(0, 0, 0), Quaternion.identity);
             player3alive = true;
             m_timeToSpawn3 = 0;
+            playersCurrentlyAlive++;
         }
-        if (m_timeToSpawn1 > timeToRespawn)
+        if (m_timeToSpawn4 > timeToRespawn)
         {
             GameObject player4r = Instantiate(player4respawn, new Vector3(0, 0, 0), Quaternion.identity);
             player4alive = true;
             m_timeToSpawn4 = 0;
+            playersCurrentlyAlive++;
         }
 
     }
@@ -152,6 +198,7 @@ public class Game_Manager : MonoBehaviour {
     {
         GameObject obj = Instantiate(ghostPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         obj.GetComponent<ghostController>().setPlayerNum(num);
+        playersCurrentlyAlive--;
     }
 
 }
