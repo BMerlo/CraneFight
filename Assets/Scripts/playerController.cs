@@ -69,7 +69,8 @@ public class playerController : MonoBehaviour {
     [SerializeField] GameObject craneActual;
     [SerializeField] Sprite craneL, craneLU, craneU, craneRU, craneR, craneRD, craneD, craneLD;
 
-    public GameObject gameManager;
+    //public GameObject gameManager;
+    Game_Manager myManager;
 
     private Rigidbody2D m_rb;
 
@@ -109,6 +110,7 @@ public class playerController : MonoBehaviour {
     //[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
     // Use this for initialization
     void Start() {
+        myManager = FindObjectOfType<Game_Manager>();
         myCollider = GetComponent<PolygonCollider2D>();
         rBody = GetComponent<Rigidbody2D>();
 
@@ -940,7 +942,7 @@ public class playerController : MonoBehaviour {
     {
         //stun(amount * 0.1f);
         hitPoints -= amount;
-
+        
         //if(amount >0)   //just in case?
         //regenCounter = regenDelay;
 
@@ -953,6 +955,7 @@ public class playerController : MonoBehaviour {
 
         if (hitPoints <= 0)
         {
+            myManager.spawnGhost(getPlayerNum());
             Destroy(this.gameObject);
         }
     }
