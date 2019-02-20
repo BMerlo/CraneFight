@@ -28,6 +28,7 @@ public class Outline : MonoBehaviour
     [HideInInspector]
     public Material originalMaterial;
 
+    bool[] inPlayerRange = new bool[]{false,false,false,false};
 
     void Start()
     {
@@ -190,37 +191,55 @@ public class Outline : MonoBehaviour
 
 
 
-        float range = 2.0f;
-        //float timer = 500;
+        //float range = 2.0f;
+        ////float timer = 500;
 
-        playerController[] cars = GameObject.FindObjectsOfType<playerController>();
-        foreach (playerController car in cars)
-        {
-            if (Vector2.Distance(car.transform.position, this.transform.position) <= range)
-            {
-                if (car.getPlayerNum() == 1)
-                {
-                    color = 0;//set color to yellow 
-                }
-                else if (car.getPlayerNum() == 2)
-                {
-                    color = 1;//set color to green 
-                }
-                else if (car.getPlayerNum() == 3)
-                {
-                    color = 2;//set color to pink
-                }
-                else if (car.getPlayerNum() == 4)
-                {
-                    color = 3;//set color to blue 
-                }
-            }
+        //playerController[] cars = GameObject.FindObjectsOfType<playerController>();
+        //foreach (playerController car in cars)
+        //{
+        //    if (Vector2.Distance(car.transform.position, this.transform.position) <= range)
+        //    {
+        //        if (car.getPlayerNum() == 1)
+        //        {
+        //            color = 0;//set color to yellow 
+        //        }
+        //        else if (car.getPlayerNum() == 2)
+        //        {
+        //            color = 1;//set color to green 
+        //        }
+        //        else if (car.getPlayerNum() == 3)
+        //        {
+        //            color = 2;//set color to pink
+        //        }
+        //        else if (car.getPlayerNum() == 4)
+        //        {
+        //            color = 3;//set color to blue 
+        //        }
+        //    }
 
-        }
+        //}
     }
 
     private void FixedUpdate()
     {
         
+    }
+
+    public void updatePlayerRange(int playerNum, bool isHere)
+    {
+        inPlayerRange[playerNum - 1] = isHere;
+
+        if (isHere && !CanShow)
+        {
+            StartOutline();
+            Initialise();
+            ShowHide_Outline(true);
+            ShowOutline = true;
+        }
+        else if (!inPlayerRange[0] && !inPlayerRange[1] && !inPlayerRange[2] && !inPlayerRange[3])
+        {
+            ShowHide_Outline(false);
+            ShowOutline = false;
+        }
     }
 }
