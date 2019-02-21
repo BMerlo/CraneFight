@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Tentacle6Lane
+  m_Name: ShadowTentacle6Lane
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,13 +20,13 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: ac71d66aacb73ab4692fba8f31cd99a0, type: 3}
+      value: {fileID: 21300000, guid: 32e919f1691000b42ab79aa5f12a93fd, type: 3}
     - time: 0.083333336
-      value: {fileID: 21300000, guid: c1c939861984d6147aa06f6076416930, type: 3}
+      value: {fileID: 21300000, guid: 9642fd19cc090e94b909f28f6f62047d, type: 3}
     - time: 0.16666667
-      value: {fileID: 21300000, guid: 7f71cbfb4a675c64db32ba6cfd560eff, type: 3}
+      value: {fileID: 21300000, guid: ecb8485af34420446810ff9407e976c7, type: 3}
     - time: 0.25
-      value: {fileID: 21300000, guid: 12431ac4f3c236f44aef664f0bb81e5e, type: 3}
+      value: {fileID: 21300000, guid: 9a5d4f7d270172246bc1b63be80454ba, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -46,10 +46,10 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: ac71d66aacb73ab4692fba8f31cd99a0, type: 3}
-    - {fileID: 21300000, guid: c1c939861984d6147aa06f6076416930, type: 3}
-    - {fileID: 21300000, guid: 7f71cbfb4a675c64db32ba6cfd560eff, type: 3}
-    - {fileID: 21300000, guid: 12431ac4f3c236f44aef664f0bb81e5e, type: 3}
+    - {fileID: 21300000, guid: 32e919f1691000b42ab79aa5f12a93fd, type: 3}
+    - {fileID: 21300000, guid: 9642fd19cc090e94b909f28f6f62047d, type: 3}
+    - {fileID: 21300000, guid: ecb8485af34420446810ff9407e976c7, type: 3}
+    - {fileID: 21300000, guid: 9a5d4f7d270172246bc1b63be80454ba, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

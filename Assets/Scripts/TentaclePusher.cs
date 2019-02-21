@@ -10,6 +10,7 @@ public class TentaclePusher : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("pusher is here~");
         findExplosiones();
         Destroy(this.gameObject);
     }
@@ -19,7 +20,7 @@ public class TentaclePusher : MonoBehaviour
     {
         //counter += Time.deltaTime;
 
-        ////every 2 seconds will push other objects
+        ////every 2 seconds will push other objects NO WE ONLY DO IT ONCE
         //if (counter >= 2)
         //{
         //    findExplosiones();
@@ -38,18 +39,19 @@ public class TentaclePusher : MonoBehaviour
         {
             Rigidbody2D targetRigidbody = colliders[i].GetComponent<Rigidbody2D>();
 
-            //Debug.Log("Collided with " + targetRigidbody.gameObject);
+            //Debug.Log("PUSHER Collided with " + targetRigidbody.gameObject);
 
             if (!targetRigidbody)
                 continue;
 
-            AddExplosionForce(targetRigidbody, m_ExplosionForce, transform.position, ExplosionRadius);
+            float perc = Vector2.Distance(transform.position, targetRigidbody.transform.position) / ExplosionRadius;
+            AddExplosionForce(targetRigidbody, m_ExplosionForce, transform.position, perc);
         }
     }
 
-    public static void AddExplosionForce(Rigidbody2D body, float explosionForce, Vector3 explosionPosition, float explosionRadius)
+    public static void AddExplosionForce(Rigidbody2D body, float explosionForce, Vector3 explosionPosition, float perc)
     {
         Vector3 dir = body.transform.position - explosionPosition;
-        body.AddForce(dir.normalized * explosionForce);
+        body.AddForce(dir.normalized * explosionForce * perc);
     }
 }

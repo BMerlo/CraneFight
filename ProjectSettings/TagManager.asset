@@ -27,7 +27,7 @@ TagManager:
   - P4
   - Falling
   - Outline
-  - 
+  - Air
   - 
   - 
   - 
@@ -47,6 +47,12 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 2988018569
+    locked: 0
+  - name: Tentacle
+    uniqueID: 2162791245
     locked: 0
   - name: Air
     uniqueID: 558978919
