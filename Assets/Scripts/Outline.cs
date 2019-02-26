@@ -28,8 +28,9 @@ public class Outline : MonoBehaviour
     [HideInInspector]
     public Material originalMaterial;
 
-    bool[] inPlayerRange = new bool[]{false,false,false,false};
-
+    bool[] inPlayerRange = new bool[] { false, false, false, false };
+    float timerForColorChange;
+    bool collideWithMore = false;
     void Start()
     {
         ShowOutline = false;
@@ -222,24 +223,77 @@ public class Outline : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
+        // start timer
+        if (collideWithMore)
+        {
+            timerForColorChange++;
+            changeColor();
+        }
     }
 
     public void updatePlayerRange(int playerNum, bool isHere)
     {
         inPlayerRange[playerNum - 1] = isHere;
-
         if (isHere && !CanShow)
         {
             StartOutline();
             Initialise();
             ShowHide_Outline(true);
             ShowOutline = true;
+            collideWithMore = true;
         }
         else if (!inPlayerRange[0] && !inPlayerRange[1] && !inPlayerRange[2] && !inPlayerRange[3])
         {
             ShowHide_Outline(false);
             ShowOutline = false;
+            collideWithMore = false;
+        }
+
+
+
+    }
+
+    public void changeColor()
+    {
+        //change color 
+        int value = 0;
+        int[] index = new int[inPlayerRange.Length];//store the player number into a new array
+        int currColor = color;//get the current color
+        //add the indices in the array that is true to another.
+        for (int i = 0; i < inPlayerRange.Length; i++)
+        {
+            if (inPlayerRange[i] == true)
+            {
+                if (index[value] != i)
+                {
+                    index[value] = i;
+                    value++;
+                }
+            }
+
+        }
+        //remove and shift index array
+        for (int i = 0; i < index.Length; i++)
+        {
+            if (inPlayerRange[i] == false)
+            {
+                if (index[value] == i)
+                {
+                    for (int j = value; j < index.Length - 1; j++)
+                        index[j] = index[j + 1];
+                    value--;
+                }
+            }
+        }
+        //cycle through color using index array
+        if (timerForColorChange > 50)
+        {
+            color = index[currColor];
+            if (currColor == value) //this is what you named the last int
+                currColor = 0;
+            else
+                currColor++;
+            timerForColorChange = 0;
         }
     }
 }
