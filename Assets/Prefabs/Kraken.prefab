@@ -97,3 +97,4 @@ MonoBehaviour:
   maxTime: 10
   randomTime: 0
   top: 0
+  flag: 0

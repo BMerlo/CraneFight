@@ -13,10 +13,11 @@ public class Tentacle : MonoBehaviour {
     bool hasPushed = false;
     float pushForce = 700;
     float pushWait = 0.3f;
+    bool isHit = false;
+    float retractSpeed = 0.1f;
 
     [SerializeField] Animator tentacleAnim;
-
-
+    
     TentaclePusher[] pushers;
     
     void Start () {
@@ -61,11 +62,12 @@ public class Tentacle : MonoBehaviour {
                 GetComponent<PolygonCollider2D>().isTrigger = false;
                 hasAttacked = true;
             }
-
         }
 
-
-
+        if(isHit)
+        {
+            this.transform.Translate(0, retractSpeed, 0);
+        }
 
         if (reverse) { 
         this.transform.Translate(-dir * speed);
@@ -77,8 +79,20 @@ public class Tentacle : MonoBehaviour {
         //if outside screen, destroy automatically
         if (transform.position.x < -10)
             Destroy(gameObject);
-        
     }
+    
+    // void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    Debug.Log("EXPLOSION HIT TENTACLE" + isHit);
+    //    Explosion e = collision.GetComponent<Explosion>();
+    //    Debug.Log(e.name + "is hit@@");
+    //    if (e != null)
+    //    {
+    //        retreat();
+
+    //    }
+    //    Debug.Log("EXPLOSION HIT TENTACLE2222" + isHit);
+    //}
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -106,13 +120,9 @@ public class Tentacle : MonoBehaviour {
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void retreat()
     {
-        //if (collision.transform.tag == "AICar")
-        if (collision.transform.GetComponent<carAI>())
-        {
-            Destroy(collision.gameObject);
-        }
+        isHit = true;
+        Debug.Log("TENTACLEHIT");
     }
-
 }
