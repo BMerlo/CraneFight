@@ -46,20 +46,30 @@ public class Explosion : MonoBehaviour {
         }
     }
 
-
     void OnTriggerEnter2D(Collider2D collision)
-    { 
-        t = collision.gameObject.GetComponent<Tentacle>();
-        Debug.Log(t.name + "is the tentacle");
+    {
+        Debug.Log(collision.GetComponent<Tentacle>() + "is the tentacle"); // error only outputs "is the tentacle"
 
-        if (collision.gameObject.GetComponent<Tentacle>() != null)
+        if (collision.GetComponent<Tentacle>())
         {
-            Debug.Log(t.name + "is hit");
-
             collision.GetComponent<Tentacle>().retreat();
-
         }
     }
+
+    //void OnTriggerEnter2D(Collider2D collision)
+    //{ 
+    //    t = collision.gameObject.GetComponent<Tentacle>();
+    //    Debug.Log(t.name + "is the tentacle");
+
+    //    if (collision.gameObject.GetComponent<Tentacle>() != null)
+    //    {
+    //        Debug.Log(t.name + "is hit");
+
+    //        collision.GetComponent<Tentacle>().retreat();
+
+    //    }
+    //}
+
     //void OnTriggerEnter2D(Collider2D collision)
     //{
     //    Debug.Log("Tentacle hit!!!!!" + collision.GetComponent<Tentacle>());
