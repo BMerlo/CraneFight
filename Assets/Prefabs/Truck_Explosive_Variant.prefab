@@ -64,5 +64,25 @@ PrefabInstance:
       propertyPath: isReverse
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7590177457760720276, guid: 1436af8cafdab554c813a69f5c54c800,
+        type: 3}
+      propertyPath: size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8753919072768945761, guid: 1436af8cafdab554c813a69f5c54c800,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8753919072768945761, guid: 1436af8cafdab554c813a69f5c54c800,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8753919072768945761, guid: 1436af8cafdab554c813a69f5c54c800,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1436af8cafdab554c813a69f5c54c800, type: 3}
