@@ -26,11 +26,11 @@ public class Explosion : MonoBehaviour {
 
         if (collision.GetComponent<Rigidbody2D>() && !collision.GetComponent<oil>())
         {
-            Debug.Log(collision.gameObject.transform.position);
+            //Debug.Log(collision.gameObject.transform.position);
 
             Vector3 dir = collision.gameObject.transform.position - this.transform.position;
             dir.Normalize();
-            Debug.Log(dir);
+            //Debug.Log(dir);
             collision.GetComponent<Rigidbody2D>().AddForce(pushForce * dir);
             //   * (1f / Vector3.Distance(this.transform.position, collision.gameObject.transform.position)));
 
@@ -44,17 +44,21 @@ public class Explosion : MonoBehaviour {
         {
             collision.GetComponent<oil>().burn();
         }
+        //else if (collision.GetComponent<Tentacle>())
+        //{
+        //    Debug.Log("TENTACLE HIT!!!!!!!!!!!!!!!!!!!!!");
+        //}
     }
 
 
     void OnTriggerEnter2D(Collider2D collision)
     { 
-        t = collision.gameObject.GetComponent<Tentacle>();
-        Debug.Log(t.name + "is the tentacle");
+        //t = collision.gameObject.GetComponent<Tentacle>();
+        Debug.Log(collision.gameObject + "--------------------------------");
 
         if (collision.gameObject.GetComponent<Tentacle>() != null)
         {
-            Debug.Log(t.name + "is hit");
+            //Debug.Log(t.name + "is hit");
 
             collision.GetComponent<Tentacle>().retreat();
 
