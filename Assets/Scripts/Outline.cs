@@ -162,10 +162,10 @@ public class Outline : MonoBehaviour
         CanShow = vChoice;
     }
 
-    void OnDisable()
-    {
-        vOutlineManager.RemoveOutline(this);
-    }
+    //void OnDisable()
+    //{
+    //    vOutlineManager.RemoveOutline(this);
+    //}
 
     //ONLY work on mouseover type
     void OnMouseOver()
