@@ -46,6 +46,30 @@ public class spawner : MonoBehaviour {
             }
     }
 
+    public void ChangeMaxCars(int ammount) {
+        Debug.Log("Max ammount of cars changed by +" + ammount);
+        MAX_CARS += ammount;
+    }
+
+    public void ChangeMinimum(float ammount) {
+        Debug.Log("min time of cars changed by" + ammount);
+        minTime -= ammount;
+        if (minTime < 0) {
+            minTime = 0;
+        }
+    }
+
+    public void ChangeMaximum(float ammount)
+    {
+        Debug.Log("max time of cars changed by" + ammount);
+        maxTime -= ammount;
+
+        if (maxTime < 2) //just in case cap gives issues
+        {
+            maxTime = 2;
+        }
+    }
+
     int countAIvehicles()
     {
         carAI[] cars = FindObjectsOfType<carAI>();
