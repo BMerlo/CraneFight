@@ -62,8 +62,7 @@ public class Tentacle : MonoBehaviour {
                 GetComponent<PolygonCollider2D>().isTrigger = false;
                 hasAttacked = true;
                 hasAttacked = true;
-
-                isHit = true;
+                retreat();//TEMPORARY SPOT TO CHECK FOR ANIMATIIONSz
             }
         }
 
@@ -71,12 +70,12 @@ public class Tentacle : MonoBehaviour {
         {
            // this.transform.Translate(0, retractSpeed, 0);
             Debug.Log("Tentacle retracting away-------");
-
-            transform.GetChild(0).gameObject.SetActive(false);
-            GetComponent<PolygonCollider2D>().enabled = false;
-            tentacleAnim.SetBool("writhing", isHit);
-            //tentacleAnim.SetBool("hitWithExplosive", isHit);
-
+            tentacleAnim.SetBool("writhing", isHit); //wiggle animation // isHit = true
+            transform.GetChild(0).gameObject.SetActive(false);//sets the shadow to false so we don't see it // just for debugging
+            GetComponent<PolygonCollider2D>().enabled = false;//disables the straight polygon collider
+           
+            this.transform.Translate(0, retractSpeed, 0);
+            //tentacleAnim.SetBool("hitWithExplosive", isHit); //retreating animation
         }
 
         if (reverse) { 
@@ -104,17 +103,17 @@ public class Tentacle : MonoBehaviour {
     //    Debug.Log("EXPLOSION HIT TENTACLE2222" + isHit);
     //}
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
+    //void OnTriggerEnter2D(Collider2D collision)
+    //{
        
-        //if (collision.GetComponent<destructible>())
-        if(collision.tag == "Pickable")
-        {
-            Debug.Log("Tentacle Hit by destructible");
-            retreat();
-        }
-        Debug.Log("EXPLOSION HIT TENTACLE2222" + isHit);
-    }
+    //    //if (collision.GetComponent<destructible>())
+    //    if(collision.tag == "Pickable")
+    //    {
+    //        Debug.Log("Tentacle Hit by destructible");
+    //        retreat();
+    //    }
+    //    Debug.Log("EXPLOSION HIT TENTACLE2222" + isHit);
+    //}
 
     private void OnTriggerStay2D(Collider2D collision)
     {
