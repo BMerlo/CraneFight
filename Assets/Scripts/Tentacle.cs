@@ -24,7 +24,7 @@ public class Tentacle : MonoBehaviour {
         pushers = GetComponentsInChildren<TentaclePusher>();
 
         tentacleAnim.SetTrigger("tentacleTrigger");
-
+        
         //to know which way to go
         if (transform.position.y < 0)
         {
@@ -61,12 +61,21 @@ public class Tentacle : MonoBehaviour {
             {
                 GetComponent<PolygonCollider2D>().isTrigger = false;
                 hasAttacked = true;
+                hasAttacked = true;
+
+                isHit = true;
             }
         }
 
         if(isHit)
         {
-            this.transform.Translate(0, retractSpeed, 0);
+           // this.transform.Translate(0, retractSpeed, 0);
+            Debug.Log("Tentacle retracting away-------");
+
+            transform.GetChild(0).gameObject.SetActive(false);
+            GetComponent<PolygonCollider2D>().enabled = false;
+            tentacleAnim.SetBool("hitWithExplosive", isHit);
+
         }
 
         if (reverse) { 
@@ -80,8 +89,8 @@ public class Tentacle : MonoBehaviour {
         if (transform.position.x < -10)
             Destroy(gameObject);
     }
-    
-    // void OnTriggerEnter2D(Collider2D collision)
+
+    //void OnTriggerEnter2D(Collider2D collision)
     //{
     //    Debug.Log("EXPLOSION HIT TENTACLE" + isHit);
     //    Explosion e = collision.GetComponent<Explosion>();
@@ -93,6 +102,18 @@ public class Tentacle : MonoBehaviour {
     //    }
     //    Debug.Log("EXPLOSION HIT TENTACLE2222" + isHit);
     //}
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+       
+        //if (collision.GetComponent<destructible>())
+        if(collision.tag == "Pickable")
+        {
+            Debug.Log("Tentacle Hit by destructible");
+            retreat();
+        }
+        Debug.Log("EXPLOSION HIT TENTACLE2222" + isHit);
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -117,6 +138,7 @@ public class Tentacle : MonoBehaviour {
         else if (collision.GetComponent<carAI>())
         {
             Destroy(collision.gameObject);
+            
         }
     }
 
