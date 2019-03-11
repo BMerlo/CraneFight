@@ -74,7 +74,8 @@ public class Tentacle : MonoBehaviour {
 
             transform.GetChild(0).gameObject.SetActive(false);
             GetComponent<PolygonCollider2D>().enabled = false;
-            tentacleAnim.SetBool("hitWithExplosive", isHit);
+            tentacleAnim.SetBool("writhing", isHit);
+            //tentacleAnim.SetBool("hitWithExplosive", isHit);
 
         }
 
