@@ -30,4 +30,26 @@ public class FishSpawner : MonoBehaviour {
         }
 		
 	}
+
+    public void ChangeMinimum(float ammount)
+    {
+        Debug.Log("min time of fish spawner changed by minus" + ammount);
+        m_minSpawnTime -= ammount;
+        if (m_minSpawnTime < 0)
+        {
+            m_minSpawnTime = 0;
+        }
+        
+    }
+
+    public void ChangeMaximum(float ammount)
+    {
+        Debug.Log("max time of fish spawner changed by minus" + ammount);
+        m_minSpawnTime -= ammount;
+
+        if (m_minSpawnTime < 2) //just in case cap gives issues
+        {
+            m_minSpawnTime = 2;
+        }
+    }
 }
