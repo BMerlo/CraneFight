@@ -44,4 +44,26 @@ public class FishSpawnerV2 : MonoBehaviour
 
     //fish jump on to the road
 
+    public void ChangeMinimum(float ammount)
+    {
+        Debug.Log("min time of fish spawner changed by minus" + ammount);
+        minTime -= ammount;
+        if (minTime < 0)
+        {
+            minTime = 0;
+        }
+
+    }
+
+    public void ChangeMaximum(float ammount)
+    {
+        Debug.Log("max time of fish spawner changed by minus" + ammount);
+        maxTime -= ammount;
+
+        if (maxTime < 2) //just in case cap gives issues
+        {
+            maxTime = 2;
+        }
+    }
+
 }

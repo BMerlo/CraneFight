@@ -45,11 +45,11 @@ public class FishSpawner : MonoBehaviour {
     public void ChangeMaximum(float ammount)
     {
         Debug.Log("max time of fish spawner changed by minus" + ammount);
-        m_minSpawnTime -= ammount;
+        m_maxSpawnTime -= ammount;
 
-        if (m_minSpawnTime < 2) //just in case cap gives issues
+        if (m_maxSpawnTime < 2) //just in case cap gives issues
         {
-            m_minSpawnTime = 2;
+            m_maxSpawnTime = 2;
         }
     }
 }

@@ -98,11 +98,11 @@ public class LevelProgression : MonoBehaviour
             timeToChangeFish += Time.deltaTime; //you can put all of this in the car part, but I wanted to keep things separated, they are changed
                                                 //at the same time by the same ammount
 
-            if (timeToChangeFish >= 145) //every 45 secs will lower down the min and max ammount to spawn a fish
+            if (timeToChangeFish >= 45) //every 45 secs will lower down the min and max ammount of time to spawn a fish
             {
                 timeToChangeFish = 0;
-                FishSpawner.GetComponent<FishSpawner>().ChangeMinimum(ammountToChangeSpawners);
-                FishSpawner.GetComponent<FishSpawner>().ChangeMaximum(ammountToChangeSpawners);
+                FishSpawner.GetComponent<FishSpawnerV2>().ChangeMinimum(ammountToChangeSpawners);
+                FishSpawner.GetComponent<FishSpawnerV2>().ChangeMaximum(ammountToChangeSpawners);
 
             }
         }               
