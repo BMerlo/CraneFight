@@ -391,7 +391,7 @@ public class playerController : MonoBehaviour {
         return shortestDistance;
     }
 
-    void becomeSmelly()
+    public void becomeSmelly()
     {
         isSmelly = true;
     }
