@@ -987,7 +987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reverse: 0
-  tentacleAnim: {fileID: 0}
+  tentacleAnim: {fileID: 1965506270680525201}
 --- !u!1 &7688160072154203319
 GameObject:
   m_ObjectHideFlags: 0
