@@ -108,6 +108,10 @@ public class carAI : MonoBehaviour
         {
             if (hit.transform.tag == "Player" && (hit.distance <= 3.0f) && (hit.distance >= 0.0f))  // PLAYER AHEAD!!!
             {
+                if (hit.transform.name == "WholeRange") {
+                    //this fix it a little bit even though it doesn't have the tag Player
+                    return;
+                }
                 //Debug.Log("Speed decreased");
                 Debug.Log("Name of other obj: " + hit.collider.name);
                 //speedUsed = lowerSpeed;
@@ -131,7 +135,7 @@ public class carAI : MonoBehaviour
             else if (hit.distance <= 3f)    // About to hit something other than a vehicle
             {
                 //Debug.Log("Speed decreased");
-                Debug.Log("Name of other obj: " + hit.collider.name);
+               // Debug.Log("Name of other obj: " + hit.collider.name);
                 desiredSpeed = originalSpeed;
                 //speedUsed = lowerSpeed;
             }
