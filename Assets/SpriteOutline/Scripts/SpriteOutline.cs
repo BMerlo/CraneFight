@@ -585,7 +585,7 @@ public class SpriteOutline : MonoBehaviour
     {
         //change color 
         int value = 0;
-        int[] index = new int[inPlayerRange.Length+1];//store the player number into a new array
+        int[] index = new int[inPlayerRange.Length];//store the player number into a new array
 
 
         //add the indices in the array that is true to another.
@@ -596,21 +596,24 @@ public class SpriteOutline : MonoBehaviour
                 if (index[value] != i)
                 {
                     index[value] = i;
-                    
+                    value++;
                 }
-                value++;
+
             }
         }
         //remove and shift index array
-        for (int i = 0; i <value; i++)
+        for (int i = 0; i < value; i++)
         {
             if (inPlayerRange[i] == false)
             {
-               for (int j = index[i]; j < value-1; j++)
-               {
-                 index[j] = index[j+1];
-                  
-               }
+                for (int j = index[i]; j < value - 1; j++)
+                {
+                    if (index[i] == index[j])
+                    {
+
+                        index[j] = index[j + 1];
+                    }
+                }
                 value--;
             }
             Debug.Log("index " + index[i]);//debug only
@@ -625,8 +628,8 @@ public class SpriteOutline : MonoBehaviour
         {
             if (timerForColorChange > 50)
             {
-                colornum = index[currColor];
-                if (currColor == value) //this is what you named the last int
+
+                if (currColor >= value) //this is what you named the last int
                 {
                     currColor = 0;
                 }
@@ -634,34 +637,36 @@ public class SpriteOutline : MonoBehaviour
                 {
                     currColor++;
                 }
+                colornum = index[currColor];
                 //for (int i = 0; i < value; i++) {
                 //    currColor = i;
                 //}
                 timerForColorChange = 0;
             }
         }
-        else {
+        else
+        {
             colornum = index[0];
         }
         //set all colors to a int
         if (colornum == 0)
         {
-            color = Color.yellow;
+            color = Color.green;
             Regenerate();
         }
         else if (colornum == 1)
         {
-            color = Color.green;
+            color = Color.magenta;
             Regenerate();
         }
-        else if(colornum == 2)
+        else if (colornum == 2)
         {
-            color = Color.blue + Color.red;
+            color = Color.red;
             Regenerate();
         }
         else if (colornum == 3)
         {
-            color = Color.blue;
+            color = Color.black;
             Regenerate();
         }
     }
