@@ -44,4 +44,13 @@ public class FishJump : MonoBehaviour
         }
 
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            Debug.Log("Something is smelly");
+            collision.GetComponent<playerController>().becomeSmelly();
+        }
+        }
 }

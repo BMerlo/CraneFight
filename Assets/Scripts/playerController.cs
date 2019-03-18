@@ -83,6 +83,16 @@ public class playerController : MonoBehaviour {
     [SerializeField] private float evadeCooldown = 1f;
     private bool hasEvaded = false;
     private float evadeCooldownTimer = 0;
+
+    [SerializeField] private float oilCooldown = 15f; //15 by default
+    private float oilCooldownTimer = 0;
+
+    [SerializeField] private float smellyCooldown = 15f; //15 by default
+    private float smellyCooldownTimer = 0;
+
+    //float OilTimer = 0; // Amount of time the Oil Status lasts
+    //float smellyTimer = 0; // Amount of time the Smelly Status lasts
+
     [SerializeField] private float jumpCooldown = 1f;
     private bool hasJumped = false;
     private float jumpCooldownTimer = 0;
@@ -213,6 +223,9 @@ public class playerController : MonoBehaviour {
         }
         else
         {
+            oilCooldownTimer -= 1 * Time.deltaTime; // oily countdown
+           // Debug.Log("Oil Timer:" + oilCooldownTimer);
+
             Collider2D[] temp = new Collider2D[30];
             ContactFilter2D tempFilter = new ContactFilter2D();
             tempFilter.useTriggers = true;
@@ -227,12 +240,14 @@ public class playerController : MonoBehaviour {
                     isStillOiled = true;
                 }
             }
-            if (isStillOiled == false)
-            {
-                getUnOiled();
+          if (isStillOiled == false && oilCooldownTimer <= 0)
+           {
+               getUnOiled();
+                oilCooldownTimer = 0;
             }
 
         }
+
 
         //Debug.Log(Input.GetAxis("P1Horizontal2"));
         //Debug.Log(Input.GetAxis("P1Vertical2"));
@@ -298,9 +313,11 @@ public class playerController : MonoBehaviour {
                 //takeDamage(jumpDamage);
             }
         }
-
+        
 
     }
+
+
     private void FixedUpdate()
     {
 
@@ -322,7 +339,8 @@ public class playerController : MonoBehaviour {
         //}
         //else
         //{
-        //    oilTimer += Time.deltaTime;
+        //    oil
+      //  += Time.deltaTime;
         //    if (oilTimer >= oilForceTime)
         //    {
         //        oiledMovement();
@@ -334,7 +352,7 @@ public class playerController : MonoBehaviour {
         if (isSmelly)
         {
             carAI[] cars = GameObject.FindObjectsOfType<carAI>();
-
+            
             foreach (carAI car in cars)
             {
                 //if (GetDistanceFromClosest(GameObject.FindGameObjectsWithTag("AICar")) <= smellRadius)
@@ -391,9 +409,19 @@ public class playerController : MonoBehaviour {
         return shortestDistance;
     }
 
-    public void becomeSmelly()
+    public void becomeSmelly()// work here 
     {
         isSmelly = true;
+        smellyCooldownTimer = smellyCooldown; // Timer starts  at 15 seconds
+        Debug.Log("Something is smelly");
+        myAnim.SetBool("isSmelly", true);
+    }
+
+    public void becomeUnSmelly()
+    {
+        isSmelly = false;
+        Debug.Log("No more Smell");
+        myAnim.SetBool("isSmelly", false);
     }
 
     void updateMovementVec()
@@ -994,7 +1022,7 @@ public class playerController : MonoBehaviour {
     }
 
     //Called when the player hits an oil spill. Sets drag to 0 while storing original drag value.
-    public void getOiled()
+    public void getOiled() // work here too
     {
         if(!isOiled)
         //if (GetComponent<Rigidbody2D>().drag != 0)
@@ -1010,16 +1038,25 @@ public class playerController : MonoBehaviour {
         //rBody.velocity.Set(v.x, v.y);
 
         isOiled = true;
+        oilCooldownTimer = oilCooldown; // Timer starts  at 15 seconds
         oilDirectionModifier = -1;
         Debug.Log("got oiled!");
+        Debug.Log("Oil started timer at: " + oilCooldownTimer);
+        //change sprites here to oily
+        myAnim.SetBool("isSmelly", true); //<----- Change "isSmelly" to "isOily" when the Oily Animations for each of the players are implemented to the myAnim controller.
+        /*March 17, 2019: Oily artwork/Animations for the vehicles were not in the project or in the google drive.
+         * So I used the smell animation just so I can debug. Please change this when the Oily animations are implemented.*/
+        
     }
     //Called when the player leaves an oil spill. Sets drag to original value.
-    public void getUnOiled()
+    public void getUnOiled() // get unoiled after 15 seconds
     {
         GetComponent<Rigidbody2D>().drag = drag;
         isOiled = false;
 
-        
+        myAnim.SetBool("isSmelly", false); // See above comments in getOiled()
+        //change sprite back to normal
+
         //if (oilCount % 2 == 0)
         //{
         //    GetComponent<Rigidbody2D>().AddForce(new Vector2(0, moveSpeed * oilForce / 2));
@@ -1082,6 +1119,17 @@ public class playerController : MonoBehaviour {
             {
                 resetCrane();
                 isDestroyedTimer = 0;
+            }
+        }
+
+        if (isSmelly) // smelly countdown
+        {
+            smellyCooldownTimer -= 1 * Time.deltaTime;
+            Debug.Log("Smelly Timer:" + smellyCooldownTimer);
+            if (smellyCooldownTimer <= 0)
+            {
+                becomeUnSmelly();
+                smellyCooldownTimer = 0;
             }
         }
 
