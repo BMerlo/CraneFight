@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 114853983172960584}
   - component: {fileID: 3486081034243663606}
   - component: {fileID: 7590177457760720276}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Truck_Explosive
   m_TagString: Carrier
   m_Icon: {fileID: 0}
@@ -209,6 +209,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c8a3bb7d046504fb2cd26fb3b6e940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 585728
   isReverse: 0
   desiredSpeed: 0
   minSpeed: 8
@@ -260,8 +263,6 @@ MonoBehaviour:
   customFrameName: 
   generatesOnStart: 0
   generatesOnValidate: 1
-  colornum: 0
-  numOfTrues: 0
 --- !u!1 &3406805431090404185
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,7 +273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1676359259678627156}
   - component: {fileID: 8753919072768945761}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,7 +336,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.05, y: 1.75}
+  m_Size: {x: 3.15, y: 1.85}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -352,7 +353,7 @@ GameObject:
   - component: {fileID: 7020477369298953407}
   - component: {fileID: 1965880855180789546}
   - component: {fileID: 575092507577749256}
-  m_Layer: 2
+  m_Layer: 19
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}

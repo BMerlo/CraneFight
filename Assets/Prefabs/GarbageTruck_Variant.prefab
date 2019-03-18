@@ -69,6 +69,11 @@ PrefabInstance:
       propertyPath: isReverse
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114261472188703166, guid: 2e3fd951dd43a454992c1bc1ee3288b3,
+        type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 585728
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e3fd951dd43a454992c1bc1ee3288b3, type: 3}
 --- !u!4 &8428729155632348167 stripped

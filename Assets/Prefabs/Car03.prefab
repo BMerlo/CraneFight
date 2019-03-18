@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 114518373985575832}
   - component: {fileID: 5971357789183878395}
   - component: {fileID: 9125507368564125867}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Car03
   m_TagString: AICar
   m_Icon: {fileID: 0}
@@ -210,6 +210,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c8a3bb7d046504fb2cd26fb3b6e940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 585728
   isReverse: 0
   desiredSpeed: 0
   minSpeed: 10
