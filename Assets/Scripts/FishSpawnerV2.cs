@@ -11,6 +11,8 @@ public class FishSpawnerV2 : MonoBehaviour
     float counter = 0;
     float timeActual;
 
+    int spawnPointX; //value random to spawn on X axis
+
 
     // Use this for initialization
     void Start()
@@ -35,9 +37,10 @@ public class FishSpawnerV2 : MonoBehaviour
     {
         if (counter >= timeActual)
         {
-            Instantiate(m_Fish, this.transform.position, this.transform.rotation);
-
             counter = 0;
+            spawnPointX = Random.Range(-2, 6); //range to spawn fishes.. will it depend on size screen?
+            Vector3 spawnPosition = new Vector3(spawnPointX, transform.position.y, transform.position.z);
+            Instantiate(m_Fish, spawnPosition, this.transform.rotation);            
             timeActual = Random.Range(minTime, maxTime);
         }
     }
