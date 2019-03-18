@@ -52,6 +52,7 @@ public class Game_Manager : MonoBehaviour {
 
     [SerializeField] GameObject ghostPrefab;
     private Text winnerText;
+    ScoreManager score; //get score script
 
     public enum PlayerNum
     {
@@ -71,7 +72,7 @@ public class Game_Manager : MonoBehaviour {
         //player4Location;
 
         winnerText = winPanel.GetComponentInChildren<Text>();
-
+        score = GetComponent<ScoreManager>();
         winnerText.text = "Winner is..."; //added for debugging purposes 
 
         player1alive = true;
@@ -118,20 +119,25 @@ public class Game_Manager : MonoBehaviour {
                 Debug.Log("PLAYER 1 WINS");
                 winPanel.SetActive(true);
                 winnerText.text = "Winner is Player1";
+                score.setp1(score.returnScores(playersCurrentlyAlive));
                 Time.timeScale = 0; //pause the game
+              
             }
             else if (player2alive)
             {
                 Debug.Log("PLAYER 2 WINS");
                 winPanel.SetActive(true);
                 winnerText.text = "Winner is Player2";
+                score.setp2(score.returnScores(playersCurrentlyAlive));
                 Time.timeScale = 0;
+               
             }
             else if (player3alive)
             {
                 Debug.Log("PLAYER 3 WINS");
                 winPanel.SetActive(true);
                 winnerText.text = "Winner is Player3";
+                score.setp3(score.returnScores(playersCurrentlyAlive));
                 Time.timeScale = 0;
             }
             else if (player4alive)
@@ -139,11 +145,16 @@ public class Game_Manager : MonoBehaviour {
                 Debug.Log("PLAYER 4 WINS");
                 winPanel.SetActive(true);
                 winnerText.text = "Winner is Player4";
+                score.setp4(score.returnScores(playersCurrentlyAlive));
                 Time.timeScale = 0;
+                
             }
 
         }
 
+
+        Debug.Log(" curr alive " + playersCurrentlyAlive);
+        score.print();
         //if (!player1alive) {
         //    m_timeToSpawn1 += Time.deltaTime;
         //}
@@ -198,32 +209,38 @@ public class Game_Manager : MonoBehaviour {
     {
         GameObject obj = Instantiate(ghostPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         obj.GetComponent<ghostController>().setPlayerNum(num);
-        playersCurrentlyAlive--;
+
 
         switch (num) {
             case 0:
                 Debug.Log("player 1 dead");
                 player1alive = false;
+                score.setp1(score.returnScores(playersCurrentlyAlive));
                 break;
             case 1:
                 Debug.Log("player 2 dead");
                 player2alive = false;
+                score.setp2(score.returnScores(playersCurrentlyAlive));
                 break;
             case 2:
 
                 Debug.Log("player 3 dead");
                 player3alive = false;
+                score.setp3(score.returnScores(playersCurrentlyAlive));
                 break;
             case 3:
                 Debug.Log("player 4 dead");
                 player4alive = false;
+                score.setp4(score.returnScores(playersCurrentlyAlive));
                 break;
             default:
                 Debug.Log("wrong num");
                 break;
 
         }
-     }
+
+        playersCurrentlyAlive--;
+    }
 
 }
 
