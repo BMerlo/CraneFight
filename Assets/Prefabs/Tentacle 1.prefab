@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1100830369405562336}
   - component: {fileID: 8432207348371132820}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: writhe4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7909374715470308645}
   - component: {fileID: 5022237902319128619}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: frame3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2945989486478174021}
   - component: {fileID: 7405976976817085114}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: writhe5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -273,7 +273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6608143290762282340}
   - component: {fileID: 7513260390576427551}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: frame1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 1965506270680525201}
   - component: {fileID: 2386674259130511494}
   - component: {fileID: 2643203426095583568}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: tentacleActual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -496,7 +496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2643612667343289709}
   - component: {fileID: 4070160169299477139}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: frame5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -559,7 +559,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7953131775575320902}
   - component: {fileID: 556216973862399319}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: frame4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -635,7 +635,7 @@ GameObject:
   m_Component:
   - component: {fileID: 884670346332532591}
   - component: {fileID: 7402844680731663855}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: frame2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -722,7 +722,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4067116262696123686}
   - component: {fileID: 6687836223736517202}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: writhe3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -819,7 +819,7 @@ GameObject:
   - component: {fileID: 7183378435408999481}
   - component: {fileID: 7183378435408999482}
   - component: {fileID: 7183378435408999483}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -918,7 +918,7 @@ GameObject:
   - component: {fileID: 7183378436246789377}
   - component: {fileID: 6695390650446634265}
   - component: {fileID: 7799283563608161680}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Tentacle 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -998,7 +998,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8863414100865412252}
   - component: {fileID: 1323706409976465072}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: writhe1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1086,7 +1086,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2789201264182592003}
   - component: {fileID: 3433506302832891057}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: writhe2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
