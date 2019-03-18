@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class carAI : MonoBehaviour
 {
+    public LayerMask layerMask;
     [SerializeField] bool isReverse = false;
     Vector3 dir = new Vector3(1, 0, 0);
     public float desiredSpeed;
@@ -36,7 +37,7 @@ public class carAI : MonoBehaviour
         //lowerSpeed = 0;
         originalSpeed = Random.Range(minSpeed, maxSpeed);
 
-
+        gameObject.layer = 19; //make every AI to belong to layer AI
 
         backGroundScript = FindObjectOfType<ScrollingBackGround>();
         backgroundSpeed = backGroundScript.getSpeed();
@@ -100,18 +101,15 @@ public class carAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 10.0f, layerMask);
         Debug.DrawLine(transform.position, transform.position + (dir * 3));
         Debug.Log(hit.collider);
 
         if (hit.collider != null)
         {
-            if (hit.transform.tag == "Player" && (hit.distance <= 3.0f) && (hit.distance >= 0.0f))  // PLAYER AHEAD!!!
+            //it needs new ranges or increment force to reduce speed
+            if (hit.transform.tag == "Player" && (hit.distance <= 3.0f) && (hit.distance >= 0.0f))  // PLAYER AHEAD!!!                                                                                                    
             {
-                if (hit.transform.name == "WholeRange") {
-                    //this fix it a little bit even though it doesn't have the tag Player
-                    return;
-                }
                 //Debug.Log("Speed decreased");
                 Debug.Log("Name of other obj: " + hit.collider.name);
                 //speedUsed = lowerSpeed;
