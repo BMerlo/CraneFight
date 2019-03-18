@@ -209,6 +209,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c8a3bb7d046504fb2cd26fb3b6e940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 61441
   isReverse: 1
   desiredSpeed: 0
   minSpeed: 8
@@ -260,8 +263,6 @@ MonoBehaviour:
   customFrameName: 
   generatesOnStart: 0
   generatesOnValidate: 1
-  colornum: 0
-  numOfTrues: 0
 --- !u!1 &2408550512232782734
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,7 +406,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.05, y: 1.75}
+  m_Size: {x: 3.15, y: 1.85}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0

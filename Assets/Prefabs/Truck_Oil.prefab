@@ -73,7 +73,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.05, y: 1.75}
+  m_Size: {x: 3.15, y: 1.85}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -86,10 +86,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1164686690122672, guid: 2d84caf13f1197a42ae2549c9e00ea62, type: 3}
-      propertyPath: m_Name
-      value: Truck_Oil
-      objectReference: {fileID: 0}
     - target: {fileID: 4955327324739372, guid: 2d84caf13f1197a42ae2549c9e00ea62, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -138,10 +134,19 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1164686690122672, guid: 2d84caf13f1197a42ae2549c9e00ea62, type: 3}
+      propertyPath: m_Name
+      value: Truck_Oil
+      objectReference: {fileID: 0}
     - target: {fileID: 114501186124481782, guid: 2d84caf13f1197a42ae2549c9e00ea62,
         type: 3}
       propertyPath: isReverse
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114501186124481782, guid: 2d84caf13f1197a42ae2549c9e00ea62,
+        type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 61441
       objectReference: {fileID: 0}
     - target: {fileID: 3633292039455626313, guid: 2d84caf13f1197a42ae2549c9e00ea62,
         type: 3}

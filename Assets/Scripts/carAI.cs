@@ -14,7 +14,7 @@ public class carAI : MonoBehaviour
     [SerializeField] float maxSpeed = 30f;
 
     float accelerateForce = 30f;
-    float decelerateForce = 5f;
+    float decelerateForce = 15f;
 
     float originalSpeed;
     float lowestSpeed;
@@ -37,7 +37,7 @@ public class carAI : MonoBehaviour
         //lowerSpeed = 0;
         originalSpeed = Random.Range(minSpeed, maxSpeed);
 
-        gameObject.layer = 19; //make every AI to belong to layer AI
+        //gameObject.layer = 19; //make every AI to belong to layer AI
 
         backGroundScript = FindObjectOfType<ScrollingBackGround>();
         backgroundSpeed = backGroundScript.getSpeed();
@@ -102,7 +102,7 @@ public class carAI : MonoBehaviour
     void Update()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 10.0f, layerMask);
-        Debug.DrawLine(transform.position, transform.position + (dir * 3));
+        Debug.DrawLine(transform.position, transform.position + (dir * 10));
         Debug.Log(hit.collider);
 
         if (hit.collider != null)
@@ -130,7 +130,7 @@ public class carAI : MonoBehaviour
                 }
 
             }
-            else if (hit.distance <= 3f)    // About to hit something other than a vehicle
+            else if (hit.distance <= 5f)    // About to hit something other than a vehicle
             {
                 //Debug.Log("Speed decreased");
                // Debug.Log("Name of other obj: " + hit.collider.name);

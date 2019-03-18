@@ -224,6 +224,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c8a3bb7d046504fb2cd26fb3b6e940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 61441
   isReverse: 0
   desiredSpeed: 0
   minSpeed: 10
