@@ -23,7 +23,7 @@ public class FishJump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("speed  " + fishRigidbody.velocity.magnitude);
+        //Debug.Log("speed  " + fishRigidbody.velocity.magnitude);
         FishUP();
 
       
