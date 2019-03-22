@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour {
 
-    float hitPoints = 100f;
+    public float hitPoints = 100f;
+    
     [SerializeField] HealthBar playerHealth;
 
     [SerializeField] float aimSpeed = 4f;
@@ -87,7 +88,7 @@ public class playerController : MonoBehaviour {
     [SerializeField] private float oilCooldown = 15f; //15 by default
     private float oilCooldownTimer = 0;
 
-    [SerializeField] private float smellyCooldown = 15f; //15 by default
+    [SerializeField] private float smellyCooldown = 5f; //15 by default
     private float smellyCooldownTimer = 0;
 
     //float OilTimer = 0; // Amount of time the Oil Status lasts
@@ -114,9 +115,12 @@ public class playerController : MonoBehaviour {
     Vector2 smellForceDown = new Vector2(0.0f, -0.08f);
     float smellRadius = 1.3f;
     public bool isSmelly;
+    [SerializeField] GameObject smellCloudB;
+    [SerializeField] GameObject smellCloudF;
+
 
     PolygonCollider2D myCollider;
-
+    
     //[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
     // Use this for initialization
     void Start() {
@@ -141,16 +145,17 @@ public class playerController : MonoBehaviour {
             default:
                 break;
         }
-
-
         m_rb = GetComponent<Rigidbody2D>();
         targetReticle.GetComponent<SpriteRenderer>().enabled = false;
         throwRange.GetComponent<SpriteRenderer>().enabled = false;
         m_arrowOriginalScale = m_arrow.transform.localScale;
         // MoveBackScript = GetComponent<moveBack>();
         //isSmelly = true;
+    }
 
-
+    public float getHitpoints()
+    {
+        return hitPoints;
     }
 
     // Update is called once per frame
@@ -365,14 +370,14 @@ public class playerController : MonoBehaviour {
                         if (car.transform.position.y > this.transform.position.y)
                         {
                             car.GetComponent<Transform>().Translate(smellForceUp);
-                            Debug.Log("CAR NAME: " + car.name + smellForceUp + "moving up: " + car.transform.position);
+                        //    Debug.Log("CAR NAME: " + car.name + smellForceUp + "moving up: " + car.transform.position);
                         }
 
                         //Transforms if AICar position.y is below player
                         else if (car.transform.position.y < this.transform.position.y)
                         {
                             car.GetComponent<Transform>().Translate(smellForceDown);
-                            Debug.Log("CAR NAME: " + car.name + smellForceDown + "moving down: " + car.transform.position);
+                        //    Debug.Log("CAR NAME: " + car.name + smellForceDown + "moving down: " + car.transform.position);
                         }
                     }
 
@@ -383,14 +388,14 @@ public class playerController : MonoBehaviour {
                         if (car.transform.position.y > this.transform.position.y)
                         {
                             car.GetComponent<Transform>().Translate(smellForceUp);
-                            Debug.Log("CAR NAME: " + car.name + smellForceUp + "moving up: " + car.transform.position);
+                            //Debug.Log("CAR NAME: " + car.name + smellForceUp + "moving up: " + car.transform.position);
                         }
 
                         //Transforms if AICar position.y is below player
                         else if (car.transform.position.y < this.transform.position.y)
                         {
                             car.GetComponent<Transform>().Translate(smellForceDown);
-                            Debug.Log("CAR NAME: " + car.name + smellForceDown + "moving down: " + car.transform.position);
+                            //Debug.Log("CAR NAME: " + car.name + smellForceDown + "moving down: " + car.transform.position);
                         }
 
                     }
@@ -413,15 +418,21 @@ public class playerController : MonoBehaviour {
     {
         isSmelly = true;
         smellyCooldownTimer = smellyCooldown; // Timer starts  at 15 seconds
-        Debug.Log("Something is smelly");
-        myAnim.SetBool("isSmelly", true);
+        //  Debug.Log("Something is smelly");
+        smellCloudF.SetActive(true);
+        smellCloudB.SetActive(true);
+
+        // myAnim.SetBool("isSmelly", true);
     }
 
     public void becomeUnSmelly()
     {
         isSmelly = false;
-        Debug.Log("No more Smell");
-        myAnim.SetBool("isSmelly", false);
+        //Debug.Log("No more Smell"); 
+        smellCloudF.SetActive(false);
+        smellCloudB.SetActive(false);
+
+        // myAnim.SetBool("isSmelly", false);
     }
 
     void updateMovementVec()
@@ -707,7 +718,7 @@ public class playerController : MonoBehaviour {
         //}
 
         rBody.AddForce(movementVector * moveSpeed);
-        Debug.Log("move");
+        //Debug.Log("move");
 
         //if (getOwnAxis("RBumper") > 0 && !hasEvaded)
         //{
@@ -793,7 +804,7 @@ public class playerController : MonoBehaviour {
     {
         if (colliderObj2Listen != null && colliderObj2Listen.GetComponent<CraneZone>().isTherePickable())
         {
-            Debug.Log("attempting to pick up");
+         //   Debug.Log("attempting to pick up");
 
             //Checks if the current player can pick up the object
             //if (colliderObj2Listen.GetComponent<CraneZone>().getObj2PickUp().GetComponent<throwable>().canIPickup((int)playerNum))
@@ -1014,7 +1025,7 @@ public class playerController : MonoBehaviour {
         }
         else if (collision.transform.GetComponent<destructible>())
         {
-            Debug.Log("destructible collided");
+         //   Debug.Log("destructible collided");
             collision.transform.GetComponent<destructible>().getDestroyed();
             takeDamage(collision.transform.GetComponent<destructible>().getDmgAmount());
         }
@@ -1040,8 +1051,8 @@ public class playerController : MonoBehaviour {
         isOiled = true;
         oilCooldownTimer = oilCooldown; // Timer starts  at 15 seconds
         oilDirectionModifier = -1;
-        Debug.Log("got oiled!");
-        Debug.Log("Oil started timer at: " + oilCooldownTimer);
+    //    Debug.Log("got oiled!");
+      //  Debug.Log("Oil started timer at: " + oilCooldownTimer);
         //change sprites here to oily
         myAnim.SetBool("isSmelly", true); //<----- Change "isSmelly" to "isOily" when the Oily Animations for each of the players are implemented to the myAnim controller.
         /*March 17, 2019: Oily artwork/Animations for the vehicles were not in the project or in the google drive.
@@ -1070,8 +1081,14 @@ public class playerController : MonoBehaviour {
         //oilCount = 1;
         //oilForce = 1.0f;
         //oilDirectionModifier = 1;
-        Debug.Log("got unoiled!");
+     //   Debug.Log("got unoiled!");
     }
+
+    public bool getIsOiled()//Getter Called in Explosion script to check if the player is oily
+    {
+           return isOiled;
+    }
+
 
     public void stun(float addedStunTime)
     {
@@ -1125,7 +1142,7 @@ public class playerController : MonoBehaviour {
         if (isSmelly) // smelly countdown
         {
             smellyCooldownTimer -= 1 * Time.deltaTime;
-            Debug.Log("Smelly Timer:" + smellyCooldownTimer);
+          //  Debug.Log("Smelly Timer:" + smellyCooldownTimer);
             if (smellyCooldownTimer <= 0)
             {
                 becomeUnSmelly();
