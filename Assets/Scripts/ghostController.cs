@@ -16,7 +16,8 @@ public class ghostController : MonoBehaviour
     [SerializeField] float moveSpeed = 8f;
     [SerializeField] bool isPossesing;
     [SerializeField] bool wantToPossess;
-    [SerializeField] float timeToDestroy;
+    [SerializeField] bool krakenPossessed;
+    //[SerializeField] float timeToDestroy;
     [SerializeField] GameObject objectToPossess;
 
     private float moveRightBust;
@@ -29,8 +30,7 @@ public class ghostController : MonoBehaviour
     {
         isPossesing = false;
         wantToPossess = false;
-        timeToDestroy = 5.0f;
-        Destroy(gameObject, timeToDestroy);       
+        krakenPossessed = false;
     }
 
     // Update is called once per frame
@@ -38,37 +38,56 @@ public class ghostController : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            Debug.Log("Want to possess A");
-            
-            wantToPossess = !wantToPossess;
+           // Debug.Log("Want to possess A");            
+            wantToPossess = true;
         }
-        //if (Input.GetButtonUp("Fire1"))
-        //{
-        //    wantToPossess = false;
-        //    isPossesing = false;
-        //    objectToPossess = null;
-        //}
+
+        if (Input.GetButtonDown("Fire1") && isPossesing)
+        {
+            if (krakenPossessed) {
+                objectToPossess.GetComponent<Rigidbody2D>().velocity = Vector3.zero; //so the kraken velocity is zero when unpossessed;
+                objectToPossess.GetComponent<Kraken>().enabled = true;
+                objectToPossess.GetComponent<Kraken>().setInitialPosition();
+            }
+
+            wantToPossess = false;
+            isPossesing = false;
+            krakenPossessed = false;
+            objectToPossess = null;
+        }
+
+        if (Input.GetButtonUp("Fire1") && !isPossesing)
+        {
+            wantToPossess = false;
+            isPossesing = false;
+        }
 
         m_timeElapsed += Time.deltaTime;
 
-        if (m_timeElapsed > timeToDestroy) {
-            Destroy(gameObject);
+        if (Input.GetButtonDown("Fire2") && isPossesing && krakenPossessed)
+        {
+            objectToPossess.GetComponent<Kraken>().spawnTentacleInFront();
         }
 
-        if (isPossesing)
-        {
-       //     objectToPossess = tra
-        }
+        //if (isPossesing)
+        //{
+        //    if (objectToPossess = null) {
+        //        wantToPossess = false;
+        //        isPossesing = false;
+        //    }
+        //}
 
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 0 && wantToPossess )
+        if (collision.gameObject.layer == 19 && wantToPossess)
         {
-           // Debug.Log("I can try to possess" + collision.name);
-            
-            if(collision.gameObject.GetComponent<MoveReverse>() != null)
+            // Debug.Log("I can try to possess" + collision.gameObject.name);
+            isPossesing = true;
+            objectToPossess = collision.gameObject;
+
+            if (collision.gameObject.GetComponent<MoveReverse>() != null)
             {
                 moveLeftBust = -30;
                 moveRightBust = 0;
@@ -80,35 +99,41 @@ public class ghostController : MonoBehaviour
                 moveLeftBust = 0;
                 moveRightBust = 30;
                 Debug.Log("BUST TO RIGHT");
-            }            
+            }
 
-            if(collision.gameObject.name == "YellowCarRubble(Clone)")
+            if (collision.gameObject.GetComponent<Kraken>() != null)
+            {
+                collision.gameObject.GetComponent<Kraken>().enabled = false;
+                krakenPossessed = true;
+            }
+
+            if (collision.gameObject.name == "YellowCarRubble(Clone)") //I didn't do this, I don't get it but I'll leave it as is
             {
                 collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 wantToPossess = !wantToPossess;
             }
 
-            collision.gameObject.transform.position = transform.position;            
-            
-            //isPossesing = true;
+            collision.gameObject.transform.position = transform.position;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 0 && wantToPossess)
+        if (collision.gameObject.layer == 19 && wantToPossess)
         {
             wantToPossess = false;
+            krakenPossessed = false;
         }
     }
-
-
-
-
-
+    
     private void FixedUpdate()
     {
-        movement();
+        if (!krakenPossessed) { //to move different when kraken is possessed
+            movement();
+        }
+        else {
+            movementKraken();
+        }        
     }
 
     float getOwnAxis(string axis)
@@ -129,38 +154,46 @@ public class ghostController : MonoBehaviour
 
         if (getOwnAxis("Vertical") > 0.3f)
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -moveSpeed));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, moveSpeed));
         }
         else if (getOwnAxis("Vertical") < -0.3f)
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, moveSpeed));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -moveSpeed));
         }
     }
-    
+
+    void movementKraken()
+    {
+        if (gameObject.transform.position.x > objectToPossess.GetComponent<Kraken>().getRandomLx() && gameObject.transform.position.x < objectToPossess.GetComponent<Kraken>().getRandomRx())
+        {
+            Debug.Log("I'm HEEERE!");
+            if (getOwnAxis("Horizontal") > 0.3f)
+            {
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(moveSpeed + moveRightBust, 0));
+            }
+            else if (getOwnAxis("Horizontal") < -0.3f)
+            {
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(-moveSpeed + moveLeftBust, 0));
+            }
+        }
+        else {
+            //Debug.Log("I'm not HEEERE!");
+            //Debug.Log("left side: " + objectToPossess.GetComponent<Kraken>().getRandomLx());         
+            //Debug.Log("RIGHT side: " + objectToPossess.GetComponent<Kraken>().getRandomRx());
+
+            if (gameObject.transform.position.x < objectToPossess.GetComponent<Kraken>().getRandomLx()) { //to 
+               GetComponent<Rigidbody2D>().AddForce(new Vector2(moveSpeed + moveRightBust, 0));
+            }
+            else if (gameObject.transform.position.x > objectToPossess.GetComponent<Kraken>().getRandomRx())
+            {
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(-moveSpeed + moveLeftBust, 0));
+            }
+        }
+    }
+
 
     public void setPlayerNum(int i)
     {
-        playerNum = (PlayerNum)i;
-        Color color = Color.white;
-        switch (i)
-        {
-            case 0:
-                color = Color.green;
-                break;
-            case 1:
-                color = Color.blue;
-                break;
-            case 2:
-                color = Color.red;
-                break;
-            case 3:
-                color = Color.black;
-                break;
-            default:
-                break;
-        }
-
-        GetComponent<SpriteRenderer>().color = color;
-
+        playerNum = (PlayerNum)i;   
     }
 }

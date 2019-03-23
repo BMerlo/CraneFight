@@ -50,7 +50,10 @@ public class Game_Manager : MonoBehaviour {
 
     private float m_timeElapsed;
 
-    [SerializeField] GameObject ghostPrefab;
+    [SerializeField] GameObject ghostPrefab1;
+    [SerializeField] GameObject ghostPrefab2;
+    [SerializeField] GameObject ghostPrefab3;
+    [SerializeField] GameObject ghostPrefab4;
     private Text winnerText;
     ScoreManager score; //get score script
 
@@ -206,29 +209,33 @@ public class Game_Manager : MonoBehaviour {
     }
 
     public void spawnGhost(int num)
-    {
-        GameObject obj = Instantiate(ghostPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        obj.GetComponent<ghostController>().setPlayerNum(num);
-
-
+    {        
+        
         switch (num) {
             case 0:
+                GameObject obj = Instantiate(ghostPrefab1, new Vector3(0, 0, 0), Quaternion.identity);
+                obj.GetComponent<ghostController>().setPlayerNum(num);
                 Debug.Log("player 1 dead");
                 player1alive = false;
                 score.setp1(score.returnScores(playersCurrentlyAlive));
                 break;
             case 1:
+                GameObject obj2 = Instantiate(ghostPrefab2, new Vector3(0, 0, 0), Quaternion.identity);
+                obj2.GetComponent<ghostController>().setPlayerNum(num);
                 Debug.Log("player 2 dead");
                 player2alive = false;
                 score.setp2(score.returnScores(playersCurrentlyAlive));
                 break;
             case 2:
-
+                GameObject obj3 = Instantiate(ghostPrefab3, new Vector3(0, 0, 0), Quaternion.identity);
+                obj3.GetComponent<ghostController>().setPlayerNum(num);
                 Debug.Log("player 3 dead");
                 player3alive = false;
                 score.setp3(score.returnScores(playersCurrentlyAlive));
                 break;
             case 3:
+                GameObject obj4 = Instantiate(ghostPrefab4, new Vector3(0, 0, 0), Quaternion.identity);
+                obj4.GetComponent<ghostController>().setPlayerNum(num);
                 Debug.Log("player 4 dead");
                 player4alive = false;
                 score.setp4(score.returnScores(playersCurrentlyAlive));

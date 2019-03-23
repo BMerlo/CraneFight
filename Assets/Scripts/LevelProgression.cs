@@ -47,7 +47,7 @@ public class LevelProgression : MonoBehaviour
         if (!krakenActive) { //so once kraken active, it won't need to update this timer
         timeToKraken += Time.deltaTime;
 
-            if (timeToKraken >= 60) //Kraken awakes!
+            if (timeToKraken >= 3) //Kraken awakes!
             {
                 //Debug.Log("***************1 minute passed");
                 KrakenSpawner.SetActive(true);
