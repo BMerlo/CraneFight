@@ -8,8 +8,8 @@ public class ReferencePosition : MonoBehaviour
     [SerializeField] Transform TR;
     [SerializeField] Transform BL;
     [SerializeField] Transform BR;
-    public Kraken krakenObj;
-    public bool krakenFound;
+    public Kraken krakenObj = null;
+    public bool krakenFound = false;
 
     void Start()
     {

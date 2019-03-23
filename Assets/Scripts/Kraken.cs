@@ -73,7 +73,7 @@ public class Kraken : MonoBehaviour {
         }
     }
 
-    public void spawnTentacleInFront() {
+    public void spawnTentacleInFront() { //so player can spawn a tentacle from ghost
         if (GameObject.Find("Tentacle(Clone)") != null) //check if a tentacle already exists
         {
             counter = 0;

@@ -16,16 +16,13 @@ public class ghostController : MonoBehaviour
     [SerializeField] float moveSpeed = 8f;
     [SerializeField] bool isPossesing;
     [SerializeField] bool wantToPossess;
-    [SerializeField] bool krakenPossessed;
-    //[SerializeField] float timeToDestroy;
+    [SerializeField] bool krakenPossessed;    
     [SerializeField] GameObject objectToPossess;
 
     private float moveRightBust;
     private float moveLeftBust;
     private float m_timeElapsed;
-    //float timeToDestroy;
-
-    // Use this for initialization
+    
     void Start()
     {
         isPossesing = false;
@@ -64,19 +61,11 @@ public class ghostController : MonoBehaviour
 
         m_timeElapsed += Time.deltaTime;
 
-        if (Input.GetButtonDown("Fire2") && isPossesing && krakenPossessed)
+        if (Input.GetButtonDown("Fire2") && isPossesing && krakenPossessed) //when possesing Kraken, B button spawns a tentacle
         {
             objectToPossess.GetComponent<Kraken>().spawnTentacleInFront();
         }
-
-        //if (isPossesing)
-        //{
-        //    if (objectToPossess = null) {
-        //        wantToPossess = false;
-        //        isPossesing = false;
-        //    }
-        //}
-
+        
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -164,9 +153,10 @@ public class ghostController : MonoBehaviour
 
     void movementKraken()
     {
-        if (gameObject.transform.position.x > objectToPossess.GetComponent<Kraken>().getRandomLx() && gameObject.transform.position.x < objectToPossess.GetComponent<Kraken>().getRandomRx())
+        //so player can only move between these 2 points.
+        if (gameObject.transform.position.x > objectToPossess.GetComponent<Kraken>().getRandomLx() && gameObject.transform.position.x < objectToPossess.GetComponent<Kraken>().getRandomRx()) 
         {
-            Debug.Log("I'm HEEERE!");
+           // Debug.Log("I'm HEEERE!");
             if (getOwnAxis("Horizontal") > 0.3f)
             {
                 GetComponent<Rigidbody2D>().AddForce(new Vector2(moveSpeed + moveRightBust, 0));
@@ -178,10 +168,10 @@ public class ghostController : MonoBehaviour
         }
         else {
             //Debug.Log("I'm not HEEERE!");
-            //Debug.Log("left side: " + objectToPossess.GetComponent<Kraken>().getRandomLx());         
+            //Debug.Log("LEFT side: " + objectToPossess.GetComponent<Kraken>().getRandomLx());         
             //Debug.Log("RIGHT side: " + objectToPossess.GetComponent<Kraken>().getRandomRx());
 
-            if (gameObject.transform.position.x < objectToPossess.GetComponent<Kraken>().getRandomLx()) { //to 
+            if (gameObject.transform.position.x < objectToPossess.GetComponent<Kraken>().getRandomLx()) { //to constrict player's movement side to side
                GetComponent<Rigidbody2D>().AddForce(new Vector2(moveSpeed + moveRightBust, 0));
             }
             else if (gameObject.transform.position.x > objectToPossess.GetComponent<Kraken>().getRandomRx())
