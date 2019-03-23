@@ -157,7 +157,7 @@ public class Game_Manager : MonoBehaviour {
 
 
         Debug.Log(" curr alive " + playersCurrentlyAlive);
-        score.print();
+   //     score.print();
         //if (!player1alive) {
         //    m_timeToSpawn1 += Time.deltaTime;
         //}
