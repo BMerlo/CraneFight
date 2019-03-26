@@ -117,6 +117,26 @@ public class playerController : MonoBehaviour {
 
     PolygonCollider2D myCollider;
 
+    //references to snap
+    ReferencePosition referencePos;
+    float referenceTop;
+    float referenceTop1;
+    float referenceTop2;
+    float referenceMid;
+    float referenceBot1;
+    float referenceBot2;
+    float referenceBot;
+
+    float midPointLane1;
+    float midPointLane2;
+    float midPointLane3;
+    float midPointLane4;
+    float midPointLane5;
+    float midPointLane6;
+
+    public int currentLane;
+    public float forceToCenter;
+
     //[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
     // Use this for initialization
     void Start() {
@@ -150,6 +170,32 @@ public class playerController : MonoBehaviour {
         // MoveBackScript = GetComponent<moveBack>();
         //isSmelly = true;
 
+        //setting references
+        referencePos = FindObjectOfType<ReferencePosition>();
+        //get reference according to objects on references object
+        referenceTop = referencePos.getReferenceTL();
+        referenceTop1 = referencePos.getReferenceT1();
+        referenceTop2 = referencePos.getReferenceT2();
+        referenceMid = referencePos.getReferenceMid();
+        referenceBot1 = referencePos.getReferenceB1();
+        referenceBot2 = referencePos.getReferenceB2();
+        referenceBot = referencePos.getReferenceBL();
+
+        //calculate mid point
+        midPointLane1 = referenceTop1 + ((referenceTop - referenceTop1) / 2);
+        midPointLane2 = referenceTop2 + ((referenceTop1 - referenceTop2) / 2);
+        midPointLane3 = referenceMid + ((referenceTop2 - referenceMid) / 2);
+        midPointLane4 = referenceBot1 + ((referenceMid - referenceBot1) / 2);
+        midPointLane5 = referenceBot2 + ((referenceBot1 - referenceBot2) / 2);
+        midPointLane6 = referenceBot + ((referenceBot2 - referenceBot) / 2);
+        /*Debug.Log(midPointLane1);
+        Debug.Log(midPointLane2);
+        Debug.Log(midPointLane3);
+        Debug.Log(midPointLane4);
+        Debug.Log(midPointLane5);
+        Debug.Log(midPointLane6);*/
+
+        forceToCenter = 50;
 
     }
 
@@ -313,8 +359,9 @@ public class playerController : MonoBehaviour {
                 //takeDamage(jumpDamage);
             }
         }
-        
 
+        //reference script
+        checkLane();
     }
 
 
@@ -397,6 +444,13 @@ public class playerController : MonoBehaviour {
                 }
             }
         }
+
+        //Debug.Log("VELOCITY: " + getVelocity());
+        //reference script
+        if (getVelocity() < 8.0f) {
+            pushToMid();
+        }
+        
     }
 
     float GetDistanceFromClosest(GameObject[] gameObjects)
@@ -1125,7 +1179,7 @@ public class playerController : MonoBehaviour {
         if (isSmelly) // smelly countdown
         {
             smellyCooldownTimer -= 1 * Time.deltaTime;
-            Debug.Log("Smelly Timer:" + smellyCooldownTimer);
+           // Debug.Log("Smelly Timer:" + smellyCooldownTimer);
             if (smellyCooldownTimer <= 0)
             {
                 becomeUnSmelly();
@@ -1133,6 +1187,82 @@ public class playerController : MonoBehaviour {
             }
         }
 
+    }
+
+    //reference script
+    float getVelocity() {
+        return m_rb.velocity.magnitude;
+    }
+
+    void checkLane() {
+        if (transform.position.y <= referenceTop && transform.position.y > referenceTop1) {
+            //    Debug.Log("I'm on 1st lane from the top");
+           
+            currentLane = 1;
+
+        }
+        else if (transform.position.y <= referenceTop1 && transform.position.y > referenceTop2)
+        {
+            currentLane = 2;
+            //  Debug.Log("I'm on 2nd lane from the top");
+        }
+        else if (transform.position.y <= referenceTop2 && transform.position.y > referenceMid)
+        {
+            currentLane = 3;
+            //Debug.Log("I'm on 3th lane from the top");
+        }     
+        else if (transform.position.y <= referenceMid && transform.position.y > referenceBot1)
+        {
+            currentLane = 4;
+            //    Debug.Log("I'm on 4th lane from the top");
+        }
+        else if (transform.position.y <= referenceBot1 && transform.position.y > referenceBot2)
+        {
+            currentLane = 5;
+            //  Debug.Log("I'm on 5th lane from the top");
+        }
+        else if (transform.position.y <= referenceBot2 && transform.position.y > referenceBot)
+        {
+            currentLane = 6;
+            //Debug.Log("I'm on 6th lane from the top");
+        }
+
+    }
+
+    void pushToMid() {
+
+        switch (currentLane)
+        {
+            case 1:
+                Vector3 pointToPush1 = new Vector3(transform.position.x, midPointLane1, 0); //calculate the point to push towards to
+                m_rb.AddForce((pointToPush1 - transform.position) * forceToCenter); //pushes on that direction with a force amplying that
+                break;
+            case 2:
+                Vector3 pointToPush2 = new Vector3(transform.position.x, midPointLane2, 0);
+                m_rb.AddForce((pointToPush2 - transform.position) * forceToCenter);
+                break;
+            case 3:
+                Vector3 pointToPush3 = new Vector3(transform.position.x, midPointLane3, 0);
+                m_rb.AddForce((pointToPush3 - transform.position) * forceToCenter);
+               // Debug.Log("Trying to push towards: " + pointToPush3);
+                break;
+            case 4:
+                Vector3 pointToPush4 = new Vector3(transform.position.x, midPointLane4, 0);
+                m_rb.AddForce((pointToPush4 - transform.position) * forceToCenter);                
+                break;
+            case 5:
+                Vector3 pointToPush5 = new Vector3(transform.position.x, midPointLane5, 0);
+                m_rb.AddForce((pointToPush5 - transform.position) * forceToCenter);
+                break;
+            case 6:
+                Vector3 pointToPush6 = new Vector3(transform.position.x, midPointLane6, 0);
+                m_rb.AddForce((pointToPush6 - transform.position) * forceToCenter);
+                break;
+            default:
+                Debug.Log("Just give it some until until update gives this 0 a value: " + currentLane);
+                break;
+
+        }
     }
 
 }
