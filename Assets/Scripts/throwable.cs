@@ -5,7 +5,7 @@ using UnityEngine;
 public class throwable : MonoBehaviour {
     //[SerializeField] Vector3 pos;
     [SerializeField] float stopDistance = 0.5f;
-    bool isStopped = false;
+    bool isStopped = true;
     bool isThrown = false;
     [SerializeField] private bool[] isPlayerPickupAble = new bool[4];
     Vector3 lastFramePos;
@@ -29,6 +29,7 @@ public class throwable : MonoBehaviour {
 
         if (isStopped == false && isThrown)
         {
+            Debug.Log("WHAT IS THIS EVEN, FFS /////////////////////");
             distanceTravelled += Vector3.Distance(this.transform.position, lastFramePos);
             lastFramePos = this.transform.position;
 
@@ -93,6 +94,11 @@ public class throwable : MonoBehaviour {
         
     }
 
+    public bool isItThrown()
+    {
+        return isThrown;
+    }
+
     //Sets boolean to true in array isPlayerPickupAble at index position playerNumber
     public void makePickupAble(int playerNumber)
     {
@@ -108,6 +114,11 @@ public class throwable : MonoBehaviour {
     public bool canIPickup(int playerNumber)
     {
         return isPlayerPickupAble[playerNumber] = false;
+    }
+
+    public void setThrown()
+    {
+        isThrown = true;
     }
 
     //Highlights the object after a set time with a colour that is allowed to pick up the object

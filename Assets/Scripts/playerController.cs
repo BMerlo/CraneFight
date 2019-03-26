@@ -794,11 +794,17 @@ public class playerController : MonoBehaviour {
         if (colliderObj2Listen != null && colliderObj2Listen.GetComponent<CraneZone>().isTherePickable())
         {
             Debug.Log("attempting to pick up");
-
+            if (colliderObj2Listen.GetComponent<CraneZone>().getObj2PickUp().GetComponent<throwable>() 
+                && colliderObj2Listen.GetComponent<CraneZone>().getObj2PickUp().GetComponent<throwable>().isItThrown())
+            {
+                return;
+            }
             //Checks if the current player can pick up the object
             //if (colliderObj2Listen.GetComponent<CraneZone>().getObj2PickUp().GetComponent<throwable>().canIPickup((int)playerNum))
-           // {
-                objPicked = colliderObj2Listen.GetComponent<CraneZone>().getObj2PickUp();
+            // {
+            objPicked = colliderObj2Listen.GetComponent<CraneZone>().getObj2PickUp();
+
+            
 
 
                 objPicked.GetComponent<Rigidbody2D>().velocity.Set(0, 0);
@@ -876,6 +882,8 @@ public class playerController : MonoBehaviour {
                 default:
                     break;
             }
+
+            objPicked.GetComponent<throwable>().setThrown();
 
             if (objPicked.GetComponent<CircleCollider2D>())
             {
@@ -1030,7 +1038,7 @@ public class playerController : MonoBehaviour {
             drag = GetComponent<Rigidbody2D>().drag;
 
         }
-        GetComponent<Rigidbody2D>().drag = 0;
+        GetComponent<Rigidbody2D>().drag = 1f;
 
         // DOESNT WORK THIS WAY> background speed fucks things up
         //Vector2 v = rBody.velocity;
@@ -1125,7 +1133,7 @@ public class playerController : MonoBehaviour {
         if (isSmelly) // smelly countdown
         {
             smellyCooldownTimer -= 1 * Time.deltaTime;
-            Debug.Log("Smelly Timer:" + smellyCooldownTimer);
+            //Debug.Log("Smelly Timer:" + smellyCooldownTimer);
             if (smellyCooldownTimer <= 0)
             {
                 becomeUnSmelly();
@@ -1133,6 +1141,11 @@ public class playerController : MonoBehaviour {
             }
         }
 
+    }
+
+    public bool amIoily()
+    {
+        return isOiled;
     }
 
 }
