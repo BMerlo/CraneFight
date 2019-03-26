@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+//using UnityEngine.SceneManagement;
 
 public class Game_Manager : MonoBehaviour {
 
@@ -53,7 +54,7 @@ public class Game_Manager : MonoBehaviour {
     [SerializeField] GameObject ghostPrefab;
     private Text winnerText;
     ScoreManager score; //get score script
-
+    //float timer = 0;
     public enum PlayerNum
     {
         P1,
@@ -95,9 +96,9 @@ public class Game_Manager : MonoBehaviour {
 
         //numberOfPlayers = player1, player2, player3, player4;
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
         //if (numberOfPlayers.Length == 1)
         //      {
@@ -114,30 +115,46 @@ public class Game_Manager : MonoBehaviour {
 
         if (playersCurrentlyAlive == 1)
         {
+            //timer++;
             if (player1alive)
             {
                 Debug.Log("PLAYER 1 WINS");
                 winPanel.SetActive(true);
                 winnerText.text = "Winner is Player1";
-                score.setp1(score.returnScores(playersCurrentlyAlive));
+
+                if (PlayerPrefs.GetInt("level") == 0)//if its level 1
+                    score.setp1(score.returnScores(playersCurrentlyAlive));
+                else if (PlayerPrefs.GetInt("level") == 1)// if its level two
+                    score.Level2setp1(score.returnScores(playersCurrentlyAlive));
+
                 Time.timeScale = 0; //pause the game
-              
+
             }
             else if (player2alive)
             {
                 Debug.Log("PLAYER 2 WINS");
                 winPanel.SetActive(true);
                 winnerText.text = "Winner is Player2";
-                score.setp2(score.returnScores(playersCurrentlyAlive));
+
+                if (PlayerPrefs.GetInt("level") == 0)//if its level 1
+                    score.setp2(score.returnScores(playersCurrentlyAlive));
+                else if (PlayerPrefs.GetInt("level") == 1)// if its level two
+                    score.Level2setp2(score.returnScores(playersCurrentlyAlive));
+
                 Time.timeScale = 0;
-               
+
             }
             else if (player3alive)
             {
                 Debug.Log("PLAYER 3 WINS");
                 winPanel.SetActive(true);
                 winnerText.text = "Winner is Player3";
-                score.setp3(score.returnScores(playersCurrentlyAlive));
+
+                if (PlayerPrefs.GetInt("level") == 0)//if its level 1
+                    score.setp3(score.returnScores(playersCurrentlyAlive));
+                else if (PlayerPrefs.GetInt("level") == 1)// if its level two
+                    score.Level2setp3(score.returnScores(playersCurrentlyAlive));
+
                 Time.timeScale = 0;
             }
             else if (player4alive)
@@ -145,13 +162,23 @@ public class Game_Manager : MonoBehaviour {
                 Debug.Log("PLAYER 4 WINS");
                 winPanel.SetActive(true);
                 winnerText.text = "Winner is Player4";
-                score.setp4(score.returnScores(playersCurrentlyAlive));
+                if (PlayerPrefs.GetInt("level") == 0)//if its level 1
+                    score.setp4(score.returnScores(playersCurrentlyAlive));
+                else if (PlayerPrefs.GetInt("level") == 1)// if its level two
+                    score.Level2setp4(score.returnScores(playersCurrentlyAlive));
+
                 Time.timeScale = 0;
-                
             }
-
+            //testing 
+            //if (timer >= 50)//load scene to test 
+            //{
+            //    SceneManager.LoadScene("SampleScene");//reload scene to test
+            //    score.levelplus();
+            //    timer = 0;
+            //}
+            //if (PlayerPrefs.GetInt("level") == 1)
+            //    score.finalScore();
         }
-
 
         Debug.Log(" curr alive " + playersCurrentlyAlive);
         score.print();
@@ -211,27 +238,48 @@ public class Game_Manager : MonoBehaviour {
         obj.GetComponent<ghostController>().setPlayerNum(num);
 
 
-        switch (num) {
+        switch (num)
+        {
             case 0:
                 Debug.Log("player 1 dead");
                 player1alive = false;
-                score.setp1(score.returnScores(playersCurrentlyAlive));
+
+                if (PlayerPrefs.GetInt("level") == 0)//if its level 1
+                    score.setp1(score.returnScores(playersCurrentlyAlive));
+                else if (PlayerPrefs.GetInt("level") == 1)// if its level two
+                    score.Level2setp1(score.returnScores(playersCurrentlyAlive));
+
                 break;
             case 1:
                 Debug.Log("player 2 dead");
                 player2alive = false;
-                score.setp2(score.returnScores(playersCurrentlyAlive));
+
+                if (PlayerPrefs.GetInt("level") == 0)//if its level 1
+                    score.setp2(score.returnScores(playersCurrentlyAlive));
+                else if (PlayerPrefs.GetInt("level") == 1)// if its level two
+                    score.Level2setp2(score.returnScores(playersCurrentlyAlive));
+
                 break;
             case 2:
 
                 Debug.Log("player 3 dead");
                 player3alive = false;
-                score.setp3(score.returnScores(playersCurrentlyAlive));
+
+                if (PlayerPrefs.GetInt("level") == 0)//if its level 1
+                    score.setp3(score.returnScores(playersCurrentlyAlive));
+                else if (PlayerPrefs.GetInt("level") == 1)// if its level two
+                    score.Level2setp3(score.returnScores(playersCurrentlyAlive));
+
                 break;
             case 3:
                 Debug.Log("player 4 dead");
                 player4alive = false;
-                score.setp4(score.returnScores(playersCurrentlyAlive));
+
+                if (PlayerPrefs.GetInt("level") == 0)//if its level 1
+                    score.setp4(score.returnScores(playersCurrentlyAlive));
+                else if (PlayerPrefs.GetInt("level") == 1)// if its level two
+                    score.Level2setp4(score.returnScores(playersCurrentlyAlive));
+
                 break;
             default:
                 Debug.Log("wrong num");
@@ -241,6 +289,5 @@ public class Game_Manager : MonoBehaviour {
 
         playersCurrentlyAlive--;
     }
-
 }
 
