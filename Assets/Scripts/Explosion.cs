@@ -5,6 +5,8 @@ using UnityEngine;
 public class Explosion : MonoBehaviour {
     [SerializeField] float pushForce = 1f;
     [SerializeField] float damageMultiplier = 100f;
+    [SerializeField] float isOilyDamge = 5f; ///
+
     Tentacle t;
     // Use this for initialization
     void Start () {
@@ -38,6 +40,16 @@ public class Explosion : MonoBehaviour {
             {
                 collision.GetComponent<playerController>().
                     takeDamage(damageMultiplier * (1f / Vector3.Distance(this.transform.position, collision.gameObject.transform.position)));
+
+                Debug.Log(collision.gameObject.name + "Health: " + collision.GetComponent<playerController>().getHitpoints());
+
+                if (collision.GetComponent<playerController>().getIsOiled()) // extra damage if oily
+                {
+                    collision.GetComponent<playerController>().takeDamage(isOilyDamge);
+                    Debug.Log(collision.gameObject.name+" has taken an extra: " + isOilyDamge);
+                    Debug.Log(collision.gameObject.name +"Health: " + collision.GetComponent<playerController>().getHitpoints());
+
+                }
             }
         }
         if (collision.GetComponent<oil>())
