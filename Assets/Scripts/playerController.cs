@@ -116,6 +116,8 @@ public class playerController : MonoBehaviour {
     public bool isSmelly;
 
     PolygonCollider2D myCollider;
+    [SerializeField] GameObject smellCloudB;
+    [SerializeField] GameObject smellCloudF;
 
     //references to snap
     ReferencePosition referencePos;
@@ -198,6 +200,11 @@ public class playerController : MonoBehaviour {
         forceToCenter = 50;
 
 
+    }
+
+    public float getHitpoints()
+    {
+        return hitPoints;
     }
 
     // Update is called once per frame
@@ -468,15 +475,17 @@ public class playerController : MonoBehaviour {
     {
         isSmelly = true;
         smellyCooldownTimer = smellyCooldown; // Timer starts  at 15 seconds
-        Debug.Log("Something is smelly");
-        myAnim.SetBool("isSmelly", true);
+      //  Debug.Log("Something is smelly");
+        smellCloudF.SetActive(true);
+        smellCloudB.SetActive(true);
     }
 
     public void becomeUnSmelly()
     {
         isSmelly = false;
         Debug.Log("No more Smell");
-        myAnim.SetBool("isSmelly", false);
+        smellCloudF.SetActive(false);
+        smellCloudB.SetActive(false);
     }
 
     void updateMovementVec()
@@ -1106,7 +1115,6 @@ public class playerController : MonoBehaviour {
         Debug.Log("got oiled!");
         Debug.Log("Oil started timer at: " + oilCooldownTimer);
         //change sprites here to oily
-        myAnim.SetBool("isSmelly", true); //<----- Change "isSmelly" to "isOily" when the Oily Animations for each of the players are implemented to the myAnim controller.
         /*March 17, 2019: Oily artwork/Animations for the vehicles were not in the project or in the google drive.
          * So I used the smell animation just so I can debug. Please change this when the Oily animations are implemented.*/
         
@@ -1135,6 +1143,12 @@ public class playerController : MonoBehaviour {
         //oilDirectionModifier = 1;
         Debug.Log("got unoiled!");
     }
+
+    public bool getIsOiled()//Getter Called in Explosion script to check if the player is oily
+    {
+        return isOiled;
+    }
+
 
     public void stun(float addedStunTime)
     {
