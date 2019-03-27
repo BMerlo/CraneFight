@@ -37,7 +37,7 @@ public class carAI : MonoBehaviour
         //lowerSpeed = 0;
         originalSpeed = Random.Range(minSpeed, maxSpeed);
 
-        //gameObject.layer = 19; //make every AI to belong to layer AI
+        gameObject.layer = 19; //make every AI to belong to layer AI
 
         backGroundScript = FindObjectOfType<ScrollingBackGround>();
         backgroundSpeed = backGroundScript.getSpeed();
@@ -64,7 +64,7 @@ public class carAI : MonoBehaviour
         myBody.velocity = new Vector2(desiredSpeed, 0);
         //GetComponent<Rigidbody2D>().AddForce(transform.right * force, ForceMode2D.Impulse);
 
-        Debug.Log("-----------------------------------speed set");
+       // Debug.Log("-----------------------------------speed set");
         
         //speedUsed = originalSpeed;
     }
@@ -72,14 +72,13 @@ public class carAI : MonoBehaviour
     void accelerate()
     {
         myBody.AddForce(dir * accelerateForce);
-        Debug.Log("---------accelerate " + (dir * accelerateForce));
-
+        //Debug.Log("---------accelerate " + (dir * accelerateForce));
     }
 
     void decelerate()
     {
         myBody.AddForce(-dir * decelerateForce);
-        Debug.Log("---------decelerate");
+        //Debug.Log("---------decelerate");
 
     }
 
