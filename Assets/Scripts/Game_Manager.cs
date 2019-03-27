@@ -51,7 +51,11 @@ public class Game_Manager : MonoBehaviour {
 
     private float m_timeElapsed;
 
-    [SerializeField] GameObject ghostPrefab;
+    [SerializeField] GameObject ghostPrefab1;
+    [SerializeField] GameObject ghostPrefab2;
+    [SerializeField] GameObject ghostPrefab3;
+    [SerializeField] GameObject ghostPrefab4;
+
     private Text winnerText;
     ScoreManager score; //get score script
     //float timer = 0;
@@ -181,7 +185,7 @@ public class Game_Manager : MonoBehaviour {
         }
 
         Debug.Log(" curr alive " + playersCurrentlyAlive);
-        score.print();
+      //  score.print();
         //if (!player1alive) {
         //    m_timeToSpawn1 += Time.deltaTime;
         //}
@@ -234,58 +238,41 @@ public class Game_Manager : MonoBehaviour {
 
     public void spawnGhost(int num)
     {
-        GameObject obj = Instantiate(ghostPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        obj.GetComponent<ghostController>().setPlayerNum(num);
 
-
-        switch (num)
-        {
+        switch (num) {
             case 0:
+                GameObject obj = Instantiate(ghostPrefab1, new Vector3(0, 0, 0), Quaternion.identity);
+                obj.GetComponent<ghostController>().setPlayerNum(num);
                 Debug.Log("player 1 dead");
                 player1alive = false;
-
-                if (PlayerPrefs.GetInt("level") == 0)//if its level 1
-                    score.setp1(score.returnScores(playersCurrentlyAlive));
-                else if (PlayerPrefs.GetInt("level") == 1)// if its level two
-                    score.Level2setp1(score.returnScores(playersCurrentlyAlive));
-
+                score.setp1(score.returnScores(playersCurrentlyAlive));
                 break;
             case 1:
+                GameObject obj2 = Instantiate(ghostPrefab2, new Vector3(0, 0, 0), Quaternion.identity);
+                obj2.GetComponent<ghostController>().setPlayerNum(num);
                 Debug.Log("player 2 dead");
                 player2alive = false;
-
-                if (PlayerPrefs.GetInt("level") == 0)//if its level 1
-                    score.setp2(score.returnScores(playersCurrentlyAlive));
-                else if (PlayerPrefs.GetInt("level") == 1)// if its level two
-                    score.Level2setp2(score.returnScores(playersCurrentlyAlive));
-
+                score.setp2(score.returnScores(playersCurrentlyAlive));
                 break;
             case 2:
-
+                GameObject obj3 = Instantiate(ghostPrefab3, new Vector3(0, 0, 0), Quaternion.identity);
+                obj3.GetComponent<ghostController>().setPlayerNum(num);
                 Debug.Log("player 3 dead");
                 player3alive = false;
-
-                if (PlayerPrefs.GetInt("level") == 0)//if its level 1
-                    score.setp3(score.returnScores(playersCurrentlyAlive));
-                else if (PlayerPrefs.GetInt("level") == 1)// if its level two
-                    score.Level2setp3(score.returnScores(playersCurrentlyAlive));
-
+                score.setp3(score.returnScores(playersCurrentlyAlive));
                 break;
             case 3:
+                GameObject obj4 = Instantiate(ghostPrefab4, new Vector3(0, 0, 0), Quaternion.identity);
+                obj4.GetComponent<ghostController>().setPlayerNum(num);
                 Debug.Log("player 4 dead");
                 player4alive = false;
-
-                if (PlayerPrefs.GetInt("level") == 0)//if its level 1
-                    score.setp4(score.returnScores(playersCurrentlyAlive));
-                else if (PlayerPrefs.GetInt("level") == 1)// if its level two
-                    score.Level2setp4(score.returnScores(playersCurrentlyAlive));
-
+                score.setp4(score.returnScores(playersCurrentlyAlive));
                 break;
             default:
                 Debug.Log("wrong num");
                 break;
 
-        }
+}
 
         playersCurrentlyAlive--;
     }
