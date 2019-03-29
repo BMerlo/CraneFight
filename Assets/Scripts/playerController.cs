@@ -27,6 +27,8 @@ public class playerController : MonoBehaviour {
     private float verticalDeadZone = 0.3f;
 
     [SerializeField] float moveSpeed = 40f;
+    float horizontalMoveSpeed = 5f;
+    float maxHorizontalSpeed = 5f;
     [SerializeField] float evadeSpeed = 400f;
     [SerializeField] bool hasBoosted = false;
     [SerializeField] GameObject r, l, u, d, ru, lu, rd, ld;
@@ -490,7 +492,8 @@ public class playerController : MonoBehaviour {
 
     void updateMovementVec()
     {
-        movementVector = new Vector2(getOwnAxis("Horizontal"), getOwnAxis("Vertical"));
+        //movementVector = new Vector2(getOwnAxis("Horizontal"), getOwnAxis("Vertical"));
+        movementVector = new Vector2(0f, getOwnAxis("Vertical"));
     }
 
     void boost()
@@ -771,6 +774,15 @@ public class playerController : MonoBehaviour {
         //}
 
         rBody.AddForce(movementVector * moveSpeed);
+
+        Vector2 vel = rBody.velocity;
+
+        if (vel.x < maxHorizontalSpeed && vel.x > -maxHorizontalSpeed)
+        {
+            vel.x = getOwnAxis("Horizontal") * horizontalMoveSpeed;
+        }
+        rBody.velocity = vel;
+
         Debug.Log("move");
 
         //if (getOwnAxis("RBumper") > 0 && !hasEvaded)
