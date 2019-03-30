@@ -32,9 +32,14 @@ public class ReferencePosition : MonoBehaviour
     {
         if (!krakenFound) { //it will only search until kraken is on
             krakenObj = FindObjectOfType<Kraken>();
-            krakenObj.GetComponent<Kraken>().setRandomLx(TL.position.x);
-            krakenObj.GetComponent<Kraken>().setRandomRx(TR.position.x);
-            krakenFound = true;
+
+            if (krakenObj != null) {
+                krakenObj.GetComponent<Kraken>().setRandomLx(TL.position.x);
+                krakenObj.GetComponent<Kraken>().setRandomRx(TR.position.x);
+                krakenFound = true;
+                //Debug.Log("KRAKEN LIMTIS SET");
+            }           
+            
         }
     }
 

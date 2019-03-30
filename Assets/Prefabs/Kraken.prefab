@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5306365482764860656}
   - component: {fileID: 5306365482764860663}
   - component: {fileID: 5306365482764860657}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Kraken
   m_TagString: Untagged
   m_Icon: {fileID: 0}

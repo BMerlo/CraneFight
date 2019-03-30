@@ -42,13 +42,7 @@ public class Game_Manager : MonoBehaviour {
 
     private float timeToRespawn = 5;
     
-
-    //reference to prefabs
-    [SerializeField] GameObject player1respawn;
-    [SerializeField] GameObject player2respawn;
-    [SerializeField] GameObject player3respawn;
-    [SerializeField] GameObject player4respawn;
-
+    
     private float m_timeElapsed;
 
     [SerializeField] GameObject ghostPrefab1;
@@ -93,10 +87,6 @@ public class Game_Manager : MonoBehaviour {
         //ghostToSpawn = -1;
 
         m_timeElapsed = 0;
-        //m_timeToSpawn1 = 0;
-        //m_timeToSpawn2 = 0;
-        //m_timeToSpawn3 = 0;
-        //m_timeToSpawn4 = 0;
 
         //numberOfPlayers = player1, player2, player3, player4;
     }
@@ -185,54 +175,7 @@ public class Game_Manager : MonoBehaviour {
         }
 
         Debug.Log(" curr alive " + playersCurrentlyAlive);
-      //  score.print();
-        //if (!player1alive) {
-        //    m_timeToSpawn1 += Time.deltaTime;
-        //}
-
-        //if (!player2alive)
-        //{
-        //    m_timeToSpawn2 += Time.deltaTime;
-        //}
-
-        //if (!player3alive)
-        //{
-        //    m_timeToSpawn3 += Time.deltaTime;
-        //}
-
-        //if (!player4alive)
-        //{
-        //    m_timeToSpawn4 += Time.deltaTime;
-        //}
-
-        //if (m_timeToSpawn1 > timeToRespawn) {
-        // //   GameObject player1r = Instantiate(player1respawn, new Vector3(0, 0, 0), Quaternion.identity);
-        //    player1alive = true;
-        //    m_timeToSpawn1 = 0;
-        //    playersCurrentlyAlive++;
-        //}
-
-        //if (m_timeToSpawn2 > timeToRespawn)
-        //{
-        //  //  GameObject player2r = Instantiate(player2respawn, new Vector3(0, 0, 0), Quaternion.identity);
-        //    player2alive = true;
-        //    m_timeToSpawn2 = 0;
-        //    playersCurrentlyAlive++;
-        //}
-        //if (m_timeToSpawn3 > timeToRespawn)
-        //{
-        //  //  GameObject player3r = Instantiate(player3respawn, new Vector3(0, 0, 0), Quaternion.identity);
-        //    player3alive = true;
-        //    m_timeToSpawn3 = 0;
-        //    playersCurrentlyAlive++;
-        //}
-        //if (m_timeToSpawn4 > timeToRespawn)
-        //{
-        //   // GameObject player4r = Instantiate(player4respawn, new Vector3(0, 0, 0), Quaternion.identity);
-        //    player4alive = true;
-        //    m_timeToSpawn4 = 0;
-        //    playersCurrentlyAlive++;
-        //}
+     
 
     }
 
@@ -271,7 +214,6 @@ public class Game_Manager : MonoBehaviour {
             default:
                 Debug.Log("wrong num");
                 break;
-
 }
 
         playersCurrentlyAlive--;

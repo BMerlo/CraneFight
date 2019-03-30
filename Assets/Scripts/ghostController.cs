@@ -19,6 +19,8 @@ public class ghostController : MonoBehaviour
     [SerializeField] bool krakenPossessed;    
     [SerializeField] GameObject objectToPossess;
 
+    Transform krakenPosition;
+
     private float moveRightBust;
     private float moveLeftBust;
     private float m_timeElapsed;
@@ -92,6 +94,7 @@ public class ghostController : MonoBehaviour
 
             if (collision.gameObject.GetComponent<Kraken>() != null)
             {
+                krakenPosition = gameObject.transform;
                 collision.gameObject.GetComponent<Kraken>().enabled = false;
                 krakenPossessed = true;
             }
@@ -112,6 +115,7 @@ public class ghostController : MonoBehaviour
         {
             wantToPossess = false;
             krakenPossessed = false;
+            
         }
     }
     
@@ -152,7 +156,7 @@ public class ghostController : MonoBehaviour
     }
 
     void movementKraken()
-    {
+    {        
         //so player can only move between these 2 points.
         if (gameObject.transform.position.x > objectToPossess.GetComponent<Kraken>().getRandomLx() && gameObject.transform.position.x < objectToPossess.GetComponent<Kraken>().getRandomRx()) 
         {

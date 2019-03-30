@@ -456,9 +456,9 @@ public class playerController : MonoBehaviour {
         
         //reference script
         //Debug.Log("VELOCITY: " + getVelocity());
-        if (getVelocity() < 8.0f) {
+        //if (getVelocity() < 8.0f) {
             pushToMid();
-        }
+        //}
     }
 
     float GetDistanceFromClosest(GameObject[] gameObjects)

@@ -109,6 +109,7 @@ public class Kraken : MonoBehaviour {
     }
 
     public void setInitialPosition() {
+        Debug.Log("setInitialPosition being called");
         gameObject.transform.position = new Vector3 (gameObject.transform.position.x, initialPosition.position.y, gameObject.transform.position.z);
     }
 }
