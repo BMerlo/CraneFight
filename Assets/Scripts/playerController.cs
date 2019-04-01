@@ -112,9 +112,9 @@ public class playerController : MonoBehaviour {
     private float m_stunTime;
 
 
-    Vector2 smellForceUp = new Vector2(0.0f, 0.08f);
-    Vector2 smellForceDown = new Vector2(0.0f, -0.08f);
-    float smellRadius = 1.3f;
+    Vector2 smellForceUp = new Vector2(0.0f, 0.1f);
+    Vector2 smellForceDown = new Vector2(0.0f, -0.1f);
+    float smellRadius = 3.3f;
     public bool isSmelly;
 
     PolygonCollider2D myCollider;
