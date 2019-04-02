@@ -174,7 +174,7 @@ public class Game_Manager : MonoBehaviour {
             //    score.finalScore();
         }
 
-        Debug.Log(" curr alive " + playersCurrentlyAlive);
+     //   Debug.Log(" curr alive " + playersCurrentlyAlive);
      
 
     }

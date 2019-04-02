@@ -14,6 +14,7 @@ public class Tentacle : MonoBehaviour {
     float pushForce = 700;
     float pushWait = 0.3f;
     bool isHit = false;
+    bool isWiggle = false;
     float retractSpeed = 0.1f;
 
     [SerializeField] Animator tentacleAnim;
@@ -61,21 +62,24 @@ public class Tentacle : MonoBehaviour {
             {
                 GetComponent<PolygonCollider2D>().isTrigger = false;
                 hasAttacked = true;
-                hasAttacked = true;
-                retreat();//TEMPORARY SPOT TO CHECK FOR ANIMATIIONSz
+               // retreat();//TEMPORARY SPOT TO CHECK FOR ANIMATIIONSz
             }
         }
 
         if(isHit)
         {
-           // this.transform.Translate(0, retractSpeed, 0);
             Debug.Log("Tentacle retracting away-------");
-            tentacleAnim.SetBool("writhing", isHit); //wiggle animation // isHit = true
             transform.GetChild(0).gameObject.SetActive(false);//sets the shadow to false so we don't see it // just for debugging
             GetComponent<PolygonCollider2D>().enabled = false;//disables the straight polygon collider
-           
             this.transform.Translate(0, retractSpeed, 0);
             //tentacleAnim.SetBool("hitWithExplosive", isHit); //retreating animation
+        }
+
+        if(isWiggle)
+        {
+            tentacleAnim.SetBool("writhing", isWiggle); //wiggle animation 
+            transform.GetChild(0).gameObject.SetActive(false);//sets the shadow to false so we don't see it // just for debugging
+            GetComponent<PolygonCollider2D>().enabled = false;//disables the straight polygon collider
         }
 
         if (reverse) { 
@@ -103,17 +107,26 @@ public class Tentacle : MonoBehaviour {
     //    Debug.Log("EXPLOSION HIT TENTACLE2222" + isHit);
     //}
 
-    //void OnTriggerEnter2D(Collider2D collision)
-    //{
-       
-    //    //if (collision.GetComponent<destructible>())
-    //    if(collision.tag == "Pickable")
-    //    {
-    //        Debug.Log("Tentacle Hit by destructible");
-    //        retreat();
-    //    }
-    //    Debug.Log("EXPLOSION HIT TENTACLE2222" + isHit);
-    //}
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        oil oi = FindObjectOfType<oil>();
+        if (oi != null)
+        {
+            Debug.Log("Tentacle Hit by" + oi);
+            isWiggling();
+        }
+
+        Explosion ex = FindObjectOfType<Explosion>();
+        if (ex != null)
+        {
+            Debug.Log("Tentacle Hit by," + ex);
+            retreat();
+        }
+        Debug.Log("hit by " + ex);
+        Debug.Log("hit by " + oi);
+
+
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -123,7 +136,7 @@ public class Tentacle : MonoBehaviour {
         }
         else if (collision.GetComponent<playerController>())
         {
-            Debug.Log("TENTACLE TRIGGERED!!!~~~~~~~~~~~~");
+         //   Debug.Log("TENTACLE TRIGGERED!!!~~~~~~~~~~~~");
 
             if (collision.transform.position.x >= transform.position.x)
             {
@@ -146,5 +159,20 @@ public class Tentacle : MonoBehaviour {
     {
         isHit = true;
         Debug.Log("TENTACLEHIT");
+    }
+
+    public void isWiggling()
+    {
+        isWiggle = true;
+    }
+
+    public bool getHit()
+    {
+        return isHit;
+    }
+
+    public bool getWiggle()
+    {
+        return isWiggle;
     }
 }

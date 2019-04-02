@@ -41,7 +41,7 @@ public class Explosion : MonoBehaviour {
                 collision.GetComponent<playerController>().
                     takeDamage(damageMultiplier * (1f / Vector3.Distance(this.transform.position, collision.gameObject.transform.position)));
 
-                Debug.Log(collision.gameObject.name + "Health: " + collision.GetComponent<playerController>().getHitpoints());
+               // Debug.Log(collision.gameObject.name + "Health: " + collision.GetComponent<playerController>().getHitpoints());
 
                 if (collision.GetComponent<playerController>().getIsOiled()) // extra damage if oily
                 {
@@ -63,19 +63,20 @@ public class Explosion : MonoBehaviour {
     }
 
 
-    void OnTriggerEnter2D(Collider2D collision)
-    { 
-        //t = collision.gameObject.GetComponent<Tentacle>();
-        Debug.Log(collision.gameObject + "--------------------------------");
+    //void OnTriggerEnter2D(Collider2D collision)
+    //{ 
+    //    t = collision.gameObject.GetComponent<Tentacle>();
+    //    Debug.Log(collision.gameObject + "--------------------------------");
 
-        if (collision.gameObject.GetComponent<Tentacle>() != null)
-        {
-            //Debug.Log(t.name + "is hit");
+    //    if (t != null)
+    //    {
+    //        Debug.Log(t + "is hit");
+    //        t.getWiggle();
+    //        t.getHit();
+    //        t.retreat();
 
-            collision.GetComponent<Tentacle>().retreat();
-
-        }
-    }
+    //    }
+    //}
     //void OnTriggerEnter2D(Collider2D collision)
     //{
     //    Debug.Log("Tentacle hit!!!!!" + collision.GetComponent<Tentacle>());
