@@ -709,3 +709,19 @@ InputManager:
     type: 0
     axis: 2
     joyNum: 4
+  - serializedVersion: 3
+    m_Name: p
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: p
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.001
+    sensitivity: 1000
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 2
+    joyNum: 4
