@@ -350,61 +350,125 @@ public class playerController : MonoBehaviour {
         {
             //chargingForce();  // NO MORE CHARGING
             Animator crane = craneActual.GetComponent<Animator>();
-            //craneActual.gameObject.SetActive(false);
+            craneActual.gameObject.SetActive(false);
 
             //CRANE ANIMATION HANDLER
-            //if (cD)
-            //{
-            //    Dcrane.gameObject.SetActive(true);
-            //    Dcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+            if (cD)
+            {
+                Dcrane.gameObject.SetActive(true);
+                Dcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
 
-            //}
-            //else if (cU)
-            //{
-            //    Ucrane.gameObject.SetActive(true);
-            //    Ucrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+                Ucrane.gameObject.SetActive(false);
+                RUcrane.gameObject.SetActive(false);
+                RDcrane.gameObject.SetActive(false);
+                LUcrane.gameObject.SetActive(false);
+                LDcrane.gameObject.SetActive(false);
+                Rcrane.gameObject.SetActive(false);
+                Lcrane.gameObject.SetActive(false);
 
-            //}
-            //else if (cRU)
-            //{
-            //    RUcrane.gameObject.SetActive(true);
-            //    RUcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+            }
+            else if (cU)
+            {
+                Ucrane.gameObject.SetActive(true);
+                Ucrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+                
+                RUcrane.gameObject.SetActive(false);
+                RDcrane.gameObject.SetActive(false);
+                LUcrane.gameObject.SetActive(false);
+                LDcrane.gameObject.SetActive(false);
+                Rcrane.gameObject.SetActive(false);
+                Lcrane.gameObject.SetActive(false);
+                Dcrane.gameObject.SetActive(false);
 
-            //}
-            //else if (cRD)
-            //{
-            //    RDcrane.gameObject.SetActive(true);
-            //    RDcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+            }
+            else if (cRU)
+            {
+                RUcrane.gameObject.SetActive(true);
+                RUcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
 
-            //}
-            //else if (cLU)
-            //{
-            //    LUcrane.gameObject.SetActive(true);
-            //    LUcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+                Ucrane.gameObject.SetActive(false);
+                RDcrane.gameObject.SetActive(false);
+                LUcrane.gameObject.SetActive(false);
+                LDcrane.gameObject.SetActive(false);
+                Rcrane.gameObject.SetActive(false);
+                Lcrane.gameObject.SetActive(false);
+                Dcrane.gameObject.SetActive(false);
 
-            //}
-            //else if (cLD)
-            //{
-            //    LDcrane.gameObject.SetActive(true);
-            //    LDcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+            }
+            else if (cRD)
+            {
+                RDcrane.gameObject.SetActive(true);
+                RDcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
 
-            //}
-            //else if (cL)
-            //{
-            //    Rcrane.gameObject.SetActive(true);
-            //    Rcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+                Ucrane.gameObject.SetActive(false);
+                RUcrane.gameObject.SetActive(false);
+                LUcrane.gameObject.SetActive(false);
+                LDcrane.gameObject.SetActive(false);
+                Rcrane.gameObject.SetActive(false);
+                Lcrane.gameObject.SetActive(false);
+                Dcrane.gameObject.SetActive(false);
 
-            //}
-            //else if (cR)
-            //{
-            //    Lcrane.gameObject.SetActive(true);
-            //    Lcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+            }
+            else if (cLU)
+            {
+                LUcrane.gameObject.SetActive(true);
+                LUcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
 
-            //}
-            //else
-            //{
-            //    resetCraneAnims();
-            //}
+                Ucrane.gameObject.SetActive(false);
+                RUcrane.gameObject.SetActive(false);
+                RDcrane.gameObject.SetActive(false);
+                LDcrane.gameObject.SetActive(false);
+                Rcrane.gameObject.SetActive(false);
+                Lcrane.gameObject.SetActive(false);
+                Dcrane.gameObject.SetActive(false);
+
+
+            }
+            else if (cLD)
+            {
+                LDcrane.gameObject.SetActive(true);
+
+                Ucrane.gameObject.SetActive(false);
+                RUcrane.gameObject.SetActive(false);
+                RDcrane.gameObject.SetActive(false);
+                LUcrane.gameObject.SetActive(false);
+                Rcrane.gameObject.SetActive(false);
+                Lcrane.gameObject.SetActive(false);
+                Dcrane.gameObject.SetActive(false);
+                LDcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+
+            }
+            else if (cR)
+            {
+                Rcrane.gameObject.SetActive(true);
+                Rcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+                Ucrane.gameObject.SetActive(false);
+                RUcrane.gameObject.SetActive(false);
+                RDcrane.gameObject.SetActive(false);
+                LUcrane.gameObject.SetActive(false);
+                LDcrane.gameObject.SetActive(false);
+                Lcrane.gameObject.SetActive(false);
+                Dcrane.gameObject.SetActive(false);
+
+            }
+            else if (cL)
+            {
+                Lcrane.gameObject.SetActive(true);
+                Lcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+
+                Ucrane.gameObject.SetActive(false);
+                RUcrane.gameObject.SetActive(false);
+                RDcrane.gameObject.SetActive(false);
+                LUcrane.gameObject.SetActive(false);
+                LDcrane.gameObject.SetActive(false);
+                Rcrane.gameObject.SetActive(false);
+                Dcrane.gameObject.SetActive(false);
+
+            }
+            else
+            {
+                resetCraneAnims();
+            }
             throwObj();
         }
         else if (isCarrying == false && !hasJumped && !isJumping && getOwnButtonDown("A"))
@@ -636,141 +700,124 @@ public class playerController : MonoBehaviour {
         {
             craneActual.GetComponent<SpriteRenderer>().sprite = craneU;
             tIndex = 6;
-            if (!cD)
-            {
-                cD = true;
-                Debug.Log("cD is " + cD);
-            }
-            else
-            { 
-                resetCraneAnims();
-             Dcrane.gameObject.SetActive(false);
-
-                Debug.Log("cD is " + cD);
-            }
+            cD = true;
+            cL = false;
+            cR = false;
+            cU = false;
+            cRD = false;
+            cLD = false;
+            cRU = false;
+            cLU = false;
         }
         else if (angle < 67.5f)//right up
         {
             craneActual.GetComponent<SpriteRenderer>().sprite = craneRU;
             tIndex = 7;
-            if (cLD)
-            {
-                cLD = true;
-                Debug.Log("cLD is " + cLD);
-            }
-            else
-            {
-                resetCraneAnims();
-                LDcrane.gameObject.SetActive(false);
+             
+            cLD = true;
+            cL = false;
+            cR = false;
+            cU = false;
+            cD = false;
+            cRD = false;
+            cRU = false;
+            cLU = false;
 
-                Debug.Log("cLD is " + cLD);
-            }
         }
         else if (angle < 112.5f)//right
         {
             craneActual.GetComponent<SpriteRenderer>().sprite = craneR;
             tIndex = 0;
-            if (!cL)
-            {
+          
                 cL = true;
-                Debug.Log("cL is " + cL);
+                cL = false;
+                cR = false;
+                cU = false;
+                cD = false;
+                cRD = false;
+                cLD = false;
+                cRU = false;
+                cLU = false;
             }
-            else
-            {
-                resetCraneAnims();
-                Lcrane.gameObject.SetActive(false);
-
-                Debug.Log("cL is " + cL);
-            }
-        }
         else if (angle < 157.5f)//right down
         {
             craneActual.GetComponent<SpriteRenderer>().sprite = craneRD;
             tIndex = 1;
         
-            if (!cLU)
-            {
-                cLU = true;
-                Debug.Log("cLU is " + cLU);
-            }
-            else
-            {
-                resetCraneAnims();
-                LUcrane.gameObject.SetActive(false);
-
-                Debug.Log("cLU is " + cLU);
-            }//this was added at all of them
+            
+            cLU = true;
+            cL = false;
+            cR = false;
+            cU = false;
+            cD = false;
+            cRD = false;
+            cLD = false;
+            cRU = false;
+            
 
         }
         else if (angle < 202.5f)//down
         {
             craneActual.GetComponent<SpriteRenderer>().sprite = craneD;
             tIndex = 2;
-            if (!cU) { 
+         
                 cU = true;
-            Debug.Log("cU is " + cU);
+                cL = false;
+                cR = false;
+                cD = false;
+                cRD = false;
+                cLD = false;
+                cRU = false;
+                cLU = false;
             }
-            else
-            {
-                resetCraneAnims();
-                Ucrane.gameObject.SetActive(false);
-                Debug.Log("cU is " + cU);
-            }
-        }
         else if (angle < 247.5f)//left down
         {
             craneActual.GetComponent<SpriteRenderer>().sprite = craneLD;
             tIndex = 3;
          
-            if (!cRU)
-            {
-                cRU = true;
-                Debug.Log("cRU is " + cRU);
-            }
-            else
-            {
-                resetCraneAnims();
-                RUcrane.gameObject.SetActive(false);
-
-                Debug.Log("cRU is " + cRU);
-            }
+           
+            cRU = true;
+            cL = false;
+            cR = false;
+            cU = false;
+            cD = false;
+            cRD = false;
+            cLD = false;
+            cLU = false;
         }
         else if (angle < 292.5f)//left
         {
             craneActual.GetComponent<SpriteRenderer>().sprite = craneL;
             tIndex = 4;
         
-            if (!cR)
-            {
+        
                 cR = true;
-                Debug.Log("cR is " + cR);
-            }
-            else
-            {
-                resetCraneAnims();
-                Rcrane.gameObject.SetActive(false);
-                Debug.Log("cR is " + cR);
-            }
+            cL = false;
+            cU = false;
+            cD = false;
+            cRD = false;
+            cLD = false;
+            cRU = false;
+            cLU = false;
         }
         else if (angle < 337.5f)//left up
         {
             craneActual.GetComponent<SpriteRenderer>().sprite = craneLU;
             tIndex = 5;
-               if (!cRD) { 
-                cRD = true;
-                Debug.Log("cRD is " + cRD);
-            }
-            else
-            {
-                resetCraneAnims();
-                RDcrane.gameObject.SetActive(false);
-                Debug.Log("cRD is " + cRD);
-            }
+           cRD = true;
+            cL = false;
+            cR = false;
+            cU = false;
+            cD = false;
+            cLD = false;
+            cRU = false;
+            cLU = false;
         }
         else
         {
             craneActual.GetComponent<SpriteRenderer>().sprite = craneU;
             tIndex = 6;
+
             resetCraneAnims();
         }
         
