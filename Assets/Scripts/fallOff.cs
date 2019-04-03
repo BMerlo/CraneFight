@@ -66,8 +66,21 @@ public class fallOff : MonoBehaviour {
 
         if (GetComponent<playerController>())
         {
-            manager.spawnGhost(GetComponent<playerController>().getPlayerNum() - 1);
-
+            switch (GetComponent<playerController>().getPlayerNum() - 1) {
+                case 0:
+                    manager.player1alive = false;
+                    break;
+                case 1:
+                    manager.player2alive = false;
+                    break;
+                case 2:
+                    manager.player3alive = false;
+                    break;
+                case 3:
+                    manager.player4alive = false;
+                    break;
+            }
+            
             Destroy(this.gameObject, 1.0f);
 
             GetComponent<playerController>().setHealth(0);

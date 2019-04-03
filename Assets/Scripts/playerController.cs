@@ -6,7 +6,7 @@ using UnityEngine;
 public class playerController : MonoBehaviour {
 
     float hitPoints = 100f;
-    [SerializeField] HealthBar playerHealth;
+    [SerializeField] public HealthBar playerHealth;
 
     [SerializeField] float aimSpeed = 4f;
     Rigidbody2D rBody;
@@ -73,7 +73,7 @@ public class playerController : MonoBehaviour {
     [SerializeField] Sprite craneL, craneLU, craneU, craneRU, craneR, craneRD, craneD, craneLD;
 
     //public GameObject gameManager;
-    Game_Manager myManager;
+    public Game_Manager myManager;
 
     private Rigidbody2D m_rb;
 
@@ -143,9 +143,13 @@ public class playerController : MonoBehaviour {
     public float forceToCenter;
 
     //new movement    
-    public bool canMoveAgain;        
-    public float verticalMoveSpeed = 4.5f;
+    public bool canMoveAgain;
+    private float rangeToBeAbleToMoveAgain = 0.05f;
+    public float verticalMoveSpeed = 5.5f;
     public float maxVerticalMoveSpeed = 8;
+    public float addForceTimer;
+    public float addForceReference = 0.4f;
+
 
     //[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
     // Use this for initialization
@@ -153,7 +157,7 @@ public class playerController : MonoBehaviour {
         myManager = FindObjectOfType<Game_Manager>();
         myCollider = GetComponent<PolygonCollider2D>();
         rBody = GetComponent<Rigidbody2D>();
-        
+        addForceTimer = 0;
 
         switch (playerNum)
         {
@@ -377,27 +381,7 @@ public class playerController : MonoBehaviour {
         
 
         //reference script
-        checkLane();
-
-        //new movement
-        //timerToPushToMiddle -= Time.deltaTime;
-       // timerToMoveAgain -= Time.deltaTime;
-        /*
-        if (timerToPushToMiddle < 0)
-        {
-            canPushToMiddle = true;
-        }
-        else {
-            canPushToMiddle = false;
-        }*/
-        /*
-        if (timerToMoveAgain < 0)
-        {
-            canMoveAgain = true;
-        }
-        else {
-            canMoveAgain = false;
-        }*/
+        checkLane();       
     }
 
 
@@ -481,10 +465,14 @@ public class playerController : MonoBehaviour {
 
         //reference script
         //Debug.Log("VELOCITY: " + getVelocity());
-        //if (getVelocity() < 8.0f) {        
+
+        //new movement
+        addForceTimer += Time.deltaTime;
+        if (addForceTimer > addForceReference) {     //0.3 by default
+          //  Debug.Log("CAN PUSH TO MIDDLE: " + true);
             pushToMid();        
-        
-        //}
+        }
+        //until here
     }
 
     float GetDistanceFromClosest(GameObject[] gameObjects)
@@ -764,29 +752,30 @@ public class playerController : MonoBehaviour {
         
     }
 
+    
     //new movement
     void canMove() {
-        if (transform.position.y <= midPointLane1 + 0.05 && transform.position.y >= midPointLane1 - 0.05f)
+        if (transform.position.y <= midPointLane1 + rangeToBeAbleToMoveAgain && transform.position.y >= midPointLane1 - rangeToBeAbleToMoveAgain) //0..5f by default
         {
             canMoveAgain = true;
         }
-        else if (transform.position.y <= midPointLane2 + 0.05 && transform.position.y >= midPointLane2 - 0.05f)
+        else if (transform.position.y <= midPointLane2 + rangeToBeAbleToMoveAgain && transform.position.y >= midPointLane2 - rangeToBeAbleToMoveAgain)
         {
             canMoveAgain = true;
         }
-        else if (transform.position.y <= midPointLane3 + 0.05 && transform.position.y >= midPointLane3 - 0.05f)
+        else if (transform.position.y <= midPointLane3 + rangeToBeAbleToMoveAgain && transform.position.y >= midPointLane3 - rangeToBeAbleToMoveAgain)
         {
             canMoveAgain = true;
         }
-        else if (transform.position.y <= midPointLane4 + 0.05 && transform.position.y >= midPointLane4 - 0.05f)
+        else if (transform.position.y <= midPointLane4 + rangeToBeAbleToMoveAgain && transform.position.y >= midPointLane4 - rangeToBeAbleToMoveAgain)
         {
             canMoveAgain = true;
         }
-        else if (transform.position.y <= midPointLane5 + 0.05 && transform.position.y >= midPointLane5 - 0.05f)
+        else if (transform.position.y <= midPointLane5 + rangeToBeAbleToMoveAgain && transform.position.y >= midPointLane5 - rangeToBeAbleToMoveAgain)
         {
             canMoveAgain = true;
         }
-        else if (transform.position.y <= midPointLane6 + 0.05 && transform.position.y >= midPointLane6 - 0.05f)
+        else if (transform.position.y <= midPointLane6 + rangeToBeAbleToMoveAgain && transform.position.y >= midPointLane6 - rangeToBeAbleToMoveAgain)
         {
             canMoveAgain = true;
         }
@@ -794,6 +783,7 @@ public class playerController : MonoBehaviour {
             canMoveAgain = false;
         }
     }
+    //until here
 
     void movement()
     {
@@ -837,14 +827,21 @@ public class playerController : MonoBehaviour {
             vel.x = getOwnAxis("Horizontal") * horizontalMoveSpeed;
         }
 
+        //new movement
         if (canMoveAgain) {
-            if (vel.y < maxVerticalMoveSpeed && vel.x > -maxVerticalMoveSpeed)
+            if (vel.y < maxVerticalMoveSpeed && vel.y > -maxVerticalMoveSpeed)
             {
                 vel.y = getOwnAxis("Vertical") * verticalMoveSpeed;
-            }
-            //timerToMoveAgain = 1;
-            //timerToPushToMiddle = 0.1f;
+            }            
         }
+
+        if ((getOwnAxis("Vertical") > 0.2f && canMoveAgain)|| (getOwnAxis("Vertical") < -0.2f && canMoveAgain))
+        {
+            addForceTimer = 0;
+        }
+        //until here
+
+
         rBody.velocity = vel;
 
        // Debug.Log("move");
@@ -1132,7 +1129,7 @@ public class playerController : MonoBehaviour {
         if (hitPoints <= 0)
         {
             isSmelly = false;
-            myManager.spawnGhost(getPlayerNum() - 1);
+            myManager.spawnPlayer(getPlayerNum() - 1);
             Destroy(this.gameObject);
         }
     }
@@ -1338,7 +1335,7 @@ public class playerController : MonoBehaviour {
         {
             case 1:
                 Vector3 pointToPush1 = new Vector3(transform.position.x, midPointLane1, 0); //calculate the point to push towards to
-                m_rb.AddForce((pointToPush1 - transform.position) * forceToCenter); //pushes on that direction with a force amplying that
+                m_rb.AddForce((pointToPush1 - transform.position) * forceToCenter); //pushes on that direction with a force
                 break;
             case 2:                
                 Vector3 pointToPush2 = new Vector3(transform.position.x, midPointLane2, 0);
