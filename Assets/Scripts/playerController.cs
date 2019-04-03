@@ -6,7 +6,7 @@ using UnityEngine;
 public class playerController : MonoBehaviour {
 
     float hitPoints = 100f;
-    [SerializeField] HealthBar playerHealth;
+    [SerializeField] public HealthBar playerHealth;
 
     [SerializeField] float aimSpeed = 4f;
     Rigidbody2D rBody;
@@ -29,6 +29,7 @@ public class playerController : MonoBehaviour {
     [SerializeField] float moveSpeed = 40f;
     float horizontalMoveSpeed = 5f;
     float maxHorizontalSpeed = 5f;
+
     [SerializeField] float evadeSpeed = 400f;
     [SerializeField] bool hasBoosted = false;
     [SerializeField] GameObject r, l, u, d, ru, lu, rd, ld;
@@ -72,7 +73,7 @@ public class playerController : MonoBehaviour {
     [SerializeField] Sprite craneL, craneLU, craneU, craneRU, craneR, craneRD, craneD, craneLD;
 
     //public GameObject gameManager;
-    Game_Manager myManager;
+    public Game_Manager myManager;
 
     private Rigidbody2D m_rb;
 
@@ -141,12 +142,22 @@ public class playerController : MonoBehaviour {
     public int currentLane;
     public float forceToCenter;
 
+    //new movement    
+    public bool canMoveAgain;
+    private float rangeToBeAbleToMoveAgain = 0.05f;
+    public float verticalMoveSpeed = 5.5f;
+    public float maxVerticalMoveSpeed = 8;
+    public float addForceTimer;
+    public float addForceReference = 0.4f;
+
+
     //[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
     // Use this for initialization
     void Start() {
         myManager = FindObjectOfType<Game_Manager>();
         myCollider = GetComponent<PolygonCollider2D>();
         rBody = GetComponent<Rigidbody2D>();
+        addForceTimer = 0;
 
         switch (playerNum)
         {
@@ -186,22 +197,20 @@ public class playerController : MonoBehaviour {
         referenceBot = referencePos.getReferenceBL();
 
         //calculate mid point
-        midPointLane1 = referenceTop1 + ((referenceTop - referenceTop1) / 2);
+        midPointLane1 = referenceTop1 + ((referenceTop - referenceTop1) / 2);        
         midPointLane2 = referenceTop2 + ((referenceTop1 - referenceTop2) / 2);
         midPointLane3 = referenceMid + ((referenceTop2 - referenceMid) / 2);
         midPointLane4 = referenceBot1 + ((referenceMid - referenceBot1) / 2);
         midPointLane5 = referenceBot2 + ((referenceBot1 - referenceBot2) / 2);
         midPointLane6 = referenceBot + ((referenceBot2 - referenceBot) / 2);
-        /*Debug.Log(midPointLane1);
+       /* Debug.Log(midPointLane1);
         Debug.Log(midPointLane2);
         Debug.Log(midPointLane3);
         Debug.Log(midPointLane4);
         Debug.Log(midPointLane5);
         Debug.Log(midPointLane6);*/
 
-        forceToCenter = 50;
-
-
+        forceToCenter = 50;        
     }
 
     public float getHitpoints()
@@ -211,6 +220,7 @@ public class playerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        canMove();
         //REGENERATION
         //if (regenCounter > 0)
         //{
@@ -220,7 +230,6 @@ public class playerController : MonoBehaviour {
         //{
         //    getHealth(Time.deltaTime * regenAmount);
         //}
-
 
         //Debug.Log(getOwnAxis("Horizontal"));
 
@@ -372,15 +381,13 @@ public class playerController : MonoBehaviour {
         
 
         //reference script
-        checkLane();
+        checkLane();       
     }
 
 
     private void FixedUpdate()
     {
-
         movement();
-
 
         //if (m_stunTime <= 0.0f)
         //{
@@ -423,14 +430,14 @@ public class playerController : MonoBehaviour {
                         if (car.transform.position.y > this.transform.position.y)
                         {
                             car.GetComponent<Transform>().Translate(smellForceUp);
-                            Debug.Log("CAR NAME: " + car.name + smellForceUp + "moving up: " + car.transform.position);
+                          //  Debug.Log("CAR NAME: " + car.name + smellForceUp + "moving up: " + car.transform.position);
                         }
 
                         //Transforms if AICar position.y is below player
                         else if (car.transform.position.y < this.transform.position.y)
                         {
                             car.GetComponent<Transform>().Translate(smellForceDown);
-                            Debug.Log("CAR NAME: " + car.name + smellForceDown + "moving down: " + car.transform.position);
+                         //   Debug.Log("CAR NAME: " + car.name + smellForceDown + "moving down: " + car.transform.position);
                         }
                     }
 
@@ -441,26 +448,31 @@ public class playerController : MonoBehaviour {
                         if (car.transform.position.y > this.transform.position.y)
                         {
                             car.GetComponent<Transform>().Translate(smellForceUp);
-                            Debug.Log("CAR NAME: " + car.name + smellForceUp + "moving up: " + car.transform.position);
+                          //  Debug.Log("CAR NAME: " + car.name + smellForceUp + "moving up: " + car.transform.position);
                         }
 
                         //Transforms if AICar position.y is below player
                         else if (car.transform.position.y < this.transform.position.y)
                         {
                             car.GetComponent<Transform>().Translate(smellForceDown);
-                            Debug.Log("CAR NAME: " + car.name + smellForceDown + "moving down: " + car.transform.position);
+                           // Debug.Log("CAR NAME: " + car.name + smellForceDown + "moving down: " + car.transform.position);
                         }
 
                     }
                 }
             }
         }
-        
+
         //reference script
         //Debug.Log("VELOCITY: " + getVelocity());
-        //if (getVelocity() < 8.0f) {
-            pushToMid();
-        //}
+
+        //new movement
+        addForceTimer += Time.deltaTime;
+        if (addForceTimer > addForceReference) {     //0.3 by default
+          //  Debug.Log("CAN PUSH TO MIDDLE: " + true);
+            pushToMid();        
+        }
+        //until here
     }
 
     float GetDistanceFromClosest(GameObject[] gameObjects)
@@ -493,7 +505,7 @@ public class playerController : MonoBehaviour {
     void updateMovementVec()
     {
         //movementVector = new Vector2(getOwnAxis("Horizontal"), getOwnAxis("Vertical"));
-        movementVector = new Vector2(0f, getOwnAxis("Vertical"));
+        movementVector = new Vector2(0f, getOwnAxis("Vertical"));        
     }
 
     void boost()
@@ -740,6 +752,39 @@ public class playerController : MonoBehaviour {
         
     }
 
+    
+    //new movement
+    void canMove() {
+        if (transform.position.y <= midPointLane1 + rangeToBeAbleToMoveAgain && transform.position.y >= midPointLane1 - rangeToBeAbleToMoveAgain) //0..5f by default
+        {
+            canMoveAgain = true;
+        }
+        else if (transform.position.y <= midPointLane2 + rangeToBeAbleToMoveAgain && transform.position.y >= midPointLane2 - rangeToBeAbleToMoveAgain)
+        {
+            canMoveAgain = true;
+        }
+        else if (transform.position.y <= midPointLane3 + rangeToBeAbleToMoveAgain && transform.position.y >= midPointLane3 - rangeToBeAbleToMoveAgain)
+        {
+            canMoveAgain = true;
+        }
+        else if (transform.position.y <= midPointLane4 + rangeToBeAbleToMoveAgain && transform.position.y >= midPointLane4 - rangeToBeAbleToMoveAgain)
+        {
+            canMoveAgain = true;
+        }
+        else if (transform.position.y <= midPointLane5 + rangeToBeAbleToMoveAgain && transform.position.y >= midPointLane5 - rangeToBeAbleToMoveAgain)
+        {
+            canMoveAgain = true;
+        }
+        else if (transform.position.y <= midPointLane6 + rangeToBeAbleToMoveAgain && transform.position.y >= midPointLane6 - rangeToBeAbleToMoveAgain)
+        {
+            canMoveAgain = true;
+        }
+        else {
+            canMoveAgain = false;
+        }
+    }
+    //until here
+
     void movement()
     {
         //float modifiedSpeed = moveSpeed;
@@ -773,7 +818,7 @@ public class playerController : MonoBehaviour {
         //    GetComponent<Rigidbody2D>().AddForce(new Vector2(0, moveSpeed));
         //}
 
-        rBody.AddForce(movementVector * moveSpeed);
+       //rBody.AddForce(movementVector * moveSpeed);
 
         Vector2 vel = rBody.velocity;
 
@@ -781,9 +826,25 @@ public class playerController : MonoBehaviour {
         {
             vel.x = getOwnAxis("Horizontal") * horizontalMoveSpeed;
         }
+
+        //new movement
+        if (canMoveAgain) {
+            if (vel.y < maxVerticalMoveSpeed && vel.y > -maxVerticalMoveSpeed)
+            {
+                vel.y = getOwnAxis("Vertical") * verticalMoveSpeed;
+            }            
+        }
+
+        if ((getOwnAxis("Vertical") > 0.2f && canMoveAgain)|| (getOwnAxis("Vertical") < -0.2f && canMoveAgain))
+        {
+            addForceTimer = 0;
+        }
+        //until here
+
+
         rBody.velocity = vel;
 
-        Debug.Log("move");
+       // Debug.Log("move");
 
         //if (getOwnAxis("RBumper") > 0 && !hasEvaded)
         //{
@@ -1067,7 +1128,8 @@ public class playerController : MonoBehaviour {
 
         if (hitPoints <= 0)
         {
-            myManager.spawnGhost(getPlayerNum() - 1);
+            isSmelly = false;
+            myManager.spawnPlayer(getPlayerNum() - 1);
             Destroy(this.gameObject);
         }
     }
@@ -1098,7 +1160,7 @@ public class playerController : MonoBehaviour {
         }
         else if (collision.transform.GetComponent<destructible>())
         {
-            Debug.Log("destructible collided");
+           // Debug.Log("destructible collided");
             collision.transform.GetComponent<destructible>().getDestroyed();
             takeDamage(collision.transform.GetComponent<destructible>().getDmgAmount());
         }
@@ -1124,8 +1186,8 @@ public class playerController : MonoBehaviour {
         isOiled = true;
         oilCooldownTimer = oilCooldown; // Timer starts  at 15 seconds
         oilDirectionModifier = -1;
-        Debug.Log("got oiled!");
-        Debug.Log("Oil started timer at: " + oilCooldownTimer);
+        //Debug.Log("got oiled!");
+        //Debug.Log("Oil started timer at: " + oilCooldownTimer);
         //change sprites here to oily
         /*March 17, 2019: Oily artwork/Animations for the vehicles were not in the project or in the google drive.
          * So I used the smell animation just so I can debug. Please change this when the Oily animations are implemented.*/
@@ -1236,23 +1298,22 @@ public class playerController : MonoBehaviour {
 
     void checkLane() {
         if (transform.position.y <= referenceTop && transform.position.y > referenceTop1) {
-            //    Debug.Log("I'm on 1st lane from the top");
-           
+            //    Debug.Log("I'm on 1st lane from the top");           
             currentLane = 1;
 
         }
         else if (transform.position.y <= referenceTop1 && transform.position.y > referenceTop2)
-        {
+        {            
             currentLane = 2;
             //  Debug.Log("I'm on 2nd lane from the top");
         }
         else if (transform.position.y <= referenceTop2 && transform.position.y > referenceMid)
-        {
+        {            
             currentLane = 3;
             //Debug.Log("I'm on 3th lane from the top");
         }     
         else if (transform.position.y <= referenceMid && transform.position.y > referenceBot1)
-        {
+        {           
             currentLane = 4;
             //    Debug.Log("I'm on 4th lane from the top");
         }
@@ -1262,7 +1323,7 @@ public class playerController : MonoBehaviour {
             //  Debug.Log("I'm on 5th lane from the top");
         }
         else if (transform.position.y <= referenceBot2 && transform.position.y > referenceBot)
-        {
+        {          
             currentLane = 6;
             //Debug.Log("I'm on 6th lane from the top");
         }
@@ -1270,36 +1331,35 @@ public class playerController : MonoBehaviour {
     }
 
     void pushToMid() {
-
         switch (currentLane)
         {
             case 1:
                 Vector3 pointToPush1 = new Vector3(transform.position.x, midPointLane1, 0); //calculate the point to push towards to
-                m_rb.AddForce((pointToPush1 - transform.position) * forceToCenter); //pushes on that direction with a force amplying that
+                m_rb.AddForce((pointToPush1 - transform.position) * forceToCenter); //pushes on that direction with a force
                 break;
-            case 2:
+            case 2:                
                 Vector3 pointToPush2 = new Vector3(transform.position.x, midPointLane2, 0);
                 m_rb.AddForce((pointToPush2 - transform.position) * forceToCenter);
                 break;
-            case 3:
+            case 3:                
                 Vector3 pointToPush3 = new Vector3(transform.position.x, midPointLane3, 0);
                 m_rb.AddForce((pointToPush3 - transform.position) * forceToCenter);
                // Debug.Log("Trying to push towards: " + pointToPush3);
                 break;
-            case 4:
+            case 4:                
                 Vector3 pointToPush4 = new Vector3(transform.position.x, midPointLane4, 0);
                 m_rb.AddForce((pointToPush4 - transform.position) * forceToCenter);                
                 break;
-            case 5:
+            case 5:                
                 Vector3 pointToPush5 = new Vector3(transform.position.x, midPointLane5, 0);
                 m_rb.AddForce((pointToPush5 - transform.position) * forceToCenter);
                 break;
-            case 6:
+            case 6:                
                 Vector3 pointToPush6 = new Vector3(transform.position.x, midPointLane6, 0);
                 m_rb.AddForce((pointToPush6 - transform.position) * forceToCenter);
                 break;
             default:
-                Debug.Log("Just give it some until until update gives this 0 a value: " + currentLane);
+                Debug.Log("Just give it some until update gives this 0 a value: " + currentLane);
                 break;
 
         }
