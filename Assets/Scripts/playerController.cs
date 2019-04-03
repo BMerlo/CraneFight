@@ -70,7 +70,14 @@ public class playerController : MonoBehaviour {
 
     [SerializeField] GameObject craneActual;
     [SerializeField] Sprite craneL, craneLU, craneU, craneRU, craneR, craneRD, craneD, craneLD;
+    [SerializeField] bool cL, cLU, cU, cRU, cR, cRD, cD, cLD;//Booleans used for determining the directions. If true then play throw anim for direction
+    [SerializeField] Animator
+        Rcrane, RUcrane, RDcrane,
+        Lcrane, LUcrane, LDcrane,
+        Ucrane, Dcrane; //Animators for the 8 crane directions
 
+    [SerializeField] Transform[] craneT; //Object transform on the crane
+    int tIndex = 0;
     //public GameObject gameManager;
     Game_Manager myManager;
 
@@ -342,6 +349,62 @@ public class playerController : MonoBehaviour {
         else if (!isJumping && isCarrying && isCharging && !hasThrown)
         {
             //chargingForce();  // NO MORE CHARGING
+            Animator crane = craneActual.GetComponent<Animator>();
+            //craneActual.gameObject.SetActive(false);
+
+            //CRANE ANIMATION HANDLER
+            //if (cD)
+            //{
+            //    Dcrane.gameObject.SetActive(true);
+            //    Dcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+
+            //}
+            //else if (cU)
+            //{
+            //    Ucrane.gameObject.SetActive(true);
+            //    Ucrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+
+            //}
+            //else if (cRU)
+            //{
+            //    RUcrane.gameObject.SetActive(true);
+            //    RUcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+
+            //}
+            //else if (cRD)
+            //{
+            //    RDcrane.gameObject.SetActive(true);
+            //    RDcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+
+            //}
+            //else if (cLU)
+            //{
+            //    LUcrane.gameObject.SetActive(true);
+            //    LUcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+
+            //}
+            //else if (cLD)
+            //{
+            //    LDcrane.gameObject.SetActive(true);
+            //    LDcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+
+            //}
+            //else if (cL)
+            //{
+            //    Rcrane.gameObject.SetActive(true);
+            //    Rcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+
+            //}
+            //else if (cR)
+            //{
+            //    Lcrane.gameObject.SetActive(true);
+            //    Lcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+
+            //}
+            //else
+            //{
+            //    resetCraneAnims();
+            //}
             throwObj();
         }
         else if (isCarrying == false && !hasJumped && !isJumping && getOwnButtonDown("A"))
@@ -558,55 +621,159 @@ public class playerController : MonoBehaviour {
         Vector3 temp = targetReticle.transform.position - this.transform.position;
         temp.Normalize();
 
-        cranePoint.transform.position = this.transform.position - temp;
+        cranePoint.transform.position = craneT[tIndex].transform.position;
 
-        Vector2 craneAngle = cranePoint.transform.position - this.transform.position;
+        Vector2 craneAngle =(this.transform.position - temp * 2) - this.transform.position;
         //MOVE CRANE ACCORDING TO CRANE POINT //
         float angle = findDegree(craneAngle.x, craneAngle.y);
         //Debug.Log(angle);
 
         m_arrow.transform.localEulerAngles = new Vector3(0,0,-angle - 180);
 
+        //craneActual.GetComponent<Animator>().SetFloat("New",angle);//sets  the integer in the animation to the angle
+
         if (angle < 22.5f)
         {
             craneActual.GetComponent<SpriteRenderer>().sprite = craneU;
+            tIndex = 6;
+            if (!cD)
+            {
+                cD = true;
+                Debug.Log("cD is " + cD);
+            }
+            else
+            { 
+                resetCraneAnims();
+             Dcrane.gameObject.SetActive(false);
+
+                Debug.Log("cD is " + cD);
+            }
         }
-        else if (angle < 67.5f)
+        else if (angle < 67.5f)//right up
         {
             craneActual.GetComponent<SpriteRenderer>().sprite = craneRU;
+            tIndex = 7;
+            if (cLD)
+            {
+                cLD = true;
+                Debug.Log("cLD is " + cLD);
+            }
+            else
+            {
+                resetCraneAnims();
+                LDcrane.gameObject.SetActive(false);
+
+                Debug.Log("cLD is " + cLD);
+            }
         }
-        else if (angle < 112.5f)
+        else if (angle < 112.5f)//right
         {
             craneActual.GetComponent<SpriteRenderer>().sprite = craneR;
+            tIndex = 0;
+            if (!cL)
+            {
+                cL = true;
+                Debug.Log("cL is " + cL);
+            }
+            else
+            {
+                resetCraneAnims();
+                Lcrane.gameObject.SetActive(false);
+
+                Debug.Log("cL is " + cL);
+            }
         }
-        else if (angle < 157.5f)
+        else if (angle < 157.5f)//right down
         {
             craneActual.GetComponent<SpriteRenderer>().sprite = craneRD;
+            tIndex = 1;
+        
+            if (!cLU)
+            {
+                cLU = true;
+                Debug.Log("cLU is " + cLU);
+            }
+            else
+            {
+                resetCraneAnims();
+                LUcrane.gameObject.SetActive(false);
+
+                Debug.Log("cLU is " + cLU);
+            }//this was added at all of them
+
         }
-        else if (angle < 202.5f)
+        else if (angle < 202.5f)//down
         {
             craneActual.GetComponent<SpriteRenderer>().sprite = craneD;
+            tIndex = 2;
+            if (!cU) { 
+                cU = true;
+            Debug.Log("cU is " + cU);
+            }
+            else
+            {
+                resetCraneAnims();
+                Ucrane.gameObject.SetActive(false);
+                Debug.Log("cU is " + cU);
+            }
         }
-        else if (angle < 247.5f)
+        else if (angle < 247.5f)//left down
         {
             craneActual.GetComponent<SpriteRenderer>().sprite = craneLD;
+            tIndex = 3;
+         
+            if (!cRU)
+            {
+                cRU = true;
+                Debug.Log("cRU is " + cRU);
+            }
+            else
+            {
+                resetCraneAnims();
+                RUcrane.gameObject.SetActive(false);
+
+                Debug.Log("cRU is " + cRU);
+            }
         }
-        else if (angle < 292.5f)
+        else if (angle < 292.5f)//left
         {
             craneActual.GetComponent<SpriteRenderer>().sprite = craneL;
+            tIndex = 4;
+        
+            if (!cR)
+            {
+                cR = true;
+                Debug.Log("cR is " + cR);
+            }
+            else
+            {
+                resetCraneAnims();
+                Rcrane.gameObject.SetActive(false);
+                Debug.Log("cR is " + cR);
+            }
         }
-        else if (angle < 337.5f)
+        else if (angle < 337.5f)//left up
         {
             craneActual.GetComponent<SpriteRenderer>().sprite = craneLU;
+            tIndex = 5;
+               if (!cRD) { 
+                cRD = true;
+                Debug.Log("cRD is " + cRD);
+            }
+            else
+            {
+                resetCraneAnims();
+                RDcrane.gameObject.SetActive(false);
+                Debug.Log("cRD is " + cRD);
+            }
         }
         else
         {
             craneActual.GetComponent<SpriteRenderer>().sprite = craneU;
+            tIndex = 6;
+            resetCraneAnims();
         }
-
-
-
-
+        
 
         ///////////////////////////////////////////////
         while (isInsideElipse(this.transform.position.x, this.transform.position.y, targetReticle.transform.position.x, targetReticle.transform.position.y,
@@ -618,6 +785,27 @@ public class playerController : MonoBehaviour {
 
 
         //Debug.Log("Is inside eclipse? " + tem);
+    }
+
+    void resetCraneAnims()
+    {
+        cL = false;
+        cR = false;
+        cU = false;
+        cD = false;
+        cRD = false;
+        cLD = false;
+        cRU = false;
+        cLU = false;
+        Ucrane.gameObject.SetActive(false);
+        RUcrane.gameObject.SetActive(false);
+        RDcrane.gameObject.SetActive(false);
+        LUcrane.gameObject.SetActive(false);
+        LDcrane.gameObject.SetActive(false);
+        Rcrane.gameObject.SetActive(false);
+        Lcrane.gameObject.SetActive(false);
+        Dcrane.gameObject.SetActive(false);
+        craneActual.gameObject.SetActive(true);
     }
 
     float findDegree(float x, float y)
@@ -680,18 +868,22 @@ public class playerController : MonoBehaviour {
             {
                 colliderObj2Listen = lu;
                 craneActual.GetComponent<SpriteRenderer>().sprite = craneLU;
+ 
             }
             else if (getOwnAxis("Vertical2") > 0.34f)
             {
                 colliderObj2Listen = ld;
                 craneActual.GetComponent<SpriteRenderer>().sprite = craneLD;
+
             }
             else
             {
                 colliderObj2Listen = l;
                 craneActual.GetComponent<SpriteRenderer>().sprite = craneL;
+  
+
             }
-            if(!hasThrown)
+            if (!hasThrown)
                 pickUp();
         }
         else if (getOwnAxis("Horizontal2") > 0.34f)
@@ -700,6 +892,7 @@ public class playerController : MonoBehaviour {
             {
                 colliderObj2Listen = ru;
                 craneActual.GetComponent<SpriteRenderer>().sprite = craneRU;
+   
             }
             else if (getOwnAxis("Vertical2") > 0.34f)
             {
@@ -710,6 +903,7 @@ public class playerController : MonoBehaviour {
             {
                 colliderObj2Listen = r;
                 craneActual.GetComponent<SpriteRenderer>().sprite = craneR;
+         
             }
             if (!hasThrown)
                 pickUp();
@@ -720,6 +914,7 @@ public class playerController : MonoBehaviour {
             {
                 colliderObj2Listen = u;
                 craneActual.GetComponent<SpriteRenderer>().sprite = craneU;
+ 
                 if (!hasThrown)
                     pickUp();
             }
@@ -1203,6 +1398,7 @@ public class playerController : MonoBehaviour {
 
         if (isCarrying)
         {
+
             isDestroyedTimer += Time.deltaTime;
             if (isDestroyedTimer >= isDestroyedFreq)
             {
