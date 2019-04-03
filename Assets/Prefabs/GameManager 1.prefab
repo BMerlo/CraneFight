@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8142549881653328641
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8142549881653328640}
+  - component: {fileID: 8142549881653328655}
+  - component: {fileID: 8142549881653328654}
+  m_Layer: 0
+  m_Name: GameManager 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8142549881653328640
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8142549881653328641}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8142549881653328655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8142549881653328641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e042879c936f5243bf7cd7688eaf40e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1: {fileID: 0}
+  player2: {fileID: 0}
+  player3: {fileID: 0}
+  player4: {fileID: 0}
+  winPanel: {fileID: 0}
+  numberOfPlayers: []
+  playersCurrentlyAlive: 0
+  locationToSpawn: {x: 0, y: 0, z: 0}
+  player1alive: 0
+  player2alive: 0
+  player3alive: 0
+  player4alive: 0
+  ghostToSpawn: 0
+  lastGhostToSpawn: 0
+  needsGhost: 0
+  ghostPrefab1: {fileID: 0}
+  ghostPrefab2: {fileID: 0}
+  ghostPrefab3: {fileID: 0}
+  ghostPrefab4: {fileID: 0}
+  player1Prefab: {fileID: 3578971101414471600, guid: f191b9b7b26201a499147c151dc04c31,
+    type: 3}
+  player2Prefab: {fileID: 5362875426069863440, guid: b77a6e0229f085747a94cc861571ec0b,
+    type: 3}
+  player3Prefab: {fileID: 320162921396651547, guid: 2261e49bdd976464983ccb40992348d7,
+    type: 3}
+  player4Prefab: {fileID: 7352857657120360930, guid: 0dfd371af78309148a24c10e6cf84974,
+    type: 3}
+  playerHealth1: {fileID: 0}
+  playerHealth2: {fileID: 0}
+  playerHealth3: {fileID: 0}
+  playerHealth4: {fileID: 0}
+--- !u!114 &8142549881653328654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8142549881653328641}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82446f13e29d14c4dacbeee9e1769b4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KrakenSpawner: {fileID: 0}
+  CarSpawner1: {fileID: 0}
+  CarSpawner2: {fileID: 0}
+  CarSpawner3: {fileID: 0}
+  CarSpawnerReverse1: {fileID: 0}
+  CarSpawnerReverse2: {fileID: 0}
+  CarSpawnerReverse3: {fileID: 0}
+  FishSpawner: {fileID: 0}

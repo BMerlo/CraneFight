@@ -173,16 +173,16 @@ public class carAI : MonoBehaviour
         //different speed on base on direction 
 
         //old   - is it tho?
-        if (isReverse && transform.position.y < 0.01) //this checks if AI goes left and its position
-        {
-            myBody.AddForce(transform.up * 3);
+        //if (isReverse && transform.position.y < 0.01) //this checks if AI goes left and its position
+        //{
+        //    myBody.AddForce(transform.up * 3);
 
-        }
-        else if (!isReverse && transform.position.y > 0)
-        {
-            myBody.AddForce(transform.up * -3);
+        //}
+        //else if (!isReverse && transform.position.y > 0)
+        //{
+        //    myBody.AddForce(transform.up * -3);
 
-        }
+        //}
 
         float currentSpeed = GetComponent<Rigidbody2D>().velocity.x;
 

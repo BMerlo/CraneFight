@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class destroyWhenFar : MonoBehaviour {
-    float maxX = 15;
+    float maxX = 30;
     float minX = -15;
 
 
