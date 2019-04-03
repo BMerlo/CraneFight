@@ -7,6 +7,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4435719099518354514, guid: d50e2276728a84b4a979d2c20952fc74,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 42a3578a3d30bbe4990ba98f8e956a65,
+        type: 3}
     - target: {fileID: 1623435752053756, guid: d50e2276728a84b4a979d2c20952fc74, type: 3}
       propertyPath: m_Name
       value: RedPlayer
@@ -160,6 +166,11 @@ PrefabInstance:
       propertyPath: playerNum
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114964337360061496, guid: d50e2276728a84b4a979d2c20952fc74,
+        type: 3}
+      propertyPath: oilSprite
+      value: 
+      objectReference: {fileID: 4671995070876876252}
     - target: {fileID: 212344068995576862, guid: d50e2276728a84b4a979d2c20952fc74,
         type: 3}
       propertyPath: m_Sprite
@@ -178,6 +189,16 @@ PrefabInstance:
     - target: {fileID: 917334501, guid: d50e2276728a84b4a979d2c20952fc74, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 0.42285714
+      objectReference: {fileID: 0}
+    - target: {fileID: 7652515106218021235, guid: d50e2276728a84b4a979d2c20952fc74,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.014
+      objectReference: {fileID: 0}
+    - target: {fileID: 7652515106218021235, guid: d50e2276728a84b4a979d2c20952fc74,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.006
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d50e2276728a84b4a979d2c20952fc74, type: 3}
@@ -298,6 +319,12 @@ GameObject:
 --- !u!1 &320413045154718967 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1938495078758672, guid: d50e2276728a84b4a979d2c20952fc74,
+    type: 3}
+  m_PrefabInstance: {fileID: 321082660577893863}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4671995070876876252 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4945783870629191739, guid: d50e2276728a84b4a979d2c20952fc74,
     type: 3}
   m_PrefabInstance: {fileID: 321082660577893863}
   m_PrefabAsset: {fileID: 0}

@@ -155,6 +155,11 @@ PrefabInstance:
       propertyPath: m_arrow
       value: 
       objectReference: {fileID: 3578154767847970140}
+    - target: {fileID: 114964337360061496, guid: d50e2276728a84b4a979d2c20952fc74,
+        type: 3}
+      propertyPath: oilSprite
+      value: 
+      objectReference: {fileID: 8434186542025935991}
     - target: {fileID: 212344068995576862, guid: d50e2276728a84b4a979d2c20952fc74,
         type: 3}
       propertyPath: m_Sprite
@@ -173,6 +178,16 @@ PrefabInstance:
     - target: {fileID: 917334501, guid: d50e2276728a84b4a979d2c20952fc74, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 0.42285714
+      objectReference: {fileID: 0}
+    - target: {fileID: 7652515106218021235, guid: d50e2276728a84b4a979d2c20952fc74,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 7652515106218021235, guid: d50e2276728a84b4a979d2c20952fc74,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.035
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d50e2276728a84b4a979d2c20952fc74, type: 3}
@@ -293,6 +308,12 @@ GameObject:
 --- !u!1 &3578154767847970140 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1938495078758672, guid: d50e2276728a84b4a979d2c20952fc74,
+    type: 3}
+  m_PrefabInstance: {fileID: 3580022782494485580}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8434186542025935991 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4945783870629191739, guid: d50e2276728a84b4a979d2c20952fc74,
     type: 3}
   m_PrefabInstance: {fileID: 3580022782494485580}
   m_PrefabAsset: {fileID: 0}
