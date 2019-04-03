@@ -65,7 +65,7 @@ public class playerController : MonoBehaviour {
 
     [SerializeField] float oilSpeed = 1.7f;
     private int oilDirectionModifier = 1;
-
+    [SerializeField] GameObject oilSprite;
 
 
     [SerializeField] GameObject craneActual;
@@ -1386,6 +1386,8 @@ public class playerController : MonoBehaviour {
         isOiled = true;
         oilCooldownTimer = oilCooldown; // Timer starts  at 15 seconds
         oilDirectionModifier = -1;
+
+        oilSprite.SetActive(true);
         Debug.Log("got oiled!");
         Debug.Log("Oil started timer at: " + oilCooldownTimer);
         //change sprites here to oily
@@ -1399,7 +1401,8 @@ public class playerController : MonoBehaviour {
         GetComponent<Rigidbody2D>().drag = drag;
         isOiled = false;
 
-        myAnim.SetBool("isSmelly", false); // See above comments in getOiled()
+        oilSprite.SetActive(false);
+       // myAnim.SetBool("isSmelly", false); // See above comments in getOiled()
         //change sprite back to normal
 
         //if (oilCount % 2 == 0)

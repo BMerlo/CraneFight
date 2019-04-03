@@ -399,7 +399,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4560342349835096}
   - component: {fileID: 212894468447521400}
-  - component: {fileID: 4313060494213335765}
   m_Layer: 0
   m_Name: CraneActual
   m_TagString: Untagged
@@ -469,25 +468,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &4313060494213335765
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1235722282267316}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2daf144a654e74741be1197c4bc1a68b, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1270969521716430
 GameObject:
   m_ObjectHideFlags: 0
@@ -1163,6 +1143,7 @@ MonoBehaviour:
   oilForce: 1
   oilForceTime: 0.5
   oilSpeed: 1.7
+  oilSprite: {fileID: 4945783870629191739}
   craneActual: {fileID: 1235722282267316}
   craneL: {fileID: 21300000, guid: a68df8623fa4d0a47ac2116b7447dbb6, type: 3}
   craneLU: {fileID: 21300000, guid: a11674ed315977e41968ec9637d6135f, type: 3}
@@ -2449,7 +2430,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7652515106218021235}
   m_Layer: 0
-  m_Name: OilyPlaceHolder
+  m_Name: OilySprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
