@@ -218,21 +218,20 @@ public class playerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        //REGENERATION
-        //if (regenCounter > 0)
-        //{
-        //    regenCounter -= Time.deltaTime;
-        //}
-        //else
-        //{
-        //    getHealth(Time.deltaTime * regenAmount);
-        //}
+		//REGENERATION
+		//if (regenCounter > 0)
+		//{
+		//    regenCounter -= Time.deltaTime;
+		//}
+		//else
+		//{
+		//    getHealth(Time.deltaTime * regenAmount);
+		//}
+
+		//Debug.Log(getOwnAxis("Horizontal"));
 
 
-        //Debug.Log(getOwnAxis("Horizontal"));
-
-
-        cooldownTimers();
+		cooldownTimers();
         updateMovementVec();
 
         //if (true)
@@ -355,67 +354,84 @@ public class playerController : MonoBehaviour {
             if (cD)
             {
                 craneActual.gameObject.SetActive(false);
-                Dcrane.gameObject.SetActive(true);
+               // Dcrane.gameObject.SetActive(true);
                 Dcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
-                
+				float animationLength = Dcrane.GetComponent<Animator>().runtimeAnimatorController.animationClips[1].length;
+				StartCoroutine(WaitForAnimation(animationLength, Dcrane));
 
-            }
-            else if (cU)
+
+
+			}
+			else if (cU)
             {
                 craneActual.gameObject.SetActive(false);
-                Ucrane.gameObject.SetActive(true);
+                //Ucrane.gameObject.SetActive(true);
                 Ucrane.GetComponent<Animator>().SetTrigger("throwTrigger");
-                
-         
+				float animationLength = Ucrane.GetComponent<Animator>().runtimeAnimatorController.animationClips[1].length;
+				StartCoroutine(WaitForAnimation(animationLength, Ucrane));
 
-            }
-            else if (cRU)
+
+
+			}
+			else if (cRU)
             {
                 craneActual.gameObject.SetActive(false);
-                RUcrane.gameObject.SetActive(true);
+                //RUcrane.gameObject.SetActive(true);
                 RUcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+				float animationLength = RUcrane.GetComponent<Animator>().runtimeAnimatorController.animationClips[1].length;
+				StartCoroutine(WaitForAnimation(animationLength, RUcrane));
 
 
-            }
-            else if (cRD)
+			}
+			else if (cRD)
             {
                 craneActual.gameObject.SetActive(false);
-                RDcrane.gameObject.SetActive(true);
+                //RDcrane.gameObject.SetActive(true);
                 RDcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+				float animationLength = RDcrane.GetComponent<Animator>().runtimeAnimatorController.animationClips[1].length;
+				StartCoroutine(WaitForAnimation(animationLength, RDcrane));
 
-          
-            }
-            else if (cLU)
+
+			}
+			else if (cLU)
             {
                 craneActual.gameObject.SetActive(false);
-                LUcrane.gameObject.SetActive(true);
+                //LUcrane.gameObject.SetActive(true);
                 LUcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+				float animationLength = LUcrane.GetComponent<Animator>().runtimeAnimatorController.animationClips[1].length;
+				StartCoroutine(WaitForAnimation(animationLength, LUcrane));
 
-              }
-            else if (cLD)
+			}
+			else if (cLD)
             {
                 craneActual.gameObject.SetActive(false);
-                LDcrane.gameObject.SetActive(true);
+                //LDcrane.gameObject.SetActive(true);
 
                 LDcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+				float animationLength = LDcrane.GetComponent<Animator>().runtimeAnimatorController.animationClips[1].length;
+				StartCoroutine(WaitForAnimation(animationLength, LDcrane));
 
-            }
-            else if (cR)
+			}
+			else if (cR)
             {
                 craneActual.gameObject.SetActive(false);
-                Rcrane.gameObject.SetActive(true);
+                //Rcrane.gameObject.SetActive(true);
                 Rcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
-                  }
-            else if (cL)
-            {
-                craneActual.gameObject.SetActive(false);
-                Lcrane.gameObject.SetActive(true);
-                Lcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+				float animationLength = Rcrane.GetComponent<Animator>().runtimeAnimatorController.animationClips[1].length;
+				StartCoroutine(WaitForAnimation(animationLength, Rcrane));
 
-            }
-            else
+			}
+			else if (cL)
             {
-                resetCraneAnims();
+               // craneActual.gameObject.SetActive(false);
+                Lcrane.GetComponent<Animator>().SetTrigger("throwTrigger");
+				float animationLength = Lcrane.GetComponent<Animator>().runtimeAnimatorController.animationClips[1].length;
+				StartCoroutine(WaitForAnimation(animationLength, Lcrane));
+
+			}
+			else
+            {
+                //resetCraneAnims();
             }
             throwObj();
         }
@@ -450,8 +466,18 @@ public class playerController : MonoBehaviour {
         checkLane();
     }
 
+	IEnumerator WaitForAnimation(float time, Animator anim)
+	{
+		yield return new WaitForSeconds(time);
+		
+		anim.gameObject.SetActive(false);
 
-    private void FixedUpdate()
+		yield return new WaitForSeconds(time/2);
+
+		craneActual.SetActive(true);
+	}
+
+	private void FixedUpdate()
     {
 
         movement();
@@ -642,11 +668,13 @@ public class playerController : MonoBehaviour {
 
         m_arrow.transform.localEulerAngles = new Vector3(0,0,-angle - 180);
 
-        //craneActual.GetComponent<Animator>().SetFloat("New",angle);//sets  the integer in the animation to the angle
-
+		//craneActual.GetComponent<Animator>().SetFloat("New",angle);//sets  the integer in the animation to the angle
+		craneActual.SetActive(false);
         if (angle < 22.5f)
         {
-            craneActual.GetComponent<SpriteRenderer>().sprite = craneU;
+           // craneActual.GetComponent<SpriteRenderer>().sprite = craneU;
+
+            Dcrane.gameObject.SetActive(true);
             tIndex = 6;
             cD = true;
 
@@ -669,7 +697,9 @@ public class playerController : MonoBehaviour {
         }
         else if (angle < 67.5f)//right up
         {
-            craneActual.GetComponent<SpriteRenderer>().sprite = craneRU;
+           // craneActual.GetComponent<SpriteRenderer>().sprite = craneRU;
+
+            LDcrane.gameObject.SetActive(true);
             tIndex = 7;
              
             cLD = true;
@@ -694,6 +724,8 @@ public class playerController : MonoBehaviour {
         else if (angle < 112.5f)//right
         {
             craneActual.GetComponent<SpriteRenderer>().sprite = craneR;
+
+            Lcrane.gameObject.SetActive(true);
             tIndex = 0;
           
                 cL = true;
@@ -717,7 +749,9 @@ public class playerController : MonoBehaviour {
         }
         else if (angle < 157.5f)//right down
         {
-            craneActual.GetComponent<SpriteRenderer>().sprite = craneRD;
+            //craneActual.GetComponent<SpriteRenderer>().sprite = craneRD;
+
+            LUcrane.gameObject.SetActive(true);
             tIndex = 1;
         
             
@@ -742,7 +776,9 @@ public class playerController : MonoBehaviour {
         }
         else if (angle < 202.5f)//down
         {
-            craneActual.GetComponent<SpriteRenderer>().sprite = craneD;
+            //craneActual.GetComponent<SpriteRenderer>().sprite = craneD;
+
+            Ucrane.gameObject.SetActive(true);
             tIndex = 2;
          
                 cU = true;
@@ -765,7 +801,9 @@ public class playerController : MonoBehaviour {
         }
         else if (angle < 247.5f)//left down
         {
-            craneActual.GetComponent<SpriteRenderer>().sprite = craneLD;
+            //craneActual.GetComponent<SpriteRenderer>().sprite = craneLD;
+
+            RUcrane.gameObject.SetActive(true);
             tIndex = 3;
            
             cRU = true;
@@ -788,7 +826,9 @@ public class playerController : MonoBehaviour {
         }
         else if (angle < 292.5f)//left
         {
-            craneActual.GetComponent<SpriteRenderer>().sprite = craneL;
+            //craneActual.GetComponent<SpriteRenderer>().sprite = craneL;
+
+            Rcrane.gameObject.SetActive(true);
             tIndex = 4;
             cR = true;
 
@@ -812,7 +852,9 @@ public class playerController : MonoBehaviour {
         }
         else if (angle < 337.5f)//left up
         {
-            craneActual.GetComponent<SpriteRenderer>().sprite = craneLU;
+           // craneActual.GetComponent<SpriteRenderer>().sprite = craneLU;
+            
+            RDcrane.gameObject.SetActive(true);
             tIndex = 5;
            cRD = true;
 
@@ -835,10 +877,10 @@ public class playerController : MonoBehaviour {
         }
         else
         {
-            craneActual.GetComponent<SpriteRenderer>().sprite = craneU;
-            tIndex = 6;
+           // craneActual.GetComponent<SpriteRenderer>().sprite = craneU;//last sprite
+            //tIndex = 6;//last sprite
 
-            resetCraneAnims();
+            //resetCraneAnims();
         }
 
         
@@ -929,6 +971,7 @@ public class playerController : MonoBehaviour {
 
     void checkColliders()
     {
+       // craneActual.SetActive(true);
         if (getOwnAxis("Horizontal2") < -0.34f)
         {
             if (getOwnAxis("Vertical2") < -0.34f)
@@ -999,7 +1042,7 @@ public class playerController : MonoBehaviour {
                 craneActual.GetComponent<SpriteRenderer>().sprite = craneD;
             }
         }
-        
+       
     }
 
     void movement()
@@ -1245,7 +1288,9 @@ public class playerController : MonoBehaviour {
             isCarrying = false;
             hasThrown = true;
             m_arrow.SetActive(false);
+            craneActual.SetActive(true);
         }
+
     }
 
     //Used if object gets destoryed while in possession of crane, resets crane to default state
