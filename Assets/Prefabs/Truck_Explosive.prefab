@@ -137,7 +137,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 2
-  m_LinearDrag: 4
+  m_LinearDrag: 3
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -214,8 +214,8 @@ MonoBehaviour:
     m_Bits: 61441
   isReverse: 0
   desiredSpeed: 0
-  minSpeed: 8
-  maxSpeed: 11
+  minSpeed: 10
+  maxSpeed: 15
   speedUsedTest: 0
   backGroundScript: {fileID: 0}
   backgroundSpeed: 0

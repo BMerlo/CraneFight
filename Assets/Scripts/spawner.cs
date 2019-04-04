@@ -11,7 +11,7 @@ public class spawner : MonoBehaviour {
     float counter = 0;
     float timeActual;
 
-    int MAX_CARS = 8;
+    int MAX_CARS = 15;
 
 	// Use this for initialization
 	void Start () {

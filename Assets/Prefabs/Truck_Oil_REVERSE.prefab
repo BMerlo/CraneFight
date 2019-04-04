@@ -35,7 +35,7 @@ Transform:
   m_GameObject: {fileID: 1164686690122672}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.5783582, y: 1.4276958, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: -0.8, y: 0.8, z: 1}
   m_Children:
   - {fileID: 880988517905967921}
   - {fileID: 4029470609966740502}
@@ -121,7 +121,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 2
-  m_LinearDrag: 4
+  m_LinearDrag: 3
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -214,8 +214,8 @@ MonoBehaviour:
     m_Bits: 61441
   isReverse: 1
   desiredSpeed: 0
-  minSpeed: 8
-  maxSpeed: 11
+  minSpeed: 10
+  maxSpeed: 15
   speedUsedTest: 0
   backGroundScript: {fileID: 0}
   backgroundSpeed: 0

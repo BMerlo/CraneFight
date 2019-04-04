@@ -1106,7 +1106,6 @@ MonoBehaviour:
   playerHealth: {fileID: 0}
   aimSpeed: 16
   playerNum: 0
-  moveSpeed: 35
   evadeSpeed: 80
   hasBoosted: 0
   r: {fileID: 1030074618824174}
@@ -1151,7 +1150,7 @@ MonoBehaviour:
   minThrowForce: 500
   timeCharging: 0
   evadeCooldown: 1
-  oilCooldown: 15
+  oilCooldown: 7
   smellyCooldown: 15
   jumpCooldown: 1
   throwCooldown: 0.5
@@ -1180,7 +1179,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 5
-  m_LinearDrag: 4
+  m_LinearDrag: 2
   m_AngularDrag: 500
   m_GravityScale: 0
   m_Material: {fileID: 0}

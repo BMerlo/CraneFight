@@ -161,7 +161,7 @@ public class Game_Manager : MonoBehaviour {
         //if (m_timeToSpawn1 > timeToRespawn && player1lives > 0) finite lives
         if (m_timeToSpawn1 > timeToRespawn && player1lives > 0)//infinite lives
         {
-            GameObject player1r = Instantiate(player1Prefab, new Vector3(0, 0, 0), Quaternion.identity);
+            GameObject player1r = Instantiate(player1Prefab, locationToSpawn, Quaternion.identity);
             player1r.GetComponent<playerController>().myManager = this; //prefabs not saving this unused variable for some reason, you have to hard code it
             player1r.GetComponent<playerController>().playerHealth = playerHealth1;
             player1r.GetComponent<playerController>().setHealth(100);
@@ -175,7 +175,7 @@ public class Game_Manager : MonoBehaviour {
         //if (m_timeToSpawn2 > timeToRespawn && player2lives > 0) finite lives
         if (m_timeToSpawn2 > timeToRespawn)//infinite lives
         {
-            GameObject player2r = Instantiate(player2Prefab, new Vector3(0, 0, 0), Quaternion.identity);
+            GameObject player2r = Instantiate(player2Prefab, locationToSpawn, Quaternion.identity);
             player2r.GetComponent<playerController>().myManager = this; //prefabs not saving this unused variable for some reason, you have to hard code it
             player2r.GetComponent<playerController>().playerHealth = playerHealth2;
             player2r.GetComponent<playerController>().setHealth(100);
@@ -189,7 +189,7 @@ public class Game_Manager : MonoBehaviour {
         //if (m_timeToSpawn3 > timeToRespawn && player3lives > 0) finite lives
         if (m_timeToSpawn3 > timeToRespawn)//infinite lives
         {
-            GameObject player3r = Instantiate(player3Prefab, new Vector3(0, 0, 0), Quaternion.identity);
+            GameObject player3r = Instantiate(player3Prefab, locationToSpawn, Quaternion.identity);
             player3r.GetComponent<playerController>().myManager = this; //prefabs not saving this unused variable for some reason, you have to hard code it
             player3r.GetComponent<playerController>().playerHealth = playerHealth3;
             player3r.GetComponent<playerController>().setHealth(100);
@@ -203,7 +203,7 @@ public class Game_Manager : MonoBehaviour {
         //if (m_timeToSpawn4 > timeToRespawn && player4lives > 0) finite lives
         if (m_timeToSpawn4 > timeToRespawn) //infinite lives
         {
-            GameObject player4r = Instantiate(player4Prefab, new Vector3(0, 0, 0), Quaternion.identity);
+            GameObject player4r = Instantiate(player4Prefab, locationToSpawn, Quaternion.identity);
             player4r.GetComponent<playerController>().myManager = this; //prefabs not saving this unused variable for some reason, you have to hard code it
             player4r.GetComponent<playerController>().playerHealth = playerHealth4;
             player4r.GetComponent<playerController>().setHealth(100);
@@ -283,59 +283,59 @@ public class Game_Manager : MonoBehaviour {
     }
 
     void someoneWon() {
-        if (player1alive)
-        {
-            Debug.Log("PLAYER 1 WINS");
-            winPanel.SetActive(true);
-            winnerText.text = "Winner is Player1";
+        //if (player1alive)
+        //{
+        //    Debug.Log("PLAYER 1 WINS");
+        //    winPanel.SetActive(true);
+        //    winnerText.text = "Winner is Player1";
 
-            if (PlayerPrefs.GetInt("level") == 0)//if its level 1
-                score.setp1(score.returnScores(playersCurrentlyAlive));
-            else if (PlayerPrefs.GetInt("level") == 1)// if its level two
-                score.Level2setp1(score.returnScores(playersCurrentlyAlive));
+        //    if (PlayerPrefs.GetInt("level") == 0)//if its level 1
+        //        score.setp1(score.returnScores(playersCurrentlyAlive));
+        //    else if (PlayerPrefs.GetInt("level") == 1)// if its level two
+        //        score.Level2setp1(score.returnScores(playersCurrentlyAlive));
 
-            Time.timeScale = 0; //pause the game
+        //    Time.timeScale = 0; //pause the game
 
-        }
-        else if (player2alive)
-        {
-            Debug.Log("PLAYER 2 WINS");
-            winPanel.SetActive(true);
-            winnerText.text = "Winner is Player2";
+        //}
+        //else if (player2alive)
+        //{
+        //    Debug.Log("PLAYER 2 WINS");
+        //    winPanel.SetActive(true);
+        //    winnerText.text = "Winner is Player2";
 
-            if (PlayerPrefs.GetInt("level") == 0)//if its level 1
-                score.setp2(score.returnScores(playersCurrentlyAlive));
-            else if (PlayerPrefs.GetInt("level") == 1)// if its level two
-                score.Level2setp2(score.returnScores(playersCurrentlyAlive));
+        //    if (PlayerPrefs.GetInt("level") == 0)//if its level 1
+        //        score.setp2(score.returnScores(playersCurrentlyAlive));
+        //    else if (PlayerPrefs.GetInt("level") == 1)// if its level two
+        //        score.Level2setp2(score.returnScores(playersCurrentlyAlive));
 
-            Time.timeScale = 0;
+        //    Time.timeScale = 0;
 
-        }
-        else if (player3alive)
-        {
-            Debug.Log("PLAYER 3 WINS");
-            winPanel.SetActive(true);
-            winnerText.text = "Winner is Player3";
+        //}
+        //else if (player3alive)
+        //{
+        //    Debug.Log("PLAYER 3 WINS");
+        //    winPanel.SetActive(true);
+        //    winnerText.text = "Winner is Player3";
 
-            if (PlayerPrefs.GetInt("level") == 0)//if its level 1
-                score.setp3(score.returnScores(playersCurrentlyAlive));
-            else if (PlayerPrefs.GetInt("level") == 1)// if its level two
-                score.Level2setp3(score.returnScores(playersCurrentlyAlive));
+        //    if (PlayerPrefs.GetInt("level") == 0)//if its level 1
+        //        score.setp3(score.returnScores(playersCurrentlyAlive));
+        //    else if (PlayerPrefs.GetInt("level") == 1)// if its level two
+        //        score.Level2setp3(score.returnScores(playersCurrentlyAlive));
 
-            Time.timeScale = 0;
-        }
-        else if (player4alive)
-        {
-            Debug.Log("PLAYER 4 WINS");
-            winPanel.SetActive(true);
-            winnerText.text = "Winner is Player4";
-            if (PlayerPrefs.GetInt("level") == 0)//if its level 1
-                score.setp4(score.returnScores(playersCurrentlyAlive));
-            else if (PlayerPrefs.GetInt("level") == 1)// if its level two
-                score.Level2setp4(score.returnScores(playersCurrentlyAlive));
+        //    Time.timeScale = 0;
+        //}
+        //else if (player4alive)
+        //{
+        //    Debug.Log("PLAYER 4 WINS");
+        //    winPanel.SetActive(true);
+        //    winnerText.text = "Winner is Player4";
+        //    if (PlayerPrefs.GetInt("level") == 0)//if its level 1
+        //        score.setp4(score.returnScores(playersCurrentlyAlive));
+        //    else if (PlayerPrefs.GetInt("level") == 1)// if its level two
+        //        score.Level2setp4(score.returnScores(playersCurrentlyAlive));
 
-            Time.timeScale = 0;
-        }
+        //    Time.timeScale = 0;
+        //}
     }
 }
 

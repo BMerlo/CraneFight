@@ -26,9 +26,9 @@ public class playerController : MonoBehaviour {
     private float horizontalDeadZone = 0.3f;
     private float verticalDeadZone = 0.3f;
 
-    [SerializeField] float moveSpeed = 40f;
+    float moveSpeed = 100f;
     float horizontalMoveSpeed = 5f;
-    float maxHorizontalSpeed = 5f;
+    float maxHorizontalSpeed = 4f;
 
     [SerializeField] float evadeSpeed = 400f;
     [SerializeField] bool hasBoosted = false;
@@ -147,8 +147,8 @@ public class playerController : MonoBehaviour {
     //new movement    
     public bool canMoveAgain;
     private float rangeToBeAbleToMoveAgain = 0.05f;
-    public float verticalMoveSpeed = 5.5f;
-    public float maxVerticalMoveSpeed = 8;
+    public float verticalMoveSpeed = 15.5f;
+    public float maxVerticalMoveSpeed = 20;
     public float addForceTimer;
     public float addForceReference = 0.4f;
 
@@ -470,10 +470,10 @@ public class playerController : MonoBehaviour {
 
         //new movement
         addForceTimer += Time.deltaTime;
-        if (addForceTimer > addForceReference) {     //0.3 by default
-          //  Debug.Log("CAN PUSH TO MIDDLE: " + true);
-            pushToMid();        
-        }
+        //if (addForceTimer > addForceReference) {     //0.3 by default
+        //  //  Debug.Log("CAN PUSH TO MIDDLE: " + true);
+        //    pushToMid();        
+        //}
         //until here
     }
 
@@ -506,8 +506,8 @@ public class playerController : MonoBehaviour {
 
     void updateMovementVec()
     {
-        //movementVector = new Vector2(getOwnAxis("Horizontal"), getOwnAxis("Vertical"));
-        movementVector = new Vector2(0f, getOwnAxis("Vertical"));        
+        movementVector = new Vector2(getOwnAxis("Horizontal"), getOwnAxis("Vertical"));
+        //movementVector = new Vector2(0f, getOwnAxis("Vertical"));        
     }
 
     void boost()
@@ -820,31 +820,64 @@ public class playerController : MonoBehaviour {
         //    GetComponent<Rigidbody2D>().AddForce(new Vector2(0, moveSpeed));
         //}
 
-       //rBody.AddForce(movementVector * moveSpeed);
+        // OLD MOVEMENT
+        //rBody.AddForce(movementVector * moveSpeed);
 
-        Vector2 vel = rBody.velocity;
+        Vector2 v = rBody.velocity;
 
-        if (vel.x < maxHorizontalSpeed && vel.x > -maxHorizontalSpeed)
+        if (movementVector.x > 0)
         {
-            vel.x = getOwnAxis("Horizontal") * horizontalMoveSpeed;
+            if (rBody.velocity.x < movementVector.x * maxHorizontalSpeed)
+            {
+                v.x = movementVector.x * maxHorizontalSpeed;
+            }
         }
+        else if (movementVector.x < 0)
+        {
+            if (rBody.velocity.x > movementVector.x * maxHorizontalSpeed)
+            {
+                v.x = movementVector.x * maxHorizontalSpeed;
+            }
+        }
+
+        if (movementVector.y > 0)
+        {
+            if (rBody.velocity.y < movementVector.y * maxHorizontalSpeed * .75f)
+            {
+                v.y = movementVector.y * maxHorizontalSpeed * .75f;
+            }
+        }
+        else if (movementVector.y < 0)
+        {
+            if (rBody.velocity.y > movementVector.y * maxHorizontalSpeed * .75f)
+            {
+                v.y = movementVector.y * maxHorizontalSpeed * .75f;
+            }
+        }
+        
+        rBody.velocity = v;
+
+        //if (vel.x < maxHorizontalSpeed && vel.x > -maxHorizontalSpeed)
+        //{
+        //    vel.x = getOwnAxis("Horizontal") * horizontalMoveSpeed;
+        //}
 
         //new movement
-        if (canMoveAgain) {
-            if (vel.y < maxVerticalMoveSpeed && vel.y > -maxVerticalMoveSpeed)
-            {
-                vel.y = getOwnAxis("Vertical") * verticalMoveSpeed;
-            }            
-        }
+        //if (canMoveAgain) {
+        //    if (vel.y < maxVerticalMoveSpeed && vel.y > -maxVerticalMoveSpeed)
+        //    {
+        //        vel.y = getOwnAxis("Vertical") * verticalMoveSpeed;
+        //    }            
+        //}
 
-        if ((getOwnAxis("Vertical") > 0.2f && canMoveAgain)|| (getOwnAxis("Vertical") < -0.2f && canMoveAgain))
-        {
-            addForceTimer = 0;
-        }
+        //if ((getOwnAxis("Vertical") > 0.2f && canMoveAgain)|| (getOwnAxis("Vertical") < -0.2f && canMoveAgain))
+        //{
+        //    addForceTimer = 0;
+        //}
         //until here
 
 
-        rBody.velocity = vel;
+        //rBody.velocity = vel;
 
        // Debug.Log("move");
 
@@ -933,8 +966,9 @@ public class playerController : MonoBehaviour {
         if (colliderObj2Listen != null && colliderObj2Listen.GetComponent<CraneZone>().isTherePickable())
         {
             Debug.Log("attempting to pick up");
-            if (colliderObj2Listen.GetComponent<CraneZone>().getObj2PickUp().GetComponent<throwable>() 
-                && colliderObj2Listen.GetComponent<CraneZone>().getObj2PickUp().GetComponent<throwable>().isItThrown())
+            //if (colliderObj2Listen.GetComponent<CraneZone>().getObj2PickUp().GetComponent<throwable>() 
+            //    && colliderObj2Listen.GetComponent<CraneZone>().getObj2PickUp().GetComponent<throwable>().isItThrown())
+            if(!colliderObj2Listen.GetComponent<CraneZone>().isTherePickable())
             {
                 return;
             }
@@ -1178,7 +1212,7 @@ public class playerController : MonoBehaviour {
             drag = GetComponent<Rigidbody2D>().drag;
 
         }
-        GetComponent<Rigidbody2D>().drag = 1f;
+        GetComponent<Rigidbody2D>().drag = 0.5f;
 
         // DOESNT WORK THIS WAY> background speed fucks things up
         //Vector2 v = rBody.velocity;

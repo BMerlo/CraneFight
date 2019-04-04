@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class carAI : MonoBehaviour
+public class oldCarAI : MonoBehaviour
 {
     public LayerMask layerMask;
     [SerializeField] bool isReverse = false;
@@ -22,7 +22,7 @@ public class carAI : MonoBehaviour
     [SerializeField] float speedUsedTest;
     //new
     //[SerializeField] Vector2 speedUse;
-    public ScrollingBackGround backGroundScript; 
+    public ScrollingBackGround backGroundScript;
     public float backgroundSpeed;
 
     public float testSpeed;
@@ -47,7 +47,7 @@ public class carAI : MonoBehaviour
             dir *= -1;
             originalSpeed *= -1;    // original speed will carry dir now    // -20
             originalSpeed += backgroundSpeed;   // bgSpeed is negative, keep in mind    //-23
-            
+
             //lowerSpeed += DIR_DIFF;
         }
         else
@@ -64,8 +64,8 @@ public class carAI : MonoBehaviour
         myBody.velocity = new Vector2(desiredSpeed, 0);
         //GetComponent<Rigidbody2D>().AddForce(transform.right * force, ForceMode2D.Impulse);
 
-       // Debug.Log("-----------------------------------speed set");
-        
+        // Debug.Log("-----------------------------------speed set");
+
         //speedUsed = originalSpeed;
     }
 
@@ -75,11 +75,84 @@ public class carAI : MonoBehaviour
         //Debug.Log("---------accelerate " + (dir * accelerateForce));
     }
 
+    void decelerate()
+    {
+        //myBody.AddForce(-dir * decelerateForce);
+        //Debug.Log("---------decelerate");
+
+    }
+
+    void tryToStop()
+    {
+        if (isReverse) //this checks if AI goes left and its position
+        {   // look like you have stopped
+            desiredSpeed = backgroundSpeed;
+            //this.GetComponent<Rigidbody2D>().velocity = new Vector2(newSpeed, 0);
+        }
+        else if (!isReverse)
+        {
+            desiredSpeed = backgroundSpeed;
+            //this.GetComponent<Rigidbody2D>().velocity = new Vector2(-newSpeed, 0);
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
     {
-     
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 10.0f, layerMask);
+        Debug.DrawLine(transform.position, transform.position + (dir * 10));
+        Debug.Log(hit.collider);
+
+        if (hit.collider != null)
+        {
+            //it needs new ranges or increment force to reduce speed
+            if (hit.transform.tag == "Player" && (hit.distance <= 3.0f) && (hit.distance >= 0.0f))  // PLAYER AHEAD!!!                                                                                                    
+            {
+                //Debug.Log("Speed decreased");
+                Debug.Log("Name of other obj: " + hit.collider.name);
+                //speedUsed = lowerSpeed;
+                tryToStop();
+
+            }
+            else if (hit.transform.GetComponent<carAI>() != null)
+            {
+                if (hit.transform.GetComponent<carAI>().getDirection() == isReverse)    // have same dir with the AIcar in front?
+                {
+                    desiredSpeed = hit.transform.GetComponent<carAI>().getCurrentSpeed();
+
+                }
+                else
+                {   //This doesnt' look right. FIX LATER
+                    // speedUsed = lowerSpeed;
+                    tryToStop();
+                }
+
+            }
+            else if (hit.distance <= 5f)    // About to hit something other than a vehicle
+            {
+                //Debug.Log("Speed decreased");
+                // Debug.Log("Name of other obj: " + hit.collider.name);
+                desiredSpeed = originalSpeed;
+                //speedUsed = lowerSpeed;
+            }
+            else
+            {
+                Debug.Log("Speed increased");
+                //speedUsed = originalSpeed;
+                //ResetSpeed();
+                desiredSpeed = originalSpeed;
+            }
+
+        }
+        else
+        {       // THERE's no one in front
+            //speedUsed = originalSpeed;
+            //ResetSpeed();
+            desiredSpeed = originalSpeed;
+        }
+        testSpeed = myBody.velocity.x;
+        //Debug.Log(myBody.velocity);
     }
 
     public float getCurrentSpeed()
@@ -124,24 +197,19 @@ public class carAI : MonoBehaviour
             //{
             //    decelerate();
             //}
-
-            if(myBody.velocity.x > originalSpeed)
+            accelerate();
+        }
+        else
+        {
+            if (desiredSpeed > currentSpeed)
             {
                 accelerate();
             }
-            
+            else if (desiredSpeed < currentSpeed * 0.8)
+            {
+                decelerate();
+            }
         }
-        //else
-        //{
-        //    if (desiredSpeed > currentSpeed)
-        //    {
-        //        accelerate();
-        //    }
-        //    else if (desiredSpeed < currentSpeed * 0.8)
-        //    {
-        //        //decelerate();
-        //    }
-        //}
 
     }
     public void resetSpeedTimer()
@@ -153,11 +221,11 @@ public class carAI : MonoBehaviour
     {
         if (isReverse) //this checks if AI goes left and its position
         {
-           // this.GetComponent<Rigidbody2D>().velocity = new Vector2(-1 * -newSpeed + 1.5f, 0);
+            // this.GetComponent<Rigidbody2D>().velocity = new Vector2(-1 * -newSpeed + 1.5f, 0);
         }
         else if (!isReverse)
         {
-          //  this.GetComponent<Rigidbody2D>().velocity = new Vector2(1 * -newSpeed - 1.5f, 0);
+            //  this.GetComponent<Rigidbody2D>().velocity = new Vector2(1 * -newSpeed - 1.5f, 0);
         }
     }
 

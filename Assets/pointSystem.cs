@@ -16,7 +16,7 @@ public class pointSystem : MonoBehaviour
     float p3points = 0;
     float p4points = 0;
 
-    float pointMultiplier = 1f;
+    float pointMultiplier = 3.5f;
 
     [SerializeField] TextMeshProUGUI p1pointText;
     [SerializeField] TextMeshProUGUI p2pointText;
@@ -81,6 +81,18 @@ public class pointSystem : MonoBehaviour
         p2pointText.text = ((int)p2points).ToString();
         p3pointText.text = ((int)p3points).ToString();
         p4pointText.text = ((int)p4points).ToString();
+
+
+        if (p1points > 100 || p2points > 100 || p3points > 100 || p4points > 100)
+        {
+            Time.timeScale = 0;
+            Invoke("reloadLevel", 2.0f);
+        }
+    }
+
+    void reloadLevel()
+    {
+        Application.LoadLevel(0);
     }
 
     bool isInTheZone(Transform transf)

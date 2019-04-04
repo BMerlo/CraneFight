@@ -4,30 +4,55 @@ using UnityEngine;
 
 public class ScrollingBackGround : MonoBehaviour
 {
+
+    //rb2d = GetComponent<Rigidbody2D>();
+    //    rb2d.velocity = new Vector2(speed, 0);
+
+
     public Rigidbody2D rb2d;
     private float speed = -3f;
     private SpriteRenderer render;
     private float length;
-    public float spacing = 5.1f;
-    // Start is called before the first frame update
-    void Start()
+    //public float spacing = 5.1f;
+
+
+    private BoxCollider2D groundCollider;       //This stores a reference to the collider attached to the Ground.
+    private float groundHorizontalLength;       //A float to store the x-axis length of the collider2D attached to the Ground GameObject.
+
+
+    private void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        rb2d.velocity = new Vector2(speed, 0);
-        render = GetComponent<SpriteRenderer>();
-        length = render.size.x;
-}
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (this.transform.position.x < -length * spacing)
-            Reposition();
+       rb2d.velocity = new Vector2(speed, 0);
     }
-    private void Reposition()
+    //Awake is called before Start.
+    private void Awake()
     {
-        Vector2 ground = new Vector2(length * spacing, 0);
-        this.transform.position = (Vector2)transform.position + ground;
+        //Get and store a reference to the collider2D attached to Ground.
+        groundCollider = GetComponent<BoxCollider2D>();
+        //Store the size of the collider along the x axis (its length in units).
+        groundHorizontalLength = groundCollider.size.x;
+    }
+
+    //Update runs once per frame
+    private void Update()
+    {
+        //Check if the difference along the x axis between the main Camera and the position of the object this is attached to is greater than groundHorizontalLength.
+        if (transform.position.x < (-groundHorizontalLength * 6) + 4)
+        {
+            //If true, this means this object is no longer visible and we can safely move it forward to be re-used.
+            RepositionBackground();
+        }
+    }
+
+    //Moves the object this script is attached to right in order to create our looping background effect.
+    private void RepositionBackground()
+    {
+        //This is how far to the right we will move our background object, in this case, twice its length. This will position it directly to the right of the currently visible background object.
+        Vector2 groundOffSet = new Vector2(groundHorizontalLength * 12f, 0);
+
+        //Move this object from it's position offscreen, behind the player, to the new position off-camera in front of the player.
+        transform.position = (Vector2)transform.position + groundOffSet;
     }
 
 

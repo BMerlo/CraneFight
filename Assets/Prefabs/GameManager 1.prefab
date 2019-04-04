@@ -51,7 +51,7 @@ MonoBehaviour:
   winPanel: {fileID: 0}
   numberOfPlayers: []
   playersCurrentlyAlive: 0
-  locationToSpawn: {x: 0, y: 0, z: 0}
+  locationToSpawn: {x: -8, y: 0, z: 0}
   player1alive: 0
   player2alive: 0
   player3alive: 0
