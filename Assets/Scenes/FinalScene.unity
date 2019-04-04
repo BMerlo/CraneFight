@@ -347,6 +347,11 @@ PrefabInstance:
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 1565991407}
+    - target: {fileID: 8950823503134628393, guid: b77a6e0229f085747a94cc861571ec0b,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2138443a856803b4cbee9ad4afd17afb, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b77a6e0229f085747a94cc861571ec0b, type: 3}
 --- !u!1 &336840378 stripped
@@ -758,6 +763,11 @@ PrefabInstance:
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 1284253815}
+    - target: {fileID: 3614708519343161378, guid: 2261e49bdd976464983ccb40992348d7,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ded75d98299a0444080af1c5c908a60d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2261e49bdd976464983ccb40992348d7, type: 3}
 --- !u!1 &1036599781
@@ -2099,6 +2109,11 @@ PrefabInstance:
       propertyPath: playerHealth
       value: 
       objectReference: {fileID: 1635789380}
+    - target: {fileID: 5787667929348034523, guid: 0dfd371af78309148a24c10e6cf84974,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dfd371af78309148a24c10e6cf84974, type: 3}
 --- !u!1001 &3591048251079783954
