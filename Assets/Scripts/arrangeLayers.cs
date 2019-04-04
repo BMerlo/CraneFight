@@ -17,18 +17,23 @@ public class arrangeLayers : MonoBehaviour
 
         Transform SmellCloudF = transform.Find("SmellCloudF");
         Transform smellChildB = transform.Find("SmellCloudB");
-       //Transform oilChild = transform.Find("OilyPlaceHolder");//Oily Child not implemented on the Player prefab yet.
+        Transform oilySprite = transform.Find("OilyPlaceHolder");
+        //Transform oilChild = transform.Find("OilyPlaceHolder");//Oily Child not implemented on the Player prefab yet.
         if (SmellCloudF != null)
         {
-            SmellCloudF.GetComponent<SpriteRenderer>().sortingOrder = (GetComponent<SpriteRenderer>().sortingOrder) + 10;
+            SmellCloudF.GetComponent<SpriteRenderer>().sortingOrder = (GetComponent<SpriteRenderer>().sortingOrder) + 5;
         }
         if (smellChildB != null)
         {
             smellChildB.GetComponent<SpriteRenderer>().sortingOrder = (GetComponent<SpriteRenderer>().sortingOrder) - 10;
         }
-       // if (oilChild != null)
-       // {
-      //      smellChildB.GetComponent<SpriteRenderer>().sortingOrder = (GetComponent<SpriteRenderer>().sortingOrder) + 10;
-       // }
+        if (oilySprite != null)
+        {
+            oilySprite.GetComponent<SpriteRenderer>().sortingOrder = (GetComponent<SpriteRenderer>().sortingOrder) + 1;
+        }
+        // if (oilChild != null)
+        // {
+        //      smellChildB.GetComponent<SpriteRenderer>().sortingOrder = (GetComponent<SpriteRenderer>().sortingOrder) + 10;
+        // }
     }
 }
