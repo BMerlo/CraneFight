@@ -8,6 +8,7 @@ public class ScrollingBackGround : MonoBehaviour
     private float speed = -3f;
     private SpriteRenderer render;
     private float length;
+    public float spacing = 5.1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,12 +21,12 @@ public class ScrollingBackGround : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.transform.position.x < -length*3)
+        if (this.transform.position.x < -length * spacing)
             Reposition();
     }
     private void Reposition()
     {
-        Vector2 ground = new Vector2(length, 0);
+        Vector2 ground = new Vector2(length * spacing, 0);
         this.transform.position = (Vector2)transform.position + ground;
     }
 
