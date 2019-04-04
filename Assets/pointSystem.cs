@@ -7,6 +7,9 @@ public class pointSystem : MonoBehaviour
     [SerializeField] Transform upLeft, downRight;
     float MaxX, MinX, MaxY, MinY;
 
+    List<playerController> playersHere;
+    playerController playerHere;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,11 +23,25 @@ public class pointSystem : MonoBehaviour
     void Update()
     {
         playerController[] players = FindObjectsOfType<playerController>();
-
+        int numHere = 0;
         foreach (playerController player in players)
         {
-            isInTheZone(player.transform);
+            if (isInTheZone(player.transform))
+            {
+                numHere++;
+                playerHere = player;
+            }
+            else
+            {   //hide crown
+
+            }
         }
+
+        if (numHere == 1)
+        {   //show crown, give points
+
+        }
+
     }
 
 
