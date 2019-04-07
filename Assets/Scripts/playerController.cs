@@ -1,14 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Rewired;
 
 
 public class playerController : MonoBehaviour {
+    Player player;
+    int playerId;
 
     float hitPoints = 100f;
     [SerializeField] public HealthBar playerHealth;
 
-    [SerializeField] float aimSpeed = 4f;
+    float aimSpeed = 160000f;
     Rigidbody2D rBody;
     bool isBoostCharging = false;
     float boostTimer = 0;
@@ -30,12 +33,11 @@ public class playerController : MonoBehaviour {
     float horizontalMoveSpeed = 5f;
     float maxHorizontalSpeed = 4f;
 
-    [SerializeField] float evadeSpeed = 400f;
+    float evadeSpeed = 80f;
     [SerializeField] bool hasBoosted = false;
     [SerializeField] GameObject r, l, u, d, ru, lu, rd, ld;
     [SerializeField] GameObject colliderObj2Listen;
     GameObject objPicked;
-    [SerializeField] private float throwForce = 0f;
 
     [SerializeField] Animator myAnim;
 
@@ -79,11 +81,11 @@ public class playerController : MonoBehaviour {
 
     private Rigidbody2D m_rb;
 
-    [SerializeField] float maxThrowForce = 5000f;
-    [SerializeField] float maxThrowTime = 3.0f;
-    [SerializeField] float minChargeTime = 1.0f;
-    [SerializeField] float minThrowForce = 1650f;
-    [SerializeField]float timeCharging;
+    float throwForce = 3000f;
+    //[SerializeField] float maxThrowTime = 3.0f;
+    //[SerializeField] float minChargeTime = 1.0f;
+    //[SerializeField] float minThrowForce = 1650f;
+    //[SerializeField]float timeCharging;
 
     [SerializeField] private float evadeCooldown = 1f;
     private bool hasEvaded = false;
@@ -142,15 +144,15 @@ public class playerController : MonoBehaviour {
     float midPointLane6;
 
     public int currentLane;
-    public float forceToCenter;
+    float forceToCenter = 50;
 
     //new movement    
     public bool canMoveAgain;
     private float rangeToBeAbleToMoveAgain = 0.05f;
     public float verticalMoveSpeed = 15.5f;
     public float maxVerticalMoveSpeed = 20;
-    public float addForceTimer;
-    public float addForceReference = 0.4f;
+    float laneForceTimer = 0;
+    float laneForceDelay = 0.5f;
 
 
     //[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
@@ -159,31 +161,37 @@ public class playerController : MonoBehaviour {
         myManager = FindObjectOfType<Game_Manager>();
         myCollider = GetComponent<PolygonCollider2D>();
         rBody = GetComponent<Rigidbody2D>();
-        addForceTimer = 0;
 
         switch (playerNum)
         {
             case PlayerNum.P1:
                 this.gameObject.layer = 12;
+                playerId = 0;
                 break;
             case PlayerNum.P2:
                 this.gameObject.layer = 13;
+                playerId = 1;
                 break;
             case PlayerNum.P3:
                 this.gameObject.layer = 14;
+                playerId = 2;
                 break;
             case PlayerNum.P4:
                 this.gameObject.layer = 15;
+                playerId = 3;
                 break;
             default:
                 break;
         }
 
+        //Rewired stuff
+        player = ReInput.players.GetPlayer(playerId);
+
 
         m_rb = GetComponent<Rigidbody2D>();
         targetReticle.GetComponent<SpriteRenderer>().enabled = false;
         throwRange.GetComponent<SpriteRenderer>().enabled = false;
-        m_arrowOriginalScale = m_arrow.transform.localScale;
+        //m_arrowOriginalScale = m_arrow.transform.localScale;  // No chargin anymore, no need
         // MoveBackScript = GetComponent<moveBack>();
         //isSmelly = true;
 
@@ -212,7 +220,7 @@ public class playerController : MonoBehaviour {
         Debug.Log(midPointLane5);
         Debug.Log(midPointLane6);*/
 
-        forceToCenter = 50;        
+        //forceToCenter = 50;     // Boris, why here?       
     }
 
     public float getHitpoints()
@@ -222,7 +230,7 @@ public class playerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        canMove();
+        //canMove();
         //REGENERATION
         //if (regenCounter > 0)
         //{
@@ -238,6 +246,7 @@ public class playerController : MonoBehaviour {
 
         cooldownTimers();
         updateMovementVec();
+        laneForceTimer += Time.deltaTime;
 
         //if (true)
         //{
@@ -253,7 +262,7 @@ public class playerController : MonoBehaviour {
         //}
         if (!isBoostCharging)
         {
-            if (!hasEvaded && (getOwnAxis("Trigger") < -0.2 || getOwnButtonDown("B")))
+            if(!hasEvaded && player.GetButtonDown("Dash"))
             {
                 isBoostCharging = true;
 
@@ -263,13 +272,13 @@ public class playerController : MonoBehaviour {
         {
             boostTimer += Time.deltaTime;
 
-            //if (boostTimer >= MAX_BOOST_TIME || (getOwnAxis("Trigger") > -0.2 && getOwnButtonUp("B")))
-            if (getOwnAxis("Trigger") > -0.2 && !getOwnButton("B"))
+            if(player.GetButtonUp("Dash"))
             {
                 boost();
             }
         }
         
+        // This is expensive. Fix if we have time
         if (isCarrying)
         {
             cranePoint.GetComponent<SpriteRenderer>().enabled = true;
@@ -284,14 +293,9 @@ public class playerController : MonoBehaviour {
         }
 
 
-        if(isOiled == false)
-        {
-            //movement();
-        }
-        else
+        if(isOiled)
         {
             oilCooldownTimer -= 1 * Time.deltaTime; // oily countdown
-           // Debug.Log("Oil Timer:" + oilCooldownTimer);
 
             Collider2D[] temp = new Collider2D[30];
             ContactFilter2D tempFilter = new ContactFilter2D();
@@ -304,20 +308,17 @@ public class playerController : MonoBehaviour {
             {
                 if (temp[i].gameObject.GetComponent<oil>())
                 {
+                    oilCooldownTimer = oilCooldown;
                     isStillOiled = true;
                 }
             }
           if (isStillOiled == false && oilCooldownTimer <= 0)
            {
                getUnOiled();
-                oilCooldownTimer = 0;
+               oilCooldownTimer = 0;
             }
 
         }
-
-
-        //Debug.Log(Input.GetAxis("P1Horizontal2"));
-        //Debug.Log(Input.GetAxis("P1Vertical2"));
 
         // Assign which collider we'll use for picking up w crane
         if (!isCarrying)
@@ -343,19 +344,24 @@ public class playerController : MonoBehaviour {
         }
 
         //Debug.Log(getOwnAxis("Trigger"));
-        if (!isJumping && isCarrying && getOwnAxis("Trigger") < 0.25f && !hasThrown)    // Charge the attack?   NO MORE CHARGING
+        //if (!isJumping && isCarrying && getOwnAxis("Trigger") < 0.25f && !hasThrown)    // Charge the attack?   NO MORE CHARGING
+        //{
+        //    //timeCharging += Time.deltaTime;
+        //    isCharging = true;
+        //    //if (m_arrow.transform.localScale.y < 0.3 && timeCharging > minChargeTime)
+        //    //    m_arrow.transform.localScale += new Vector3(0f, 0.01f, 0);
+        //}
+        //else if (!isJumping && isCarrying && isCharging && !hasThrown)
+        //{
+        //    //chargingForce();  // NO MORE CHARGING
+        //    throwObj();
+        //}
+
+        if (!isJumping && isCarrying && !hasThrown && player.GetButton("Throw"))
         {
-            //timeCharging += Time.deltaTime;
-            isCharging = true;
-            //if (m_arrow.transform.localScale.y < 0.3 && timeCharging > minChargeTime)
-            //    m_arrow.transform.localScale += new Vector3(0f, 0.01f, 0);
-        }
-        else if (!isJumping && isCarrying && isCharging && !hasThrown)
-        {
-            //chargingForce();  // NO MORE CHARGING
             throwObj();
         }
-        else if (isCarrying == false && !hasJumped && !isJumping && getOwnButtonDown("A"))
+        else if (isCarrying == false && !hasJumped && !isJumping && player.GetButton("Jump"))
             //getOwnAxis("Trigger") > 0.25f)
         {
             isJumping = true;
@@ -416,65 +422,55 @@ public class playerController : MonoBehaviour {
         //}
 
 
-        if (isSmelly)
-        {
-            carAI[] cars = GameObject.FindObjectsOfType<carAI>();
+        //if (isSmelly)
+        //{
+        //    carAI[] cars = GameObject.FindObjectsOfType<carAI>();
             
-            foreach (carAI car in cars)
-            {
-                //if (GetDistanceFromClosest(GameObject.FindGameObjectsWithTag("AICar")) <= smellRadius)
-                if(Vector2.Distance(car.transform.position, this.transform.position) <= smellRadius)
-                {
-                    //Checks if car AI is in front of player
-                    if (car.transform.position.x > this.transform.position.x)
-                    {
-                        //Transforms if AICar position.y is above player
-                        if (car.transform.position.y > this.transform.position.y)
-                        {
-                            car.GetComponent<Transform>().Translate(smellForceUp);
-                          //  Debug.Log("CAR NAME: " + car.name + smellForceUp + "moving up: " + car.transform.position);
-                        }
+        //    foreach (carAI car in cars)
+        //    {
+        //        //if (GetDistanceFromClosest(GameObject.FindGameObjectsWithTag("AICar")) <= smellRadius)
+        //        if(Vector2.Distance(car.transform.position, this.transform.position) <= smellRadius)
+        //        {
+        //            //Checks if car AI is in front of player
+        //            if (car.transform.position.x > this.transform.position.x)
+        //            {
+        //                //Transforms if AICar position.y is above player
+        //                if (car.transform.position.y > this.transform.position.y)
+        //                {
+        //                    car.GetComponent<Transform>().Translate(smellForceUp);
+        //                  //  Debug.Log("CAR NAME: " + car.name + smellForceUp + "moving up: " + car.transform.position);
+        //                }
 
-                        //Transforms if AICar position.y is below player
-                        else if (car.transform.position.y < this.transform.position.y)
-                        {
-                            car.GetComponent<Transform>().Translate(smellForceDown);
-                         //   Debug.Log("CAR NAME: " + car.name + smellForceDown + "moving down: " + car.transform.position);
-                        }
-                    }
+        //                //Transforms if AICar position.y is below player
+        //                else if (car.transform.position.y < this.transform.position.y)
+        //                {
+        //                    car.GetComponent<Transform>().Translate(smellForceDown);
+        //                 //   Debug.Log("CAR NAME: " + car.name + smellForceDown + "moving down: " + car.transform.position);
+        //                }
+        //            }
 
-                    //Checks if AICar position.x is behind the player
-                    else if (car.transform.position.x < this.transform.position.x)
-                    {
-                        //Transforms if AICar position.y is above player
-                        if (car.transform.position.y > this.transform.position.y)
-                        {
-                            car.GetComponent<Transform>().Translate(smellForceUp);
-                          //  Debug.Log("CAR NAME: " + car.name + smellForceUp + "moving up: " + car.transform.position);
-                        }
+        //            //Checks if AICar position.x is behind the player
+        //            else if (car.transform.position.x < this.transform.position.x)
+        //            {
+        //                //Transforms if AICar position.y is above player
+        //                if (car.transform.position.y > this.transform.position.y)
+        //                {
+        //                    car.GetComponent<Transform>().Translate(smellForceUp);
+        //                  //  Debug.Log("CAR NAME: " + car.name + smellForceUp + "moving up: " + car.transform.position);
+        //                }
 
-                        //Transforms if AICar position.y is below player
-                        else if (car.transform.position.y < this.transform.position.y)
-                        {
-                            car.GetComponent<Transform>().Translate(smellForceDown);
-                           // Debug.Log("CAR NAME: " + car.name + smellForceDown + "moving down: " + car.transform.position);
-                        }
+        //                //Transforms if AICar position.y is below player
+        //                else if (car.transform.position.y < this.transform.position.y)
+        //                {
+        //                    car.GetComponent<Transform>().Translate(smellForceDown);
+        //                   // Debug.Log("CAR NAME: " + car.name + smellForceDown + "moving down: " + car.transform.position);
+        //                }
 
-                    }
-                }
-            }
-        }
-
-        //reference script
-        //Debug.Log("VELOCITY: " + getVelocity());
-
-        //new movement
-        addForceTimer += Time.deltaTime;
-        //if (addForceTimer > addForceReference) {     //0.3 by default
-        //  //  Debug.Log("CAN PUSH TO MIDDLE: " + true);
-        //    pushToMid();        
+        //            }
+        //        }
+        //    }
         //}
-        //until here
+
     }
 
     float GetDistanceFromClosest(GameObject[] gameObjects)
@@ -506,8 +502,9 @@ public class playerController : MonoBehaviour {
 
     void updateMovementVec()
     {
-        movementVector = new Vector2(getOwnAxis("Horizontal"), getOwnAxis("Vertical"));
+        //movementVector = new Vector2(getOwnAxis("Horizontal"), getOwnAxis("Vertical"));
         //movementVector = new Vector2(0f, getOwnAxis("Vertical"));        
+        movementVector = new Vector2(player.GetAxis("MoveHorizontal"), player.GetAxis("MoveVertical"));
     }
 
     void boost()
@@ -522,31 +519,12 @@ public class playerController : MonoBehaviour {
 
     Vector2 getRightStickDir()    // returns a normalized vector from right stick.
     {
-        Vector3 dir = new Vector3(0, 0, 0);
+        Vector2 dir = new Vector2(player.GetAxis("AimHorizontal"), player.GetAxis("AimVertical"));
 
-        if (getOwnAxis("Horizontal2") > horizontalDeadZone)
-        {
-            //GetComponent<Rigidbody2D>().AddForce(new Vector2(moveSpeed, 0));
-            dir.x = getOwnAxis("Horizontal2");
-        }
-        else if (getOwnAxis("Horizontal2") < -horizontalDeadZone)
-        {
-            dir.x = getOwnAxis("Horizontal2");
-        }
-
-        if (getOwnAxis("Vertical2") > verticalDeadZone)
-        {
-            dir.y = -getOwnAxis("Vertical2");
-        }
-        else if (getOwnAxis("Vertical2") < verticalDeadZone)
-        {
-            dir.y = -getOwnAxis("Vertical2");
-        }
-
-        if (Vector3.Magnitude(dir) > 1)
-        {
+        //if (Vector3.Magnitude(dir) > 1)
+        //{
             dir.Normalize();
-        }
+        //}
 
         return dir;
     }
@@ -555,8 +533,9 @@ public class playerController : MonoBehaviour {
     void aim()
     {
 
-        m_arrow.SetActive(true);
+        //m_arrow.SetActive(true);
 
+        //COME BACK TO CLEAN THIS WHOLE PART IF WE HAVE TIME
         Vector2 dir = getRightStickDir();
 
 
@@ -688,14 +667,14 @@ public class playerController : MonoBehaviour {
 
     void checkColliders()
     {
-        if (getOwnAxis("Horizontal2") < -0.34f)
+        if (player.GetAxis("AimHorizontal") < -0.34f)
         {
-            if (getOwnAxis("Vertical2") < -0.34f)
+            if (player.GetAxis("AimVertical") > 0.34f)
             {
                 colliderObj2Listen = lu;
                 craneActual.GetComponent<SpriteRenderer>().sprite = craneLU;
             }
-            else if (getOwnAxis("Vertical2") > 0.34f)
+            else if (player.GetAxis("AimVertical") < -0.34f)
             {
                 colliderObj2Listen = ld;
                 craneActual.GetComponent<SpriteRenderer>().sprite = craneLD;
@@ -708,14 +687,14 @@ public class playerController : MonoBehaviour {
             if(!hasThrown)
                 pickUp();
         }
-        else if (getOwnAxis("Horizontal2") > 0.34f)
+        else if (player.GetAxis("AimHorizontal") > 0.34f)
         {
-            if (getOwnAxis("Vertical2") < -0.34f)
+            if (player.GetAxis("AimVertical") > 0.34f)
             {
                 colliderObj2Listen = ru;
                 craneActual.GetComponent<SpriteRenderer>().sprite = craneRU;
             }
-            else if (getOwnAxis("Vertical2") > 0.34f)
+            else if (player.GetAxis("AimVertical") < -0.34f)
             {
                 colliderObj2Listen = rd;
                 craneActual.GetComponent<SpriteRenderer>().sprite = craneRD;
@@ -730,14 +709,14 @@ public class playerController : MonoBehaviour {
         }
         else
         {
-            if (getOwnAxis("Vertical2") < -0.34f)
+            if (player.GetAxis("AimVertical") > 0.34f)
             {
                 colliderObj2Listen = u;
                 craneActual.GetComponent<SpriteRenderer>().sprite = craneU;
                 if (!hasThrown)
                     pickUp();
             }
-            else if (getOwnAxis("Vertical2") > 0.34f)
+            else if (player.GetAxis("AimVertical") < -0.34f)
             {
                 colliderObj2Listen = d;
                 craneActual.GetComponent<SpriteRenderer>().sprite = craneD;
@@ -747,7 +726,7 @@ public class playerController : MonoBehaviour {
             else
             {
                 //colliderObj2Listen = null;
-                colliderObj2Listen = d;
+                colliderObj2Listen = d; //Do we need this?
                 craneActual.GetComponent<SpriteRenderer>().sprite = craneD;
             }
         }
@@ -842,6 +821,7 @@ public class playerController : MonoBehaviour {
 
         if (movementVector.y > 0)
         {
+            laneForceTimer = 0;
             if (rBody.velocity.y < movementVector.y * maxHorizontalSpeed * .75f)
             {
                 v.y = movementVector.y * maxHorizontalSpeed * .75f;
@@ -849,10 +829,15 @@ public class playerController : MonoBehaviour {
         }
         else if (movementVector.y < 0)
         {
+            laneForceTimer = 0;
             if (rBody.velocity.y > movementVector.y * maxHorizontalSpeed * .75f)
             {
                 v.y = movementVector.y * maxHorizontalSpeed * .75f;
             }
+        }
+        else if(laneForceTimer > laneForceDelay)
+        {
+            pushToMid();
         }
         
         rBody.velocity = v;
@@ -968,19 +953,16 @@ public class playerController : MonoBehaviour {
             Debug.Log("attempting to pick up");
             //if (colliderObj2Listen.GetComponent<CraneZone>().getObj2PickUp().GetComponent<throwable>() 
             //    && colliderObj2Listen.GetComponent<CraneZone>().getObj2PickUp().GetComponent<throwable>().isItThrown())
-            if(!colliderObj2Listen.GetComponent<CraneZone>().isTherePickable())
-            {
-                return;
-            }
+
             //Checks if the current player can pick up the object
             //if (colliderObj2Listen.GetComponent<CraneZone>().getObj2PickUp().GetComponent<throwable>().canIPickup((int)playerNum))
             // {
             objPicked = colliderObj2Listen.GetComponent<CraneZone>().getObj2PickUp();
+            m_arrow.SetActive(true);
 
-            
 
 
-                objPicked.GetComponent<Rigidbody2D>().velocity.Set(0, 0);
+            objPicked.GetComponent<Rigidbody2D>().velocity.Set(0, 0);
                 isCarrying = true;
                 cranePoint.transform.position = objPicked.transform.position;
                 objPicked.GetComponent<Rigidbody2D>().isKinematic = true;
@@ -1011,24 +993,24 @@ public class playerController : MonoBehaviour {
 
     }
 
-    void chargingForce()
-    {
-        isCharging = false;
-        if (timeCharging > maxThrowTime)
-            throwForce = maxThrowForce;
-        else if (timeCharging < minChargeTime)
-            throwForce = minThrowForce;
-        else
-            throwForce = (timeCharging / maxThrowTime) * maxThrowForce;
-        timeCharging = 0f;
-        m_arrow.transform.localScale = m_arrowOriginalScale;
-    }
+    //void chargingForce()
+    //{
+    //    isCharging = false;
+    //    if (timeCharging > maxThrowTime)
+    //        throwForce = maxThrowForce;
+    //    else if (timeCharging < minChargeTime)
+    //        throwForce = minThrowForce;
+    //    else
+    //        throwForce = (timeCharging / maxThrowTime) * maxThrowForce;
+    //    timeCharging = 0f;
+    //    m_arrow.transform.localScale = m_arrowOriginalScale;
+    //}
 
     void throwObj()
     {
         if (objPicked != null)
         {
-            float distance = Vector3.Distance(cranePoint.transform.position, targetReticle.transform.position);
+            //float distance = Vector3.Distance(cranePoint.transform.position, targetReticle.transform.position);
 
             objPicked.GetComponent<Rigidbody2D>().isKinematic = false;
             objPicked.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -1073,8 +1055,7 @@ public class playerController : MonoBehaviour {
             }
 
             //objPicked.GetComponent<throwable>().setDistance(distance);
-            //objPicked.GetComponent<Rigidbody2D>().AddForce(dir * throwForce);
-            objPicked.GetComponent<Rigidbody2D>().AddForce(dir * maxThrowForce);    // NOW< WE ALWAYS THROW WITH MAX FORCE
+            objPicked.GetComponent<Rigidbody2D>().AddForce(dir * throwForce);    // NOW< WE ALWAYS THROW WITH MAX FORCE
 
             objPicked = null;
             isCarrying = false;
@@ -1311,16 +1292,16 @@ public class playerController : MonoBehaviour {
             }
         }
 
-        if (isSmelly) // smelly countdown
-        {
-            smellyCooldownTimer -= 1 * Time.deltaTime;
-            //Debug.Log("Smelly Timer:" + smellyCooldownTimer);
-            if (smellyCooldownTimer <= 0)
-            {
-                becomeUnSmelly();
-                smellyCooldownTimer = 0;
-            }
-        }
+        //if (isSmelly) // smelly countdown
+        //{
+        //    smellyCooldownTimer -= 1 * Time.deltaTime;
+        //    //Debug.Log("Smelly Timer:" + smellyCooldownTimer);
+        //    if (smellyCooldownTimer <= 0)
+        //    {
+        //        becomeUnSmelly();
+        //        smellyCooldownTimer = 0;
+        //    }
+        //}
 
     }
 
