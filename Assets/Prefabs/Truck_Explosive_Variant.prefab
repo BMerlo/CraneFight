@@ -68,6 +68,16 @@ PrefabInstance:
       propertyPath: isReverse
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114853983172960584, guid: 1436af8cafdab554c813a69f5c54c800,
+        type: 3}
+      propertyPath: minSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114853983172960584, guid: 1436af8cafdab554c813a69f5c54c800,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7590177457760720276, guid: 1436af8cafdab554c813a69f5c54c800,
         type: 3}
       propertyPath: size
