@@ -33,7 +33,7 @@ public class playerController : MonoBehaviour {
     float horizontalMoveSpeed = 5f;
     float maxHorizontalSpeed = 4f;
 
-    float evadeSpeed = 80f;
+    float evadeSpeed = 150f;
     [SerializeField] bool hasBoosted = false;
     [SerializeField] GameObject r, l, u, d, ru, lu, rd, ld;
     [SerializeField] GameObject colliderObj2Listen;
@@ -87,7 +87,7 @@ public class playerController : MonoBehaviour {
     //[SerializeField] float minThrowForce = 1650f;
     //[SerializeField]float timeCharging;
 
-    [SerializeField] private float evadeCooldown = 1f;
+    [SerializeField] private float evadeCooldown = 0.5f;
     private bool hasEvaded = false;
     private float evadeCooldownTimer = 0;
 
@@ -509,7 +509,8 @@ public class playerController : MonoBehaviour {
 
     void boost()
     {
-        float force = (evadeSpeed / 3.0f) + ((evadeSpeed * 2.0f * (boostTimer / MAX_BOOST_TIME)) / 3.0f);
+        //float force = (evadeSpeed / 3.0f) + ((evadeSpeed * 2.0f * (boostTimer / MAX_BOOST_TIME)) / 3.0f);
+        float force = 120f;
         GetComponent<Rigidbody2D>().AddForce(movementVector.normalized * force, ForceMode2D.Impulse);
         hasEvaded = true;
         isBoostCharging = false;

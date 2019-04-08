@@ -5,16 +5,16 @@ using UnityEngine;
 public class carAI : MonoBehaviour
 {
     public LayerMask layerMask;
-    [SerializeField] bool isReverse = false;
-    Vector3 dir = new Vector3(1, 0, 0);
+    //[SerializeField] bool isReverse = false;
+    Vector3 dir = new Vector3(-1, 0, 0);
     public float desiredSpeed;
 
     Rigidbody2D myBody;
-    [SerializeField] float minSpeed = 20f;
-    [SerializeField] float maxSpeed = 30f;
+    [SerializeField] float minSpeed = 6f;
+    [SerializeField] float maxSpeed = 12f;
 
-    float accelerateForce = 30f;
-    float decelerateForce = 15f;
+    float accelerateForce = 100f;
+    float decelerateForce = 45f;
 
     float originalSpeed;
     float lowestSpeed;
@@ -35,27 +35,20 @@ public class carAI : MonoBehaviour
     {
         myBody = GetComponent<Rigidbody2D>();
         //lowerSpeed = 0;
-        originalSpeed = Random.Range(minSpeed, maxSpeed);
+        originalSpeed = -Random.Range(minSpeed, maxSpeed);
 
         gameObject.layer = 19; //make every AI to belong to layer AI
 
         backGroundScript = FindObjectOfType<ScrollingBackGround>();
         backgroundSpeed = backGroundScript.getSpeed();
 
-        if (isReverse)
-        {
-            dir *= -1;
-            originalSpeed *= -1;    // original speed will carry dir now    // -20
-            originalSpeed += backgroundSpeed;   // bgSpeed is negative, keep in mind    //-23
+            // ALWAYS REVERSE NOW.
+            // original speed will carry dir now    // -20
+        originalSpeed += backgroundSpeed;   // bgSpeed is negative, keep in mind    //-23
             
             //lowerSpeed += DIR_DIFF;
-        }
-        else
-        {
-            originalSpeed += backgroundSpeed;   //  20 - 3 = 17
-            //minSpeed -= DIR_DIFF;
-            //maxSpeed -= DIR_DIFF;
-        }
+
+
 
         speedUsedTest = originalSpeed;
         desiredSpeed = originalSpeed;
@@ -75,11 +68,27 @@ public class carAI : MonoBehaviour
         //Debug.Log("---------accelerate " + (dir * accelerateForce));
     }
 
+    void decelerate()
+    {
+        myBody.AddForce(-dir * decelerateForce);
+    }
+
 
     // Update is called once per frame
     void Update()
     {
-     
+        speedUsedTest = myBody.velocity.x;
+
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 7.0f, layerMask);
+        Debug.DrawLine(transform.position, transform.position + (dir * 7.0f));
+
+
+        if (hit.collider && hit.transform.GetComponent<carAI>())
+        {
+            desiredSpeed = hit.transform.GetComponent<carAI>().getCurrentSpeed();
+        }
+
     }
 
     public float getCurrentSpeed()
@@ -90,7 +99,8 @@ public class carAI : MonoBehaviour
 
     public bool getDirection()
     {
-        return isReverse;
+        //return isReverse;
+        return true;    // we wont need anymore but wth
     }
 
     private void FixedUpdate()
@@ -111,11 +121,11 @@ public class carAI : MonoBehaviour
 
         //}
 
-        float currentSpeed = GetComponent<Rigidbody2D>().velocity.x;
+        //float currentSpeed = GetComponent<Rigidbody2D>().velocity.x;
 
         // google self drive has nothing on me
-        if (isReverse)  // NEgative speed
-        {
+        //if (isReverse)  // NEgative speed // ALWAYS REVERSE NOW
+        //{
             // if (desiredSpeed < currentSpeed)
             //{
             //    accelerate();
@@ -125,12 +135,16 @@ public class carAI : MonoBehaviour
             //    decelerate();
             //}
 
-            if(myBody.velocity.x > originalSpeed)
+            if(myBody.velocity.x > desiredSpeed)
             {
                 accelerate();
-            }
-            
         }
+        else if (myBody.velocity.x < desiredSpeed * 1.1f)
+        {
+            decelerate();
+        }
+            
+        //}
         //else
         //{
         //    if (desiredSpeed > currentSpeed)
@@ -151,14 +165,14 @@ public class carAI : MonoBehaviour
     }
     private void ResetSpeed()
     {
-        if (isReverse) //this checks if AI goes left and its position
-        {
-           // this.GetComponent<Rigidbody2D>().velocity = new Vector2(-1 * -newSpeed + 1.5f, 0);
-        }
-        else if (!isReverse)
-        {
-          //  this.GetComponent<Rigidbody2D>().velocity = new Vector2(1 * -newSpeed - 1.5f, 0);
-        }
+        //if (isReverse) //this checks if AI goes left and its position
+        //{
+        //   // this.GetComponent<Rigidbody2D>().velocity = new Vector2(-1 * -newSpeed + 1.5f, 0);
+        //}
+        //else if (!isReverse)
+        //{
+        //  //  this.GetComponent<Rigidbody2D>().velocity = new Vector2(1 * -newSpeed - 1.5f, 0);
+        //}
     }
 
 }

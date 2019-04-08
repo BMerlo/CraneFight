@@ -55,10 +55,10 @@ public class Game_Manager : MonoBehaviour {
     [SerializeField] GameObject player3Prefab;
     [SerializeField] GameObject player4Prefab;
     
-    private int player1lives = 2;
-    private int player2lives = 2;
-    private int player3lives = 2;
-    private int player4lives = 2;
+    //private int player1lives = 2;
+    //private int player2lives = 2;
+    //private int player3lives = 2;
+    //private int player4lives = 2;
     [SerializeField] HealthBar playerHealth1;
     [SerializeField] HealthBar playerHealth2;
     [SerializeField] HealthBar playerHealth3;
@@ -159,7 +159,7 @@ public class Game_Manager : MonoBehaviour {
         }
 
         //if (m_timeToSpawn1 > timeToRespawn && player1lives > 0) finite lives
-        if (m_timeToSpawn1 > timeToRespawn && player1lives > 0)//infinite lives
+        if (m_timeToSpawn1 > timeToRespawn)//infinite lives
         {
             GameObject player1r = Instantiate(player1Prefab, locationToSpawn, Quaternion.identity);
             player1r.GetComponent<playerController>().myManager = this; //prefabs not saving this unused variable for some reason, you have to hard code it
@@ -168,7 +168,7 @@ public class Game_Manager : MonoBehaviour {
             player1alive = true;
             m_timeToSpawn1 = 0;
             player1 = player1r;
-            player1lives--;
+            //player1lives--;
             playersCurrentlyAlive++;
         }
 
@@ -182,7 +182,7 @@ public class Game_Manager : MonoBehaviour {
             player2alive = true;
             m_timeToSpawn2 = 0;
             player2 = player2r;
-            player2lives--;
+            //player2lives--;
             playersCurrentlyAlive++;
         }
 
@@ -196,7 +196,7 @@ public class Game_Manager : MonoBehaviour {
             player3alive = true;
             m_timeToSpawn3 = 0;
             player3 = player3r;
-            player3lives--;
+            //player3lives--;
             playersCurrentlyAlive++;
         }
 
@@ -210,7 +210,7 @@ public class Game_Manager : MonoBehaviour {
             player4alive = true;
             player4 = player4r;
             m_timeToSpawn4 = 0;
-            player4lives--;
+            //player4lives--;
             playersCurrentlyAlive++;
         }
     }
