@@ -803,7 +803,8 @@ public class playerController : MonoBehaviour {
         // OLD MOVEMENT
         //rBody.AddForce(movementVector * moveSpeed);
 
-        Vector2 v = rBody.velocity;
+        //Vector2 v = rBody.velocity;
+        Vector2 v = new Vector2(0, 0);
 
         if (movementVector.x > 0)
         {
@@ -814,7 +815,7 @@ public class playerController : MonoBehaviour {
         }
         else if (movementVector.x < 0)
         {
-            if (rBody.velocity.x > movementVector.x * maxHorizontalSpeed)
+            if (rBody.velocity.x > movementVector.x * maxHorizontalSpeed * 1.5f)
             {
                 v.x = movementVector.x * maxHorizontalSpeed;
             }
@@ -823,7 +824,7 @@ public class playerController : MonoBehaviour {
         if (movementVector.y > 0)
         {
             laneForceTimer = 0;
-            if (rBody.velocity.y < movementVector.y * maxHorizontalSpeed * .75f)
+            if (rBody.velocity.y < movementVector.y * maxHorizontalSpeed * .7f)
             {
                 v.y = movementVector.y * maxHorizontalSpeed * .75f;
             }
@@ -831,7 +832,7 @@ public class playerController : MonoBehaviour {
         else if (movementVector.y < 0)
         {
             laneForceTimer = 0;
-            if (rBody.velocity.y > movementVector.y * maxHorizontalSpeed * .75f)
+            if (rBody.velocity.y > movementVector.y * maxHorizontalSpeed * .7f)
             {
                 v.y = movementVector.y * maxHorizontalSpeed * .75f;
             }
@@ -840,8 +841,11 @@ public class playerController : MonoBehaviour {
         {
             pushToMid();
         }
-        
-        rBody.velocity = v;
+
+        // Nope velocity change now
+        //rBody.velocity = v;
+        rBody.velocity += v;
+
 
         //if (vel.x < maxHorizontalSpeed && vel.x > -maxHorizontalSpeed)
         //{
