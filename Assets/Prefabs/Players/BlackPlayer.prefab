@@ -11,12 +11,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlackPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 212344068995576862, guid: d50e2276728a84b4a979d2c20952fc74,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 3d62127afbee54c458107dbfcfa922e2,
-        type: 3}
     - target: {fileID: 917334501, guid: d50e2276728a84b4a979d2c20952fc74, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 0.6571429
@@ -69,11 +63,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 95638600150682162, guid: d50e2276728a84b4a979d2c20952fc74,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 845532f25e60fb741a934b94f71b8d19, type: 2}
     - target: {fileID: 114964337360061496, guid: d50e2276728a84b4a979d2c20952fc74,
         type: 3}
       propertyPath: playerHealth
@@ -128,7 +117,7 @@ PrefabInstance:
         type: 3}
       propertyPath: myAnim
       value: 
-      objectReference: {fileID: 7447998687151036460}
+      objectReference: {fileID: 5520006001410700951}
     - target: {fileID: 114964337360061496, guid: d50e2276728a84b4a979d2c20952fc74,
         type: 3}
       propertyPath: cranePoint
@@ -199,6 +188,11 @@ PrefabInstance:
       propertyPath: smellCloudF
       value: 
       objectReference: {fileID: 4688027463835254773}
+    - target: {fileID: 1288765496779725689, guid: d50e2276728a84b4a979d2c20952fc74,
+        type: 3}
+      propertyPath: spriteHolder
+      value: 
+      objectReference: {fileID: 6342841030844754985}
     - target: {fileID: 7652515106218021235, guid: d50e2276728a84b4a979d2c20952fc74,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -209,6 +203,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.003
       objectReference: {fileID: 0}
+    - target: {fileID: 3068180200268326025, guid: d50e2276728a84b4a979d2c20952fc74,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 845532f25e60fb741a934b94f71b8d19, type: 2}
     - target: {fileID: 4435719099518354514, guid: d50e2276728a84b4a979d2c20952fc74,
         type: 3}
       propertyPath: m_Sprite
@@ -220,14 +219,19 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 212344068995576862, guid: d50e2276728a84b4a979d2c20952fc74,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3d62127afbee54c458107dbfcfa922e2,
+        type: 3}
+    - target: {fileID: 95638600150682162, guid: d50e2276728a84b4a979d2c20952fc74,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 845532f25e60fb741a934b94f71b8d19, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d50e2276728a84b4a979d2c20952fc74, type: 3}
---- !u!95 &7447998687151036460 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 95638600150682162, guid: d50e2276728a84b4a979d2c20952fc74,
-    type: 3}
-  m_PrefabInstance: {fileID: 7354199609305633310}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7353409024866020546 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1076528598286044, guid: d50e2276728a84b4a979d2c20952fc74,
@@ -357,6 +361,18 @@ GameObject:
 --- !u!1 &2843057384627260150 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4718589559807989992, guid: d50e2276728a84b4a979d2c20952fc74,
+    type: 3}
+  m_PrefabInstance: {fileID: 7354199609305633310}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6342841030844754985 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4470123738942979639, guid: d50e2276728a84b4a979d2c20952fc74,
+    type: 3}
+  m_PrefabInstance: {fileID: 7354199609305633310}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5520006001410700951 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3068180200268326025, guid: d50e2276728a84b4a979d2c20952fc74,
     type: 3}
   m_PrefabInstance: {fileID: 7354199609305633310}
   m_PrefabAsset: {fileID: 0}

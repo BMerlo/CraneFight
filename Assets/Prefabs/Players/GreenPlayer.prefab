@@ -11,12 +11,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GreenPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 212344068995576862, guid: d50e2276728a84b4a979d2c20952fc74,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 08ad11f1ac72bd34cad6d43c565a4e27,
-        type: 3}
     - target: {fileID: 917334501, guid: d50e2276728a84b4a979d2c20952fc74, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 0.6571429
@@ -69,11 +63,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 95638600150682162, guid: d50e2276728a84b4a979d2c20952fc74,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 636adfb649cd9044b919a1b283f45258, type: 2}
     - target: {fileID: 114964337360061496, guid: d50e2276728a84b4a979d2c20952fc74,
         type: 3}
       propertyPath: playerHealth
@@ -123,7 +112,7 @@ PrefabInstance:
         type: 3}
       propertyPath: myAnim
       value: 
-      objectReference: {fileID: 3529992029909001854}
+      objectReference: {fileID: 1962045936960194757}
     - target: {fileID: 114964337360061496, guid: d50e2276728a84b4a979d2c20952fc74,
         type: 3}
       propertyPath: cranePoint
@@ -204,6 +193,11 @@ PrefabInstance:
       propertyPath: verticalMoveSpeed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1288765496779725689, guid: d50e2276728a84b4a979d2c20952fc74,
+        type: 3}
+      propertyPath: spriteHolder
+      value: 
+      objectReference: {fileID: 1128110045068726907}
     - target: {fileID: 7652515106218021235, guid: d50e2276728a84b4a979d2c20952fc74,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -214,14 +208,24 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.035
       objectReference: {fileID: 0}
+    - target: {fileID: 3068180200268326025, guid: d50e2276728a84b4a979d2c20952fc74,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 636adfb649cd9044b919a1b283f45258, type: 2}
+    - target: {fileID: 212344068995576862, guid: d50e2276728a84b4a979d2c20952fc74,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 08ad11f1ac72bd34cad6d43c565a4e27,
+        type: 3}
+    - target: {fileID: 95638600150682162, guid: d50e2276728a84b4a979d2c20952fc74,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 636adfb649cd9044b919a1b283f45258, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d50e2276728a84b4a979d2c20952fc74, type: 3}
---- !u!95 &3529992029909001854 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 95638600150682162, guid: d50e2276728a84b4a979d2c20952fc74,
-    type: 3}
-  m_PrefabInstance: {fileID: 3580022782494485580}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3579544596546540176 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1076528598286044, guid: d50e2276728a84b4a979d2c20952fc74,
@@ -351,6 +355,18 @@ GameObject:
 --- !u!1 &8130413450722243748 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4718589559807989992, guid: d50e2276728a84b4a979d2c20952fc74,
+    type: 3}
+  m_PrefabInstance: {fileID: 3580022782494485580}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1128110045068726907 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4470123738942979639, guid: d50e2276728a84b4a979d2c20952fc74,
+    type: 3}
+  m_PrefabInstance: {fileID: 3580022782494485580}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1962045936960194757 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3068180200268326025, guid: d50e2276728a84b4a979d2c20952fc74,
     type: 3}
   m_PrefabInstance: {fileID: 3580022782494485580}
   m_PrefabAsset: {fileID: 0}
