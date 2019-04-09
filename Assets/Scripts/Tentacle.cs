@@ -33,13 +33,16 @@ public class Tentacle : MonoBehaviour {
         camShaker.StartCoroutine(camShaker.Shake(0.5f, .1f));
 
         //to know which way to go
-        if (transform.position.y < 0)
-        {
-            reverse = true;
-        }
-        else {
-            reverse = false;
-        }
+        //if (transform.position.y < 0)
+        //{
+        //    reverse = true;
+        //}
+        //else {
+        //    reverse = false;
+        //}
+
+        // Find a better fix later
+        GetComponent<PolygonCollider2D>().enabled = true;
     }
     
     void Update() {

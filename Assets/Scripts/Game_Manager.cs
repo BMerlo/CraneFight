@@ -5,6 +5,10 @@ using UnityEngine.UI;
 //using UnityEngine.SceneManagement;
 
 public class Game_Manager : MonoBehaviour {
+    [SerializeField] float bossEventTime = 30f;
+    float bossEventCounter = 0;
+    [SerializeField] Transform tentacleSpawnPos;
+    [SerializeField] GameObject tentaclePrefab;
 
     [SerializeField] GameObject player1;
     [SerializeField] GameObject player2;
@@ -108,6 +112,14 @@ public class Game_Manager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        bossEventCounter += Time.deltaTime;
+
+        if (bossEventCounter >= bossEventTime)
+        {
+            bossEventCounter = 0;
+            tentacleEvent();
+        }
+
         //if (numberOfPlayers.Length == 1)
         //      {
         //          Time.timeScale = 0;
@@ -215,6 +227,11 @@ public class Game_Manager : MonoBehaviour {
         }
     }
     
+    void tentacleEvent()
+    {
+        Instantiate(tentaclePrefab, tentacleSpawnPos.position, tentaclePrefab.transform.rotation);
+    }
+
     public void spawnGhost(int num)
     {
         switch (num) {
