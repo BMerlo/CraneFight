@@ -375,9 +375,9 @@ public class playerController : MonoBehaviour {
             //myAnim.SetBool("IsJumping", true);
             myAnim.SetTrigger("IsJumpingTrigger");
 			//GetComponent<BoxCollider2D>().enabled = false;
-			//myCollider.enabled = true;
+			myCollider.enabled = false;
 			//GetComponent<SpriteRenderer>().enabled = false;
-			gameObject.layer = 18;//changing gameobject physics layer to "Air"
+			//gameObject.layer = 18;//changing gameobject physics layer to "Air"
 			jumpTimer = 0;
         }
         else if (isJumping)
@@ -387,13 +387,13 @@ public class playerController : MonoBehaviour {
             if (jumpTimer >= jumpTime)
             {
 
-				gameObject.layer = tempLayer;//changing gameobject physics layer to default
+				//gameObject.layer = tempLayer;//changing gameobject physics layer to default
 				isJumping = false;
 				jumpSprite.sortingLayerName = "Default";//changed sprite sorting layer to default
 				hasJumped = true;
                 //myAnim.SetBool("IsJumping", false);
                 //GetComponent<BoxCollider2D>().enabled = true;
-                //myCollider.enabled = true;
+                myCollider.enabled = true;
                 //GetComponent<SpriteRenderer>().enabled = true;
                 //takeDamage(jumpDamage);
             }
