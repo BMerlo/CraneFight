@@ -75,19 +75,5 @@ public class SideArrowSpawn : MonoBehaviour
 
         }
     }
-    public bool returnp1left() {
-        return p1left;
-    }
-    public bool returnp2left()
-    {
-        return p2left;
-    }
-    public bool returnp3left()
-    {
-        return p3left;
-    }
-    public bool returnp4left()
-    {
-        return p4left;
-    }
+
 }

@@ -6,51 +6,52 @@ public class SideArrow : MonoBehaviour
 {
     // Start is called before the first frame update
     public int pnum;
-    SideArrowSpawn sidearrow;
+    fallBackChecker fallback;
+    Camera camera;
+    float width;
     void Start()
     {
-         sidearrow = FindObjectOfType<SideArrowSpawn>();
-
+        fallback = FindObjectOfType<fallBackChecker>();
+        camera = Camera.main;
+        //float height = 0.95f * camera.orthographicSize;
+        // width = height * camera.aspect;
     }
     // Update is called once per frame
     void Update()
     {
-        playerController[] cars = GameObject.FindObjectsOfType<playerController>();
-        foreach (playerController car in cars)
-        {
-
-            if (pnum == 1 && car.getPlayerNum() == 1)
+            if (pnum == 1 )
             {
-                transform.position = new Vector2(-8, car.transform.position.y);
-                if (sidearrow.returnp1left()) {
+            transform.position = new Vector2(fallback.returnbound(), fallback.p1object().transform.position.y);
+                if (fallback.returnp1left()) {
                     Destroy(this.gameObject);
                 }
             }
-            if (pnum == 2 && car.getPlayerNum() == 2)
+            if (pnum == 2 )
             {
-               transform.position = new Vector2(-8, car.transform.position.y);
-                if (sidearrow.returnp2left())
+               transform.position = new Vector2(fallback.returnbound(), fallback.p2object().transform.position.y);
+                if (fallback.returnp2left())
                 {
                     Destroy(this.gameObject);
                 }
             }
-            if (pnum == 3 && car.getPlayerNum() == 3)
+            if (pnum == 3 )
             {
-                transform.position = new Vector2(-8, car.transform.position.y);
-                if (sidearrow.returnp3left())
+                transform.position = new Vector2(fallback.returnbound(), fallback.p3object().transform.position.y);
+                if (fallback.returnp3left())
                 {
                     Destroy(this.gameObject);
                 }
             }
-            if (pnum == 4 && car.getPlayerNum() == 4)
+            if (pnum == 4)
             {
-                transform.position = new Vector2(-8, car.transform.position.y);
-                if (sidearrow.returnp4left())
+                transform.position = new Vector2(fallback.returnbound(), fallback.p4object().transform.position.y);
+                if (fallback.returnp4left())
                 {
                     Destroy(this.gameObject);
                 }
             }
-               
-        }
+    }
+    public void setnum(int num) {
+        pnum = num;
     }
 }
