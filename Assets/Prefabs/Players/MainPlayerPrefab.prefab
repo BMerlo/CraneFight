@@ -1075,7 +1075,7 @@ MonoBehaviour:
   targetReticle: {fileID: 1345681843616540}
   upLarger: {fileID: 4981469485215136}
   rightLarger: {fileID: 4913710291580284}
-  jumpTime: 0.5
+  spriteHolder: {fileID: 4470123738942979639}
   isOiled: 0
   oilForce: 1
   oilForceTime: 0.5
@@ -1140,6 +1140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxY: 3.51
   minY: -3.91
+  spriteHolder: {fileID: 4470123738942979639}
 --- !u!114 &1288765496779725689
 MonoBehaviour:
   m_ObjectHideFlags: 0
