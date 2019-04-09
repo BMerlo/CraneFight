@@ -5,7 +5,7 @@ using UnityEngine.UI;
 //using UnityEngine.SceneManagement;
 
 public class Game_Manager : MonoBehaviour {
-    [SerializeField] float bossEventTime = 30f;
+    [SerializeField] float bossEventTime = 10f;
     float bossEventCounter = 0;
     [SerializeField] Transform tentacleSpawnPos;
     [SerializeField] GameObject tentaclePrefab;

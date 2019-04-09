@@ -7,7 +7,8 @@ public class Tentacle : MonoBehaviour {
     //CameraShakeInstance shaker;
     CameraShake camShaker;
 
-    const float speed = 0.05f;
+    //const float speed = 0.05f;    // old movement - equal to background speed
+    const float speed = 0.25f;
     Vector3 dir = new Vector3(-1, 0, 0);    
     public bool reverse;
 
@@ -30,7 +31,7 @@ public class Tentacle : MonoBehaviour {
         pushers = GetComponentsInChildren<TentaclePusher>();
 
         tentacleAnim.SetTrigger("tentacleTrigger");
-        camShaker.StartCoroutine(camShaker.Shake(0.5f, .1f));
+        camShaker.StartCoroutine(camShaker.Shake(0.7f, .1f));
 
         //to know which way to go
         //if (transform.position.y < 0)
