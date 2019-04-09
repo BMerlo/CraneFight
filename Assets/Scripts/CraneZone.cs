@@ -20,7 +20,7 @@ public class CraneZone : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.tag == "Pickable")
+        if (collision.transform.tag == "Pickable" && collision.GetComponent<throwable>() && collision.GetComponent<throwable>().isItThrown() == false)
         {
             obj2pick = collision.gameObject;
         }
