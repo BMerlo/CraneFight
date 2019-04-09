@@ -55,6 +55,9 @@ public class playerController : MonoBehaviour {
     bool isJumping = false;
     float jumpTimer = 0;
     float jumpTime = .5f;
+	
+    [SerializeField] GameObject spriteHolder;//Handling the jump here
+    SpriteRenderer jumpSprite;
 
     Vector2 movementVector = Vector2.zero;
 
@@ -153,15 +156,17 @@ public class playerController : MonoBehaviour {
     public float maxVerticalMoveSpeed = 20;
     float laneForceTimer = 0;
     float laneForceDelay = 0.5f;
+	int tempLayer = 0;
 
+	//[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
+	// Use this for initialization
+	void Start() {
 
-    //[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
-    // Use this for initialization
-    void Start() {
-        myManager = FindObjectOfType<Game_Manager>();
+		tempLayer = gameObject.layer;
+		myManager = FindObjectOfType<Game_Manager>();
         myCollider = GetComponent<PolygonCollider2D>();
         rBody = GetComponent<Rigidbody2D>();
-
+		jumpSprite = spriteHolder.GetComponent<SpriteRenderer>();
         switch (playerNum)
         {
             case PlayerNum.P1:
@@ -361,16 +366,19 @@ public class playerController : MonoBehaviour {
         {
             throwObj();
         }
+		
         else if (isCarrying == false && !hasJumped && !isJumping && player.GetButton("Jump"))
             //getOwnAxis("Trigger") > 0.25f)
         {
             isJumping = true;
+			jumpSprite.sortingLayerName = "Air";//changed sprite sorting layer
             //myAnim.SetBool("IsJumping", true);
             myAnim.SetTrigger("IsJumpingTrigger");
-            //GetComponent<BoxCollider2D>().enabled = false;
-            myCollider.enabled = false;
-            //GetComponent<SpriteRenderer>().enabled = false;
-            jumpTimer = 0;
+			//GetComponent<BoxCollider2D>().enabled = false;
+			//myCollider.enabled = true;
+			//GetComponent<SpriteRenderer>().enabled = false;
+			gameObject.layer = 18;//changing gameobject physics layer to "Air"
+			jumpTimer = 0;
         }
         else if (isJumping)
         {
@@ -378,11 +386,14 @@ public class playerController : MonoBehaviour {
 
             if (jumpTimer >= jumpTime)
             {
-                isJumping = false;
-                hasJumped = true;
+
+				gameObject.layer = tempLayer;//changing gameobject physics layer to default
+				isJumping = false;
+				jumpSprite.sortingLayerName = "Default";//changed sprite sorting layer to default
+				hasJumped = true;
                 //myAnim.SetBool("IsJumping", false);
                 //GetComponent<BoxCollider2D>().enabled = true;
-                myCollider.enabled = true;
+                //myCollider.enabled = true;
                 //GetComponent<SpriteRenderer>().enabled = true;
                 //takeDamage(jumpDamage);
             }
