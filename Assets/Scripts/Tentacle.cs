@@ -1,8 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using EZCameraShake;
 
 public class Tentacle : MonoBehaviour {
+    //CameraShakeInstance shaker;
+    CameraShake camShaker;
+
     const float speed = 0.05f;
     Vector3 dir = new Vector3(-1, 0, 0);    
     public bool reverse;
@@ -22,10 +26,12 @@ public class Tentacle : MonoBehaviour {
     TentaclePusher[] pushers;
     
     void Start () {
+        camShaker = FindObjectOfType<CameraShake>();
         pushers = GetComponentsInChildren<TentaclePusher>();
 
         tentacleAnim.SetTrigger("tentacleTrigger");
-        
+        camShaker.StartCoroutine(camShaker.Shake(0.5f, .1f));
+
         //to know which way to go
         if (transform.position.y < 0)
         {
@@ -45,6 +51,8 @@ public class Tentacle : MonoBehaviour {
             {
                 counter = 0;
                 Debug.Log("tentacle attack!!1!");
+                
+                //CameraShaker.Instance.StartShake(1f, 1f, 0f);
                 //tentacleAnim.SetTrigger("tentacleTrigger");
                 hasPushed = true;
                 //foreach (TentaclePusher pusher in pushers)
@@ -52,6 +60,7 @@ public class Tentacle : MonoBehaviour {
                 //    pusher.enabled = true;
                 //}
                 GetComponent<PolygonCollider2D>().enabled = true;
+                
             }
         }
         else if (!hasAttacked)
