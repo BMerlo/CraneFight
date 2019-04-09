@@ -36,8 +36,16 @@ public class fallOff : MonoBehaviour {
 
     void fallFromTop()
     {
-        GetComponent<SpriteRenderer>().sortingOrder = -3;
-        GetComponent<SpriteRenderer>().sortingLayerName = "Background";
+        if (GetComponent<SpriteRenderer>())
+        {
+            GetComponent<SpriteRenderer>().sortingOrder = -3;
+            GetComponent<SpriteRenderer>().sortingLayerName = "Background";
+        }
+        else if (GetComponentInChildren<SpriteRenderer>())
+        {
+            GetComponentInChildren<SpriteRenderer>().sortingOrder = -3;
+            GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Background";
+        }
 
         fall();
     }

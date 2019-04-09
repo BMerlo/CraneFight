@@ -63,6 +63,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 50254654541653292, guid: d50e2276728a84b4a979d2c20952fc74,
+        type: 3}
+      propertyPath: m_LinearDrag
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 114964337360061496, guid: d50e2276728a84b4a979d2c20952fc74,
         type: 3}
       propertyPath: playerHealth
@@ -185,11 +190,6 @@ PrefabInstance:
       objectReference: {fileID: 1634435545045516711}
     - target: {fileID: 114964337360061496, guid: d50e2276728a84b4a979d2c20952fc74,
         type: 3}
-      propertyPath: forceToCenter
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 114964337360061496, guid: d50e2276728a84b4a979d2c20952fc74,
-        type: 3}
       propertyPath: verticalMoveSpeed
       value: 5
       objectReference: {fileID: 0}
@@ -209,17 +209,6 @@ PrefabInstance:
       value: -0.035
       objectReference: {fileID: 0}
     - target: {fileID: 3068180200268326025, guid: d50e2276728a84b4a979d2c20952fc74,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 636adfb649cd9044b919a1b283f45258, type: 2}
-    - target: {fileID: 212344068995576862, guid: d50e2276728a84b4a979d2c20952fc74,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 08ad11f1ac72bd34cad6d43c565a4e27,
-        type: 3}
-    - target: {fileID: 95638600150682162, guid: d50e2276728a84b4a979d2c20952fc74,
         type: 3}
       propertyPath: m_Controller
       value: 
@@ -328,12 +317,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3580022782494485580}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &3578857721066118904 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1235722282267316, guid: d50e2276728a84b4a979d2c20952fc74,
-    type: 3}
-  m_PrefabInstance: {fileID: 3580022782494485580}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3578154767847970140 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1938495078758672, guid: d50e2276728a84b4a979d2c20952fc74,
@@ -367,6 +350,12 @@ GameObject:
 --- !u!95 &1962045936960194757 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3068180200268326025, guid: d50e2276728a84b4a979d2c20952fc74,
+    type: 3}
+  m_PrefabInstance: {fileID: 3580022782494485580}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3578857721066118904 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1235722282267316, guid: d50e2276728a84b4a979d2c20952fc74,
     type: 3}
   m_PrefabInstance: {fileID: 3580022782494485580}
   m_PrefabAsset: {fileID: 0}

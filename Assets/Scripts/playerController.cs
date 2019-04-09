@@ -54,7 +54,7 @@ public class playerController : MonoBehaviour {
 
     bool isJumping = false;
     float jumpTimer = 0;
-    [SerializeField] float jumpTime = 3f;
+    float jumpTime = .5f;
 
     Vector2 movementVector = Vector2.zero;
 
@@ -81,7 +81,7 @@ public class playerController : MonoBehaviour {
 
     private Rigidbody2D m_rb;
 
-    float throwForce = 3000f;
+    float throwForce = 2000f;
     //[SerializeField] float maxThrowTime = 3.0f;
     //[SerializeField] float minChargeTime = 1.0f;
     //[SerializeField] float minThrowForce = 1650f;
@@ -365,7 +365,8 @@ public class playerController : MonoBehaviour {
             //getOwnAxis("Trigger") > 0.25f)
         {
             isJumping = true;
-            myAnim.SetBool("IsJumping", true);
+            //myAnim.SetBool("IsJumping", true);
+            myAnim.SetTrigger("IsJumpingTrigger");
             //GetComponent<BoxCollider2D>().enabled = false;
             myCollider.enabled = false;
             //GetComponent<SpriteRenderer>().enabled = false;
@@ -379,7 +380,7 @@ public class playerController : MonoBehaviour {
             {
                 isJumping = false;
                 hasJumped = true;
-                myAnim.SetBool("IsJumping", false);
+                //myAnim.SetBool("IsJumping", false);
                 //GetComponent<BoxCollider2D>().enabled = true;
                 myCollider.enabled = true;
                 //GetComponent<SpriteRenderer>().enabled = true;
