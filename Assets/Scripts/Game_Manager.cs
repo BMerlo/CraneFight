@@ -253,7 +253,7 @@ public class Game_Manager : MonoBehaviour {
         {
             player2.gameObject.transform.GetChild(12).GetComponent<SpriteRenderer>().enabled = true;
             player2.GetComponent<PolygonCollider2D>().enabled = true;
-            player1.GetComponent<playerController>().enabled = true;
+            player2.GetComponent<playerController>().enabled = true;
             player2Moved = false;
             player2MovedTimer = timeToBeActive;
         }
