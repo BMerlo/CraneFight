@@ -9,6 +9,9 @@ public class fallOff : MonoBehaviour {
     Game_Manager manager;
     bool isFalling = false;
 
+    [SerializeField] SpriteRenderer defaultSprite;
+    [SerializeField] SpriteRenderer otherSprite;
+
 	// Use this for initialization
 	void Start () {
         manager = FindObjectOfType<Game_Manager>();
@@ -36,16 +39,31 @@ public class fallOff : MonoBehaviour {
 
     void fallFromTop()
     {
+        SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();
+
+        foreach (SpriteRenderer sprite in sprites)
+        {
+            sprite.sortingOrder = -3;
+            sprite.sortingLayerName = "Background";
+        }
+
         if (GetComponent<SpriteRenderer>())
         {
             GetComponent<SpriteRenderer>().sortingOrder = -3;
             GetComponent<SpriteRenderer>().sortingLayerName = "Background";
         }
-        else if (GetComponentInChildren<SpriteRenderer>())
-        {
-            GetComponentInChildren<SpriteRenderer>().sortingOrder = -3;
-            GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Background";
-        }
+
+        //if (defaultSprite)
+        //{
+        //    defaultSprite.sortingOrder = -3;
+        //    defaultSprite.sortingLayerName = "Background";
+        //}
+        //if (otherSprite)
+        //{
+        //    otherSprite.sortingOrder = -3;
+        //    otherSprite.sortingLayerName = "Background";
+        //}
+
 
         fall();
     }

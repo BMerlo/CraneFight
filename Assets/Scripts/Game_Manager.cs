@@ -327,6 +327,7 @@ public class Game_Manager : MonoBehaviour {
             player1r.GetComponent<playerController>().myManager = this; //prefabs not saving this unused variable for some reason, you have to hard code it
             player1r.GetComponent<playerController>().playerHealth = playerHealth1;            
             player1r.GetComponent<playerController>().setHealth(100);
+            player1r.GetComponent<arrangeLayers>().setOilObjOff();
 
             //turn off controllers and collider
             player1r.GetComponent<playerController>().enabled = false;
@@ -347,6 +348,7 @@ public class Game_Manager : MonoBehaviour {
             player2r.GetComponent<playerController>().myManager = this; //prefabs not saving this unused variable for some reason, you have to hard code it
             player2r.GetComponent<playerController>().playerHealth = playerHealth2;
             player2r.GetComponent<playerController>().setHealth(100);
+            player2r.GetComponent<arrangeLayers>().setOilObjOff();
 
             player2r.GetComponent<playerController>().enabled = false;
             player2r.GetComponent<PolygonCollider2D>().enabled = false;
@@ -366,6 +368,7 @@ public class Game_Manager : MonoBehaviour {
             player3r.GetComponent<playerController>().myManager = this; //prefabs not saving this unused variable for some reason, you have to hard code it
             player3r.GetComponent<playerController>().playerHealth = playerHealth3;
             player3r.GetComponent<playerController>().setHealth(100);
+            player3r.GetComponent<arrangeLayers>().setOilObjOff();
 
             player3r.GetComponent<playerController>().enabled = false;
             player3r.GetComponent<PolygonCollider2D>().enabled = false;
@@ -386,6 +389,7 @@ public class Game_Manager : MonoBehaviour {
             player4r.GetComponent<playerController>().myManager = this; //prefabs not saving this unused variable for some reason, you have to hard code it
             player4r.GetComponent<playerController>().playerHealth = playerHealth4;
             player4r.GetComponent<playerController>().setHealth(100);
+            player4r.GetComponent<arrangeLayers>().setOilObjOff();
 
             player4r.GetComponent<playerController>().enabled = false;
             player4r.GetComponent<PolygonCollider2D>().enabled = false;            

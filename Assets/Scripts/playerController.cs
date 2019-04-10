@@ -33,7 +33,7 @@ public class playerController : MonoBehaviour {
     float horizontalMoveSpeed = 5f;
     float maxHorizontalSpeed = 4f;
 
-    float evadeSpeed = 150f;
+    float evadeSpeed = 80f;
     [SerializeField] bool hasBoosted = false;
     [SerializeField] GameObject r, l, u, d, ru, lu, rd, ld;
     [SerializeField] GameObject colliderObj2Listen;
@@ -158,10 +158,14 @@ public class playerController : MonoBehaviour {
     float laneForceDelay = 0.5f;
 	int tempLayer = 0;
 
+
+    arrangeLayers layerScript;
+
 	//[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
 	// Use this for initialization
 	void Start() {
-
+        oilSprite.SetActive(false);
+        layerScript = GetComponent<arrangeLayers>();
 		tempLayer = gameObject.layer;
 		myManager = FindObjectOfType<Game_Manager>();
         myCollider = GetComponent<PolygonCollider2D>();
@@ -371,7 +375,9 @@ public class playerController : MonoBehaviour {
             //getOwnAxis("Trigger") > 0.25f)
         {
             isJumping = true;
-			jumpSprite.sortingLayerName = "Air";//changed sprite sorting layer
+            //jumpSprite.sortingLayerName = "Air";//changed sprite sorting layer
+            layerScript.jump();
+
             //myAnim.SetBool("IsJumping", true);
             myAnim.SetTrigger("IsJumpingTrigger");
 			//GetComponent<BoxCollider2D>().enabled = false;
@@ -389,7 +395,8 @@ public class playerController : MonoBehaviour {
 
 				//gameObject.layer = tempLayer;//changing gameobject physics layer to default
 				isJumping = false;
-				jumpSprite.sortingLayerName = "Default";//changed sprite sorting layer to default
+                jumpSprite.sortingLayerName = "Default";//changed sprite sorting layer to default
+                layerScript.unJump();
 				hasJumped = true;
                 //myAnim.SetBool("IsJumping", false);
                 //GetComponent<BoxCollider2D>().enabled = true;
@@ -522,8 +529,7 @@ public class playerController : MonoBehaviour {
     void boost()
     {
         //float force = (evadeSpeed / 3.0f) + ((evadeSpeed * 2.0f * (boostTimer / MAX_BOOST_TIME)) / 3.0f);
-        float force = 120f;
-        GetComponent<Rigidbody2D>().AddForce(movementVector.normalized * force, ForceMode2D.Impulse);
+        GetComponent<Rigidbody2D>().AddForce(movementVector.normalized * evadeSpeed, ForceMode2D.Impulse);
         hasEvaded = true;
         isBoostCharging = false;
         boostTimer = 0;

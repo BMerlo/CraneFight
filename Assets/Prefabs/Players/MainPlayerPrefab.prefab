@@ -544,7 +544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4342841726112494
 Transform:
   m_ObjectHideFlags: 0
@@ -1007,6 +1007,7 @@ GameObject:
   - component: {fileID: 114270323687789280}
   - component: {fileID: 1288765496779725689}
   - component: {fileID: 917334501}
+  - component: {fileID: 1404132875673849755}
   m_Layer: 12
   m_Name: MainPlayerPrefab
   m_TagString: Player
@@ -1140,6 +1141,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxY: 3.51
   minY: -3.91
+  defaultSprite: {fileID: 6589702378659625280}
+  otherSprite: {fileID: 1289683126748972276}
 --- !u!114 &1288765496779725689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1153,6 +1156,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteHolder: {fileID: 4470123738942979639}
+  oilySprite: {fileID: 4435719099518354514}
+  shadow: {fileID: 1289683126748972276}
+  sprites: []
 --- !u!60 &917334501
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1189,6 +1195,18 @@ PolygonCollider2D:
       - {x: 0.20941211, y: 0.03157772}
       - {x: 0.17675538, y: 0.05603548}
       - {x: 0.14582632, y: 0.08065366}
+--- !u!114 &1404132875673849755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623435752053756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a1b2c41acdb9174d9269399b1785d03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1707827991027492
 GameObject:
   m_ObjectHideFlags: 0
@@ -1515,8 +1533,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 599711903
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 208e320a84be30b42b8d0e2f4c893ad0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1642,6 +1660,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteHolder: {fileID: 0}
+  oilySprite: {fileID: 0}
+  shadow: {fileID: 0}
+  sprites: []
 --- !u!1 &3673107771687361904
 GameObject:
   m_ObjectHideFlags: 0
@@ -1940,6 +1961,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteHolder: {fileID: 0}
+  oilySprite: {fileID: 0}
+  shadow: {fileID: 0}
+  sprites: []
 --- !u!1 &4945783870629191739
 GameObject:
   m_ObjectHideFlags: 0
@@ -1957,7 +1981,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7652515106218021235
 Transform:
   m_ObjectHideFlags: 0

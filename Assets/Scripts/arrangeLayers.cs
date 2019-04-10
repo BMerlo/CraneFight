@@ -6,10 +6,22 @@ public class arrangeLayers : MonoBehaviour
 {
     [SerializeField] GameObject spriteHolder;
     SpriteRenderer mainSprite;
+    [SerializeField] SpriteRenderer oilySprite;
+
+    [SerializeField] SpriteRenderer shadow;
+
+
+    [SerializeField] SpriteRenderer[] sprites;
 
     // Start is called before the first frame update
     void Start()
     {
+        //Transform SmellCloudF = transform.Find("SmellCloudF");
+        //Transform smellChildB = transform.Find("SmellCloudB");
+
+        sprites = GetComponentsInChildren<SpriteRenderer>();
+        //setOilObjOff();
+
         //mainSprite = transform.Find("Sprite").GetComponent<SpriteRenderer>();
         if (GetComponent<SpriteRenderer>()) {
             mainSprite = GetComponent<SpriteRenderer>();
@@ -31,20 +43,27 @@ public class arrangeLayers : MonoBehaviour
         {
             Debug.Log("Wtf");
         }
-        
 
-        Transform SmellCloudF = transform.Find("SmellCloudF");
-        Transform smellChildB = transform.Find("SmellCloudB");
-        Transform oilySprite = transform.Find("OilyPlaceHolder");
+
+
         //Transform oilChild = transform.Find("OilyPlaceHolder");//Oily Child not implemented on the Player prefab yet.
-        if (SmellCloudF != null)
+        //if (SmellCloudF != null)
+        //{
+        //    SmellCloudF.GetComponent<SpriteRenderer>().sortingOrder = (mainSprite.sortingOrder) + 5;
+        //}
+        //if (smellChildB != null)
+        //{
+        //    smellChildB.GetComponent<SpriteRenderer>().sortingOrder = (mainSprite.sortingOrder) - 10;
+        //}
+        foreach (SpriteRenderer sprite in sprites)
         {
-            SmellCloudF.GetComponent<SpriteRenderer>().sortingOrder = (mainSprite.sortingOrder) + 5;
+            if (sprite != oilySprite || sprite != shadow)
+            {
+                sprite.sortingOrder = (mainSprite.sortingOrder) + 2;
+            }
         }
-        if (smellChildB != null)
-        {
-            smellChildB.GetComponent<SpriteRenderer>().sortingOrder = (mainSprite.sortingOrder) - 10;
-        }
+
+
         if (oilySprite != null)
         {
             oilySprite.GetComponent<SpriteRenderer>().sortingOrder = (mainSprite.sortingOrder) + 1;
@@ -53,5 +72,40 @@ public class arrangeLayers : MonoBehaviour
         // {
         //      smellChildB.GetComponent<SpriteRenderer>().sortingOrder = (GetComponent<SpriteRenderer>().sortingOrder) + 10;
         // }
+    }
+
+    public void jump()
+    {
+        mainSprite.sortingLayerName = "Air";
+
+        foreach (SpriteRenderer sprite in sprites)
+        {
+            if (sprite != shadow)
+            {
+                sprite.sortingLayerName = "Air";
+            }         
+        }
+
+        oilySprite.sortingLayerName = "Air";
+    }
+
+    public void unJump()
+    {
+        mainSprite.sortingLayerName = "Default";
+
+        foreach (SpriteRenderer sprite in sprites)
+        {
+            if (sprite != shadow)
+            {
+            sprite.sortingLayerName = "Default";
+            }
+        }
+
+        oilySprite.sortingLayerName = "Default";
+    }
+
+    public void setOilObjOff()
+    {
+        oilySprite.gameObject.SetActive(false);
     }
 }
