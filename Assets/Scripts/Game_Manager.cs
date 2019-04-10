@@ -42,7 +42,10 @@ public class Game_Manager : MonoBehaviour {
 
     public int playersCurrentlyAlive;
 
-    [SerializeField] Vector3 locationToSpawn;
+    [SerializeField] Vector3 locationToSpawn1;
+    [SerializeField] Vector3 locationToSpawn2;
+    [SerializeField] Vector3 locationToSpawn3;
+    [SerializeField] Vector3 locationToSpawn4;
 
     public bool player1alive;
     public bool player2alive;
@@ -121,6 +124,11 @@ public class Game_Manager : MonoBehaviour {
         player2alive = true;
         player3alive = true;
         player4alive = true;
+
+        locationToSpawn1 = new Vector3(-10, 0.19f, 0);
+        locationToSpawn2 = new Vector3(-10, -2.19f, 0);
+        locationToSpawn3 = new Vector3(-10, 1.45f, 0);
+        locationToSpawn4 = new Vector3(-10, -1.01f, 0);
 
         needsGhost = false;
 
@@ -323,7 +331,7 @@ public class Game_Manager : MonoBehaviour {
         //if (m_timeToSpawn1 > timeToRespawn && player1lives > 0) finite lives
         if (m_timeToSpawn1 > timeToRespawn)//infinite lives
         {
-            GameObject player1r = Instantiate(player1Prefab, locationToSpawn, Quaternion.identity);
+            GameObject player1r = Instantiate(player1Prefab, locationToSpawn1, Quaternion.identity);
             player1r.GetComponent<playerController>().myManager = this; //prefabs not saving this unused variable for some reason, you have to hard code it
             player1r.GetComponent<playerController>().playerHealth = playerHealth1;            
             player1r.GetComponent<playerController>().setHealth(100);
@@ -344,7 +352,7 @@ public class Game_Manager : MonoBehaviour {
         //if (m_timeToSpawn2 > timeToRespawn && player2lives > 0) finite lives
         if (m_timeToSpawn2 > timeToRespawn)//infinite lives
         {
-            GameObject player2r = Instantiate(player2Prefab, locationToSpawn, Quaternion.identity);
+            GameObject player2r = Instantiate(player2Prefab, locationToSpawn2, Quaternion.identity);
             player2r.GetComponent<playerController>().myManager = this; //prefabs not saving this unused variable for some reason, you have to hard code it
             player2r.GetComponent<playerController>().playerHealth = playerHealth2;
             player2r.GetComponent<playerController>().setHealth(100);
@@ -364,7 +372,7 @@ public class Game_Manager : MonoBehaviour {
         //if (m_timeToSpawn3 > timeToRespawn && player3lives > 0) finite lives
         if (m_timeToSpawn3 > timeToRespawn)//infinite lives
         {
-            GameObject player3r = Instantiate(player3Prefab, locationToSpawn, Quaternion.identity);
+            GameObject player3r = Instantiate(player3Prefab, locationToSpawn3, Quaternion.identity);
             player3r.GetComponent<playerController>().myManager = this; //prefabs not saving this unused variable for some reason, you have to hard code it
             player3r.GetComponent<playerController>().playerHealth = playerHealth3;
             player3r.GetComponent<playerController>().setHealth(100);
@@ -385,7 +393,7 @@ public class Game_Manager : MonoBehaviour {
         //if (m_timeToSpawn4 > timeToRespawn && player4lives > 0) finite lives
         if (m_timeToSpawn4 > timeToRespawn) //infinite lives
         {
-            GameObject player4r = Instantiate(player4Prefab, locationToSpawn, Quaternion.identity);
+            GameObject player4r = Instantiate(player4Prefab, locationToSpawn4, Quaternion.identity);
             player4r.GetComponent<playerController>().myManager = this; //prefabs not saving this unused variable for some reason, you have to hard code it
             player4r.GetComponent<playerController>().playerHealth = playerHealth4;
             player4r.GetComponent<playerController>().setHealth(100);
