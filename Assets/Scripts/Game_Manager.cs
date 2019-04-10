@@ -67,6 +67,16 @@ public class Game_Manager : MonoBehaviour {
     [SerializeField] HealthBar playerHealth2;
     [SerializeField] HealthBar playerHealth3;
     [SerializeField] HealthBar playerHealth4;
+	
+	bool player1Moved;
+    float player1MovedTimer;
+    bool player2Moved;
+    float player2MovedTimer;
+    bool player3Moved;
+    float player3MovedTimer;
+    bool player4Moved;
+    float player4MovedTimer;
+    float timeToBeActive = 2;
 
     private Text winnerText;
     ScoreManager score; //get score script
@@ -107,6 +117,11 @@ public class Game_Manager : MonoBehaviour {
         m_timeElapsed = 0;
 
         //numberOfPlayers = player1, player2, player3, player4;
+		
+		player1MovedTimer = timeToBeActive;
+        player2MovedTimer = timeToBeActive;
+        player3MovedTimer = timeToBeActive;
+        player4MovedTimer = timeToBeActive;
     }
 
     // Update is called once per frame
@@ -169,14 +184,131 @@ public class Game_Manager : MonoBehaviour {
         {
             m_timeToSpawn4 += Time.deltaTime;
         }
+		
+		if (player1Moved) {
+            player1MovedTimer -= Time.deltaTime;
+        }
+		
+		if (player2Moved)
+        {
+            player2MovedTimer -= Time.deltaTime;
+        }
+
+        if (player3Moved)
+        {
+            player3MovedTimer -= Time.deltaTime;
+        }
+
+        if (player4Moved)
+        {
+            player4MovedTimer -= Time.deltaTime;
+        }
+
+        if (player1Moved && player1MovedTimer > 0)//blinking and moving
+        {
+           // Debug.Log("im being called");
+            player1 = GameObject.Find("GreenPlayer(Clone)");            
+            player1.transform.Translate(Vector2.right * Time.deltaTime * 2.5f);
+            if (Time.fixedTime % .5 < .2)
+            {
+                player1.GetComponent<SpriteRenderer>().enabled = false;
+            }
+            else
+            {
+                player1.GetComponent<SpriteRenderer>().enabled = true;
+            }
+        }
+        else if (player1Moved && player1MovedTimer <=0)//once its ready to play again
+        {
+            player1.GetComponent<SpriteRenderer>().enabled = true;
+            player1.GetComponent<playerController>().enabled = true;
+            player1.GetComponent<PolygonCollider2D>().enabled = true;
+            player1Moved = false;
+            player1MovedTimer = timeToBeActive;
+        }
+
+        if (player2Moved && player2MovedTimer > 0)
+        {
+            //Debug.Log("im being called");
+            player2 = GameObject.Find("PurplePlayer(Clone)");
+            player2.transform.Translate(Vector2.right * Time.deltaTime * 2.5f);
+            if (Time.fixedTime % .5 < .2)
+            {
+                player2.GetComponent<SpriteRenderer>().enabled = false;
+            }
+            else
+            {
+                player2.GetComponent<SpriteRenderer>().enabled = true;
+            }
+        }
+        else if (player2Moved && player2MovedTimer <= 0)
+        {
+            player2.GetComponent<playerController>().enabled = true;
+            player2.GetComponent<PolygonCollider2D>().enabled = true;
+            player2.GetComponent<SpriteRenderer>().enabled = true;
+            player2Moved = false;
+            player2MovedTimer = timeToBeActive;
+        }
+
+        if (player3Moved && player3MovedTimer > 0)
+        {
+            //Debug.Log("im being called");
+            player3 = GameObject.Find("RedPlayer(Clone)");
+            player3.transform.Translate(Vector2.right * Time.deltaTime * 2.5f);
+            if (Time.fixedTime % .5 < .2)
+            {
+                player3.GetComponent<SpriteRenderer>().enabled = false;
+            }
+            else
+            {
+                player3.GetComponent<SpriteRenderer>().enabled = true;
+            }
+        }
+        else if (player3Moved && player3MovedTimer <= 0)
+        {
+            player3.GetComponent<playerController>().enabled = true;
+            player3.GetComponent<PolygonCollider2D>().enabled = true;
+            player3.GetComponent<SpriteRenderer>().enabled = true;
+            player3Moved = false;
+            player3MovedTimer = timeToBeActive;
+        }
+
+        if (player4Moved && player4MovedTimer > 0)
+        {
+            //Debug.Log("im being called");
+            player4 = GameObject.Find("BlackPlayer(Clone)");
+            player4.transform.Translate(Vector2.right * Time.deltaTime * 2.5f);
+            if (Time.fixedTime % .5 < .2)
+            {
+                player4.GetComponent<SpriteRenderer>().enabled = false;
+            }
+            else
+            {
+                player4.GetComponent<SpriteRenderer>().enabled = true;
+            }
+        }
+        else if (player4Moved && player4MovedTimer <= 0)
+        {
+            player4.GetComponent<playerController>().enabled = true;
+            player4.GetComponent<PolygonCollider2D>().enabled = true;
+            player4.GetComponent<SpriteRenderer>().enabled = true;
+            player4Moved = false;
+            player4MovedTimer = timeToBeActive;
+        }
 
         //if (m_timeToSpawn1 > timeToRespawn && player1lives > 0) finite lives
         if (m_timeToSpawn1 > timeToRespawn)//infinite lives
         {
             GameObject player1r = Instantiate(player1Prefab, locationToSpawn, Quaternion.identity);
             player1r.GetComponent<playerController>().myManager = this; //prefabs not saving this unused variable for some reason, you have to hard code it
-            player1r.GetComponent<playerController>().playerHealth = playerHealth1;
+            player1r.GetComponent<playerController>().playerHealth = playerHealth1;            
             player1r.GetComponent<playerController>().setHealth(100);
+
+            //turn off controllers and collider
+            player1r.GetComponent<playerController>().enabled = false;
+            player1r.GetComponent<PolygonCollider2D>().enabled = false;
+            player1Moved = true;           
+
             player1alive = true;
             m_timeToSpawn1 = 0;
             player1 = player1r;
@@ -191,6 +323,11 @@ public class Game_Manager : MonoBehaviour {
             player2r.GetComponent<playerController>().myManager = this; //prefabs not saving this unused variable for some reason, you have to hard code it
             player2r.GetComponent<playerController>().playerHealth = playerHealth2;
             player2r.GetComponent<playerController>().setHealth(100);
+
+            player2r.GetComponent<playerController>().enabled = false;
+            player2r.GetComponent<PolygonCollider2D>().enabled = false;
+            player2Moved = true;                        
+
             player2alive = true;
             m_timeToSpawn2 = 0;
             player2 = player2r;
@@ -205,12 +342,18 @@ public class Game_Manager : MonoBehaviour {
             player3r.GetComponent<playerController>().myManager = this; //prefabs not saving this unused variable for some reason, you have to hard code it
             player3r.GetComponent<playerController>().playerHealth = playerHealth3;
             player3r.GetComponent<playerController>().setHealth(100);
+
+            player3r.GetComponent<playerController>().enabled = false;
+            player3r.GetComponent<PolygonCollider2D>().enabled = false;
+            player3Moved = true;            
+
             player3alive = true;
             m_timeToSpawn3 = 0;
             player3 = player3r;
             //player3lives--;
             playersCurrentlyAlive++;
         }
+
 
         //if (m_timeToSpawn4 > timeToRespawn && player4lives > 0) finite lives
         if (m_timeToSpawn4 > timeToRespawn) //infinite lives
@@ -219,6 +362,11 @@ public class Game_Manager : MonoBehaviour {
             player4r.GetComponent<playerController>().myManager = this; //prefabs not saving this unused variable for some reason, you have to hard code it
             player4r.GetComponent<playerController>().playerHealth = playerHealth4;
             player4r.GetComponent<playerController>().setHealth(100);
+
+            player4r.GetComponent<playerController>().enabled = false;
+            player4r.GetComponent<PolygonCollider2D>().enabled = false;            
+            player4Moved = true;
+
             player4alive = true;
             player4 = player4r;
             m_timeToSpawn4 = 0;
