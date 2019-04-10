@@ -16,10 +16,26 @@ public class fallBackChecker : MonoBehaviour {
 
     GameObject p1, p2, p3, p4;
 
+    public GameObject p1arrow;
+    public GameObject p2arrow;
+    public GameObject p3arrow;
+    public GameObject p4arrow;
+
+
+     bool p1left;
+     bool p2left;
+     bool p3left;
+     bool p4left;
+
+    float bound;
+
+
     // Use this for initialization
     void Start () {
-		
-	}
+        Collider2D collider2D;
+        collider2D = gameObject.GetComponent<Collider2D>();
+        bound = collider2D.bounds.max.x+1;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -30,6 +46,7 @@ public class fallBackChecker : MonoBehaviour {
             {
                 p1.GetComponent<playerController>().takeDamage(100);
                 Destroy(p1);
+                p1left = true;
             }
         }
 
@@ -40,6 +57,7 @@ public class fallBackChecker : MonoBehaviour {
             {
                 p2.GetComponent<playerController>().takeDamage(100);
                 Destroy(p2);
+                p2left = true;
             }
         }
 
@@ -50,6 +68,7 @@ public class fallBackChecker : MonoBehaviour {
             {
                 p3.GetComponent<playerController>().takeDamage(100);
                 Destroy(p3);
+                p3left = true;
             }
         }
 
@@ -60,10 +79,14 @@ public class fallBackChecker : MonoBehaviour {
             {
                 p4.GetComponent<playerController>().takeDamage(100);
                 Destroy(p4);
+                p4left = true;
             }
         }
-
-
+        //p1arrow.GetComponent<SideArrow>().follow(p1);
+        //p2arrow.GetComponent<SideArrow>().follow(p2);
+        //p3arrow.GetComponent<SideArrow>().follow(p3);
+        //p4arrow.GetComponent<SideArrow>().follow(p4);
+       
     }
 
 
@@ -77,18 +100,34 @@ public class fallBackChecker : MonoBehaviour {
                 case 1:
                     isP1here = true;
                     p1 = collision.gameObject;
+
+                    Instantiate(p1arrow, new Vector2(0, collision.transform.position.y), collision.transform.rotation);
+                    p1arrow.GetComponent<SideArrow>().setnum(1);
+                    p1left = false;
                     break;
                 case 2:
                     isP2here = true;
                     p2 = collision.gameObject;
+
+                    Instantiate(p2arrow, new Vector2(0, collision.transform.position.y), collision.transform.rotation);
+                    p2arrow.GetComponent<SideArrow>().setnum(2);
+                    p2left = false;
                     break;
                 case 3:
                     isP3here = true;
                     p3 = collision.gameObject;
+
+                    Instantiate(p3arrow, new Vector2(0, collision.transform.position.y), collision.transform.rotation);
+                    p3arrow.GetComponent<SideArrow>().setnum(3);
+                    p3left = false;
                     break;
                 case 4:
                     isP4here = true;
                     p4 = collision.gameObject;
+
+                    Instantiate(p4arrow, new Vector2(0, collision.transform.position.y), collision.transform.rotation);
+                    p4arrow.GetComponent<SideArrow>().setnum(4);
+                    p4left = false;
                     break;
                 default:
                     break;
@@ -107,18 +146,22 @@ public class fallBackChecker : MonoBehaviour {
                 case 1:
                     isP1here = false;
                     counter1 = 0;
+                    p1left = true;
                     break;
                 case 2:
                     isP2here = false;
                     counter2 = 0;
+                    p2left = true;
                     break;
                 case 3:
                     isP3here = false;
                     counter3 = 0;
+                    p3left = true;
                     break;
                 case 4:
                     isP4here = false;
                     counter4 = 0;
+                    p4left = true;
                     break;
                 default:
                     break;
@@ -126,4 +169,40 @@ public class fallBackChecker : MonoBehaviour {
 
         }
     }
+    public bool returnp1left()
+    {
+        return p1left;
+    }
+    public bool returnp2left()
+    {
+        return p2left;
+    }
+    public bool returnp3left()
+    {
+        return p3left;
+    }
+    public bool returnp4left()
+    {
+        return p4left;
+    }
+
+    public GameObject p1object() {
+        return p1;
+    }
+    public GameObject p2object()
+    {
+        return p2;
+    }
+    public GameObject p3object()
+    {
+        return p3;
+    }
+    public GameObject p4object()
+    {
+        return p4;
+    }
+    public float returnbound() {
+        return bound;
+    }
+
 }
