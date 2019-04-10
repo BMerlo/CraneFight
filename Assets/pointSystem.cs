@@ -40,6 +40,7 @@ public class pointSystem : MonoBehaviour
         int numHere = 0;
         foreach (playerController player in players)
         {
+            player.setCrown(false);
             if (isInTheZone(player.transform))
             {
                 numHere++;
@@ -47,7 +48,7 @@ public class pointSystem : MonoBehaviour
             }
             else
             {   //hide crown
-
+                
             }
         }
 
@@ -71,6 +72,7 @@ public class pointSystem : MonoBehaviour
                     break;
             }
             updatePoints();
+            playerHere.setCrown(true);
         }
 
     }

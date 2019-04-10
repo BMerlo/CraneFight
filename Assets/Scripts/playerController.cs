@@ -5,6 +5,7 @@ using Rewired;
 
 
 public class playerController : MonoBehaviour {
+    [SerializeField] GameObject crownObj;
     Player player;
     int playerId;
 
@@ -196,7 +197,7 @@ public class playerController : MonoBehaviour {
         //Rewired stuff
         player = ReInput.players.GetPlayer(playerId);
 
-
+        
         m_rb = GetComponent<Rigidbody2D>();
         targetReticle.GetComponent<SpriteRenderer>().enabled = false;
         throwRange.GetComponent<SpriteRenderer>().enabled = false;
@@ -1405,6 +1406,11 @@ public class playerController : MonoBehaviour {
                 break;
 
         }
+    }
+
+    public void setCrown(bool setBool)
+    {
+        crownObj.SetActive(setBool);
     }
 
 }
