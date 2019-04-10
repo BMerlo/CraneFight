@@ -9,8 +9,16 @@ public class Game_Manager : MonoBehaviour {
     float bossEventCounter = 0;
     [SerializeField] Transform tentacleSpawnPos;
     [SerializeField] GameObject tentaclePrefab;
+	[SerializeField] GameObject krakenHead;//Takes in existing krakenhead in the scene. If we want to make it the prefab then we have to instantiate it in the script.
+	[SerializeField] float kUpSpeed = 0;//Up movement speed for kraken head
+	//[SerializeField] float delayKSpawner = 0;//Delay time between tentacle spawn and kraken down movement
+	[SerializeField] float kDownSpeed = 0;//Down movement speed for kraken head
+	[SerializeField] float delayK = 0;//Delay between tentacles and spawning
 
-    [SerializeField] GameObject player1;
+	[SerializeField] Vector2 KrakenStartPos;
+	[SerializeField] Vector2 KrakenEndPos;
+
+	[SerializeField] GameObject player1;
     [SerializeField] GameObject player2;
     [SerializeField] GameObject player3;
     [SerializeField] GameObject player4;
@@ -117,7 +125,7 @@ public class Game_Manager : MonoBehaviour {
         if (bossEventCounter >= bossEventTime)
         {
             bossEventCounter = 0;
-            tentacleEvent();
+			StartCoroutine(waitForKrakenHead(kUpSpeed, kDownSpeed, delayK));
         }
 
         //if (numberOfPlayers.Length == 1)
@@ -229,10 +237,58 @@ public class Game_Manager : MonoBehaviour {
     
     void tentacleEvent()
     {
-        Instantiate(tentaclePrefab, tentacleSpawnPos.position, tentaclePrefab.transform.rotation);
+
+		Instantiate(tentaclePrefab, tentacleSpawnPos.position, tentaclePrefab.transform.rotation);
+	//	Instantiate(krakenHead, KrakenStartPos, krakenHead.transform.rotation);//spawning in kraken
     }
 
-    public void spawnGhost(int num)
+
+
+	//void moveKrak(GameObject kraken, Vector2 s, Vector2 e, float time)
+	//{
+	//	var i = 0.0f;
+	//	var timer = 1.0f / time;
+	//	while (i < 1.0f)
+	//	{
+	//		i += Time.deltaTime * timer;
+	//		kraken.transform.position = Vector2.Lerp(s, e, i);
+	//	}
+	//}
+
+
+	IEnumerator moveKrakenHead(Transform kTrans, Vector2 startPos, Vector2 endPos, float time)
+	{
+		var j = 0.0f;
+		var timer = 1.0f / time;
+		while (j < 1.0f) {
+			j += Time.deltaTime * timer;
+			kTrans.position = Vector2.Lerp(startPos, endPos, j);
+			yield return null;
+		}
+	}
+
+	IEnumerator waitForKrakenHead(float upSp,float downSP, float delay)
+	{
+
+		//move head up
+
+		StartCoroutine(moveKrakenHead(krakenHead.transform, KrakenStartPos, KrakenEndPos, upSp));
+
+		yield return new WaitForSeconds(delay); // time between kraken up movement and tentacle spawn
+		
+		//spawn tentacle
+		tentacleEvent();
+
+		yield return new WaitForSeconds(delay); //time between after tentacle spawn and kraken down movement
+
+		//move head down
+		StartCoroutine(moveKrakenHead(krakenHead.transform, KrakenEndPos, KrakenStartPos, downSP));
+
+		yield return new WaitForSeconds(delay);
+
+	}
+
+	public void spawnGhost(int num)
     {
         switch (num) {
             case 0:
