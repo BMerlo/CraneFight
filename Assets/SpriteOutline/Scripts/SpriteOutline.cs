@@ -7,7 +7,8 @@ using System.Collections.Generic;
 [RequireComponent(typeof(SpriteRenderer))]
 public class SpriteOutline : MonoBehaviour
 {
-
+    int colorCheckCounter = 0;
+    int colorCheckRate = 5;
     public enum SortMethod
     {
         SORTING_ORDER,
@@ -559,7 +560,16 @@ public class SpriteOutline : MonoBehaviour
         {
             if (numOfTrues > 1)
                 timerForColorChange++;
-            changeColor();
+
+            if (colorCheckCounter > colorCheckRate)
+            {
+                changeColor();
+            }
+            else
+            {
+                colorCheckCounter++;
+            }
+            
         }
     }
 
@@ -616,12 +626,12 @@ public class SpriteOutline : MonoBehaviour
                 }
                 value--;
             }
-            Debug.Log("index " + index[i]);//debug only
+            //Debug.Log("index " + index[i]);//debug only
         }
-        Debug.Log("value " + value);//debug only
-        Debug.Log("color " + currColor);//debug only
-        Debug.Log("colornum " + colornum);//debug only
-        Debug.Log("index " + index.Length);//debug only
+        //Debug.Log("value " + value);//debug only
+        //Debug.Log("color " + currColor);//debug only
+        //Debug.Log("colornum " + colornum);//debug only
+        //Debug.Log("index " + index.Length);//debug only
 
         //cycle through color using index array
         if (numOfTrues > 1)//if number of trues is greater than one then
