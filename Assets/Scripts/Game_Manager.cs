@@ -18,6 +18,13 @@ public class Game_Manager : MonoBehaviour {
 	[SerializeField] Vector2 KrakenStartPos;
 	[SerializeField] Vector2 KrakenEndPos;
 
+
+    [SerializeField] GameObject tankWarningPrefab;
+    [SerializeField] GameObject tankPrefab;
+
+    [SerializeField] Transform[] warningPos;
+    [SerializeField] Transform[] tankPos;
+
 	[SerializeField] GameObject player1;
     [SerializeField] GameObject player2;
     [SerializeField] GameObject player3;
@@ -140,7 +147,16 @@ public class Game_Manager : MonoBehaviour {
         if (bossEventCounter >= bossEventTime)
         {
             bossEventCounter = 0;
-			StartCoroutine(waitForKrakenHead(kUpSpeed, kDownSpeed, delayK));
+
+            if (Random.Range(0, 2) == 0)
+            {
+                StartCoroutine(waitForKrakenHead(kUpSpeed, kDownSpeed, delayK));
+            }
+            else
+            {
+                tankEvent();
+            }
+			
         }
 
         //if (numberOfPlayers.Length == 1)
@@ -390,7 +406,19 @@ public class Game_Manager : MonoBehaviour {
 	//	Instantiate(krakenHead, KrakenStartPos, krakenHead.transform.rotation);//spawning in kraken
     }
 
+    void tankEvent()
+    {
+        int i = Random.Range(0, 3);
 
+        for (int j = 0; j < 3; j++)
+        {
+            if (i != j)
+            {
+                Instantiate(tankWarningPrefab, warningPos[j].position, tankWarningPrefab.transform.rotation);
+                Instantiate(tankPrefab, tankPos[j].position, tankPrefab.transform.rotation);
+            }
+        }
+    }
 
 	//void moveKrak(GameObject kraken, Vector2 s, Vector2 e, float time)
 	//{

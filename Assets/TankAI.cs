@@ -35,5 +35,9 @@ public class TankAI : MonoBehaviour
         {
             collision.transform.GetComponent<destructible>().getDestroyed();
         }
+        else if (collision.transform.GetComponent<playerController>())
+        {
+            collision.transform.GetComponent<playerController>().takeDamage(150);
+        }
     }
 }
