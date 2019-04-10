@@ -44,6 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e042879c936f5243bf7cd7688eaf40e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossEventTime: 10
+  tentacleSpawnPos: {fileID: 0}
+  tentaclePrefab: {fileID: 0}
+  krakenHead: {fileID: 7584087093427284611, guid: 407ebb2d435a1714ba89b3967349842e,
+    type: 3}
+  kUpSpeed: 1
+  kDownSpeed: 1
+  delayK: 2
+  KrakenStartPos: {x: 2.14, y: 2.18}
+  KrakenEndPos: {x: 2.14, y: 4.33}
   player1: {fileID: 0}
   player2: {fileID: 0}
   player3: {fileID: 0}
