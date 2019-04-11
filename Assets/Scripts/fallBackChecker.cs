@@ -42,7 +42,7 @@ public class fallBackChecker : MonoBehaviour {
         if (isP1here)
         {
             counter1 += Time.deltaTime;
-            if (counter1 >= timeToLose)
+            if (counter1 >= timeToLose&&p1!=null)
             {
                 p1.GetComponent<playerController>().takeDamage(100);
                 Destroy(p1);
@@ -53,7 +53,7 @@ public class fallBackChecker : MonoBehaviour {
         if (isP2here)
         {
             counter2 += Time.deltaTime;
-            if (counter2 >= timeToLose)
+            if (counter2 >= timeToLose && p2 != null)
             {
                 p2.GetComponent<playerController>().takeDamage(100);
                 Destroy(p2);
@@ -64,7 +64,7 @@ public class fallBackChecker : MonoBehaviour {
         if (isP3here)
         {
             counter3 += Time.deltaTime;
-            if (counter3 >= timeToLose)
+            if (counter3 >= timeToLose && p3 != null)
             {
                 p3.GetComponent<playerController>().takeDamage(100);
                 Destroy(p3);
@@ -75,7 +75,7 @@ public class fallBackChecker : MonoBehaviour {
         if (isP4here)
         {
             counter4 += Time.deltaTime;
-            if (counter4 >= timeToLose)
+            if (counter4 >= timeToLose && p4 != null)
             {
                 p4.GetComponent<playerController>().takeDamage(100);
                 Destroy(p4);
