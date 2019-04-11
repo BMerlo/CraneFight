@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 114501186124481782}
   - component: {fileID: 2222402565605239402}
   - component: {fileID: 234547779056226}
+  - component: {fileID: 2793564596666179892}
   m_Layer: 0
   m_Name: Truck_Oil_REVERSE
   m_TagString: Carrier
@@ -146,7 +147,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.95, y: 1.65}
+    oldSize: {x: 2.9, y: 1.7375}
     newSize: {x: 0.59, y: 0.33}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -185,6 +186,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxY: 3.51
   minY: -3.91
+  defaultSprite: {fileID: 0}
+  otherSprite: {fileID: 0}
 --- !u!114 &114869835421410580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,6 +235,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88f0c8e5ed8f3e741a9609404f20f917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteHolder: {fileID: 0}
+  oilySprite: {fileID: 0}
+  shadow: {fileID: 0}
+  sprites: []
 --- !u!114 &234547779056226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,6 +269,22 @@ MonoBehaviour:
   customFrameName: 
   generatesOnStart: 0
   generatesOnValidate: 1
+--- !u!114 &2793564596666179892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164686690122672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d91f868682021764d82bf590bbe43f82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce2Destroy: 0.5
+  spawnee: {fileID: 7820193301447535830, guid: 1c7d51134df705e46a26a390c40da3bb, type: 3}
+  doesSpawnOnDestroy: 1
+  damage: 5
 --- !u!1 &2408550512232782734
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,7 +428,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.15, y: 1.85}
+  m_Size: {x: 2.95, y: 1.7875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
