@@ -34,7 +34,7 @@ public class playerController : MonoBehaviour {
     float horizontalMoveSpeed = 5f;
     float maxHorizontalSpeed = 4f;
 
-    float evadeSpeed = 80f;
+    float evadeSpeed = 50f;
     [SerializeField] bool hasBoosted = false;
     [SerializeField] GameObject r, l, u, d, ru, lu, rd, ld;
     [SerializeField] GameObject colliderObj2Listen;
@@ -85,7 +85,7 @@ public class playerController : MonoBehaviour {
 
     private Rigidbody2D m_rb;
 
-    float throwForce = 2000f;
+    float throwForce = 1400f;
     //[SerializeField] float maxThrowTime = 3.0f;
     //[SerializeField] float minChargeTime = 1.0f;
     //[SerializeField] float minThrowForce = 1650f;
