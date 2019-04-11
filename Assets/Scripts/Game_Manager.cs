@@ -125,10 +125,10 @@ public class Game_Manager : MonoBehaviour {
         player3alive = true;
         player4alive = true;
 
-        locationToSpawn1 = new Vector3(-10, 0.19f, 0);
-        locationToSpawn2 = new Vector3(-10, -2.19f, 0);
-        locationToSpawn3 = new Vector3(-10, 1.45f, 0);
-        locationToSpawn4 = new Vector3(-10, -1.01f, 0);
+        locationToSpawn1 = new Vector3(-12.5f, 0.19f, 0);
+        locationToSpawn2 = new Vector3(-12.5f, -2.19f, 0);
+        locationToSpawn3 = new Vector3(-12.5f, 1.45f, 0);
+        locationToSpawn4 = new Vector3(-12.5f, -1.01f, 0);
 
         needsGhost = false;
 
@@ -243,18 +243,18 @@ public class Game_Manager : MonoBehaviour {
             player1.transform.Translate(Vector2.right * Time.deltaTime * 2.5f);
             if (Time.fixedTime % .5 < .2)
             {
-                player1.gameObject.transform.GetChild(12).GetComponent<SpriteRenderer>().enabled = false;
+                player1.gameObject.transform.GetChild(11).GetComponent<SpriteRenderer>().enabled = false;
             }
             else
             {
-                player1.gameObject.transform.GetChild(12).GetComponent<SpriteRenderer>().enabled = true;
+                player1.gameObject.transform.GetChild(11).GetComponent<SpriteRenderer>().enabled = true;
             }
         }
         else if (player1Moved && player1MovedTimer <=0)//once its ready to play again
-        {
-            player1.gameObject.transform.GetChild(12).GetComponent<SpriteRenderer>().enabled = true;
+        {            
             player1.GetComponent<playerController>().enabled = true;
             player1.GetComponent<PolygonCollider2D>().enabled = true;
+            player1.gameObject.transform.GetChild(11).GetComponent<SpriteRenderer>().enabled = true;
             player1Moved = false;
             player1MovedTimer = timeToBeActive;
         }
@@ -266,18 +266,18 @@ public class Game_Manager : MonoBehaviour {
             player2.transform.Translate(Vector2.right * Time.deltaTime * 2.5f);
             if (Time.fixedTime % .5 < .2)
             {
-                player2.gameObject.transform.GetChild(12).GetComponent<SpriteRenderer>().enabled = false;
+                player2.gameObject.transform.GetChild(11).GetComponent<SpriteRenderer>().enabled = false;
             }
             else
             {
-                player2.gameObject.transform.GetChild(12).GetComponent<SpriteRenderer>().enabled = true;
+                player2.gameObject.transform.GetChild(11).GetComponent<SpriteRenderer>().enabled = true;
             }
         }
         else if (player2Moved && player2MovedTimer <= 0)
-        {
-            player2.gameObject.transform.GetChild(12).GetComponent<SpriteRenderer>().enabled = true;
+        {            
             player2.GetComponent<PolygonCollider2D>().enabled = true;
             player2.GetComponent<playerController>().enabled = true;
+            player2.gameObject.transform.GetChild(11).GetComponent<SpriteRenderer>().enabled = true;
             player2Moved = false;
             player2MovedTimer = timeToBeActive;
         }
@@ -289,18 +289,18 @@ public class Game_Manager : MonoBehaviour {
             player3.transform.Translate(Vector2.right * Time.deltaTime * 2.5f);
             if (Time.fixedTime % .5 < .2)
             {
-                player3.gameObject.transform.GetChild(12).GetComponent<SpriteRenderer>().enabled = false;
+                player3.gameObject.transform.GetChild(11).GetComponent<SpriteRenderer>().enabled = false;
             }
             else
             {
-                player3.gameObject.transform.GetChild(12).GetComponent<SpriteRenderer>().enabled = true;
+                player3.gameObject.transform.GetChild(11).GetComponent<SpriteRenderer>().enabled = true;
             }
         }
         else if (player3Moved && player3MovedTimer <= 0)
-        {
-            player3.gameObject.transform.GetChild(12).GetComponent<SpriteRenderer>().enabled = true;
+        {            
             player3.GetComponent<PolygonCollider2D>().enabled = true;
             player3.GetComponent<playerController>().enabled = true;
+            player3.gameObject.transform.GetChild(11).GetComponent<SpriteRenderer>().enabled = true;
             player3Moved = false;
             player3MovedTimer = timeToBeActive;
         }
@@ -312,18 +312,18 @@ public class Game_Manager : MonoBehaviour {
             player4.transform.Translate(Vector2.right * Time.deltaTime * 2.5f);
             if (Time.fixedTime % .5 < .2)
             {
-                player4.gameObject.transform.GetChild(12).GetComponent<SpriteRenderer>().enabled = false;
+                player4.gameObject.transform.GetChild(11).GetComponent<SpriteRenderer>().enabled = false;
             }
             else
             {
-                player4.gameObject.transform.GetChild(12).GetComponent<SpriteRenderer>().enabled = true;
+                player4.gameObject.transform.GetChild(11).GetComponent<SpriteRenderer>().enabled = true;
             }
         }
         else if (player4Moved && player4MovedTimer <= 0)
         {
             player4.GetComponent<playerController>().enabled = true;
             player4.GetComponent<PolygonCollider2D>().enabled = true;
-            player4.gameObject.transform.GetChild(12).GetComponent<SpriteRenderer>().enabled = true;
+            player4.gameObject.transform.GetChild(11).GetComponent<SpriteRenderer>().enabled = true;
             player4Moved = false;
             player4MovedTimer = timeToBeActive;
         }
