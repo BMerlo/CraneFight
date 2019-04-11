@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minForce2Destroy: 0.5
-  spawnee: {fileID: 7820193301447535830, guid: 1c7d51134df705e46a26a390c40da3bb, type: 3}
+  spawnee: {fileID: 1674921903964498, guid: da91c45527867dc4d8ad25e2fc37f7d4, type: 3}
   doesSpawnOnDestroy: 1
   damage: 5
 --- !u!1001 &3967272463045274889

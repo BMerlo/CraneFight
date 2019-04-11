@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b34168abd8e386844bea19119f6f06ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushForce: 50
+  pushForce: 200
   damageMultiplier: 0.25
   isOilyDamge: 5
 --- !u!114 &114524044153557530

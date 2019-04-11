@@ -16,7 +16,7 @@ public class Tentacle : MonoBehaviour {
     float counter = 0;
     bool hasAttacked = false;
     bool hasPushed = false;
-    float pushForce = 700;
+    float pushForce = 800;
     float pushWait = 0.3f;
     bool isHit = false;
     bool isWiggle = false;
@@ -103,7 +103,7 @@ public class Tentacle : MonoBehaviour {
         }
         
         //if outside screen, destroy automatically
-        if (transform.position.x < -10)
+        if (transform.position.x < -15)
             Destroy(gameObject);
     }
 
@@ -122,22 +122,26 @@ public class Tentacle : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        oil oi = FindObjectOfType<oil>();
-        if (oi != null)
+        //oil oi = FindObjectOfType<oil>();
+        //if (oi != null)
+        //{
+        //    Debug.Log("Tentacle Hit by" + oi);
+        //    isWiggling();
+        //}
+
+        //Explosion ex = FindObjectOfType<Explosion>();
+        //if (ex != null)
+        //{
+        //    Debug.Log("Tentacle Hit by," + ex);
+        //    retreat();
+        //}
+        //Debug.Log("hit by " + ex);
+        //Debug.Log("hit by " + oi);
+
+        if (collision.GetComponent<oil>())
         {
-            Debug.Log("Tentacle Hit by" + oi);
             isWiggling();
         }
-
-        Explosion ex = FindObjectOfType<Explosion>();
-        if (ex != null)
-        {
-            Debug.Log("Tentacle Hit by," + ex);
-            retreat();
-        }
-        Debug.Log("hit by " + ex);
-        Debug.Log("hit by " + oi);
-
 
     }
 
