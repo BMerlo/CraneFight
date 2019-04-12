@@ -79,6 +79,12 @@ public class playerController : MonoBehaviour {
 
     [SerializeField] GameObject craneActual;
     [SerializeField] Sprite craneL, craneLU, craneU, craneRU, craneR, craneRD, craneD, craneLD;
+    [SerializeField]
+    Animator
+        Rcrane, RUcrane, RDcrane,
+        Lcrane, LUcrane, LDcrane,
+        Ucrane, Dcrane; //Animators for the 8 crane directions
+    Animator activeAnimator;
 
     //public GameObject gameManager;
     public Game_Manager myManager;
@@ -161,10 +167,18 @@ public class playerController : MonoBehaviour {
 
 
     arrangeLayers layerScript;
+    Animator[] craneAnims;
 
-	//[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
-	// Use this for initialization
-	void Start() {
+
+    //[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
+    // Use this for initialization
+    void Start() {
+        activeAnimator = Dcrane;
+
+        craneAnims = new Animator[] {Rcrane, RUcrane, RDcrane,
+        Lcrane, LUcrane, LDcrane,
+        Ucrane, Dcrane};
+
         oilSprite.SetActive(false);
         layerScript = GetComponent<arrangeLayers>();
 		tempLayer = gameObject.layer;
@@ -289,18 +303,18 @@ public class playerController : MonoBehaviour {
         }
         
         // This is expensive. Fix if we have time
-        if (isCarrying)
-        {
-            cranePoint.GetComponent<SpriteRenderer>().enabled = true;
-           // targetReticle.GetComponent<SpriteRenderer>().enabled = true;
-           // throwRange.GetComponent<SpriteRenderer>().enabled = true;
-        }
-        else
-        {
-            cranePoint.GetComponent<SpriteRenderer>().enabled = false;
-            targetReticle.GetComponent<SpriteRenderer>().enabled = false;
-            throwRange.GetComponent<SpriteRenderer>().enabled = false;
-        }
+        //if (isCarrying)
+        //{
+        //    //cranePoint.GetComponent<SpriteRenderer>().enabled = true;
+        //   // targetReticle.GetComponent<SpriteRenderer>().enabled = true;
+        //   // throwRange.GetComponent<SpriteRenderer>().enabled = true;
+        //}
+        //else
+        //{
+        //    //cranePoint.GetComponent<SpriteRenderer>().enabled = false;
+        //    targetReticle.GetComponent<SpriteRenderer>().enabled = false;
+        //    throwRange.GetComponent<SpriteRenderer>().enabled = false;
+        //}
 
 
         if(isOiled)
@@ -370,6 +384,11 @@ public class playerController : MonoBehaviour {
         if (!isJumping && isCarrying && !hasThrown && player.GetButton("Throw"))
         {
             throwObj();
+
+            foreach (Animator anim in craneAnims)
+            {
+                anim.SetTrigger("throwTrigger");
+            }
         }
 		
         else if (isCarrying == false && !hasJumped && !isJumping && player.GetButton("Jump"))
@@ -549,6 +568,15 @@ public class playerController : MonoBehaviour {
         return dir;
     }
 
+    void switchActiveAnim(Animator anim)
+    {
+        if (activeAnimator != anim)
+        {
+            activeAnimator.gameObject.SetActive(false);
+            anim.gameObject.SetActive(true);
+            activeAnimator = anim;
+        }
+    }
 
     void aim()
     {
@@ -572,6 +600,8 @@ public class playerController : MonoBehaviour {
         temp.Normalize();
 
         cranePoint.transform.position = this.transform.position - temp;
+        //cranePoint.transform.position = craneT[tIndex].transform.position;
+        //cranePoint.transform.position = activeAnimator.gameObject.transform.GetChild(0).transform.position;
 
         Vector2 craneAngle = cranePoint.transform.position - this.transform.position;
         //MOVE CRANE ACCORDING TO CRANE POINT //
@@ -582,39 +612,48 @@ public class playerController : MonoBehaviour {
 
         if (angle < 22.5f)
         {
-            craneActual.GetComponent<SpriteRenderer>().sprite = craneU;
+            //craneActual.GetComponent<SpriteRenderer>().sprite = craneU;
+            switchActiveAnim(Dcrane);
         }
         else if (angle < 67.5f)
         {
-            craneActual.GetComponent<SpriteRenderer>().sprite = craneRU;
+            //craneActual.GetComponent<SpriteRenderer>().sprite = craneRU;
+            switchActiveAnim(LDcrane);
         }
         else if (angle < 112.5f)
         {
-            craneActual.GetComponent<SpriteRenderer>().sprite = craneR;
+            //craneActual.GetComponent<SpriteRenderer>().sprite = craneR;
+            switchActiveAnim(Lcrane);
         }
         else if (angle < 157.5f)
         {
-            craneActual.GetComponent<SpriteRenderer>().sprite = craneRD;
+            //craneActual.GetComponent<SpriteRenderer>().sprite = craneRD;
+            switchActiveAnim(LUcrane);
         }
         else if (angle < 202.5f)
         {
-            craneActual.GetComponent<SpriteRenderer>().sprite = craneD;
+            //craneActual.GetComponent<SpriteRenderer>().sprite = craneD;
+            switchActiveAnim(Ucrane);
         }
         else if (angle < 247.5f)
         {
-            craneActual.GetComponent<SpriteRenderer>().sprite = craneLD;
+            //craneActual.GetComponent<SpriteRenderer>().sprite = craneLD;
+            switchActiveAnim(RUcrane);
         }
         else if (angle < 292.5f)
         {
-            craneActual.GetComponent<SpriteRenderer>().sprite = craneL;
+            //craneActual.GetComponent<SpriteRenderer>().sprite = craneL;
+            switchActiveAnim(Rcrane);
         }
         else if (angle < 337.5f)
         {
-            craneActual.GetComponent<SpriteRenderer>().sprite = craneLU;
+            //craneActual.GetComponent<SpriteRenderer>().sprite = craneLU;
+            switchActiveAnim(RDcrane);
         }
         else
         {
-            craneActual.GetComponent<SpriteRenderer>().sprite = craneU;
+            //craneActual.GetComponent<SpriteRenderer>().sprite = craneU;
+            //switchActiveAnim(LDcrane);
         }
 
 
@@ -629,7 +668,7 @@ public class playerController : MonoBehaviour {
         }
 
 
-
+        objPicked.transform.position = activeAnimator.gameObject.transform.GetChild(0).transform.position;
         //Debug.Log("Is inside eclipse? " + tem);
     }
 
@@ -692,17 +731,20 @@ public class playerController : MonoBehaviour {
             if (player.GetAxis("AimVertical") > 0.34f)
             {
                 colliderObj2Listen = lu;
-                craneActual.GetComponent<SpriteRenderer>().sprite = craneLU;
+                //craneActual.GetComponent<SpriteRenderer>().sprite = craneLU;
+                switchActiveAnim(RDcrane);
             }
             else if (player.GetAxis("AimVertical") < -0.34f)
             {
                 colliderObj2Listen = ld;
-                craneActual.GetComponent<SpriteRenderer>().sprite = craneLD;
+                //craneActual.GetComponent<SpriteRenderer>().sprite = craneLD;
+                switchActiveAnim(RUcrane);
             }
             else
             {
                 colliderObj2Listen = l;
-                craneActual.GetComponent<SpriteRenderer>().sprite = craneL;
+                //craneActual.GetComponent<SpriteRenderer>().sprite = craneL;
+                switchActiveAnim(Rcrane);
             }
             if(!hasThrown)
                 pickUp();
@@ -712,17 +754,20 @@ public class playerController : MonoBehaviour {
             if (player.GetAxis("AimVertical") > 0.34f)
             {
                 colliderObj2Listen = ru;
-                craneActual.GetComponent<SpriteRenderer>().sprite = craneRU;
+                //craneActual.GetComponent<SpriteRenderer>().sprite = craneRU;
+                switchActiveAnim(LDcrane);
             }
             else if (player.GetAxis("AimVertical") < -0.34f)
             {
                 colliderObj2Listen = rd;
-                craneActual.GetComponent<SpriteRenderer>().sprite = craneRD;
+                //craneActual.GetComponent<SpriteRenderer>().sprite = craneRD;
+                switchActiveAnim(LUcrane);
             }
             else
             {
                 colliderObj2Listen = r;
-                craneActual.GetComponent<SpriteRenderer>().sprite = craneR;
+                //craneActual.GetComponent<SpriteRenderer>().sprite = craneR;
+                switchActiveAnim(Lcrane);
             }
             if (!hasThrown)
                 pickUp();
@@ -732,14 +777,16 @@ public class playerController : MonoBehaviour {
             if (player.GetAxis("AimVertical") > 0.34f)
             {
                 colliderObj2Listen = u;
-                craneActual.GetComponent<SpriteRenderer>().sprite = craneU;
+                //craneActual.GetComponent<SpriteRenderer>().sprite = craneU;
+                switchActiveAnim(Dcrane);
                 if (!hasThrown)
                     pickUp();
             }
             else if (player.GetAxis("AimVertical") < -0.34f)
             {
                 colliderObj2Listen = d;
-                craneActual.GetComponent<SpriteRenderer>().sprite = craneD;
+                //craneActual.GetComponent<SpriteRenderer>().sprite = craneD;
+                switchActiveAnim(Ucrane);
                 if (!hasThrown)
                     pickUp();
             }
@@ -747,7 +794,8 @@ public class playerController : MonoBehaviour {
             {
                 //colliderObj2Listen = null;
                 colliderObj2Listen = d; //Do we need this?
-                craneActual.GetComponent<SpriteRenderer>().sprite = craneD;
+                //craneActual.GetComponent<SpriteRenderer>().sprite = craneD;
+                switchActiveAnim(Ucrane);
             }
         }
         
