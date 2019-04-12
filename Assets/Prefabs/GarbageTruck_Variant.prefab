@@ -1,21 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &8155141073779008331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8427128647890767587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d91f868682021764d82bf590bbe43f82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minForce2Destroy: 0.5
-  spawnee: {fileID: 7820193301447535830, guid: 1c7d51134df705e46a26a390c40da3bb, type: 3}
-  doesSpawnOnDestroy: 1
-  damage: 5
 --- !u!114 &2571129165296843672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30,6 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minForce2Destroy: 0.5
   spawnee: {fileID: 7820193301447535830, guid: 1c7d51134df705e46a26a390c40da3bb, type: 3}
+  spawnee2: {fileID: 0}
+  doesSpawnOnDestroy: 1
+  damage: 5
+--- !u!114 &8155141073779008331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8427128647890767587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d91f868682021764d82bf590bbe43f82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minForce2Destroy: 0.5
+  spawnee: {fileID: 7820193301447535830, guid: 1c7d51134df705e46a26a390c40da3bb, type: 3}
+  spawnee2: {fileID: 3143999756706792155, guid: 5ec5fd59a6836e344830082aee0923ee,
+    type: 3}
   doesSpawnOnDestroy: 1
   damage: 5
 --- !u!1001 &8428373317045479263
