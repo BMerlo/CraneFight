@@ -97,7 +97,7 @@ public class playerController : MonoBehaviour {
     //[SerializeField] float minThrowForce = 1650f;
     //[SerializeField]float timeCharging;
 
-    [SerializeField] private float evadeCooldown = 0.5f;
+    private float evadeCooldown = 0.6f;
     private bool hasEvaded = false;
     private float evadeCooldownTimer = 0;
 
@@ -549,11 +549,14 @@ public class playerController : MonoBehaviour {
     void boost()
     {
         //float force = (evadeSpeed / 3.0f) + ((evadeSpeed * 2.0f * (boostTimer / MAX_BOOST_TIME)) / 3.0f);
-        GetComponent<Rigidbody2D>().AddForce(movementVector.normalized * evadeSpeed, ForceMode2D.Impulse);
+        Vector2 temp = movementVector.normalized;
+        temp = new Vector2(temp.x * 1.25f, temp.y * 1.0f);
+        GetComponent<Rigidbody2D>().AddForce(temp * evadeSpeed, ForceMode2D.Impulse);
         hasEvaded = true;
         isBoostCharging = false;
         boostTimer = 0;
-
+        //Change color for dahs feedback
+        spriteHolder.GetComponent<SpriteRenderer>().color = new Color(0.35f, 0.1f, 0.1f);
     }
 
     Vector2 getRightStickDir()    // returns a normalized vector from right stick.
@@ -667,8 +670,14 @@ public class playerController : MonoBehaviour {
             targetReticle.transform.position = (0.99f * (targetReticle.transform.position - this.transform.position)) + this.transform.position;
         }
 
-
+        if (objPicked && activeAnimator)
+        {
         objPicked.transform.position = activeAnimator.gameObject.transform.GetChild(0).transform.position;
+        }
+        else
+        {
+            Debug.Log("YOU SHOULDT SEE THIS....");
+        }
         //Debug.Log("Is inside eclipse? " + tem);
     }
 
@@ -1339,6 +1348,7 @@ public class playerController : MonoBehaviour {
             evadeCooldownTimer += Time.deltaTime;
             if (evadeCooldownTimer >= evadeCooldown)
             {
+                spriteHolder.GetComponent<SpriteRenderer>().color = Color.white;
                 hasEvaded = false;
                 evadeCooldownTimer = 0;
             }
