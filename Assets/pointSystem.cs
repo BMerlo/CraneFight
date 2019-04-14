@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Rewired;
+using UnityEngine.SceneManagement;
 
 public class pointSystem : MonoBehaviour
 {
@@ -23,10 +25,12 @@ public class pointSystem : MonoBehaviour
     [SerializeField] TextMeshProUGUI p3pointText;
     [SerializeField] TextMeshProUGUI p4pointText;
 
+	[SerializeField] GameObject winPanel;
 
     // Start is called before the first frame update
     void Start()
     {
+		winPanel.SetActive(false);
         MaxX = downRight.position.x;
         MaxY = upLeft.position.y;
         MinX = upLeft.position.x;
@@ -87,15 +91,20 @@ public class pointSystem : MonoBehaviour
 
         if (p1points > 100 || p2points > 100 || p3points > 100 || p4points > 100)
         {
-            Time.timeScale = 0;
-            Invoke("reloadLevel", 2.0f);
-        }
+			winPanel.SetActive(true);
+			Time.timeScale = 0;
+			if(ReInput.players.SystemPlayer.GetButtonDown("Restart"))//restart level when Enter/Return key is pressed
+			{
+				Invoke("reloadLevel", 0);
+			}
+			
+		}
     }
 
     void reloadLevel()
     {
-        Application.LoadLevel(0);
-    }
+     	SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+	}
 
     bool isInTheZone(Transform transf)
     {
