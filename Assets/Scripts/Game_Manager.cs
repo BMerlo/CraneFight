@@ -118,7 +118,7 @@ public class Game_Manager : MonoBehaviour {
 
         winnerText = winPanel.GetComponentInChildren<Text>();
         score = GetComponent<ScoreManager>();
-        winnerText.text = "Winner is..."; //added for debugging purposes 
+       // winnerText.text = "Winner is..."; //added for debugging purposes 
 
         player1alive = true;
         player2alive = true;

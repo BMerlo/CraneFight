@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Rewired;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class pointSystem : MonoBehaviour
 {
@@ -25,13 +26,17 @@ public class pointSystem : MonoBehaviour
     [SerializeField] TextMeshProUGUI p3pointText;
     [SerializeField] TextMeshProUGUI p4pointText;
 
-	[SerializeField] GameObject winPanel;
 
-    // Start is called before the first frame update
-    void Start()
+	public Sprite p1Sprite, p2Sprite, p3Sprite, p4Sprite;
+	[SerializeField] Image winnerSprite;
+	[SerializeField] GameObject winPanel;
+	[SerializeField] GameObject rocketPanel;
+
+
+	// Start is called before the first frame update
+	void Start()
     {
-		winPanel.SetActive(false);
-        MaxX = downRight.position.x;
+		MaxX = downRight.position.x;
         MaxY = upLeft.position.y;
         MinX = upLeft.position.x;
         MinY = downRight.position.y;
@@ -89,11 +94,32 @@ public class pointSystem : MonoBehaviour
         p4pointText.text = ((int)p4points).ToString();
 
 
-        if (p1points > 100 || p2points > 100 || p3points > 100 || p4points > 100)
+        if (p1points > 10 || p2points > 10 || p3points > 10 || p4points > 10)
         {
-			winPanel.SetActive(true);
+			//winPanel.SetActive(true);
 			Time.timeScale = 0;
-			if(ReInput.players.SystemPlayer.GetButtonDown("Restart"))//restart level when Enter/Return key is pressed
+			//winPanel.GetComponent<Image>().enabled = true;
+			winPanel.SetActive(true);
+			rocketPanel.GetComponent<Image>().enabled = true;
+
+			if (p1points > 10)
+			{
+				winnerSprite.sprite = p1Sprite;
+			}
+			else if (p2points > 10)
+			{
+				winnerSprite.sprite = p2Sprite;
+			}
+			else if (p3points > 10)
+			{
+				winnerSprite.sprite = p3Sprite;
+			}
+			else if (p4points > 10)
+			{
+				winnerSprite.sprite = p4Sprite;
+			}
+
+			if (ReInput.players.SystemPlayer.GetButtonDown("Restart"))//restart level when Enter/Return key is pressed
 			{
 				Invoke("reloadLevel", 0);
 			}
