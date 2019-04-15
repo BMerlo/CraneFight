@@ -55,14 +55,25 @@ public class arrangeLayers : MonoBehaviour
         //{
         //    smellChildB.GetComponent<SpriteRenderer>().sortingOrder = (mainSprite.sortingOrder) - 10;
         //}
-        foreach (SpriteRenderer sprite in sprites)
+        if (GetComponent<playerController>() != null)
         {
-            if (sprite != oilySprite || sprite != shadow)
+            foreach (SpriteRenderer sprite in sprites)
             {
-                sprite.sortingOrder = (mainSprite.sortingOrder) + 2;
+                if (sprite != oilySprite || sprite != shadow)
+                {
+                    sprites[3].sortingOrder = (mainSprite.sortingOrder) + 2;
+                }
             }
         }
-
+        else {
+            foreach (SpriteRenderer sprite in sprites)
+            {
+                if (sprite != oilySprite || sprite != shadow)
+                {
+                    sprite.sortingOrder = (mainSprite.sortingOrder) + 2;
+                }
+            }
+        }
 
         if (oilySprite != null)
         {

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class fallOff : MonoBehaviour {
     [SerializeField] float maxY = 3.51f;
@@ -11,9 +12,10 @@ public class fallOff : MonoBehaviour {
 
     [SerializeField] SpriteRenderer defaultSprite;
     [SerializeField] SpriteRenderer otherSprite;
+    [SerializeField] Image numberSprite;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         manager = FindObjectOfType<Game_Manager>();
 	}
 	
@@ -71,7 +73,7 @@ public class fallOff : MonoBehaviour {
     void fall()
     {
         isFalling = true;
-
+        numberSprite.enabled = false;
         GetComponent<arrangeLayers>().enabled = false;
         this.gameObject.layer = 16;
 
