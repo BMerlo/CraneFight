@@ -94,7 +94,7 @@ public class pointSystem : MonoBehaviour
         p4pointText.text = ((int)p4points).ToString();
 
 
-        if (p1points > 10 || p2points > 10 || p3points > 10 || p4points > 10)
+        if (p1points > 100 || p2points > 100 || p3points > 100 || p4points > 100)
         {
 			//winPanel.SetActive(true);
 			Time.timeScale = 0;
