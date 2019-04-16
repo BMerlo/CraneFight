@@ -25,7 +25,7 @@ public class HealthBar : MonoBehaviour {
         if (myHealth > 100)
             myHealth = 100;
 
-        healthBar.transform.localScale = new Vector3(myHealth / 100, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
+        healthBar.transform.localScale = new Vector3(1.0f - (myHealth / 100f), healthBar.transform.localScale.y, healthBar.transform.localScale.z);
 
     }
 
@@ -35,7 +35,7 @@ public class HealthBar : MonoBehaviour {
         {
             hp = 0;
         }
-        healthBar.transform.localScale = new Vector3(hp / 100, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
+        healthBar.transform.localScale = new Vector3(1.0f - (myHealth / 100f), healthBar.transform.localScale.y, healthBar.transform.localScale.z);
     }
 
   

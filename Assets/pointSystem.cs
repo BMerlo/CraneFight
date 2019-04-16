@@ -21,13 +21,16 @@ public class pointSystem : MonoBehaviour
 
     float pointMultiplier = 3.5f;
 
-    [SerializeField] TextMeshProUGUI p1pointText;
-    [SerializeField] TextMeshProUGUI p2pointText;
-    [SerializeField] TextMeshProUGUI p3pointText;
-    [SerializeField] TextMeshProUGUI p4pointText;
+    //[SerializeField] TextMeshProUGUI p1pointText;
+    //[SerializeField] TextMeshProUGUI p2pointText;
+    //[SerializeField] TextMeshProUGUI p3pointText;
+    //[SerializeField] TextMeshProUGUI p4pointText;
+
+    [SerializeField] RectTransform p1pointTrans, p2pointTrans, p3pointTrans, p4pointTrans;
 
 
-	public Sprite p1Sprite, p2Sprite, p3Sprite, p4Sprite;
+
+    public Sprite p1Sprite, p2Sprite, p3Sprite, p4Sprite;
 	[SerializeField] Image winnerSprite;
 	[SerializeField] GameObject winPanel;
 	[SerializeField] GameObject rocketPanel;
@@ -88,11 +91,14 @@ public class pointSystem : MonoBehaviour
 
     void updatePoints()
     {
-        p1pointText.text = ((int)p1points).ToString();
-        p2pointText.text = ((int)p2points).ToString();
-        p3pointText.text = ((int)p3points).ToString();
-        p4pointText.text = ((int)p4points).ToString();
-
+        //p1pointText.text = ((int)p1points).ToString();
+        //p2pointText.text = ((int)p2points).ToString();
+        //p3pointText.text = ((int)p3points).ToString();
+        //p4pointText.text = ((int)p4points).ToString();
+        p1pointTrans.transform.localScale = new Vector3(1.0f - (p1points / 100f), p1pointTrans.transform.localScale.y, p1pointTrans.transform.localScale.z);
+        p2pointTrans.transform.localScale = new Vector3(1.0f - (p2points / 100f), p2pointTrans.transform.localScale.y, p2pointTrans.transform.localScale.z);
+        p3pointTrans.transform.localScale = new Vector3(1.0f - (p3points / 100f), p3pointTrans.transform.localScale.y, p3pointTrans.transform.localScale.z);
+        p4pointTrans.transform.localScale = new Vector3(1.0f - (p4points / 100f), p4pointTrans.transform.localScale.y, p4pointTrans.transform.localScale.z);
 
         if (p1points > 100 || p2points > 100 || p3points > 100 || p4points > 100)
         {
