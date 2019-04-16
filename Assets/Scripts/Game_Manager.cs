@@ -252,7 +252,7 @@ public class Game_Manager : MonoBehaviour {
         }
         else if (player1Moved && player1MovedTimer <=0)//once its ready to play again
         {            
-            player1.GetComponent<playerController>().enabled = true;
+            //player1.GetComponent<playerController>().enabled = true;
             player1.GetComponent<PolygonCollider2D>().enabled = true;
             player1.gameObject.transform.GetChild(11).GetComponent<SpriteRenderer>().enabled = true;
             player1Moved = false;
@@ -275,7 +275,7 @@ public class Game_Manager : MonoBehaviour {
         }
         else if (player2Moved && player2MovedTimer <= 0)
         {            
-            player2.GetComponent<PolygonCollider2D>().enabled = true;
+            //player2.GetComponent<PolygonCollider2D>().enabled = true;
             player2.GetComponent<playerController>().enabled = true;
             player2.gameObject.transform.GetChild(11).GetComponent<SpriteRenderer>().enabled = true;
             player2Moved = false;
@@ -298,7 +298,7 @@ public class Game_Manager : MonoBehaviour {
         }
         else if (player3Moved && player3MovedTimer <= 0)
         {            
-            player3.GetComponent<PolygonCollider2D>().enabled = true;
+            //player3.GetComponent<PolygonCollider2D>().enabled = true;
             player3.GetComponent<playerController>().enabled = true;
             player3.gameObject.transform.GetChild(11).GetComponent<SpriteRenderer>().enabled = true;
             player3Moved = false;
@@ -322,7 +322,7 @@ public class Game_Manager : MonoBehaviour {
         else if (player4Moved && player4MovedTimer <= 0)
         {
             player4.GetComponent<playerController>().enabled = true;
-            player4.GetComponent<PolygonCollider2D>().enabled = true;
+            //player4.GetComponent<PolygonCollider2D>().enabled = true;
             player4.gameObject.transform.GetChild(11).GetComponent<SpriteRenderer>().enabled = true;
             player4Moved = false;
             player4MovedTimer = timeToBeActive;

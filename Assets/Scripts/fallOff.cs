@@ -73,7 +73,12 @@ public class fallOff : MonoBehaviour {
     void fall()
     {
         isFalling = true;
-        numberSprite.enabled = false;
+
+        if (numberSprite != null)
+        {
+            numberSprite.enabled = false;
+        }
+        
         GetComponent<arrangeLayers>().enabled = false;
         this.gameObject.layer = 16;
 

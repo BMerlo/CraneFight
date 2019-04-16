@@ -170,6 +170,12 @@ public class playerController : MonoBehaviour {
     Animator[] craneAnims;
 
 
+    float maxVelocity = 25f;
+
+    bool isInvulnerable = false;
+    float invTimer = 2.5f;
+    float invCounter = 0;
+
     //[SerializeField] ContactFilter2D tempFilter = new ContactFilter2D();
     // Use this for initialization
     void Start() {
@@ -254,6 +260,27 @@ public class playerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+
+        if (isInvulnerable)
+        {
+            invCounter += Time.deltaTime;
+            if (Time.fixedTime % .5 < .2)
+            {
+                transform.GetChild(11).GetComponent<SpriteRenderer>().enabled = false;
+            }
+            else
+            {
+                transform.GetChild(11).GetComponent<SpriteRenderer>().enabled = true;
+            }
+
+            if (invCounter >= invTimer)
+            {
+                isInvulnerable = false;
+                GetComponent<PolygonCollider2D>().enabled = true;
+                transform.GetChild(11).GetComponent<SpriteRenderer>().enabled = true;
+            }
+        }
+
         //canMove();
         //REGENERATION
         //if (regenCounter > 0)
@@ -452,7 +479,7 @@ public class playerController : MonoBehaviour {
         //else
         //{
         //    oil
-      //  += Time.deltaTime;
+        //  += Time.deltaTime;
         //    if (oilTimer >= oilForceTime)
         //    {
         //        oiledMovement();
@@ -464,7 +491,7 @@ public class playerController : MonoBehaviour {
         //if (isSmelly)
         //{
         //    carAI[] cars = GameObject.FindObjectsOfType<carAI>();
-            
+
         //    foreach (carAI car in cars)
         //    {
         //        //if (GetDistanceFromClosest(GameObject.FindGameObjectsWithTag("AICar")) <= smellRadius)
@@ -509,7 +536,18 @@ public class playerController : MonoBehaviour {
         //        }
         //    }
         //}
+        if (rBody.velocity.magnitude > maxVelocity)
+        {
+            Vector2 temp = rBody.velocity;
+            temp.Normalize();
+            rBody.velocity = temp * maxVelocity;
+        }
+    }
 
+    public void setInvulerable()
+    {
+        isInvulnerable = true;
+        invCounter = 0;
     }
 
     float GetDistanceFromClosest(GameObject[] gameObjects)
