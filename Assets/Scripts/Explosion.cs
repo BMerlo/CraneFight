@@ -39,13 +39,13 @@ public class Explosion : MonoBehaviour {
             if (collision.GetComponent<playerController>())
             {
                 collision.GetComponent<playerController>().
-                    takeDamage(damageMultiplier * (1f / Vector3.Distance(this.transform.position, collision.gameObject.transform.position)));
+                    takeDamage(damageMultiplier * (1f / Vector3.Distance(this.transform.position, collision.gameObject.transform.position)), false);
 
                // Debug.Log(collision.gameObject.name + "Health: " + collision.GetComponent<playerController>().getHitpoints());
 
                 if (collision.GetComponent<playerController>().getIsOiled()) // extra damage if oily
                 {
-                    collision.GetComponent<playerController>().takeDamage(isOilyDamge);
+                    collision.GetComponent<playerController>().takeDamage(isOilyDamge, false);
                     Debug.Log(collision.gameObject.name+" has taken an extra: " + isOilyDamge);
                     Debug.Log(collision.gameObject.name +"Health: " + collision.GetComponent<playerController>().getHitpoints());
 

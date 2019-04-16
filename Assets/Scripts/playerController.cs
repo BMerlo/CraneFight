@@ -18,6 +18,8 @@ public class playerController : MonoBehaviour {
     float boostTimer = 0;
     float MAX_BOOST_TIME = 2.0f;
 
+    [SerializeField] GameObject explosion;
+
     enum PlayerNum
     {
         P1,
@@ -1247,7 +1249,7 @@ public class playerController : MonoBehaviour {
     //    }
     //}
 
-    public void takeDamage(float amount)
+    public void takeDamage(float amount, bool isLoud)
     {
         //stun(amount * 0.1f);
         hitPoints -= amount;
@@ -1266,9 +1268,15 @@ public class playerController : MonoBehaviour {
         {
             isSmelly = false;
             myManager.spawnPlayer(getPlayerNum() - 1);
+            if (isLoud)
+            {
+                Instantiate(explosion, this.transform.position, explosion.transform.rotation);
+            }
+
             Destroy(this.gameObject);
         }
     }
+
 
     public void setHealth(float value)
     {
@@ -1298,7 +1306,7 @@ public class playerController : MonoBehaviour {
         {
            // Debug.Log("destructible collided");
             collision.transform.GetComponent<destructible>().getDestroyed();
-            takeDamage(collision.transform.GetComponent<destructible>().getDmgAmount());
+            takeDamage(collision.transform.GetComponent<destructible>().getDmgAmount(), true);
         }
 
     }

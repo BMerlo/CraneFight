@@ -17,7 +17,7 @@ public class destroyWhenFarPlayer : MonoBehaviour
     {
         if (Vector2.Distance(this.transform.position, new Vector2(0,0)) > killDistance)
         {
-            GetComponent<playerController>().takeDamage(1000);
+            GetComponent<playerController>().takeDamage(1000, false);
         }
     }
 }

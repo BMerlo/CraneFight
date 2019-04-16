@@ -23,7 +23,7 @@ public class collisionChecker : MonoBehaviour
         Debug.Log("Front collision");
         if (collision.transform.GetComponent<playerController>())
         {
-            collision.transform.GetComponent<playerController>().takeDamage(collisionDmg);
+            collision.transform.GetComponent<playerController>().takeDamage(collisionDmg, true);
         }
         Destroy(transform.parent.gameObject);
 

@@ -252,8 +252,9 @@ public class Game_Manager : MonoBehaviour {
         }
         else if (player1Moved && player1MovedTimer <=0)//once its ready to play again
         {            
-            //player1.GetComponent<playerController>().enabled = true;
-            player1.GetComponent<PolygonCollider2D>().enabled = true;
+            player1.GetComponent<playerController>().enabled = true;
+            player1.GetComponent<playerController>().setInvulerable();
+            //player1.GetComponent<PolygonCollider2D>().enabled = true;
             player1.gameObject.transform.GetChild(11).GetComponent<SpriteRenderer>().enabled = true;
             player1Moved = false;
             player1MovedTimer = timeToBeActive;
@@ -277,6 +278,7 @@ public class Game_Manager : MonoBehaviour {
         {            
             //player2.GetComponent<PolygonCollider2D>().enabled = true;
             player2.GetComponent<playerController>().enabled = true;
+            player2.GetComponent<playerController>().setInvulerable();
             player2.gameObject.transform.GetChild(11).GetComponent<SpriteRenderer>().enabled = true;
             player2Moved = false;
             player2MovedTimer = timeToBeActive;
@@ -300,6 +302,7 @@ public class Game_Manager : MonoBehaviour {
         {            
             //player3.GetComponent<PolygonCollider2D>().enabled = true;
             player3.GetComponent<playerController>().enabled = true;
+            player3.GetComponent<playerController>().setInvulerable();
             player3.gameObject.transform.GetChild(11).GetComponent<SpriteRenderer>().enabled = true;
             player3Moved = false;
             player3MovedTimer = timeToBeActive;
@@ -322,6 +325,7 @@ public class Game_Manager : MonoBehaviour {
         else if (player4Moved && player4MovedTimer <= 0)
         {
             player4.GetComponent<playerController>().enabled = true;
+            player4.GetComponent<playerController>().setInvulerable();
             //player4.GetComponent<PolygonCollider2D>().enabled = true;
             player4.gameObject.transform.GetChild(11).GetComponent<SpriteRenderer>().enabled = true;
             player4Moved = false;

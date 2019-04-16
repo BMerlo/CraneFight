@@ -34,7 +34,7 @@ public class constantDamage : MonoBehaviour {
     {
         if (collision.GetComponent<playerController>())
         {
-            collision.GetComponent<playerController>().takeDamage(Time.deltaTime * damage);
+            collision.GetComponent<playerController>().takeDamage(Time.deltaTime * damage, true);
         }
     }
 
