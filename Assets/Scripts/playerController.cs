@@ -423,6 +423,7 @@ public class playerController : MonoBehaviour {
         else if (isCarrying == false && !hasJumped && !isJumping && player.GetButton("Jump"))
             //getOwnAxis("Trigger") > 0.25f)
         {
+            GetComponent<AudioSource>().Play();
             isJumping = true;
             //jumpSprite.sortingLayerName = "Air";//changed sprite sorting layer
             layerScript.jump();
