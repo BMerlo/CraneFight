@@ -1101,7 +1101,6 @@ MonoBehaviour:
   Ucrane: {fileID: 9089370731319960755}
   Dcrane: {fileID: 3948965442913086354}
   myManager: {fileID: 0}
-  evadeCooldown: 1
   oilCooldown: 7
   smellyCooldown: 15
   jumpCooldown: 1
@@ -1152,6 +1151,7 @@ MonoBehaviour:
   minY: -3.91
   defaultSprite: {fileID: 6589702378659625280}
   otherSprite: {fileID: 1289683126748972276}
+  numberSprite: {fileID: 7345634892778031185}
 --- !u!114 &1288765496779725689
 MonoBehaviour:
   m_ObjectHideFlags: 0
