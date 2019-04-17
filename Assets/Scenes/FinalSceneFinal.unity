@@ -1466,8 +1466,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280067623}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.23999977, y: 0.14999998, z: 0.07421875}
-  m_LocalScale: {x: 5.9128175, y: 2.72, z: 1}
+  m_LocalPosition: {x: -0.23999977, y: 0.024, z: 0.07421875}
+  m_LocalScale: {x: 5.9128175, y: 2.62752, z: 1}
   m_Children: []
   m_Father: {fileID: 10088583}
   m_RootOrder: 3
@@ -5597,6 +5597,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6307007966698969028, guid: 0943d3088c12cb044b0827d139766300,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307007966781778062, guid: 0943d3088c12cb044b0827d139766300,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307007965333873685, guid: 0943d3088c12cb044b0827d139766300,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307007966565488390, guid: 0943d3088c12cb044b0827d139766300,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6307007965558302215, guid: 0943d3088c12cb044b0827d139766300,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5702,25 +5722,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6307007966698969028, guid: 0943d3088c12cb044b0827d139766300,
+    - target: {fileID: 6307007965764912429, guid: 0943d3088c12cb044b0827d139766300,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6307007966781778062, guid: 0943d3088c12cb044b0827d139766300,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6307007965333873685, guid: 0943d3088c12cb044b0827d139766300,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6307007966565488390, guid: 0943d3088c12cb044b0827d139766300,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0943d3088c12cb044b0827d139766300, type: 3}

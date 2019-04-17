@@ -31,9 +31,12 @@ public class HealthBar : MonoBehaviour {
 
     public void updateHealthBar(float hp)
     {
+
+        myHealth = hp;
+
         if (hp < 0)
         {
-            hp = 0;
+            myHealth = 0;
         }
         healthBar.transform.localScale = new Vector3(1.0f - (myHealth / 100f), healthBar.transform.localScale.y, healthBar.transform.localScale.z);
     }
