@@ -39,7 +39,9 @@ public class pointSystem : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-		MaxX = downRight.position.x;
+        Time.timeScale = 1f;
+
+        MaxX = downRight.position.x;
         MaxY = upLeft.position.y;
         MinX = upLeft.position.x;
         MinY = downRight.position.y;
@@ -108,19 +110,19 @@ public class pointSystem : MonoBehaviour
 			winPanel.SetActive(true);
 			rocketPanel.GetComponent<Image>().enabled = true;
 
-			if (p1points > 10)
+			if (p1points >= 100)
 			{
 				winnerSprite.sprite = p1Sprite;
 			}
-			else if (p2points > 10)
+			else if (p2points >= 100)
 			{
 				winnerSprite.sprite = p2Sprite;
 			}
-			else if (p3points > 10)
+			else if (p3points >= 100)
 			{
 				winnerSprite.sprite = p3Sprite;
 			}
-			else if (p4points > 10)
+			else if (p4points >= 100)
 			{
 				winnerSprite.sprite = p4Sprite;
 			}

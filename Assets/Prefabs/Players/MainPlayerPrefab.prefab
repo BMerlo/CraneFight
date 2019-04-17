@@ -1168,6 +1168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteHolder: {fileID: 4470123738942979639}
+  mainSprite: {fileID: 0}
   oilySprite: {fileID: 4435719099518354514}
   shadow: {fileID: 1289683126748972276}
   sprites: []
@@ -1673,7 +1674,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 599711903
   m_SortingLayer: -1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 208e320a84be30b42b8d0e2f4c893ad0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1828,6 +1829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteHolder: {fileID: 0}
+  mainSprite: {fileID: 0}
   oilySprite: {fileID: 0}
   shadow: {fileID: 0}
   sprites: []
@@ -2298,6 +2300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteHolder: {fileID: 0}
+  mainSprite: {fileID: 0}
   oilySprite: {fileID: 0}
   shadow: {fileID: 0}
   sprites: []

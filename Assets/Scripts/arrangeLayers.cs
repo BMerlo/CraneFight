@@ -5,7 +5,7 @@ using UnityEngine;
 public class arrangeLayers : MonoBehaviour
 {
     [SerializeField] GameObject spriteHolder;
-    SpriteRenderer mainSprite;
+    [SerializeField] SpriteRenderer mainSprite;
     [SerializeField] SpriteRenderer oilySprite;
 
     [SerializeField] SpriteRenderer shadow;
@@ -19,7 +19,7 @@ public class arrangeLayers : MonoBehaviour
         //Transform SmellCloudF = transform.Find("SmellCloudF");
         //Transform smellChildB = transform.Find("SmellCloudB");
 
-        sprites = GetComponentsInChildren<SpriteRenderer>();
+        sprites = GetComponentsInChildren<SpriteRenderer>(true);
         //setOilObjOff();
 
         //mainSprite = transform.Find("Sprite").GetComponent<SpriteRenderer>();
@@ -59,16 +59,16 @@ public class arrangeLayers : MonoBehaviour
         {
             foreach (SpriteRenderer sprite in sprites)
             {
-                if (sprite != oilySprite || sprite != shadow)
+                if (sprite != oilySprite && sprite != shadow && sprite != mainSprite)
                 {
-                    sprites[3].sortingOrder = (mainSprite.sortingOrder) + 2;
+                    sprite.sortingOrder = (mainSprite.sortingOrder) + 2;
                 }
             }
         }
         else {
             foreach (SpriteRenderer sprite in sprites)
             {
-                if (sprite != oilySprite || sprite != shadow)
+                if (sprite != oilySprite && sprite != shadow && sprite != mainSprite)
                 {
                     sprite.sortingOrder = (mainSprite.sortingOrder) + 2;
                 }
